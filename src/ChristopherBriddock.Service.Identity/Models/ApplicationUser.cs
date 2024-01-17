@@ -11,6 +11,4 @@ public sealed class ApplicationUser : IdentityUser<Guid>
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public override Guid Id { get; set; } = Guid.NewGuid();
-
-    public List<AspNetApplicationUser> Application { get; set; }
 }

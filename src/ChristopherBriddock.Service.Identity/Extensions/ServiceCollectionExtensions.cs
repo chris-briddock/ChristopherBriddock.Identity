@@ -33,7 +33,9 @@ public static class ServiceCollectionExtensions
             opt.IncludeXmlComments(xmlPath);
             opt.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
             {
-                Description = @"JWT Authorization header using the Bearer scheme. \r\n\r\n 
+                Description = @"JWT Authorization header using the Bearer scheme.
+
+
                       Enter 'Bearer' [space] and then your token in the text input below.",
                 Name = "Authorization",
                 In = ParameterLocation.Header,
@@ -141,7 +143,6 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddApplicationServices(this IServiceCollection services)
     {
         services.TryAddScoped<IEmailProvider, EmailProvider>();
-        services.TryAddScoped<IApplicationRepo, ApplicationRepo>();
         return services;
     }
 }
