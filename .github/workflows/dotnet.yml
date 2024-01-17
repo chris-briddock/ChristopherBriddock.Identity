@@ -20,9 +20,9 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 8.0.x
-    - name: Restore dependencies
-      run: dotnet restore
-    - name: Build
-      run: dotnet build --no-restore
+    - name: Build & Restore
+      run: dotnet build --configuration Release src/ChristopherBriddock.Identity.sln
     - name: Test
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet test
+    - name: Publish
+      run: dotnet publish src/ChristopherBriddock.Identity/ChristopherBriddock.Identity.csproj -c Release
