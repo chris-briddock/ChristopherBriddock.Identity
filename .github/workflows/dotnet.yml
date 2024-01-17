@@ -21,7 +21,7 @@ jobs:
       with:
         dotnet-version: 8.0.x
     - name: Build & Restore
-      run: dotnet build --configuration Release src/ChristopherBriddock.Identity.sln
+      run: dotnet build --configuration Release src/ChristopherBriddock.Service.Identity.sln
     - name: Test
       run: dotnet test
     - name: Publish
