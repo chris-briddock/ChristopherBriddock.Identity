@@ -44,7 +44,7 @@ public sealed class RegisterEndpoint(IServiceProvider services,
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public override async Task<ActionResult> HandleAsync(RegisterRequest request,
-                                                   CancellationToken cancellationToken = default)
+                                                         CancellationToken cancellationToken = default)
     {
         try
         {

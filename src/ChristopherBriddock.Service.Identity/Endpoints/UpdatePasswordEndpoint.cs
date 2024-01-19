@@ -12,29 +12,24 @@ namespace ChristopherBriddock.Service.Identity.Endpoints
     /// <summary>
     /// Exposes an endpoint to allow the user to update their password.
     /// </summary>
-    public class UpdatePasswordEndpoint : EndpointBaseAsync
-                                          .WithRequest<UpdatePasswordRequest>
-                                          .WithActionResult
+    /// <remarks>
+    /// Initializes a new instance of <see cref="UpdatePasswordEndpoint"/>
+    /// </remarks>
+    /// <param name="services"></param>
+    /// <param name="logger"></param>
+    public class UpdatePasswordEndpoint(IServiceProvider services,
+                                        ILogger<UpdatePasswordEndpoint> logger) : EndpointBaseAsync
+                                                                                 .WithRequest<UpdatePasswordRequest>
+                                                                                 .WithActionResult
     {
         /// <summary>
         /// The application service provider.
         /// </summary>
-        public IServiceProvider Services { get; }
+        public IServiceProvider Services { get; } = services;
         /// <summary>
         /// The application's logger.
         /// </summary>
-        public ILogger<UpdatePasswordEndpoint> Logger { get; }
-
-        /// <summary>
-        /// Initializes a new instance of <see cref="UpdatePasswordEndpoint"/>
-        /// </summary>
-        /// <param name="services"></param>
-        /// <param name="logger"></param>
-        public UpdatePasswordEndpoint(IServiceProvider services, ILogger<UpdatePasswordEndpoint> logger)
-        {
-            Services = services;
-            Logger = logger;
-        }
+        public ILogger<UpdatePasswordEndpoint> Logger { get; } = logger;
 
         /// <summary>
         /// Allows a user to update their password.

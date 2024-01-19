@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Update;
 using System.Security.Claims;
 
 namespace ChristopherBriddock.Service.Identity.Endpoints
@@ -19,7 +20,7 @@ namespace ChristopherBriddock.Service.Identity.Endpoints
     /// <param name="logger"></param>
     public class UpdateEmailEndpoint(IServiceProvider services,
                                ILogger<UpdateEmailEndpoint> logger) : EndpointBaseAsync
-                                                                     .WithRequest<UpdatePhoneNmberRequest>
+                                                                     .WithRequest<UpdateEmailRequest>
                                                                      .WithActionResult
     {
         /// <summary>
@@ -42,7 +43,7 @@ namespace ChristopherBriddock.Service.Identity.Endpoints
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public override async Task<ActionResult> HandleAsync(UpdatePhoneNmberRequest request, CancellationToken cancellationToken = default)
+        public override async Task<ActionResult> HandleAsync(UpdateEmailRequest request, CancellationToken cancellationToken = default)
         {
             try
             {
@@ -69,7 +70,7 @@ namespace ChristopherBriddock.Service.Identity.Endpoints
             }
             catch(Exception ex)
             {
-                Logger.LogError($"Error in endpoint: {nameof(AuthoriseEndpoint)} - {nameof(HandleAsync)} Error details: {ex}", ex);
+                Logger.LogError($"Error in endpoint: {nameof(UpdateEmailEndpoint)} - {nameof(HandleAsync)} Error details: {ex}", ex);
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }

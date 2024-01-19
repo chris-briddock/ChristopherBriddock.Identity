@@ -12,30 +12,24 @@ namespace ChristopherBriddock.Service.Identity.Endpoints
     /// <summary>
     /// Exposes an endpoint to allow the user to update their phone number.
     /// </summary>
-    public class UpdatePhoneNumberEndpoint : EndpointBaseAsync
-                                             .WithRequest<UpdatePhoneNumberRequest>
-                                             .WithActionResult
+    /// <remarks>
+    /// Initializes a new instance of <see cref="UpdatePhoneNumberEndpoint"/>
+    /// </remarks>
+    /// <param name="services"></param>
+    /// <param name="logger"></param>
+    public class UpdatePhoneNumberEndpoint(IServiceProvider services,
+                                     ILogger<UpdatePhoneNumberEndpoint> logger) : EndpointBaseAsync
+                                                                                 .WithRequest<UpdatePhoneNumberRequest>
+                                                                                 .WithActionResult
     {
         /// <summary>
         /// The application service provider.
         /// </summary>
-        public IServiceProvider Services { get; }
+        public IServiceProvider Services { get; } = services;
         /// <summary>
         /// The application logger.
         /// </summary>
-        public ILogger<UpdatePhoneNumberEndpoint> Logger { get; }
-
-        /// <summary>
-        /// Initializes a new instance of <see cref="UpdatePhoneNumberEndpoint"/>
-        /// </summary>
-        /// <param name="services"></param>
-        /// <param name="logger"></param>
-        public UpdatePhoneNumberEndpoint(IServiceProvider services,
-                                         ILogger<UpdatePhoneNumberEndpoint> logger)
-        {
-            Services = services;
-            Logger = logger;
-        }
+        public ILogger<UpdatePhoneNumberEndpoint> Logger { get; } = logger;
 
         /// <summary>
         /// Allows a user to update their email address.

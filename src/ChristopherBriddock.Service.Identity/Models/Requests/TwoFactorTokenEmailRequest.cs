@@ -8,5 +8,5 @@ public sealed record TwoFactorTokenEmailRequest
     /// <summary>
     /// The user's email address.
     /// </summary>
-    public string Email { get; set; }
+    public string Email { get; set; } = default!;
 }
