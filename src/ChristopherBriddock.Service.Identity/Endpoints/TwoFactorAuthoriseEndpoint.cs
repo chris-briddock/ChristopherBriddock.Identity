@@ -4,7 +4,6 @@ using ChristopherBriddock.Service.Identity.Models.Requests;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 
 namespace ChristopherBriddock.Service.Identity.Endpoints;
 
@@ -13,7 +12,7 @@ namespace ChristopherBriddock.Service.Identity.Endpoints;
 /// </summary>
 public sealed class TwoFactorAuthoriseEndpoint(IServiceProvider services,
                                                IHttpContextAccessor httpContext,
-                                               ILogger<TwoFactorAuthoriseEndpoint> logger)  : EndpointBaseAsync
+                                               ILogger<TwoFactorAuthoriseEndpoint> logger) : EndpointBaseAsync
                                                                                               .WithRequest<TwoFactorSignInRequest>
                                                                                               .WithActionResult
 {

@@ -48,7 +48,7 @@ namespace ChristopherBriddock.Service.Identity.Endpoints
             {
                 var userManager = Services.GetRequiredService<UserManager<ApplicationUser>>();
                 string emailAddress = User.FindFirst(ClaimTypes.Email)!.Value;
-                
+
                 var user = await userManager.FindByEmailAsync(emailAddress);
 
                 if (user is null)
@@ -59,7 +59,7 @@ namespace ChristopherBriddock.Service.Identity.Endpoints
                 var token = await userManager.GenerateChangePhoneNumberTokenAsync(user, user.PhoneNumber!);
 
                 var result = await userManager.ChangePhoneNumberAsync(user, request.PhoneNumber, token);
-            
+
                 if (!result.Succeeded)
                 {
                     return BadRequest();
@@ -67,7 +67,7 @@ namespace ChristopherBriddock.Service.Identity.Endpoints
 
                 return NoContent();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Logger.LogError($"Error in endpoint: {nameof(UpdatePhoneNumberEndpoint)} - {nameof(HandleAsync)} Error details: {ex}", ex);
                 return StatusCode(StatusCodes.Status500InternalServerError);

@@ -3,7 +3,6 @@ using ChristopherBriddock.Service.Identity.Models.Responses;
 using ChristopherBriddock.Service.Identity.Providers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 
 namespace ChristopherBriddock.Service.Identity.Endpoints;
 

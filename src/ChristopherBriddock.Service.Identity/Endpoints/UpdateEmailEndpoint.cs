@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Update;
 using System.Security.Claims;
 
 namespace ChristopherBriddock.Service.Identity.Endpoints
@@ -49,7 +48,7 @@ namespace ChristopherBriddock.Service.Identity.Endpoints
             {
                 var userManager = Services.GetRequiredService<UserManager<ApplicationUser>>();
                 string emailAddress = User.FindFirst(ClaimTypes.Email)!.Value;
-                
+
                 var user = await userManager.FindByEmailAsync(emailAddress);
 
                 if (user is null)
@@ -60,7 +59,7 @@ namespace ChristopherBriddock.Service.Identity.Endpoints
                 var token = await userManager.GenerateChangeEmailTokenAsync(user, request.EmailAddress);
 
                 var result = await userManager.ChangeEmailAsync(user, request.EmailAddress, token);
-            
+
                 if (!result.Succeeded)
                 {
                     return BadRequest();
@@ -68,7 +67,7 @@ namespace ChristopherBriddock.Service.Identity.Endpoints
 
                 return NoContent();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Logger.LogError($"Error in endpoint: {nameof(UpdateEmailEndpoint)} - {nameof(HandleAsync)} Error details: {ex}", ex);
                 return StatusCode(StatusCodes.Status500InternalServerError);

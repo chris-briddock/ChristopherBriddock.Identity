@@ -46,11 +46,11 @@ public sealed class LogoutEndpoint(IServiceProvider services,
 
             return NoContent();
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             Logger.LogError($"Error in endpoint: {nameof(LogoutEndpoint)} - {nameof(HandleAsync)} Error details: {ex}", ex);
             return StatusCode(StatusCodes.Status500InternalServerError);
         }
-        
+
     }
 }
