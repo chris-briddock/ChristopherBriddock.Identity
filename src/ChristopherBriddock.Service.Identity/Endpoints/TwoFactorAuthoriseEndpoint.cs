@@ -4,6 +4,7 @@ using ChristopherBriddock.Service.Identity.Models.Requests;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace ChristopherBriddock.Service.Identity.Endpoints;
 
@@ -11,9 +12,10 @@ namespace ChristopherBriddock.Service.Identity.Endpoints;
 /// Exposes an endpoint that allows the user to sign in using two factor authentication.
 /// </summary>
 public sealed class TwoFactorAuthoriseEndpoint(IServiceProvider services,
-                                     IHttpContextAccessor httpContext) : EndpointBaseAsync
-                                                                        .WithRequest<TwoFactorSignInRequest>
-                                                                        .WithActionResult
+                                               IHttpContextAccessor httpContext,
+                                               ILogger<TwoFactorAuthoriseEndpoint> logger)  : EndpointBaseAsync
+                                                                                              .WithRequest<TwoFactorSignInRequest>
+                                                                                              .WithActionResult
 {
     /// <summary>
     /// The service provider.
@@ -23,6 +25,8 @@ public sealed class TwoFactorAuthoriseEndpoint(IServiceProvider services,
     /// The application's http context accessor.
     /// </summary>
     public IHttpContextAccessor HttpContextAccessor { get; } = httpContext;
+    /// <inheritdoc/>
+    public ILogger<TwoFactorAuthoriseEndpoint> Logger { get; } = logger;
 
     /// <summary>
     /// Allows the user to sign in with two factor code.
@@ -65,7 +69,7 @@ public sealed class TwoFactorAuthoriseEndpoint(IServiceProvider services,
         }
         catch (Exception ex)
         {
-            // TODO: Add Logging.
+            Logger.LogError($"Error in endpoint: {nameof(TwoFactorAuthoriseEndpoint)} - {nameof(HandleAsync)} Error details: {ex}", ex);
             return StatusCode(StatusCodes.Status500InternalServerError);
         }
 

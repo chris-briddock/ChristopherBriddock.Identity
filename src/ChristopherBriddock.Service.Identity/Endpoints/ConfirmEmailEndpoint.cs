@@ -69,8 +69,7 @@ public sealed class ConfirmEmailEndpoint(IServiceProvider services,
         }
         catch (Exception ex)
         {
-            // TODO: ADD LOGGING
-            //Logger.LogError()
+            Logger.LogError($"Error in endpoint: {nameof(ConfirmEmailEndpoint)} - {nameof(HandleAsync)} Error details: {ex}", ex);
             return StatusCode(StatusCodes.Status500InternalServerError);
         }
     }

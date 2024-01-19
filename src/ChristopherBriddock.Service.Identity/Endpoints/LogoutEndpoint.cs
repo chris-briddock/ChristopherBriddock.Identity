@@ -14,13 +14,18 @@ namespace ChristopherBriddock.Service.Identity.Endpoints;
 /// Initializes a new instance of <see cref="LogoutEndpoint"/>
 /// </remarks>
 /// <param name="services">The application's service provider.</param>
-public sealed class LogoutEndpoint(IServiceProvider services) : EndpointBaseAsync
-                                                               .WithoutRequest
-                                                               .WithActionResult
+/// <param name="logger">The application's logger.</param>
+public sealed class LogoutEndpoint(IServiceProvider services,
+                                    ILogger<LogoutEndpoint> logger) : EndpointBaseAsync
+                                                                      .WithoutRequest
+                                                                      .WithActionResult
 {
 
     /// <inheritdoc/>
-    public IServiceProvider Services { get; set; } = services;
+    public IServiceProvider Services { get; } = services;
+    /// <inheritdoc/>
+    public ILogger<LogoutEndpoint> Logger { get; } = logger;
+
     /// <summary>
     /// Allows a user to sign out.
     /// </summary>
@@ -30,12 +35,22 @@ public sealed class LogoutEndpoint(IServiceProvider services) : EndpointBaseAsyn
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public override async Task<ActionResult> HandleAsync(CancellationToken cancellationToken = default)
     {
-        var signInManeger = Services.GetRequiredService<SignInManager<ApplicationUser>>();
+        try
+        {
+            var signInManeger = Services.GetRequiredService<SignInManager<ApplicationUser>>();
 
-        await signInManeger.SignOutAsync();
+            await signInManeger.SignOutAsync();
 
-        return NoContent();
+            return NoContent();
+        }
+        catch(Exception ex)
+        {
+            Logger.LogError($"Error in endpoint: {nameof(LogoutEndpoint)} - {nameof(HandleAsync)} Error details: {ex}", ex);
+            return StatusCode(StatusCodes.Status500InternalServerError);
+        }
+        
     }
 }

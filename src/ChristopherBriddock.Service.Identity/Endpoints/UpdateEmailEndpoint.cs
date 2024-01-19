@@ -12,23 +12,24 @@ namespace ChristopherBriddock.Service.Identity.Endpoints
     /// <summary>
     /// Exposes an endpoint to allow the user to update their email.
     /// </summary>
-    public class UpdateEmailEndpoint : EndpointBaseAsync
-                                       .WithRequest<UpdatePhoneNmberRequest>
-                                       .WithActionResult
+    /// <remarks>
+    /// Initializes a new instance of <see cref="UpdateEmailEndpoint"/>
+    /// </remarks>
+    /// <param name="services"></param>
+    /// <param name="logger"></param>
+    public class UpdateEmailEndpoint(IServiceProvider services,
+                               ILogger<UpdateEmailEndpoint> logger) : EndpointBaseAsync
+                                                                     .WithRequest<UpdatePhoneNmberRequest>
+                                                                     .WithActionResult
     {
         /// <summary>
         /// The application service provider.
         /// </summary>
-        public IServiceProvider Services { get; set; }
-
+        public IServiceProvider Services { get; set; } = services;
         /// <summary>
-        /// Initializes a new instance of <see cref="UpdateEmailEndpoint"/>
+        /// The application's logger.
         /// </summary>
-        /// <param name="services"></param>
-        public UpdateEmailEndpoint(IServiceProvider services)
-        {
-            Services = services;
-        }
+        public ILogger<UpdateEmailEndpoint> Logger { get; } = logger;
 
         /// <summary>
         /// Allows a user to update their email address.
@@ -68,7 +69,7 @@ namespace ChristopherBriddock.Service.Identity.Endpoints
             }
             catch(Exception ex)
             {
-                // TODO: Add logging.
+                Logger.LogError($"Error in endpoint: {nameof(AuthoriseEndpoint)} - {nameof(HandleAsync)} Error details: {ex}", ex);
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }

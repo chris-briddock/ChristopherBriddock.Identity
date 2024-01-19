@@ -16,10 +16,12 @@ namespace ChristopherBriddock.Service.Identity.Endpoints;
 /// </remarks>
 /// <param name="services">The application service provider.</param>
 /// <param name="emailSender">Allows the sending of emails for verification purposes.</param>
+/// <param name="logger">The application's logger.</param>
 public sealed class TwoFactorTokenEmailEndpoint(IServiceProvider services,
-                                                IEmailProvider emailSender) : EndpointBaseAsync
-                                                                              .WithRequest<TwoFactorTokenEmailRequest>
-                                                                              .WithActionResult
+                                                IEmailProvider emailSender,
+                                                ILogger<TwoFactorTokenEmailEndpoint> logger) : EndpointBaseAsync
+                                                                                               .WithRequest<TwoFactorTokenEmailRequest>
+                                                                                               .WithActionResult
 {
     /// <summary>
     /// The application service provider.
@@ -29,6 +31,8 @@ public sealed class TwoFactorTokenEmailEndpoint(IServiceProvider services,
     /// Allows the sending of emails for verification purposes.
     /// </summary>
     public IEmailProvider EmailSender { get; } = emailSender;
+    /// <inheritdoc/>
+    public ILogger<TwoFactorTokenEmailEndpoint> Logger { get; } = logger;
 
     /// <summary>
     /// Sends a two factor token to the user by email.
@@ -66,6 +70,7 @@ public sealed class TwoFactorTokenEmailEndpoint(IServiceProvider services,
         }
         catch (Exception ex)
         {
+            Logger.LogError($"Error in endpoint: {nameof(TwoFactorTokenEmailEndpoint)} - {nameof(HandleAsync)} Error details: {ex}", ex);
             return StatusCode(StatusCodes.Status500InternalServerError);
         }
 

@@ -19,8 +19,10 @@ namespace ChristopherBriddock.Service.Identity.Endpoints;
 /// </remarks>
 /// <param name="services">The application's service provider.</param>
 /// <param name="emailSender">The application's email sender.</param>
+/// <param name="logger">The application's logger.</param>
 public sealed class RegisterEndpoint(IServiceProvider services,
-                                    IEmailProvider emailSender) : EndpointBaseAsync
+                                    IEmailProvider emailSender,
+                                    ILogger<RegisterEndpoint> logger) : EndpointBaseAsync
                                                                   .WithRequest<RegisterRequest>
                                                                   .WithActionResult
 {
@@ -28,6 +30,8 @@ public sealed class RegisterEndpoint(IServiceProvider services,
     public IServiceProvider Services { get; } = services;
     /// <inheritdoc/>
     public IEmailProvider EmailSender { get; } = emailSender;
+    /// <inheritdoc/>
+    public ILogger<RegisterEndpoint> Logger { get; } = logger;
 
     /// <summary>
     /// Allows a user to register a new user.
@@ -84,7 +88,7 @@ public sealed class RegisterEndpoint(IServiceProvider services,
         }
         catch (Exception ex)
         {
-            // TODO: Add LOGGING.
+            Logger.LogError($"Error in endpoint: {nameof(RegisterEndpoint)} - {nameof(HandleAsync)} Error details: {ex}", ex);
             return StatusCode(StatusCodes.Status500InternalServerError);
         }
 

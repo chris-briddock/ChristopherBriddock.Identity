@@ -13,10 +13,12 @@ namespace ChristopherBriddock.Service.Identity.Endpoints;
 /// <remarks>
 /// Initializes a new instance of <see cref="RefreshEndpoint"/>
 /// </remarks>
-/// <param name="jsonWebTokenProvider"></param>
-/// <param name="configuration"></param>
+/// <param name="jsonWebTokenProvider">Allows the generation of JWTs.</param>
+/// <param name="configuration">The application's configuration.</param>
+/// <param name="logger">The application's logger.</param>
 public class RefreshEndpoint(IJsonWebTokenProvider jsonWebTokenProvider,
-                             IConfiguration configuration) : EndpointBaseAsync
+                             IConfiguration configuration,
+                             ILogger<RefreshEndpoint> logger) : EndpointBaseAsync
                                                              .WithRequest<RefreshRequest>
                                                              .WithActionResult
 {
@@ -24,6 +26,8 @@ public class RefreshEndpoint(IJsonWebTokenProvider jsonWebTokenProvider,
     public IJsonWebTokenProvider JsonWebTokenProvider { get; } = jsonWebTokenProvider;
     /// <inheritdoc/>
     public IConfiguration Configuration { get; } = configuration;
+    /// <inheritdoc/>
+    public ILogger<RefreshEndpoint> Logger { get; } = logger;
 
     /// <summary>
     /// Allows a user to refresh the bearer token.

@@ -13,21 +13,28 @@ namespace ChristopherBriddock.Service.Identity.Endpoints
     /// Exposes an endpoint to allow the user to update their phone number.
     /// </summary>
     public class UpdatePhoneNumberEndpoint : EndpointBaseAsync
-                                       .WithRequest<UpdatePhoneNumberRequest>
-                                       .WithActionResult
+                                             .WithRequest<UpdatePhoneNumberRequest>
+                                             .WithActionResult
     {
         /// <summary>
         /// The application service provider.
         /// </summary>
-        public IServiceProvider Services { get; set; }
+        public IServiceProvider Services { get; }
+        /// <summary>
+        /// The application logger.
+        /// </summary>
+        public ILogger<UpdatePhoneNumberEndpoint> Logger { get; }
 
         /// <summary>
         /// Initializes a new instance of <see cref="UpdatePhoneNumberEndpoint"/>
         /// </summary>
         /// <param name="services"></param>
-        public UpdatePhoneNumberEndpoint(IServiceProvider services)
+        /// <param name="logger"></param>
+        public UpdatePhoneNumberEndpoint(IServiceProvider services,
+                                         ILogger<UpdatePhoneNumberEndpoint> logger)
         {
             Services = services;
+            Logger = logger;
         }
 
         /// <summary>
@@ -68,7 +75,7 @@ namespace ChristopherBriddock.Service.Identity.Endpoints
             }
             catch(Exception ex)
             {
-                // TODO: Add logging.
+                Logger.LogError($"Error in endpoint: {nameof(UpdatePhoneNumberEndpoint)} - {nameof(HandleAsync)} Error details: {ex}", ex);
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }

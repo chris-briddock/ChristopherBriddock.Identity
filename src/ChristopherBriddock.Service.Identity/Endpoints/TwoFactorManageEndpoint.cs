@@ -16,14 +16,18 @@ namespace ChristopherBriddock.Service.Identity.Endpoints;
 /// Initializes a new instance of <see cref="TwoFactorManageEndpoint"/>
 /// </remarks>
 /// <param name="services">The application's service provider.</param>
-public sealed class TwoFactorManageEndpoint(IServiceProvider services) : EndpointBaseAsync
+/// <param name="logger">The application's logger.</param>
+public sealed class TwoFactorManageEndpoint(IServiceProvider services,
+                                            ILogger<TwoFactorManageEndpoint> logger) : EndpointBaseAsync
                                                                                        .WithRequest<TwoFactorManageRequest>
                                                                                        .WithActionResult
 {
     /// <summary>
     /// The service provider for the application.
     /// </summary>
-    public IServiceProvider Services { get; set; } = services;
+    public IServiceProvider Services { get; } = services;
+    /// <inheritdoc/>
+    public ILogger<TwoFactorManageEndpoint> Logger { get; } = logger;
 
     /// <summary>
     /// Allows a user to enable two factor.
@@ -65,7 +69,7 @@ public sealed class TwoFactorManageEndpoint(IServiceProvider services) : Endpoin
         }
         catch (Exception ex)
         {
-            // TODO: Add Logging.
+            Logger.LogError($"Error in endpoint: {nameof(TwoFactorManageEndpoint)} - {nameof(HandleAsync)} Error details: {ex}", ex);
             return StatusCode(StatusCodes.Status500InternalServerError);
         }
 

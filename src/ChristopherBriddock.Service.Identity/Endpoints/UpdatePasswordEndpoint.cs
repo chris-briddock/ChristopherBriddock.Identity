@@ -19,15 +19,21 @@ namespace ChristopherBriddock.Service.Identity.Endpoints
         /// <summary>
         /// The application service provider.
         /// </summary>
-        public IServiceProvider Services { get; set; }
+        public IServiceProvider Services { get; }
+        /// <summary>
+        /// The application's logger.
+        /// </summary>
+        public ILogger<UpdatePasswordEndpoint> Logger { get; }
 
         /// <summary>
         /// Initializes a new instance of <see cref="UpdatePasswordEndpoint"/>
         /// </summary>
         /// <param name="services"></param>
-        public UpdatePasswordEndpoint(IServiceProvider services)
+        /// <param name="logger"></param>
+        public UpdatePasswordEndpoint(IServiceProvider services, ILogger<UpdatePasswordEndpoint> logger)
         {
             Services = services;
+            Logger = logger;
         }
 
         /// <summary>
@@ -62,7 +68,7 @@ namespace ChristopherBriddock.Service.Identity.Endpoints
             }
             catch(Exception ex)
             {
-                // TODO: Add logging.
+                Logger.LogError($"Error in endpoint: {nameof(UpdatePasswordEndpoint)} - {nameof(HandleAsync)} Error details: {ex}", ex);
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
