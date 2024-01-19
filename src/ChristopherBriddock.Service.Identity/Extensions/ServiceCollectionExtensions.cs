@@ -142,6 +142,14 @@ public static class ServiceCollectionExtensions
     /// <returns>The modified <see cref="IServiceCollection"/> instance.</returns>
     public static IServiceCollection AddApplicationServices(this IServiceCollection services)
     {
+        services.AddSession(opt =>
+        {
+            opt.IdleTimeout = TimeSpan.FromMinutes(60);
+            opt.Cookie.Name = "AspNetCookie.Session";
+            opt.Cookie.Expiration = TimeSpan.FromMinutes(60);
+            opt.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+            opt.Cookie.IsEssential = true;
+        });
         services.TryAddScoped<IEmailProvider, EmailProvider>();
         return services;
     }

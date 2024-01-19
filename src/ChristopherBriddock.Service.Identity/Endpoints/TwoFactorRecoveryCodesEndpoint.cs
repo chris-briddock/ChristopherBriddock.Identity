@@ -15,14 +15,18 @@ namespace ChristopherBriddock.Service.Identity.Endpoints;
 /// Initializes a new instance of <see cref="TwoFactorRecoveryCodesEndpoint"/>
 /// </remarks>
 /// <param name="services">The application service provider.</param>
-public class TwoFactorRecoveryCodesEndpoint(IServiceProvider services) : EndpointBaseAsync
-                                                                        .WithoutRequest
-                                                                        .WithActionResult
+/// <param name="logger">The application's logger.</param>
+public class TwoFactorRecoveryCodesEndpoint(IServiceProvider services,
+                                            ILogger<TwoFactorRecoveryCodesEndpoint> logger) : EndpointBaseAsync
+                                                                                              .WithoutRequest
+                                                                                              .WithActionResult
 {
     /// <summary>
     /// The application service provider.
     /// </summary>
     public IServiceProvider Services { get; } = services;
+    /// <inheritdoc/>
+    public ILogger<TwoFactorRecoveryCodesEndpoint> Logger { get; } = logger;
 
     /// <summary>
     /// Allows a user to generate two factor recovery codes.
@@ -50,7 +54,7 @@ public class TwoFactorRecoveryCodesEndpoint(IServiceProvider services) : Endpoin
         }
         catch (Exception ex)
         {
-            // TODO: Add logging.
+            Logger.LogError($"Error in endpoint: {nameof(TwoFactorRecoveryCodesEndpoint)} - {nameof(HandleAsync)} Error details: {ex}", ex);
             return StatusCode(StatusCodes.Status500InternalServerError);
         }
     }

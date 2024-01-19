@@ -12,23 +12,24 @@ namespace ChristopherBriddock.Service.Identity.Endpoints
     /// <summary>
     /// Exposes an endpoint to allow the user to update their password.
     /// </summary>
-    public class UpdatePasswordEndpoint : EndpointBaseAsync
-                                          .WithRequest<UpdatePasswordRequest>
-                                          .WithActionResult
+    /// <remarks>
+    /// Initializes a new instance of <see cref="UpdatePasswordEndpoint"/>
+    /// </remarks>
+    /// <param name="services"></param>
+    /// <param name="logger"></param>
+    public class UpdatePasswordEndpoint(IServiceProvider services,
+                                        ILogger<UpdatePasswordEndpoint> logger) : EndpointBaseAsync
+                                                                                 .WithRequest<UpdatePasswordRequest>
+                                                                                 .WithActionResult
     {
         /// <summary>
         /// The application service provider.
         /// </summary>
-        public IServiceProvider Services { get; set; }
-
+        public IServiceProvider Services { get; } = services;
         /// <summary>
-        /// Initializes a new instance of <see cref="UpdatePasswordEndpoint"/>
+        /// The application's logger.
         /// </summary>
-        /// <param name="services"></param>
-        public UpdatePasswordEndpoint(IServiceProvider services)
-        {
-            Services = services;
-        }
+        public ILogger<UpdatePasswordEndpoint> Logger { get; } = logger;
 
         /// <summary>
         /// Allows a user to update their password.
@@ -44,7 +45,7 @@ namespace ChristopherBriddock.Service.Identity.Endpoints
             {
                 var userManager = Services.GetRequiredService<UserManager<ApplicationUser>>();
                 string emailAddress = User.FindFirst(ClaimTypes.Email)!.Value;
-                
+
                 var user = await userManager.FindByEmailAsync(emailAddress);
 
                 if (user is null)
@@ -52,7 +53,7 @@ namespace ChristopherBriddock.Service.Identity.Endpoints
                     return NotFound();
                 }
                 var result = await userManager.ChangePasswordAsync(user, request.CurrentPassword, request.NewPassword);
-            
+
                 if (!result.Succeeded)
                 {
                     return BadRequest();
@@ -60,9 +61,9 @@ namespace ChristopherBriddock.Service.Identity.Endpoints
 
                 return NoContent();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                // TODO: Add logging.
+                Logger.LogError($"Error in endpoint: {nameof(UpdatePasswordEndpoint)} - {nameof(HandleAsync)} Error details: {ex}", ex);
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }

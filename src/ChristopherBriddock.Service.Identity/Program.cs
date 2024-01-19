@@ -19,6 +19,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
     app.UseDeveloperExceptionPage();
 }
+app.UseSession();
 app.UseHsts();
 app.UseHttpsRedirection();
 app.UseRouting();

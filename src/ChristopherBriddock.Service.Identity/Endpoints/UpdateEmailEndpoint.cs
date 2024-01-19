@@ -12,23 +12,24 @@ namespace ChristopherBriddock.Service.Identity.Endpoints
     /// <summary>
     /// Exposes an endpoint to allow the user to update their email.
     /// </summary>
-    public class UpdateEmailEndpoint : EndpointBaseAsync
-                                       .WithRequest<UpdatePhoneNmberRequest>
-                                       .WithActionResult
+    /// <remarks>
+    /// Initializes a new instance of <see cref="UpdateEmailEndpoint"/>
+    /// </remarks>
+    /// <param name="services"></param>
+    /// <param name="logger"></param>
+    public class UpdateEmailEndpoint(IServiceProvider services,
+                               ILogger<UpdateEmailEndpoint> logger) : EndpointBaseAsync
+                                                                     .WithRequest<UpdateEmailRequest>
+                                                                     .WithActionResult
     {
         /// <summary>
         /// The application service provider.
         /// </summary>
-        public IServiceProvider Services { get; set; }
-
+        public IServiceProvider Services { get; set; } = services;
         /// <summary>
-        /// Initializes a new instance of <see cref="UpdateEmailEndpoint"/>
+        /// The application's logger.
         /// </summary>
-        /// <param name="services"></param>
-        public UpdateEmailEndpoint(IServiceProvider services)
-        {
-            Services = services;
-        }
+        public ILogger<UpdateEmailEndpoint> Logger { get; } = logger;
 
         /// <summary>
         /// Allows a user to update their email address.
@@ -41,13 +42,13 @@ namespace ChristopherBriddock.Service.Identity.Endpoints
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public override async Task<ActionResult> HandleAsync(UpdatePhoneNmberRequest request, CancellationToken cancellationToken = default)
+        public override async Task<ActionResult> HandleAsync(UpdateEmailRequest request, CancellationToken cancellationToken = default)
         {
             try
             {
                 var userManager = Services.GetRequiredService<UserManager<ApplicationUser>>();
                 string emailAddress = User.FindFirst(ClaimTypes.Email)!.Value;
-                
+
                 var user = await userManager.FindByEmailAsync(emailAddress);
 
                 if (user is null)
@@ -58,7 +59,7 @@ namespace ChristopherBriddock.Service.Identity.Endpoints
                 var token = await userManager.GenerateChangeEmailTokenAsync(user, request.EmailAddress);
 
                 var result = await userManager.ChangeEmailAsync(user, request.EmailAddress, token);
-            
+
                 if (!result.Succeeded)
                 {
                     return BadRequest();
@@ -66,9 +67,9 @@ namespace ChristopherBriddock.Service.Identity.Endpoints
 
                 return NoContent();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                // TODO: Add logging.
+                Logger.LogError($"Error in endpoint: {nameof(UpdateEmailEndpoint)} - {nameof(HandleAsync)} Error details: {ex}", ex);
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }

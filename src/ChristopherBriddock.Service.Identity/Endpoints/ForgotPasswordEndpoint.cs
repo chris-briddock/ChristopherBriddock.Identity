@@ -18,15 +18,19 @@ namespace ChristopherBriddock.Service.Identity.Endpoints;
 /// </remarks>
 /// <param name="services">The applications service provider.</param>
 /// <param name="emailSender">The email sender.</param>
+/// <param name="logger">The application logger</param>
 public sealed class ForgotPasswordEndpoint(IServiceProvider services,
-                              IEmailProvider emailSender) : EndpointBaseAsync
-                                                          .WithRequest<ForgotPasswordRequest>
-                                                          .WithActionResult
+                                           IEmailProvider emailSender,
+                                           ILogger<ForgotPasswordEndpoint> logger) : EndpointBaseAsync
+                                                                                    .WithRequest<ForgotPasswordRequest>
+                                                                                    .WithActionResult
 {
     /// <inheritdoc/>
     private IServiceProvider Services { get; } = services;
     /// <inheritdoc/>
     private IEmailProvider EmailSender { get; } = emailSender;
+    /// <inheritdoc/>
+    public ILogger<ForgotPasswordEndpoint> Logger { get; set; } = logger;
 
     /// <summary>
     /// Allows a user to send a password reset email.
@@ -59,7 +63,7 @@ public sealed class ForgotPasswordEndpoint(IServiceProvider services,
         }
         catch (Exception ex)
         {
-            // TODO: ADD LOGGING.
+            Logger.LogError($"Error in endpoint: {nameof(ForgotPasswordEndpoint)} - {nameof(HandleAsync)} Error details: {ex}", ex);
             return StatusCode(StatusCodes.Status500InternalServerError);
 
         }

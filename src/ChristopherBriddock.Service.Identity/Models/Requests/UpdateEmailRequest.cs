@@ -3,10 +3,10 @@
 /// <summary>
 /// Represents a user email request.
 /// </summary>
-public sealed record UpdatePhoneNmberRequest
+public sealed record UpdateEmailRequest
 {
     /// <summary>
     /// The new email address.
     /// </summary>
-    public string EmailAddress { get; set; }
+    public string EmailAddress { get; set; } = default!;
 }

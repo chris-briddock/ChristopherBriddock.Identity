@@ -16,10 +16,12 @@ namespace ChristopherBriddock.Service.Identity.Endpoints;
 /// <param name="jsonWebTokenProvider">The json web token provider.</param>
 /// <param name="services">The application's service provider.</param>
 /// <param name="httpContextAccessor">Allows access to a <see cref="HttpContent"/> via an interface.</param>
+/// <param name="logger">The application logger.</param>
 public class TokenEndpoint(IConfiguration configuration,
                            IJsonWebTokenProvider jsonWebTokenProvider,
                            IServiceProvider services,
-                           IHttpContextAccessor httpContextAccessor) : EndpointBaseAsync
+                           IHttpContextAccessor httpContextAccessor,
+                           ILogger<TokenEndpoint> logger) : EndpointBaseAsync
                                                                       .WithoutRequest
                                                                       .WithActionResult<TokenResponse>
 {
@@ -30,7 +32,7 @@ public class TokenEndpoint(IConfiguration configuration,
     /// <summary>
     /// The json web token provider.
     /// </summary>
-    public IJsonWebTokenProvider JsonWebTokenProvider { get; set; } = jsonWebTokenProvider;
+    public IJsonWebTokenProvider JsonWebTokenProvider { get; } = jsonWebTokenProvider;
     /// <summary>
     /// The service provider.
     /// </summary>
@@ -39,6 +41,8 @@ public class TokenEndpoint(IConfiguration configuration,
     /// Allows access to a <see cref="HttpContent"/> via an interface.
     /// </summary>
     public IHttpContextAccessor HttpContextAccessor { get; } = httpContextAccessor;
+    /// <inheritdoc/>
+    public ILogger<TokenEndpoint> Logger { get; } = logger;
 
     /// <summary>
     /// Allows a user to generate a Bearer token.
@@ -99,7 +103,7 @@ public class TokenEndpoint(IConfiguration configuration,
         }
         catch (Exception ex)
         {
-            // TODO: Add Logging.
+            Logger.LogError($"Error in endpoint: {nameof(TokenEndpoint)} - {nameof(HandleAsync)} Error details: {ex}", ex); Logger.LogError($"Error in endpoint: {nameof(AuthoriseEndpoint)} - {nameof(HandleAsync)} Error details: {ex}", ex);
             return StatusCode(StatusCodes.Status500InternalServerError);
         }
 
