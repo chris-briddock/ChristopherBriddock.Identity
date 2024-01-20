@@ -17,14 +17,15 @@ internal class SignInManagerMock : MockBase<SignInManager<ApplicationUser>>
                                                                        Substitute.For<IOptions<IdentityOptions>>(),
                                                                        Substitute.For<IPasswordHasher<ApplicationUser>>(),
                                                                        Substitute.For<IEnumerable<IUserValidator<ApplicationUser>>>(),
-                                                                       Substitute.For<IEnumerable<IPasswordHasher<ApplicationUser>>>(),
+                                                                       Substitute.For<IEnumerable<IPasswordValidator<ApplicationUser>>>(),
                                                                        Substitute.For<ILookupNormalizer>(),
+                                                                       Substitute.For<IdentityErrorDescriber>(),
                                                                        Substitute.For<IServiceProvider>(),
                                                                        Substitute.For<ILogger<UserManager<ApplicationUser>>>()),
             Substitute.For<IHttpContextAccessor>(),
             Substitute.For<IUserClaimsPrincipalFactory<ApplicationUser>>(),
             Substitute.For<IOptions<IdentityOptions>>(),
-            Substitute.For<ILogger<SignInManager<ILogger>>>(),
+            Substitute.For<ILogger<SignInManager<ApplicationUser>>>(),
             Substitute.For<IAuthenticationSchemeProvider>(),
             Substitute.For<IUserConfirmation<ApplicationUser>>()
             );

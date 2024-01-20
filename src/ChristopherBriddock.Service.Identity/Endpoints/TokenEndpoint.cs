@@ -103,7 +103,7 @@ public class TokenEndpoint(IConfiguration configuration,
         }
         catch (Exception ex)
         {
-            Logger.LogError($"Error in endpoint: {nameof(TokenEndpoint)} - {nameof(HandleAsync)} Error details: {ex}", ex); Logger.LogError($"Error in endpoint: {nameof(AuthoriseEndpoint)} - {nameof(HandleAsync)} Error details: {ex}", ex);
+            Logger.LogError("Error in endpoint: {endpointName} - {methodName} Error details: {ex}", nameof(TokenEndpoint), nameof(HandleAsync), ex);
             return StatusCode(StatusCodes.Status500InternalServerError);
         }
 

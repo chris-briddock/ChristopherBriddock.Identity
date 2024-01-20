@@ -10,15 +10,15 @@ internal class UserManagerMock : MockBase<UserManager<ApplicationUser>>
 {
     public override UserManager<ApplicationUser> Mock()
     {
-        var userManager = Substitute.For<UserManager<ApplicationUser>>(Substitute.For<IUserStore<ApplicationUser>>(),
+        return Substitute.For<UserManager<ApplicationUser>>(Substitute.For<IUserStore<ApplicationUser>>(),
                                                                        Substitute.For<IOptions<IdentityOptions>>(),
                                                                        Substitute.For<IPasswordHasher<ApplicationUser>>(),
                                                                        Substitute.For<IEnumerable<IUserValidator<ApplicationUser>>>(),
-                                                                       Substitute.For<IEnumerable<IPasswordHasher<ApplicationUser>>>(),
+                                                                       Substitute.For<IEnumerable<IPasswordValidator<ApplicationUser>>>(),
                                                                        Substitute.For<ILookupNormalizer>(),
+                                                                       Substitute.For<IdentityErrorDescriber>(),
                                                                        Substitute.For<IServiceProvider>(),
                                                                        Substitute.For<ILogger<UserManager<ApplicationUser>>>());
 
-        return userManager;
     }
 }

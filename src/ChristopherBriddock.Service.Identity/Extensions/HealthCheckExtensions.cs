@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
+using Microsoft.FeatureManagement;
 using System.Text;
 using System.Text.Json;
 
@@ -30,6 +31,44 @@ public static class HealthCheckExtensions
         });
 
         return app;
+    }
+
+    /// <summary>
+    /// Adds health checks for vital infrastructure such as Databases, Caches and Logging.
+    /// </summary>
+    /// <param name="services">The <see cref="IServiceCollection"/> to which authentication services will be added.</param>
+    /// <returns>The modified <see cref="IServiceCollection"/> instance.</returns>
+    public static IServiceCollection AddCustomHealthChecks(this IServiceCollection services)
+    {
+        var featureManager = services.BuildServiceProvider()
+                                     .GetRequiredService<IFeatureManager>();
+
+        var configuration = services.BuildServiceProvider()
+                                    .GetRequiredService<IConfiguration>();
+
+        services.AddHealthChecks()
+                .AddNpgSql(configuration.GetConnectionString("Default")!);
+
+
+        if (featureManager.IsEnabledAsync(FeatureFlags.Redis).Result)
+        {
+            services.AddHealthChecks().AddRedis(configuration["ConnectionStrings:Redis"]!,
+                                                null,
+                                                HealthStatus.Unhealthy,
+                                                null,
+                                                null);
+        }
+        
+        if (featureManager.IsEnabledAsync(FeatureFlags.ExternalLoggingServer).Result)
+        {
+            services.AddHealthChecks().AddSeqPublisher(opt =>
+            {
+                opt.Endpoint = configuration["Seq:Endpoint"]!;
+                opt.ApiKey = configuration["Seq:ApiKey"]!;
+            });
+        }
+
+        return services;
     }
 }
 

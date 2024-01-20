@@ -69,7 +69,7 @@ namespace ChristopherBriddock.Service.Identity.Endpoints
             }
             catch (Exception ex)
             {
-                Logger.LogError($"Error in endpoint: {nameof(UpdateEmailEndpoint)} - {nameof(HandleAsync)} Error details: {ex}", ex);
+                Logger.LogError("Error in endpoint: {endpointName} - {methodName} Error details: {ex}", nameof(UpdateEmailEndpoint), nameof(HandleAsync), ex);
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }

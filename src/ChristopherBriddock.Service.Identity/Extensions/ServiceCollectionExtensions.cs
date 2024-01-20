@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
+using Microsoft.FeatureManagement;
 
 namespace ChristopherBriddock.Service.Identity.Extensions;
 
@@ -103,7 +104,7 @@ public static class ServiceCollectionExtensions
     /// <summary>
     /// Extension method for adding authentication services to the IServiceCollection.
     /// </summary>
-    /// <param name="services">The <see cref="IServiceCollection"/> to which authentication services will be added.</param>
+    /// <param name="services">The <see cref="IServiceCollection"/> to which services will be added.</param>
     /// <returns>The modified <see cref="IServiceCollection"/> instance.</returns>
     public static IServiceCollection AddCustomAuthentication(this IServiceCollection services)
     {
@@ -122,7 +123,7 @@ public static class ServiceCollectionExtensions
     /// <summary>
     /// Adds custom authorization policy.
     /// </summary>
-    /// <param name="services">The <see cref="IServiceCollection"/> to which authentication services will be added.</param>
+    /// <param name="services">The <see cref="IServiceCollection"/> to which services will be added.</param>
     /// <returns>The modified <see cref="IServiceCollection"/> instance.</returns>
     public static IServiceCollection AddCustomAuthorization(this IServiceCollection services)
     {
@@ -136,11 +137,37 @@ public static class ServiceCollectionExtensions
     }
 
     /// <summary>
-    /// Adds all needed services to the service collection.
+    /// Add the required services for in-memory and redis services, if redis is enabled in the feature flags.
     /// </summary>
-    /// <param name="services">The <see cref="IServiceCollection"/> to which authentication services will be added.</param>
+    /// <param name="services">The <see cref="IServiceCollection"/> to which services will be added.</param>
     /// <returns>The modified <see cref="IServiceCollection"/> instance.</returns>
-    public static IServiceCollection AddApplicationServices(this IServiceCollection services)
+    public static IServiceCollection AddCache(this IServiceCollection services)
+    {
+        IConfiguration configuration = services
+                                      .BuildServiceProvider()
+                                      .GetRequiredService<IConfiguration>();
+        IFeatureManager featureManager = services
+                                        .BuildServiceProvider()
+                                        .GetRequiredService<IFeatureManager>();
+        
+        services.AddDistributedMemoryCache();
+
+        if (featureManager.IsEnabledAsync(FeatureFlags.Redis).Result)
+        {
+            services.AddStackExchangeRedisCache(opt =>
+            {
+                opt.Configuration = configuration.GetConnectionString("Redis");
+                opt.InstanceName = configuration.GetConnectionString("RedisInstanceName");
+            });
+        }
+        return services;
+    }
+    /// <summary>
+    /// Adds session support to the application. 
+    /// </summary>
+    /// <param name="services">The <see cref="IServiceCollection"/> to which services will be added.</param>
+    /// <returns>The modified <see cref="IServiceCollection"/> instance.</returns>
+    public static IServiceCollection AddCustomSession(this IServiceCollection services)
     {
         services.AddSession(opt =>
         {
@@ -150,7 +177,44 @@ public static class ServiceCollectionExtensions
             opt.Cookie.SecurePolicy = CookieSecurePolicy.Always;
             opt.Cookie.IsEssential = true;
         });
-        services.TryAddScoped<IEmailProvider, EmailProvider>();
+        return services;
+    }
+    /// <summary>
+    /// Adds Azure Application Insights, if enabled.
+    /// </summary>
+    /// <param name="services">The <see cref="IServiceCollection"/> to which services will be added.</param>
+    /// <returns>The modified <see cref="IServiceCollection"/> instance.</returns>
+    public static IServiceCollection AddAzureAppInsights(this IServiceCollection services)
+    {
+        var featureManager = services.BuildServiceProvider().GetRequiredService<IFeatureManager>();
+        if (featureManager.IsEnabledAsync(FeatureFlags.ApplicationInsights).Result)
+        {
+            var configuration = services.BuildServiceProvider().GetRequiredService<IConfiguration>();
+            services.AddApplicationInsightsTelemetry(options => options.ConnectionString = configuration["ApplicationInsights:InstrumentationKey"]);
+            services.AddApplicationInsightsKubernetesEnricher();
+        }
+        return services;
+    }
+    /// <summary>
+    /// Add cross origin policy.
+    /// </summary>
+    /// <remarks>
+    /// This is only enabled in development, by the middleware <see cref="CorsMiddlewareExtensions.UseCors(IApplicationBuilder)"/>
+    /// </remarks>
+    /// <param name="services">The <see cref="IServiceCollection"/> to which services will be added.</param>
+    /// <returns>The modified <see cref="IServiceCollection"/> instance.</returns>
+    public static IServiceCollection AddCrossOriginPolicy(this IServiceCollection services)
+    {
+        services.AddCors(opt =>
+        {
+            opt.AddPolicy(CorsConstants.PolicyName, opt =>
+            {
+                opt.AllowAnyOrigin();
+                opt.AllowAnyHeader();
+                opt.AllowAnyMethod();
+            });
+        });
+
         return services;
     }
 }

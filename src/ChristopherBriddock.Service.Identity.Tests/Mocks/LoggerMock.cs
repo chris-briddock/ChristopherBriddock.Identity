@@ -7,8 +7,6 @@ internal class LoggerMock<T> : MockBase<ILogger<T>> where T : class
 {
     public override ILogger<T> Mock()
     {
-        var logger = Substitute.For<ILogger<T>>();
-
-        return logger;
+        return Substitute.For<ILogger<T>>();
     }
 }

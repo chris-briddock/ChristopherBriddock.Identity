@@ -54,18 +54,15 @@ public sealed class ForgotPasswordEndpoint(IServiceProvider services,
             {
                 var code = await userManager.GeneratePasswordResetTokenAsync(user);
                 code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-
-                // TODO: Implement email sender to send a message to the email service.
                 await EmailSender.SendPasswordResetCodeAsync(user, request.EmailAddress, code);
             }
 
-            return Ok();
+            return NoContent();
         }
         catch (Exception ex)
         {
-            Logger.LogError($"Error in endpoint: {nameof(ForgotPasswordEndpoint)} - {nameof(HandleAsync)} Error details: {ex}", ex);
+            Logger.LogError("Error in endpoint: {endpointName} - {methodName} Error details: {ex}", nameof(ForgotPasswordEndpoint), nameof(HandleAsync), ex);
             return StatusCode(StatusCodes.Status500InternalServerError);
-
         }
 
     }

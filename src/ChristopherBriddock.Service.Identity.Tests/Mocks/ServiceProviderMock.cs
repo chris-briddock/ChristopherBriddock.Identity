@@ -6,8 +6,6 @@ internal class ServiceProviderMock : MockBase<IServiceProvider>
 {
     public override IServiceProvider Mock()
     {
-        var serviceProvider = Substitute.For<IServiceProvider>();
-
-        return serviceProvider;
+        return Substitute.For<IServiceProvider>();
     }
 }

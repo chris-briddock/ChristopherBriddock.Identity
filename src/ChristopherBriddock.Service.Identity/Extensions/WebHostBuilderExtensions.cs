@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Server.Kestrel.Core;
+using Serilog;
 
 namespace ChristopherBriddock.Service.Identity.Extensions;
 
@@ -24,6 +25,17 @@ public static class WebHostBuilderExtensions
                 listenOptions.Protocols = HttpProtocols.Http1AndHttp2AndHttp3;
                 listenOptions.UseHttps();
             });
+        });
+    }
+    /// <summary>
+    /// Add serilog with option enabled to read from configuration.
+    /// </summary>
+    /// <param name="webHostBuilder">The updated <see cref="IHostBuilder"/></param>
+    public static void AddSerilog(this IHostBuilder webHostBuilder)
+    {     
+        webHostBuilder.UseSerilog((context, config) =>
+        {
+            config.ReadFrom.Configuration(context.Configuration);
         });
     }
 }

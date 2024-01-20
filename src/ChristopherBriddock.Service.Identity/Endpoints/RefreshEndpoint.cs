@@ -47,6 +47,6 @@ public class RefreshEndpoint(IJsonWebTokenProvider jsonWebTokenProvider,
         {
             return Unauthorized();
         }
-        return await Task.FromResult(LocalRedirect("/token"));
+        return LocalRedirect("/token");
     }
 }

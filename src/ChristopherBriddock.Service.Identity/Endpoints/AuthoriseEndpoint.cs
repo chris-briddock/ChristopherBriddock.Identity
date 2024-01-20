@@ -38,7 +38,6 @@ public sealed class AuthoriseEndpoint(IServiceProvider services,
     /// <returns>A new <see cref="ActionResult"/></returns>
     [HttpPost("/authorise")]
     [AllowAnonymous]
-    [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status302Found)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -63,7 +62,7 @@ public sealed class AuthoriseEndpoint(IServiceProvider services,
 
             if (signInResult.RequiresTwoFactor)
             {
-                return Ok("Two factor authentication required.");
+                return LocalRedirect("/2fa/email");
             }
 
             ApplicationUser? user = await signInManager.UserManager.FindByEmailAsync(request.EmailAddress);
@@ -79,7 +78,7 @@ public sealed class AuthoriseEndpoint(IServiceProvider services,
         }
         catch (Exception ex)
         {
-            Logger.LogError($"Error in endpoint: {nameof(AuthoriseEndpoint)} - {nameof(HandleAsync)} Error details: {ex}", ex);
+            Logger.LogError("Error in endpoint: {endpointName} - {methodName} Error details: {ex}", nameof(AuthoriseEndpoint), nameof(HandleAsync), ex);
             return StatusCode(StatusCodes.Status500InternalServerError);
         }
 
