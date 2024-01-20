@@ -45,7 +45,12 @@ To get started with the Identity Service, follow these steps:
 
 ### Configuration
 
-    Please replace placeholder values in appsettings.json, or in your development environment use dotnet user-secrets. This uses PostgreSQL, optionally Redis, and also optionally Azure Application Insights, which are enabled in the "FeatureManagement" section of the appsettings.json file. Feel free to customize to your needs.
+    1. Configure PostgreSQL in appsettings.json, under ConnectionStrings > Default.
+    2. Optionally configure Redis with a connection string and instance name.
+    3. Update the JWT section, with audience, secret and expires values.
+    4. Update FeatureManagement section, if you would like to use Redis or Application Insights.
+    5. Update ApplicationInsights section with your instrumentation key.
+    6. If you have a Seq server available update the "WriteTo" section of Serilog.
 
 ### Libraries Used
 
