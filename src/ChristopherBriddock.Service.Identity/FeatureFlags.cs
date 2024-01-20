@@ -8,13 +8,13 @@ public static class FeatureFlags
     /// <summary>
     /// Gets or sets the boolean to enable or disable Redis caching.
     /// </summary>
-    public static string Redis { get; set; } = "Redis";
+    public const string Redis = "Redis";
     /// <summary>
     /// Gets or sets the boolean to enable or disable Azure Application Insights.
     /// </summary>
-    public static string ApplicationInsights { get; set; } = "ApplicationInsights";
+    public const string ApplicationInsights = "ApplicationInsights";
     /// <summary>
     /// Gets or sets the boolean to enable or disable the external logging server.
     /// </summary>
-    public static string ExternalLoggingServer { get; set; } = "ExternalLoggingServer";
+    public const string ExternalLoggingServer = "ExternalLoggingServer";
 }
