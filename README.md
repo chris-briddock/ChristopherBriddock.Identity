@@ -45,12 +45,12 @@ To get started with the Identity Service, follow these steps:
 
 ### Configuration
 
-    1. Configure PostgreSQL in appsettings.json, under ConnectionStrings > Default.
-    2. Optionally configure Redis with a connection string and instance name.
-    3. Update the JWT section, with audience, secret and expires values.
-    4. Update FeatureManagement section, if you would like to use Redis or Application Insights.
-    5. Update ApplicationInsights section with your instrumentation key.
-    6. If you have a Seq server available update the "WriteTo" section of Serilog.
+1. Configure PostgreSQL in appsettings.json, under ConnectionStrings > Default.
+2. Optionally configure Redis with a connection string and instance name.
+3. Update the JWT section, with audience, secret and expires values.
+4. Update FeatureManagement section, if you would like to use Redis or Application Insights.
+5. Update ApplicationInsights section with your instrumentation key.
+6. If you have a Seq server available update the "WriteTo" section of Serilog.
 
 ### Libraries Used
 
