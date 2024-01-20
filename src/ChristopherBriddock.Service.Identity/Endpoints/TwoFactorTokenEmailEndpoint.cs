@@ -1,7 +1,8 @@
 ﻿using Ardalis.ApiEndpoints;
+using ChristopherBriddock.Service.Identity.Constants;
 using ChristopherBriddock.Service.Identity.Models;
 using ChristopherBriddock.Service.Identity.Models.Requests;
-using ChristopherBriddock.Service.Identity.Providers;
+using ChristopherBriddock.Service.Identity.Publishers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -18,7 +19,7 @@ namespace ChristopherBriddock.Service.Identity.Endpoints;
 /// <param name="emailSender">Allows the sending of emails for verification purposes.</param>
 /// <param name="logger">The application's logger.</param>
 public sealed class TwoFactorTokenEmailEndpoint(IServiceProvider services,
-                                                IEmailProvider emailSender,
+                                                IEmailPublisher emailSender,
                                                 ILogger<TwoFactorTokenEmailEndpoint> logger) : EndpointBaseAsync
                                                                                                .WithRequest<TwoFactorTokenEmailRequest>
                                                                                                .WithActionResult
@@ -27,10 +28,8 @@ public sealed class TwoFactorTokenEmailEndpoint(IServiceProvider services,
     /// The application service provider.
     /// </summary>
     public IServiceProvider Services { get; } = services;
-    /// <summary>
-    /// Allows the sending of emails for verification purposes.
-    /// </summary>
-    public IEmailProvider EmailSender { get; } = emailSender;
+    /// <inheritdoc/>
+    public IEmailPublisher EmailSender { get; } = emailSender;
     /// <inheritdoc/>
     public ILogger<TwoFactorTokenEmailEndpoint> Logger { get; } = logger;
 
@@ -62,9 +61,15 @@ public sealed class TwoFactorTokenEmailEndpoint(IServiceProvider services,
             if (user is null)
                 return NotFound();
 
-            var code = await userManager.GenerateTwoFactorTokenAsync(user!, TokenOptions.DefaultProvider);
+            var code = await userManager.GenerateTwoFactorTokenAsync(user!, TokenOptions.DefaultAuthenticatorProvider);
 
-            await EmailSender.SendTwoFactorCodeAsync(user, userEmail!, code);
+            EmailMessagePublisher message = new()
+            {
+                EmailAddress = user.Email!,
+                Code = code,
+                Type = EmailMessagePublisherConstants.TwoFactorToken
+            };
+            await EmailSender.Publish(message, cancellationToken);
 
             return Ok();
         }

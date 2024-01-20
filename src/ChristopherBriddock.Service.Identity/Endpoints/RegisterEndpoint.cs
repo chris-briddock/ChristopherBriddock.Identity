@@ -2,7 +2,7 @@
 using ChristopherBriddock.Service.Identity.Constants;
 using ChristopherBriddock.Service.Identity.Models;
 using ChristopherBriddock.Service.Identity.Models.Requests;
-using ChristopherBriddock.Service.Identity.Providers;
+using ChristopherBriddock.Service.Identity.Publishers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -21,7 +21,7 @@ namespace ChristopherBriddock.Service.Identity.Endpoints;
 /// <param name="emailSender">The application's email sender.</param>
 /// <param name="logger">The application's logger.</param>
 public sealed class RegisterEndpoint(IServiceProvider services,
-                                    IEmailProvider emailSender,
+                                    IEmailPublisher emailSender,
                                     ILogger<RegisterEndpoint> logger) : EndpointBaseAsync
                                                                   .WithRequest<RegisterRequest>
                                                                   .WithActionResult
@@ -29,7 +29,7 @@ public sealed class RegisterEndpoint(IServiceProvider services,
     /// <inheritdoc/>
     public IServiceProvider Services { get; } = services;
     /// <inheritdoc/>
-    public IEmailProvider EmailSender { get; } = emailSender;
+    public IEmailPublisher EmailSender { get; } = emailSender;
     /// <inheritdoc/>
     public ILogger<RegisterEndpoint> Logger { get; } = logger;
 
@@ -80,9 +80,15 @@ public sealed class RegisterEndpoint(IServiceProvider services,
             var code = await userManager.GenerateEmailConfirmationTokenAsync(user);
             code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
 
-            await EmailSender.SendConfirmationLinkAsync(user, request.EmailAddress, code);
+            EmailMessagePublisher message = new()
+            {
+                EmailAddress = user.Email!,
+                Code = code,
+                Type = EmailMessagePublisherConstants.Register
+            };
+            await EmailSender.Publish(message, cancellationToken);
 
-            return Created();
+            return StatusCode(StatusCodes.Status201Created);
 
 
         }

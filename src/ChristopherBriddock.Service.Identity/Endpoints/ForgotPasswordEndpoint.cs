@@ -1,7 +1,8 @@
 ﻿using Ardalis.ApiEndpoints;
+using ChristopherBriddock.Service.Identity.Constants;
 using ChristopherBriddock.Service.Identity.Models;
 using ChristopherBriddock.Service.Identity.Models.Requests;
-using ChristopherBriddock.Service.Identity.Providers;
+using ChristopherBriddock.Service.Identity.Publishers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -20,7 +21,7 @@ namespace ChristopherBriddock.Service.Identity.Endpoints;
 /// <param name="emailSender">The email sender.</param>
 /// <param name="logger">The application logger</param>
 public sealed class ForgotPasswordEndpoint(IServiceProvider services,
-                                           IEmailProvider emailSender,
+                                           IEmailPublisher emailSender,
                                            ILogger<ForgotPasswordEndpoint> logger) : EndpointBaseAsync
                                                                                     .WithRequest<ForgotPasswordRequest>
                                                                                     .WithActionResult
@@ -28,7 +29,7 @@ public sealed class ForgotPasswordEndpoint(IServiceProvider services,
     /// <inheritdoc/>
     private IServiceProvider Services { get; } = services;
     /// <inheritdoc/>
-    private IEmailProvider EmailSender { get; } = emailSender;
+    private IEmailPublisher EmailSender { get; } = emailSender;
     /// <inheritdoc/>
     public ILogger<ForgotPasswordEndpoint> Logger { get; set; } = logger;
 
@@ -54,7 +55,14 @@ public sealed class ForgotPasswordEndpoint(IServiceProvider services,
             {
                 var code = await userManager.GeneratePasswordResetTokenAsync(user);
                 code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-                await EmailSender.SendPasswordResetCodeAsync(user, request.EmailAddress, code);
+
+                EmailMessagePublisher message = new()
+                {
+                    EmailAddress = user.Email!,
+                    Code = code,
+                    Type = EmailMessagePublisherConstants.ForgotPassword
+                };
+                await EmailSender.Publish(message, cancellationToken);
             }
 
             return NoContent();

@@ -58,14 +58,20 @@ public static class HealthCheckExtensions
                                                 null,
                                                 null);
         }
-        
-        if (featureManager.IsEnabledAsync(FeatureFlags.ExternalLoggingServer).Result)
+
+        if (featureManager.IsEnabledAsync(FeatureFlags.Seq).Result)
         {
             services.AddHealthChecks().AddSeqPublisher(opt =>
             {
                 opt.Endpoint = configuration["Seq:Endpoint"]!;
                 opt.ApiKey = configuration["Seq:ApiKey"]!;
             });
+        }
+
+        if(featureManager.IsEnabledAsync(FeatureFlags.AzApplicationInsights).Result)
+        {
+            var key = configuration["ApplicationInsights:InstrumentationKey"]!;
+            services.AddHealthChecks().AddAzureApplicationInsights(key);
         }
 
         return services;

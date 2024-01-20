@@ -8,7 +8,7 @@ The Identity Service is a robust authentication and authorization component for 
 * [Endpoints](#endpoints)
 * [Getting Started](#getting-started)
 * [Configuration](#configuration)
-* [Libraries Used](#libraries-used)
+* [Frameworks and Libraries Used](#frameworks-and-libraries-used)
 * [License](#license)
 
 ### Introduction
@@ -17,7 +17,7 @@ The Identity Service plays a crucial role in your application's security infrast
 
 ### Endpoints
 
-* **/authorize**: Endpoint for user authorization.
+* **/authorise**: Endpoint for user authorization.
 * **/confirmemail**: Endpoint for confirming user email.
 * **/forgotpassword**: Endpoint for handling forgotten passwords.
 * **/logout**: Endpoint for user logout.
@@ -25,10 +25,10 @@ The Identity Service plays a crucial role in your application's security infrast
 * **/register**: Endpoint for user registration.
 * **/resetpassword**: Endpoint for resetting user passwords.
 * **/token**: Endpoint for token management.
-* **/2fa/authorize**: Endpoint for two-factor authentication authorization.
+* **/2fa/authorise**: Endpoint for two-factor authentication authorization.
 * **/2fa/manage**: Endpoint for managing two-factor authentication settings.
 * **/2fa/codes**: Endpoint for generating and managing two-factor authentication codes.
-* **/2fa/redeem**: Endpoint for redeethenticaming two-factor aution codes.
+* **/2fa/redeem**: Endpoint for reedming two-factor recovery codes.
 * **/2fa/email**: Endpoint for sending two factor code emails.
 * **/account/email**: Endpoint for managing user account email.
 * **/account/phonenumber**: Endpoint for managing user account phone number.
@@ -38,7 +38,7 @@ The Identity Service plays a crucial role in your application's security infrast
 
 To get started with the Identity Service, follow these steps:
 
-1. Clone the repository: `git clone https://github.com/chris-briddock/ChristopherBriddock.Identity`
+1. Clone the repository: `git clone https://github.com/chris-briddock/ChristopherBriddock.Identity.git`
 2. Open the solution.
 3. Please refer to the [Configuration](#configuration) section.
 4. Build and run the Web API.
@@ -49,16 +49,16 @@ To get started with the Identity Service, follow these steps:
 2. Optionally configure Redis with a connection string and instance name.
 3. Update the JWT section, with audience, secret and expires values.
 4. Update FeatureManagement section, if you would like to use Redis or Application Insights.
-5. Update ApplicationInsights section with your instrumentation key.
+5. Optionally update ApplicationInsights section with your instrumentation key.
 6. If you have a Seq server available update the "WriteTo" section of Serilog.
 
-### Libraries Used
+### Frameworks and Libraries Used
 
 1. **ASP.NET 8**: Primary web framework for building APIs in C#.
 2. **Ardallis.Endpoints**: Provides a clean and testable way to define API endpoints.
 3. **AspNetCore.HealthChecks.NpgSql**: Enables health checks for PostgreSQL databases. Usage is specific to C# applications.
 4. **AspNetCore.HealthChecks.Publisher.Seq**: Extends health checks by providing a publisher for Seq logging. Seq is a centralized log server.
-5. **AspNetCore.Redis**: Library for integrating Redis caching in ASP.NET Core applications. Usage is specific to C# applications.
+5. **AspNetCore.HealthChecks.Redis**: Provides health checks for redis.
 6. **MassTransit**: A distributed application framework for .NET. Provides abstractions for messaging patterns.
 7. **MassTransit.RabbitMQ**: Transport extension for MassTransit, specifically for RabbitMQ. Enables message-based communication.
 8. **Microsoft.ApplicationInsights.AspNetCore**: Integrates Azure Application Insights into ASP.NET Core applications for monitoring and diagnostics.

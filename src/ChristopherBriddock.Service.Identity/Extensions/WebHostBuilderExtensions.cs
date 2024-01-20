@@ -27,15 +27,4 @@ public static class WebHostBuilderExtensions
             });
         });
     }
-    /// <summary>
-    /// Add serilog with option enabled to read from configuration.
-    /// </summary>
-    /// <param name="webHostBuilder">The updated <see cref="IHostBuilder"/></param>
-    public static void AddSerilog(this IHostBuilder webHostBuilder)
-    {     
-        webHostBuilder.UseSerilog((context, config) =>
-        {
-            config.ReadFrom.Configuration(context.Configuration);
-        });
-    }
 }

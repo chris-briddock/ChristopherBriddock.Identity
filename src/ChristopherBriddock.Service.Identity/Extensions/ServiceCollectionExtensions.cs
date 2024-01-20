@@ -9,6 +9,8 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using Microsoft.FeatureManagement;
+using MassTransit;
+using Serilog;
 
 namespace ChristopherBriddock.Service.Identity.Extensions;
 
@@ -172,8 +174,7 @@ public static class ServiceCollectionExtensions
         services.AddSession(opt =>
         {
             opt.IdleTimeout = TimeSpan.FromMinutes(60);
-            opt.Cookie.Name = "AspNetCookie.Session";
-            opt.Cookie.Expiration = TimeSpan.FromMinutes(60);
+            opt.Cookie.Name = ".AspNetCookie.Session";
             opt.Cookie.SecurePolicy = CookieSecurePolicy.Always;
             opt.Cookie.IsEssential = true;
         });
@@ -187,7 +188,7 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddAzureAppInsights(this IServiceCollection services)
     {
         var featureManager = services.BuildServiceProvider().GetRequiredService<IFeatureManager>();
-        if (featureManager.IsEnabledAsync(FeatureFlags.ApplicationInsights).Result)
+        if (featureManager.IsEnabledAsync(FeatureFlags.AzApplicationInsights).Result)
         {
             var configuration = services.BuildServiceProvider().GetRequiredService<IConfiguration>();
             services.AddApplicationInsightsTelemetry(options => options.ConnectionString = configuration["ApplicationInsights:InstrumentationKey"]);
@@ -213,6 +214,85 @@ public static class ServiceCollectionExtensions
                 opt.AllowAnyHeader();
                 opt.AllowAnyMethod();
             });
+        });
+
+        return services;
+    }
+
+    /// <summary>
+    /// Adds publisher messaging for rabbitmq or azure service bus.
+    /// </summary>
+    /// <param name="services">The <see cref="IServiceCollection"/> to which services will be added.</param>
+    /// <returns>The modified <see cref="IServiceCollection"/> instance.</returns>
+    public static IServiceCollection AddPublisherMessaging(this IServiceCollection services)
+    {
+        var configuration = services.BuildServiceProvider()
+                                    .GetRequiredService<IConfiguration>();
+
+        var featureManager = services.BuildServiceProvider()
+                                     .GetRequiredService<IFeatureManager>();
+
+        if (featureManager.IsEnabledAsync(FeatureFlags.AzServiceBus).Result)
+        {
+            services.AddMassTransit(mt =>
+            {
+                mt.UsingAzureServiceBus((context, config) =>
+                {
+                    config.Host(configuration["Messaging:AzureServiceBus:ConnectionString"]);
+                    config.ConfigureEndpoints(context);
+                });
+            });
+        }
+        if (featureManager.IsEnabledAsync(FeatureFlags.RabbitMq).Result)
+        {
+            services.AddMassTransit(mt =>
+            {
+                mt.SetKebabCaseEndpointNameFormatter();
+
+                mt.UsingRabbitMq((context, config) =>
+                {
+
+                    config.Host(configuration["Messaging:RabbitMQ:Hostname"], "/", r =>
+                    {
+                        r.Username("Messaging:RabbitMQ:Username");
+                        r.Password("Messaging:RabbitMQ:Password");
+                    });
+                    config.ConfigureEndpoints(context);
+                });
+            });
+        }
+
+        return services;
+    }
+    /// <summary>
+    /// Adds serilog to console by default, optionally adds Seq by setting the feature flag.
+    /// </summary>
+    /// <param name="services">The <see cref="IServiceCollection"/> to which services will be added.</param>
+    /// <returns>The modified <see cref="IServiceCollection"/> instance.</returns>
+    public static IServiceCollection AddSerilog(this IServiceCollection services)
+    {
+        var configuration = services.BuildServiceProvider()
+                                   .GetRequiredService<IConfiguration>();
+
+        var featureManager = services.BuildServiceProvider()
+                             .GetRequiredService<IFeatureManager>();
+
+        if (featureManager.IsEnabledAsync(FeatureFlags.Seq).Result)
+        {
+            Log.Logger = new LoggerConfiguration()
+                            .ReadFrom.Configuration(configuration)
+                            .CreateLogger();
+        }
+        else
+        {
+            Log.Logger = new LoggerConfiguration().WriteTo
+                                                  .Console()
+                                                  .CreateLogger();
+        }
+
+        services.AddLogging(loggingbuilder =>
+        {
+            loggingbuilder.AddSerilog();
         });
 
         return services;

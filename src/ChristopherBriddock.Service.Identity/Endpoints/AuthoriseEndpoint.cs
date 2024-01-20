@@ -81,6 +81,5 @@ public sealed class AuthoriseEndpoint(IServiceProvider services,
             Logger.LogError("Error in endpoint: {endpointName} - {methodName} Error details: {ex}", nameof(AuthoriseEndpoint), nameof(HandleAsync), ex);
             return StatusCode(StatusCodes.Status500InternalServerError);
         }
-
     }
 }
