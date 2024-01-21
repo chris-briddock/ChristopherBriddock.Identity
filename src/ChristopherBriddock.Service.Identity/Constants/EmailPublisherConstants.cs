@@ -3,7 +3,7 @@
 /// <summary>
 /// Represents the types of email messages that can be sent from the application to the message queue.
 /// </summary>
-public static class EmailMessagePublisherConstants
+public static class EmailPublisherConstants
 {
     /// <summary>
     /// The value for a forogtten password message.

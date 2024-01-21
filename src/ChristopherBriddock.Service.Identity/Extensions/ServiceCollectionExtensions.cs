@@ -254,8 +254,8 @@ public static class ServiceCollectionExtensions
 
                     config.Host(configuration["Messaging:RabbitMQ:Hostname"], "/", r =>
                     {
-                        r.Username("Messaging:RabbitMQ:Username");
-                        r.Password("Messaging:RabbitMQ:Password");
+                        r.Username(configuration["Messaging:RabbitMQ:Username"]);
+                        r.Password(configuration["Messaging:RabbitMQ:Password"]);
                     });
                     config.ConfigureEndpoints(context);
                 });
@@ -269,19 +269,21 @@ public static class ServiceCollectionExtensions
     /// </summary>
     /// <param name="services">The <see cref="IServiceCollection"/> to which services will be added.</param>
     /// <returns>The modified <see cref="IServiceCollection"/> instance.</returns>
-    public static IServiceCollection AddSerilog(this IServiceCollection services)
+    public static IServiceCollection AddSerilogWithConfiguration(this IServiceCollection services)
     {
         var configuration = services.BuildServiceProvider()
                                    .GetRequiredService<IConfiguration>();
 
         var featureManager = services.BuildServiceProvider()
                              .GetRequiredService<IFeatureManager>();
+        
+        services.AddSerilog();
 
         if (featureManager.IsEnabledAsync(FeatureFlags.Seq).Result)
         {
-            Log.Logger = new LoggerConfiguration()
-                            .ReadFrom.Configuration(configuration)
-                            .CreateLogger();
+            Log.Logger = new LoggerConfiguration().ReadFrom
+                                                  .Configuration(configuration)
+                                                  .CreateLogger();
         }
         else
         {
@@ -292,7 +294,7 @@ public static class ServiceCollectionExtensions
 
         services.AddLogging(loggingbuilder =>
         {
-            loggingbuilder.AddSerilog();
+            loggingbuilder.AddSerilog(Log.Logger);
         });
 
         return services;

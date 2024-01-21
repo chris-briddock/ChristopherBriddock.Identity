@@ -61,11 +61,7 @@ public static class HealthCheckExtensions
 
         if (featureManager.IsEnabledAsync(FeatureFlags.Seq).Result)
         {
-            services.AddHealthChecks().AddSeqPublisher(opt =>
-            {
-                opt.Endpoint = configuration["Seq:Endpoint"]!;
-                opt.ApiKey = configuration["Seq:ApiKey"]!;
-            });
+            // TODO: Add Seq Health CHecks.
         }
 
         if(featureManager.IsEnabledAsync(FeatureFlags.AzApplicationInsights).Result)

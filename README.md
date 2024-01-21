@@ -8,7 +8,6 @@ The Identity Service is a robust authentication and authorization component for 
 * [Endpoints](#endpoints)
 * [Getting Started](#getting-started)
 * [Configuration](#configuration)
-* [Frameworks and Libraries Used](#frameworks-and-libraries-used)
 * [License](#license)
 
 ### Introduction
@@ -51,30 +50,6 @@ To get started with the Identity Service, follow these steps:
 4. Update FeatureManagement section, if you would like to use Redis or Application Insights.
 5. Optionally update ApplicationInsights section with your instrumentation key.
 6. If you have a Seq server available update the "WriteTo" section of Serilog.
-
-### Frameworks and Libraries Used
-
-1. **ASP.NET 8**: Primary web framework for building APIs in C#.
-2. **Ardallis.Endpoints**: Provides a clean and testable way to define API endpoints.
-3. **AspNetCore.HealthChecks.NpgSql**: Enables health checks for PostgreSQL databases. Usage is specific to C# applications.
-4. **AspNetCore.HealthChecks.Publisher.Seq**: Extends health checks by providing a publisher for Seq logging. Seq is a centralized log server.
-5. **AspNetCore.HealthChecks.Redis**: Provides health checks for redis.
-6. **MassTransit**: A distributed application framework for .NET. Provides abstractions for messaging patterns.
-7. **MassTransit.RabbitMQ**: Transport extension for MassTransit, specifically for RabbitMQ. Enables message-based communication.
-8. **Microsoft.ApplicationInsights.AspNetCore**: Integrates Azure Application Insights into ASP.NET Core applications for monitoring and diagnostics.
-9. **Microsoft.ApplicationInsights.Kubernetes**: Extends Application Insights for monitoring applications deployed on Kubernetes.
-10. **Microsoft.AspNetCore.Authentication.JwtBearer**: Middleware for validating JSON Web Tokens (JWTs) in ASP.NET Core.
-11. **Microsoft.AspNetCore.Identity.EntityFrameworkCore**: ASP.NET Core Identity provider using Entity Framework Core. Manages user identity and authorization.
-12. **Microsoft.EntityFrameworkCore**: Object-relational mapper (ORM) for simplifying database interactions in .NET applications.
-13. **Microsoft.FeatureManagement**: Library for feature management, controlling feature availability through configuration.
-14. **Microsoft.IdentityModel.JsonWebTokens**: Library for working with JSON Web Tokens (JWTs). Essential for authentication and authorization.
-15. **NpgSql.EntityFrameworkCore.PostgreSQL**: PostgreSQL database provider for Entity Framework Core.
-16. **Serilog**: Logging library for .NET applications. Provides structured logging.
-17. **Serilog.AspNetCore**: Integration library for using Serilog with ASP.NET Core applications.
-18. **Serilog.Sink.Console**: Serilog sink for writing log events to the console. Useful for development and debugging.
-19. **Serilog.Sinks.Seq**: Serilog sink for Seq logging. Seq is a centralized logging server.
-20. **NSubstitute**: Mocking library for .NET. Used in unit tests to create substitute objects.
-21. **Xunit**: Testing framework for .NET applications. Provides a simple and extensible approach to writing unit tests in C#.
 
 ### License
 

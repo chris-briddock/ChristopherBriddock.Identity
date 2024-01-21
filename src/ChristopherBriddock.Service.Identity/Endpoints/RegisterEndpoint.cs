@@ -80,11 +80,11 @@ public sealed class RegisterEndpoint(IServiceProvider services,
             var code = await userManager.GenerateEmailConfirmationTokenAsync(user);
             code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
 
-            EmailMessagePublisher message = new()
+            MessageContents message = new()
             {
                 EmailAddress = user.Email!,
                 Code = code,
-                Type = EmailMessagePublisherConstants.Register
+                Type = EmailPublisherConstants.Register
             };
             await EmailSender.Publish(message, cancellationToken);
 

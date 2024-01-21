@@ -56,11 +56,11 @@ public sealed class ForgotPasswordEndpoint(IServiceProvider services,
                 var code = await userManager.GeneratePasswordResetTokenAsync(user);
                 code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
 
-                EmailMessagePublisher message = new()
+                MessageContents message = new()
                 {
                     EmailAddress = user.Email!,
                     Code = code,
-                    Type = EmailMessagePublisherConstants.ForgotPassword
+                    Type = EmailPublisherConstants.ForgotPassword
                 };
                 await EmailSender.Publish(message, cancellationToken);
             }

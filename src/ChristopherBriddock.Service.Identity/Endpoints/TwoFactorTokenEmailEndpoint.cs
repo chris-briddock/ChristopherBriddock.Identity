@@ -16,10 +16,10 @@ namespace ChristopherBriddock.Service.Identity.Endpoints;
 /// Initializes a new instance of <see cref="TwoFactorTokenEmailEndpoint"/>
 /// </remarks>
 /// <param name="services">The application service provider.</param>
-/// <param name="emailSender">Allows the sending of emails for verification purposes.</param>
+/// <param name="emailPublisher">Allows the sending of emails for verification purposes.</param>
 /// <param name="logger">The application's logger.</param>
 public sealed class TwoFactorTokenEmailEndpoint(IServiceProvider services,
-                                                IEmailPublisher emailSender,
+                                                IEmailPublisher emailPublisher,
                                                 ILogger<TwoFactorTokenEmailEndpoint> logger) : EndpointBaseAsync
                                                                                                .WithRequest<TwoFactorTokenEmailRequest>
                                                                                                .WithActionResult
@@ -29,7 +29,7 @@ public sealed class TwoFactorTokenEmailEndpoint(IServiceProvider services,
     /// </summary>
     public IServiceProvider Services { get; } = services;
     /// <inheritdoc/>
-    public IEmailPublisher EmailSender { get; } = emailSender;
+    public IEmailPublisher EmailPublisher { get; } = emailPublisher;
     /// <inheritdoc/>
     public ILogger<TwoFactorTokenEmailEndpoint> Logger { get; } = logger;
 
@@ -63,13 +63,13 @@ public sealed class TwoFactorTokenEmailEndpoint(IServiceProvider services,
 
             var code = await userManager.GenerateTwoFactorTokenAsync(user!, TokenOptions.DefaultAuthenticatorProvider);
 
-            EmailMessagePublisher message = new()
+            MessageContents message = new()
             {
                 EmailAddress = user.Email!,
                 Code = code,
-                Type = EmailMessagePublisherConstants.TwoFactorToken
+                Type = EmailPublisherConstants.TwoFactorToken
             };
-            await EmailSender.Publish(message, cancellationToken);
+            await EmailPublisher.Publish(message, cancellationToken);
 
             return Ok();
         }
