@@ -10,7 +10,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddControllers();
 builder.Services.AddSwagger("ChristopherBriddock.Service.Identity.xml");
 builder.Services.AddFeatureManagement();
-builder.Services.AddSerilog();
+builder.Services.AddSerilogWithConfiguration();
 builder.Services.AddCustomAuthentication();
 builder.Services.AddCustomAuthorization();
 builder.Services.AddAuthorizationBuilder();
