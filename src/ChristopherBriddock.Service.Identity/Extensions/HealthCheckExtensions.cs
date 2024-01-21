@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+﻿using ChristopherBriddock.Service.Common.Constants;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.FeatureManagement;
 using System.Text;
@@ -50,7 +51,7 @@ public static class HealthCheckExtensions
                 .AddNpgSql(configuration.GetConnectionString("Default")!);
 
 
-        if (featureManager.IsEnabledAsync(FeatureFlags.Redis).Result)
+        if (featureManager.IsEnabledAsync(FeatureFlagConstants.Redis).Result)
         {
             services.AddHealthChecks().AddRedis(configuration["ConnectionStrings:Redis"]!,
                                                 null,
@@ -59,12 +60,12 @@ public static class HealthCheckExtensions
                                                 null);
         }
 
-        if (featureManager.IsEnabledAsync(FeatureFlags.Seq).Result)
+        if (featureManager.IsEnabledAsync(FeatureFlagConstants.Seq).Result)
         {
             // TODO: Add Seq Health CHecks.
         }
 
-        if(featureManager.IsEnabledAsync(FeatureFlags.AzApplicationInsights).Result)
+        if(featureManager.IsEnabledAsync(FeatureFlagConstants.AzApplicationInsights).Result)
         {
             var key = configuration["ApplicationInsights:InstrumentationKey"]!;
             services.AddHealthChecks().AddAzureApplicationInsights(key);

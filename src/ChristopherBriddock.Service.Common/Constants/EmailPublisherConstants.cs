@@ -1,4 +1,4 @@
-﻿namespace ChristopherBriddock.Service.Identity.Constants;
+﻿namespace ChristopherBriddock.Service.Common.Constants;
 
 /// <summary>
 /// Represents the types of email messages that can be sent from the application to the message queue.

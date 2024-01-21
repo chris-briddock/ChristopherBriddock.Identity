@@ -1,4 +1,4 @@
-using ChristopherBriddock.Service.Identity.Constants;
+using ChristopherBriddock.Service.Common.Constants;
 using ChristopherBriddock.Service.Identity.Data;
 using ChristopherBriddock.Service.Identity.Extensions;
 using ChristopherBriddock.Service.Identity.Publishers;
@@ -23,7 +23,7 @@ builder.Services.AddDbContext<AppDbContext>();
 builder.Services.AddCustomHealthChecks();
 builder.Services.AddCrossOriginPolicy();
 builder.Services.AddPublisherMessaging();
-builder.Services.TryAddScoped<IEmailPublisher, EmailPublisher>();
+builder.Services.TryAddSingleton<IEmailPublisher, EmailPublisher>();
 
 WebApplication app = builder.Build();
 if (app.Environment.IsDevelopment())

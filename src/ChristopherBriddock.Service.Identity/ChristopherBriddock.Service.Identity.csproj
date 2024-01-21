@@ -46,4 +46,8 @@
     <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.5.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ChristopherBriddock.Service.Common\ChristopherBriddock.Service.Common.csproj" />
+  </ItemGroup>
+
 </Project>

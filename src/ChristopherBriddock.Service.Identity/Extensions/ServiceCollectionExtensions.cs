@@ -11,6 +11,7 @@ using Microsoft.OpenApi.Models;
 using Microsoft.FeatureManagement;
 using MassTransit;
 using Serilog;
+using ChristopherBriddock.Service.Common.Constants;
 
 namespace ChristopherBriddock.Service.Identity.Extensions;
 
@@ -154,7 +155,7 @@ public static class ServiceCollectionExtensions
         
         services.AddDistributedMemoryCache();
 
-        if (featureManager.IsEnabledAsync(FeatureFlags.Redis).Result)
+        if (featureManager.IsEnabledAsync(FeatureFlagConstants.Redis).Result)
         {
             services.AddStackExchangeRedisCache(opt =>
             {
@@ -187,8 +188,10 @@ public static class ServiceCollectionExtensions
     /// <returns>The modified <see cref="IServiceCollection"/> instance.</returns>
     public static IServiceCollection AddAzureAppInsights(this IServiceCollection services)
     {
-        var featureManager = services.BuildServiceProvider().GetRequiredService<IFeatureManager>();
-        if (featureManager.IsEnabledAsync(FeatureFlags.AzApplicationInsights).Result)
+        var featureManager = services.BuildServiceProvider()
+                                     .GetRequiredService<IFeatureManager>();
+
+        if (featureManager.IsEnabledAsync(FeatureFlagConstants.AzApplicationInsights).Result)
         {
             var configuration = services.BuildServiceProvider().GetRequiredService<IConfiguration>();
             services.AddApplicationInsightsTelemetry(options => options.ConnectionString = configuration["ApplicationInsights:InstrumentationKey"]);
@@ -232,7 +235,7 @@ public static class ServiceCollectionExtensions
         var featureManager = services.BuildServiceProvider()
                                      .GetRequiredService<IFeatureManager>();
 
-        if (featureManager.IsEnabledAsync(FeatureFlags.AzServiceBus).Result)
+        if (featureManager.IsEnabledAsync(FeatureFlagConstants.AzServiceBus).Result)
         {
             services.AddMassTransit(mt =>
             {
@@ -243,7 +246,7 @@ public static class ServiceCollectionExtensions
                 });
             });
         }
-        if (featureManager.IsEnabledAsync(FeatureFlags.RabbitMq).Result)
+        if (featureManager.IsEnabledAsync(FeatureFlagConstants.RabbitMq).Result)
         {
             services.AddMassTransit(mt =>
             {
@@ -279,7 +282,7 @@ public static class ServiceCollectionExtensions
         
         services.AddSerilog();
 
-        if (featureManager.IsEnabledAsync(FeatureFlags.Seq).Result)
+        if (featureManager.IsEnabledAsync(FeatureFlagConstants.Seq).Result)
         {
             Log.Logger = new LoggerConfiguration().ReadFrom
                                                   .Configuration(configuration)

@@ -1,11 +1,11 @@
 ﻿using Microsoft.FeatureManagement;
 
-namespace ChristopherBriddock.Service.Identity;
+namespace ChristopherBriddock.Service.Common.Constants;
 
 /// <summary>
 /// Contains configuration definitions for features that can be disabled or enabled.
 /// </summary>
-public static class FeatureFlags
+public static class FeatureFlagConstants
 {
     /// <summary>
     /// Gets or sets the boolean to enable or disable Redis caching.

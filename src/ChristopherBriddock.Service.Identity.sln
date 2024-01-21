@@ -9,6 +9,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChristopherBriddock.Service
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{3C9B2A43-4CF0-4071-B5EC-B35A8256EF34}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChristopherBriddock.Service.Email", "ChristopherBriddock.Service.Email\ChristopherBriddock.Service.Email.csproj", "{E0E643C5-A4BA-416A-9F84-1C8F7D2EA9A8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChristopherBriddock.Service.Common", "ChristopherBriddock.Service.Common\ChristopherBriddock.Service.Common.csproj", "{55AF770B-80FF-4735-9014-24008C39E27A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{3C9B2A43-4CF0-4071-B5EC-B35A8256EF34}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3C9B2A43-4CF0-4071-B5EC-B35A8256EF34}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3C9B2A43-4CF0-4071-B5EC-B35A8256EF34}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0E643C5-A4BA-416A-9F84-1C8F7D2EA9A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0E643C5-A4BA-416A-9F84-1C8F7D2EA9A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0E643C5-A4BA-416A-9F84-1C8F7D2EA9A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0E643C5-A4BA-416A-9F84-1C8F7D2EA9A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55AF770B-80FF-4735-9014-24008C39E27A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55AF770B-80FF-4735-9014-24008C39E27A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55AF770B-80FF-4735-9014-24008C39E27A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55AF770B-80FF-4735-9014-24008C39E27A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

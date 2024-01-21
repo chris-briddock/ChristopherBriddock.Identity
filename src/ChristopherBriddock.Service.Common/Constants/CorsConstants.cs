@@ -1,4 +1,4 @@
-﻿namespace ChristopherBriddock.Service.Identity.Constants;
+﻿namespace ChristopherBriddock.Service.Common.Constants;
 
 /// <summary>
 /// Defines the constant values relate to CORS.

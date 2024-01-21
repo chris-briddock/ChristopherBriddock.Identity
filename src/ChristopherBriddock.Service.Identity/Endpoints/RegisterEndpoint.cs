@@ -1,4 +1,6 @@
 ﻿using Ardalis.ApiEndpoints;
+using ChristopherBriddock.Service.Common.Constants;
+using ChristopherBriddock.Service.Common.Messaging;
 using ChristopherBriddock.Service.Identity.Constants;
 using ChristopherBriddock.Service.Identity.Models;
 using ChristopherBriddock.Service.Identity.Models.Requests;
@@ -29,7 +31,7 @@ public sealed class RegisterEndpoint(IServiceProvider services,
     /// <inheritdoc/>
     public IServiceProvider Services { get; } = services;
     /// <inheritdoc/>
-    public IEmailPublisher EmailSender { get; } = emailSender;
+    public IEmailPublisher EmailPublisher { get; } = emailSender;
     /// <inheritdoc/>
     public ILogger<RegisterEndpoint> Logger { get; } = logger;
 
@@ -80,13 +82,13 @@ public sealed class RegisterEndpoint(IServiceProvider services,
             var code = await userManager.GenerateEmailConfirmationTokenAsync(user);
             code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
 
-            MessageContents message = new()
+            EmailMessage message = new()
             {
                 EmailAddress = user.Email!,
                 Code = code,
                 Type = EmailPublisherConstants.Register
             };
-            await EmailSender.Publish(message, cancellationToken);
+            await EmailPublisher.Publish(message, cancellationToken);
 
             return StatusCode(StatusCodes.Status201Created);
 

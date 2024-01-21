@@ -22,8 +22,8 @@ public class TokenEndpoint(IConfiguration configuration,
                            IServiceProvider services,
                            IHttpContextAccessor httpContextAccessor,
                            ILogger<TokenEndpoint> logger) : EndpointBaseAsync
-                                                                      .WithoutRequest
-                                                                      .WithActionResult<TokenResponse>
+                                                            .WithoutRequest
+                                                            .WithActionResult<TokenResponse>
 {
     /// <summary>
     /// The application's configuration.

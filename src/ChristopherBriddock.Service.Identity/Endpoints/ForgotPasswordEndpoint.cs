@@ -1,5 +1,6 @@
 ﻿using Ardalis.ApiEndpoints;
-using ChristopherBriddock.Service.Identity.Constants;
+using ChristopherBriddock.Service.Common.Constants;
+using ChristopherBriddock.Service.Common.Messaging;
 using ChristopherBriddock.Service.Identity.Models;
 using ChristopherBriddock.Service.Identity.Models.Requests;
 using ChristopherBriddock.Service.Identity.Publishers;
@@ -29,7 +30,7 @@ public sealed class ForgotPasswordEndpoint(IServiceProvider services,
     /// <inheritdoc/>
     private IServiceProvider Services { get; } = services;
     /// <inheritdoc/>
-    private IEmailPublisher EmailSender { get; } = emailSender;
+    private IEmailPublisher EmailPublisher { get; } = emailSender;
     /// <inheritdoc/>
     public ILogger<ForgotPasswordEndpoint> Logger { get; set; } = logger;
 
@@ -56,13 +57,13 @@ public sealed class ForgotPasswordEndpoint(IServiceProvider services,
                 var code = await userManager.GeneratePasswordResetTokenAsync(user);
                 code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
 
-                MessageContents message = new()
+                EmailMessage message = new()
                 {
                     EmailAddress = user.Email!,
                     Code = code,
                     Type = EmailPublisherConstants.ForgotPassword
                 };
-                await EmailSender.Publish(message, cancellationToken);
+                await EmailPublisher.Publish(message, cancellationToken);
             }
 
             return NoContent();
