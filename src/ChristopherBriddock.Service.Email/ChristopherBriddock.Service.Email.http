@@ -1,6 +1,0 @@
-@ChristopherBriddock.Service.Email_HostAddress = http://localhost:5120
-
-GET {{ChristopherBriddock.Service.Email_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###

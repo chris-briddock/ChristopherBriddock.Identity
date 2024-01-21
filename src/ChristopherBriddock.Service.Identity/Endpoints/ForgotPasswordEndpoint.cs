@@ -43,6 +43,7 @@ public sealed class ForgotPasswordEndpoint(IServiceProvider services,
     [HttpPost("/forgotpassword")]
     [AllowAnonymous]
     [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status409Conflict)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public override async Task<ActionResult> HandleAsync([FromBody] ForgotPasswordRequest request,
                                                          CancellationToken cancellationToken = default)
@@ -51,9 +52,13 @@ public sealed class ForgotPasswordEndpoint(IServiceProvider services,
         {
             var userManager = Services.GetRequiredService<UserManager<ApplicationUser>>();
             var user = await userManager.FindByEmailAsync(request.EmailAddress);
-
-            if (user is not null && await userManager.IsEmailConfirmedAsync(user))
+            
+            if (user is not null)
             {
+                if (await userManager.IsEmailConfirmedAsync(user))
+                {
+                    return Conflict("Email is not confirmed.");
+                }
                 var code = await userManager.GeneratePasswordResetTokenAsync(user);
                 code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
 
@@ -64,9 +69,12 @@ public sealed class ForgotPasswordEndpoint(IServiceProvider services,
                     Type = EmailPublisherConstants.ForgotPassword
                 };
                 await EmailPublisher.Publish(message, cancellationToken);
+
+                return NoContent();
             }
 
-            return NoContent();
+            return NotFound();
+            
         }
         catch (Exception ex)
         {

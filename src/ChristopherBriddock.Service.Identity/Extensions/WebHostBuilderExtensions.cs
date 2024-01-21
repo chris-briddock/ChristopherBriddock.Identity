@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Server.Kestrel.Core;
-using Serilog;
 
 namespace ChristopherBriddock.Service.Identity.Extensions;
 

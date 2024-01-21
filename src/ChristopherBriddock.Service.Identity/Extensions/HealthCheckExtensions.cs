@@ -65,7 +65,7 @@ public static class HealthCheckExtensions
             // TODO: Add Seq Health CHecks.
         }
 
-        if(featureManager.IsEnabledAsync(FeatureFlagConstants.AzApplicationInsights).Result)
+        if (featureManager.IsEnabledAsync(FeatureFlagConstants.AzApplicationInsights).Result)
         {
             var key = configuration["ApplicationInsights:InstrumentationKey"]!;
             services.AddHealthChecks().AddAzureApplicationInsights(key);

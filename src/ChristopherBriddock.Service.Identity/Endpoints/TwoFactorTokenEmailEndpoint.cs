@@ -1,7 +1,6 @@
 ﻿using Ardalis.ApiEndpoints;
 using ChristopherBriddock.Service.Common.Constants;
 using ChristopherBriddock.Service.Common.Messaging;
-using ChristopherBriddock.Service.Identity.Constants;
 using ChristopherBriddock.Service.Identity.Models;
 using ChristopherBriddock.Service.Identity.Models.Requests;
 using ChristopherBriddock.Service.Identity.Publishers;
@@ -63,7 +62,7 @@ public sealed class TwoFactorTokenEmailEndpoint(IServiceProvider services,
             if (user is null)
                 return NotFound();
 
-            var code = await userManager.GenerateTwoFactorTokenAsync(user!, TokenOptions.DefaultAuthenticatorProvider);
+            var code = await userManager.GenerateTwoFactorTokenAsync(user!, TokenOptions.DefaultProvider);
 
             EmailMessage message = new()
             {

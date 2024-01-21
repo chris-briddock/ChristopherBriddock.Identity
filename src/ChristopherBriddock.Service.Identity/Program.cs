@@ -1,4 +1,5 @@
 using ChristopherBriddock.Service.Common.Constants;
+using ChristopherBriddock.Service.Common.Extensions;
 using ChristopherBriddock.Service.Identity.Data;
 using ChristopherBriddock.Service.Identity.Extensions;
 using ChristopherBriddock.Service.Identity.Publishers;

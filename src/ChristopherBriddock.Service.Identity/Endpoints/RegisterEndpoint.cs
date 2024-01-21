@@ -44,6 +44,7 @@ public sealed class RegisterEndpoint(IServiceProvider services,
     [HttpPost("/register")]
     [AllowAnonymous]
     [ProducesResponseType(StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status409Conflict)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public override async Task<ActionResult> HandleAsync(RegisterRequest request,
                                                          CancellationToken cancellationToken = default)
@@ -52,6 +53,13 @@ public sealed class RegisterEndpoint(IServiceProvider services,
         {
             var userManager = Services.GetRequiredService<UserManager<ApplicationUser>>();
             var roleManager = Services.GetRequiredService<RoleManager<ApplicationRole>>();
+
+            var existingUser = await userManager.FindByEmailAsync(request.EmailAddress);
+
+            if (existingUser is not null)
+            {
+                return StatusCode(StatusCodes.Status409Conflict);
+            }
 
             ApplicationUser user = new()
             {
@@ -91,8 +99,6 @@ public sealed class RegisterEndpoint(IServiceProvider services,
             await EmailPublisher.Publish(message, cancellationToken);
 
             return StatusCode(StatusCodes.Status201Created);
-
-
         }
         catch (Exception ex)
         {

@@ -1,17 +1,16 @@
-﻿using ChristopherBriddock.Service.Identity.Constants;
+﻿using ChristopherBriddock.Service.Common.Constants;
+using ChristopherBriddock.Service.Identity.Constants;
 using ChristopherBriddock.Service.Identity.Data;
 using ChristopherBriddock.Service.Identity.Models;
 using ChristopherBriddock.Service.Identity.Options;
 using ChristopherBriddock.Service.Identity.Providers;
+using MassTransit;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Options;
-using Microsoft.OpenApi.Models;
 using Microsoft.FeatureManagement;
-using MassTransit;
-using Serilog;
-using ChristopherBriddock.Service.Common.Constants;
+using Microsoft.OpenApi.Models;
 
 namespace ChristopherBriddock.Service.Identity.Extensions;
 
@@ -152,7 +151,7 @@ public static class ServiceCollectionExtensions
         IFeatureManager featureManager = services
                                         .BuildServiceProvider()
                                         .GetRequiredService<IFeatureManager>();
-        
+
         services.AddDistributedMemoryCache();
 
         if (featureManager.IsEnabledAsync(FeatureFlagConstants.Redis).Result)
@@ -264,41 +263,6 @@ public static class ServiceCollectionExtensions
                 });
             });
         }
-
-        return services;
-    }
-    /// <summary>
-    /// Adds serilog to console by default, optionally adds Seq by setting the feature flag.
-    /// </summary>
-    /// <param name="services">The <see cref="IServiceCollection"/> to which services will be added.</param>
-    /// <returns>The modified <see cref="IServiceCollection"/> instance.</returns>
-    public static IServiceCollection AddSerilogWithConfiguration(this IServiceCollection services)
-    {
-        var configuration = services.BuildServiceProvider()
-                                   .GetRequiredService<IConfiguration>();
-
-        var featureManager = services.BuildServiceProvider()
-                             .GetRequiredService<IFeatureManager>();
-        
-        services.AddSerilog();
-
-        if (featureManager.IsEnabledAsync(FeatureFlagConstants.Seq).Result)
-        {
-            Log.Logger = new LoggerConfiguration().ReadFrom
-                                                  .Configuration(configuration)
-                                                  .CreateLogger();
-        }
-        else
-        {
-            Log.Logger = new LoggerConfiguration().WriteTo
-                                                  .Console()
-                                                  .CreateLogger();
-        }
-
-        services.AddLogging(loggingbuilder =>
-        {
-            loggingbuilder.AddSerilog(Log.Logger);
-        });
 
         return services;
     }
