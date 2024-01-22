@@ -23,7 +23,7 @@ public sealed class AppDbContext(IConfiguration configuration,
     {
         if (WebHostEnvironment.IsEnvironment("Test"))
         {
-            optionsBuilder.UseInMemoryDatabase("test.db");
+            optionsBuilder.UseSqlite("Data Source=LocalDatabase.db");
         }
         else
         {

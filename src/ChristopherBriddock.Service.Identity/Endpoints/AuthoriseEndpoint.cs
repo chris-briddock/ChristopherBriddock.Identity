@@ -39,7 +39,7 @@ public sealed class AuthoriseEndpoint(IServiceProvider services,
     /// <returns>A new <see cref="ActionResult"/></returns>
     [HttpPost("/authorise")]
     [AllowAnonymous]
-    [ProducesResponseType(StatusCodes.Status302Found)]
+    [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public override async Task<ActionResult> HandleAsync([FromBody] AuthorizeRequest request,

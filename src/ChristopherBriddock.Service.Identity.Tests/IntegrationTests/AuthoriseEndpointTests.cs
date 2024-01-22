@@ -1,10 +1,13 @@
-﻿using ChristopherBriddock.Service.Identity.Endpoints;
+﻿using ChristopherBriddock.Service.Identity.Models;
 using ChristopherBriddock.Service.Identity.Models.Requests;
 using ChristopherBriddock.Service.Identity.Tests.Mocks;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using NSubstitute;
 using NSubstitute.ExceptionExtensions;
 using System.Net;
 using System.Net.Http.Json;
@@ -27,20 +30,26 @@ public class AuthoriseEndpointTests : IClassFixture<WebApplicationFactory<Progra
     }
 
     [Fact]
-    public async Task AuthoriseEndpoint_ReturnsStatus302Found_WhenUseValidCredentials()
+    public async Task AuthoriseEndpoint_ReturnsStatus200OK_WhenRedirectedToToken()
     {
         using var client = _webApplicationFactory.CreateClient();
 
-        _authorizeRequest = new()
+        RegisterRequest registerRequest = new()
         {
             EmailAddress = "test@test.com",
             Password = "=W0Jqcxsz8] Lq74z*:&gB^zmhx*HsrB6GYj%K}G",
+            PhoneNumber = "180055501000"
+        };
+        _authorizeRequest = new()
+        {
+            EmailAddress = registerRequest.EmailAddress,
+            Password = registerRequest.Password,
             RememberMe = true
         };
 
         var endpointResponse = await client.PostAsJsonAsync("/authorise", _authorizeRequest);
 
-        Assert.Equivalent(HttpStatusCode.Redirect, endpointResponse.StatusCode);
+        Assert.Equivalent(HttpStatusCode.OK, endpointResponse.StatusCode);
     }
     [Fact]
     public async Task AuthoriseEndpoint_ReturnsStatus401Unauthorized_WhenUseInvalidValidCredentials()
@@ -61,20 +70,29 @@ public class AuthoriseEndpointTests : IClassFixture<WebApplicationFactory<Progra
     [Fact]
     public async Task AuthoriseEndpoint_ReturnsStatus500InternalServerError_WhenExceptionIsThrown()
     {
-        LoggerMock<AuthoriseEndpoint> loggerMock = new();
+        ServiceProviderMock serviceProviderMock = new();
+        var mock = serviceProviderMock.Mock()
+                                      .When(x => x.GetRequiredService<SignInManager<ApplicationUser>>()
+                                      .Throws(new InvalidOperationException()));
 
-        loggerMock.Mock().Throws<Exception>();
+        _authorizeRequest = new()
+        {
+            EmailAddress = "test@test.com",
+            Password = "=W0Jqcxsz8] Lq74z*:&gB^zmhx*HsrB6GYj%K}G",
+            RememberMe = true
+        };
 
         using var client = _webApplicationFactory.WithWebHostBuilder(s =>
         {
-            s.ConfigureTestServices(services =>
+            s.ConfigureTestServices(s =>
             {
-                services.AddSingleton<LoggerMock<AuthoriseEndpoint>>();
+                s.Replace(new ServiceDescriptor(typeof(SignInManager<ApplicationUser>), mock));
             });
         }).CreateClient();
 
         using var endpointResponse = await client.PostAsJsonAsync("/authorise", _authorizeRequest);
-
         Assert.Equivalent(HttpStatusCode.InternalServerError, endpointResponse.StatusCode);
+
+
     }
 }

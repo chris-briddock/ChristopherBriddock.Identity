@@ -6,6 +6,10 @@ using ChristopherBriddock.Service.Identity.Publishers;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.FeatureManagement;
 
+namespace ChristopherBriddock.Service.Identity;
+/// <summary>
+/// The entry point for the Web Application.
+/// </summary>
 public sealed class Program
 {
     private static async Task Main(string[] args)
