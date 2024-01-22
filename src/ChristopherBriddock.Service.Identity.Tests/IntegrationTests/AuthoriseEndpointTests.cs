@@ -1,17 +1,4 @@
-﻿using ChristopherBriddock.Service.Identity.Models;
-using ChristopherBriddock.Service.Identity.Models.Requests;
-using ChristopherBriddock.Service.Identity.Tests.Mocks;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc.Testing;
-using Microsoft.AspNetCore.TestHost;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
-using NSubstitute;
-using NSubstitute.ExceptionExtensions;
-using System.Net;
-using System.Net.Http.Json;
-
+﻿using Polly;
 namespace ChristopherBriddock.Service.Identity.Tests.IntegrationTests;
 
 public class AuthoriseEndpointTests : IClassFixture<WebApplicationFactory<Program>>
@@ -46,10 +33,13 @@ public class AuthoriseEndpointTests : IClassFixture<WebApplicationFactory<Progra
             Password = registerRequest.Password,
             RememberMe = true
         };
+        var register = await client.PostAsJsonAsync("/register", registerRequest);
 
-        var endpointResponse = await client.PostAsJsonAsync("/authorise", _authorizeRequest);
+        var sut = await Policy.Handle<HttpRequestException>()
+    .WaitAndRetryAsync(3, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)))
+    .ExecuteAsync(async () => await client.PostAsJsonAsync("/authorise", _authorizeRequest));
 
-        Assert.Equivalent(HttpStatusCode.OK, endpointResponse.StatusCode);
+        Assert.Equivalent(HttpStatusCode.OK, sut.StatusCode);
     }
     [Fact]
     public async Task AuthoriseEndpoint_ReturnsStatus401Unauthorized_WhenUseInvalidValidCredentials()
@@ -63,9 +53,9 @@ public class AuthoriseEndpointTests : IClassFixture<WebApplicationFactory<Progra
             RememberMe = true
         };
 
-        using var endpointResponse = await client.PostAsJsonAsync("/authorise", _authorizeRequest);
+        using var sut = await client.PostAsJsonAsync("/authorise", _authorizeRequest);
 
-        Assert.Equivalent(HttpStatusCode.Unauthorized, endpointResponse.StatusCode);
+        Assert.Equivalent(HttpStatusCode.Unauthorized, sut.StatusCode);
     }
     [Fact]
     public async Task AuthoriseEndpoint_ReturnsStatus500InternalServerError_WhenExceptionIsThrown()
@@ -90,8 +80,8 @@ public class AuthoriseEndpointTests : IClassFixture<WebApplicationFactory<Progra
             });
         }).CreateClient();
 
-        using var endpointResponse = await client.PostAsJsonAsync("/authorise", _authorizeRequest);
-        Assert.Equivalent(HttpStatusCode.InternalServerError, endpointResponse.StatusCode);
+        using var sut = await client.PostAsJsonAsync("/authorise", _authorizeRequest);
+        Assert.Equivalent(HttpStatusCode.InternalServerError, sut.StatusCode);
 
 
     }

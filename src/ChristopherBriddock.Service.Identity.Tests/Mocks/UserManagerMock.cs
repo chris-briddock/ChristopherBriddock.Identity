@@ -1,8 +1,5 @@
-﻿using ChristopherBriddock.Service.Identity.Models;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using NSubstitute;
 
 namespace ChristopherBriddock.Service.Identity.Tests.Mocks;
 

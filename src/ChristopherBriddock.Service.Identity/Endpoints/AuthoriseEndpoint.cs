@@ -41,6 +41,7 @@ public sealed class AuthoriseEndpoint(IServiceProvider services,
     [AllowAnonymous]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public override async Task<ActionResult> HandleAsync([FromBody] AuthorizeRequest request,
                                                          CancellationToken cancellationToken = default)

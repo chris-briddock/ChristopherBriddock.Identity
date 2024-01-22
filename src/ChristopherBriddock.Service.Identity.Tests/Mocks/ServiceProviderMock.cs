@@ -1,6 +1,4 @@
-﻿using NSubstitute;
-
-namespace ChristopherBriddock.Service.Identity.Tests.Mocks;
+﻿namespace ChristopherBriddock.Service.Identity.Tests.Mocks;
 
 internal class ServiceProviderMock : MockBase<IServiceProvider>
 {

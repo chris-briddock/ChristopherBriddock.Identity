@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.Logging;
-using NSubstitute;
 
 namespace ChristopherBriddock.Service.Identity.Tests.Mocks;
 
