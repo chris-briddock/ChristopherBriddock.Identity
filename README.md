@@ -7,7 +7,6 @@ The Identity Service is a robust authentication and authorization component for 
 * [Introduction](#introduction)
 * [Endpoints](#endpoints)
 * [Getting Started](#getting-started)
-* [Configuration](#configuration)
 * [License](#license)
 
 ### Introduction
@@ -39,17 +38,8 @@ To get started with the Identity Service, follow these steps:
 
 1. Clone the repository: `git clone https://github.com/chris-briddock/ChristopherBriddock.Identity.git`
 2. Open the solution.
-3. Please refer to the [Configuration](#configuration) section.
+3. Please configure all placeholder values in appsettings.json in both services.
 4. Build and run the Web API.
-
-### Configuration
-
-1. Configure PostgreSQL in appsettings.json, under ConnectionStrings > Default.
-2. Optionally configure Redis with a connection string and instance name.
-3. Update the JWT section, with audience, secret and expires values.
-4. Update FeatureManagement section, if you would like to use Redis or Application Insights.
-5. Optionally update ApplicationInsights section with your instrumentation key.
-6. If you have a Seq server available update the "WriteTo" section of Serilog.
 
 ### License
 

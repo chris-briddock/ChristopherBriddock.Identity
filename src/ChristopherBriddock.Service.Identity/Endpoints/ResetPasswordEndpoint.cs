@@ -1,4 +1,4 @@
-﻿using Ardalis.ApiEndpoints;
+﻿using ChristopherBriddock.ApiEndpoints;
 using ChristopherBriddock.Service.Identity.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.Data;
@@ -16,6 +16,7 @@ namespace ChristopherBriddock.Service.Identity.Endpoints;
 public sealed class ResetPasswordEndpoint(IServiceProvider services,
                                           ILogger<ResetPasswordEndpoint> logger) : EndpointBaseAsync
                                                                                   .WithRequest<ResetPasswordRequest>
+                                                                                  .WithoutParam
                                                                                   .WithActionResult
 {
     /// <summary>
@@ -38,7 +39,7 @@ public sealed class ResetPasswordEndpoint(IServiceProvider services,
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    public override async Task<ActionResult> HandleAsync(ResetPasswordRequest request,
+    public override async Task<ActionResult> HandleAsync([FromBody] ResetPasswordRequest request,
                                                    CancellationToken cancellationToken = default)
     {
         try

@@ -1,4 +1,4 @@
-﻿using Ardalis.ApiEndpoints;
+﻿using ChristopherBriddock.ApiEndpoints;
 using ChristopherBriddock.Service.Identity.Models;
 using ChristopherBriddock.Service.Identity.Models.Requests;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -20,6 +20,7 @@ namespace ChristopherBriddock.Service.Identity.Endpoints;
 public class UpdatePhoneNumberEndpoint(IServiceProvider services,
                                  ILogger<UpdatePhoneNumberEndpoint> logger) : EndpointBaseAsync
                                                                              .WithRequest<UpdatePhoneNumberRequest>
+                                                                             .WithoutParam
                                                                              .WithActionResult
 {
     /// <summary>

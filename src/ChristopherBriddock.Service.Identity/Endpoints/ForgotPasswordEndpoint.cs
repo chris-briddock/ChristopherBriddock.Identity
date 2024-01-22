@@ -1,4 +1,4 @@
-﻿using Ardalis.ApiEndpoints;
+﻿using ChristopherBriddock.ApiEndpoints;
 using ChristopherBriddock.Service.Common.Constants;
 using ChristopherBriddock.Service.Common.Messaging;
 using ChristopherBriddock.Service.Identity.Models;
@@ -25,6 +25,7 @@ public sealed class ForgotPasswordEndpoint(IServiceProvider services,
                                            IEmailPublisher emailSender,
                                            ILogger<ForgotPasswordEndpoint> logger) : EndpointBaseAsync
                                                                                     .WithRequest<ForgotPasswordRequest>
+                                                                                    .WithoutParam
                                                                                     .WithActionResult
 {
     /// <inheritdoc/>
@@ -52,7 +53,7 @@ public sealed class ForgotPasswordEndpoint(IServiceProvider services,
         {
             var userManager = Services.GetRequiredService<UserManager<ApplicationUser>>();
             var user = await userManager.FindByEmailAsync(request.EmailAddress);
-            
+
             if (user is not null)
             {
                 if (await userManager.IsEmailConfirmedAsync(user))
@@ -74,7 +75,7 @@ public sealed class ForgotPasswordEndpoint(IServiceProvider services,
             }
 
             return NotFound();
-            
+
         }
         catch (Exception ex)
         {

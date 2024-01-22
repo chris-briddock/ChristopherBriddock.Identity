@@ -1,4 +1,4 @@
-﻿using Ardalis.ApiEndpoints;
+﻿using ChristopherBriddock.ApiEndpoints;
 using ChristopherBriddock.Service.Identity.Models;
 using ChristopherBriddock.Service.Identity.Models.Requests;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -20,6 +20,7 @@ namespace ChristopherBriddock.Service.Identity.Endpoints;
 public class UpdateEmailEndpoint(IServiceProvider services,
                            ILogger<UpdateEmailEndpoint> logger) : EndpointBaseAsync
                                                                  .WithRequest<UpdateEmailRequest>
+                                                                 .WithoutParam
                                                                  .WithActionResult
 {
     /// <summary>
@@ -42,7 +43,7 @@ public class UpdateEmailEndpoint(IServiceProvider services,
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    public override async Task<ActionResult> HandleAsync(UpdateEmailRequest request, CancellationToken cancellationToken = default)
+    public override async Task<ActionResult> HandleAsync([FromQuery] UpdateEmailRequest request, CancellationToken cancellationToken = default)
     {
         try
         {

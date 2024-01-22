@@ -1,4 +1,4 @@
-﻿using Ardalis.ApiEndpoints;
+﻿using ChristopherBriddock.ApiEndpoints;
 using ChristopherBriddock.Service.Identity.Models;
 using ChristopherBriddock.Service.Identity.Models.Requests;
 using Microsoft.AspNetCore.Authorization;
@@ -18,6 +18,7 @@ namespace ChristopherBriddock.Service.Identity.Endpoints;
 public sealed class AuthoriseEndpoint(IServiceProvider services,
                                       ILogger<AuthoriseEndpoint> logger) : EndpointBaseAsync
                                                                           .WithRequest<AuthorizeRequest>
+                                                                          .WithoutParam
                                                                           .WithActionResult
 {
     /// <summary>

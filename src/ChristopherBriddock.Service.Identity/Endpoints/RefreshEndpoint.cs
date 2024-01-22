@@ -1,4 +1,4 @@
-﻿using Ardalis.ApiEndpoints;
+﻿using ChristopherBriddock.ApiEndpoints;
 using ChristopherBriddock.Service.Identity.Models.Requests;
 using ChristopherBriddock.Service.Identity.Providers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -19,8 +19,9 @@ namespace ChristopherBriddock.Service.Identity.Endpoints;
 public class RefreshEndpoint(IJsonWebTokenProvider jsonWebTokenProvider,
                              IConfiguration configuration,
                              ILogger<RefreshEndpoint> logger) : EndpointBaseAsync
-                                                             .WithRequest<RefreshRequest>
-                                                             .WithActionResult
+                                                               .WithRequest<RefreshRequest>
+                                                               .WithoutParam
+                                                               .WithActionResult
 {
     /// <inheritdoc/>
     public IJsonWebTokenProvider JsonWebTokenProvider { get; } = jsonWebTokenProvider;
@@ -37,7 +38,8 @@ public class RefreshEndpoint(IJsonWebTokenProvider jsonWebTokenProvider,
     /// <returns>A new <see cref="ActionResult"/></returns>
     [HttpGet("/refresh")]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-    public override async Task<ActionResult> HandleAsync(RefreshRequest request, CancellationToken cancellationToken = default)
+    public override async Task<ActionResult> HandleAsync([FromBody] RefreshRequest request,
+                                                         CancellationToken cancellationToken = default)
     {
         var validationResult = await JsonWebTokenProvider.TryValidateTokenAsync(request.RefreshToken,
                                                    Configuration["Jwt:Secret"]!,

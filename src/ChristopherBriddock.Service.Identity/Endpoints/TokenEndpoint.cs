@@ -1,4 +1,4 @@
-﻿using Ardalis.ApiEndpoints;
+﻿using ChristopherBriddock.ApiEndpoints;
 using ChristopherBriddock.Service.Identity.Models.Responses;
 using ChristopherBriddock.Service.Identity.Providers;
 using Microsoft.AspNetCore.Authorization;

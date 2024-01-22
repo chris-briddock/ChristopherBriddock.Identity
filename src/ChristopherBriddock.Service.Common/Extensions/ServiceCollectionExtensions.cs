@@ -6,6 +6,9 @@ using Serilog;
 
 namespace ChristopherBriddock.Service.Common.Extensions;
 
+/// <summary>
+/// Extension methods for the <see cref="IServiceCollection"/>
+/// </summary>
 public static class ServiceCollectionExtensions
 {
     /// <summary>

@@ -18,28 +18,30 @@ public static class ServiceCollectionExtensions
 
         var featureManager = services.BuildServiceProvider()
                                      .GetRequiredService<IFeatureManager>();
-        services.AddMassTransit(x =>
+
+        if (featureManager.IsEnabledAsync(FeatureFlagConstants.AzServiceBus).Result)
+        {
+            services.AddMassTransit(mt =>
+            {
+                mt.SetKebabCaseEndpointNameFormatter();
+
+                mt.AddConsumer<EmailConsumer>();
+
+                mt.UsingAzureServiceBus((context, config) =>
+                {
+                    config.Host(configuration["Messaging:AzureServiceBus:ConnectionString"]);
+                    config.ConfigureEndpoints(context);
+                });
+            });
+        }
+        if (featureManager.IsEnabledAsync(FeatureFlagConstants.RabbitMq).Result)
         {
 
-            x.SetKebabCaseEndpointNameFormatter();
-
-            x.AddConsumers(typeof(Program).Assembly);
-
-            if (featureManager.IsEnabledAsync(FeatureFlagConstants.AzServiceBus).Result)
-            {
-                services.AddMassTransit(mt =>
-                {
-                    mt.UsingAzureServiceBus((context, config) =>
-                    {
-                        config.Host(configuration["Messaging:AzureServiceBus:ConnectionString"]);
-                        config.ConfigureEndpoints(context);
-                    });
-                });
-            }
-            if (featureManager.IsEnabledAsync(FeatureFlagConstants.RabbitMq).Result)
+            services.AddMassTransit(x =>
             {
                 x.UsingRabbitMq((context, config) =>
                 {
+                    x.SetKebabCaseEndpointNameFormatter();
                     x.AddConsumer<EmailConsumer>();
                     config.Host(configuration["Messaging:RabbitMQ:Hostname"], "/", r =>
                     {
@@ -48,8 +50,9 @@ public static class ServiceCollectionExtensions
                     });
                     config.ConfigureEndpoints(context);
                 });
-            }
-        });
+            });
+
+        }
         return services;
     }
 }

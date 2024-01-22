@@ -1,4 +1,4 @@
-﻿using Ardalis.ApiEndpoints;
+﻿using ChristopherBriddock.ApiEndpoints;
 using ChristopherBriddock.Service.Common.Constants;
 using ChristopherBriddock.Service.Common.Messaging;
 using ChristopherBriddock.Service.Identity.Constants;
@@ -25,8 +25,9 @@ namespace ChristopherBriddock.Service.Identity.Endpoints;
 public sealed class RegisterEndpoint(IServiceProvider services,
                                     IEmailPublisher emailSender,
                                     ILogger<RegisterEndpoint> logger) : EndpointBaseAsync
-                                                                  .WithRequest<RegisterRequest>
-                                                                  .WithActionResult
+                                                                        .WithRequest<RegisterRequest>
+                                                                        .WithoutParam
+                                                                        .WithActionResult
 {
     /// <inheritdoc/>
     public IServiceProvider Services { get; } = services;

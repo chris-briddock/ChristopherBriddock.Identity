@@ -1,4 +1,4 @@
-﻿using Ardalis.ApiEndpoints;
+﻿using ChristopherBriddock.ApiEndpoints;
 using ChristopherBriddock.Service.Identity.Models;
 using ChristopherBriddock.Service.Identity.Models.Requests;
 using Microsoft.AspNetCore.Authorization;
@@ -13,8 +13,9 @@ namespace ChristopherBriddock.Service.Identity.Endpoints;
 public sealed class TwoFactorAuthoriseEndpoint(IServiceProvider services,
                                                IHttpContextAccessor httpContext,
                                                ILogger<TwoFactorAuthoriseEndpoint> logger) : EndpointBaseAsync
-                                                                                              .WithRequest<TwoFactorSignInRequest>
-                                                                                              .WithActionResult
+                                                                                             .WithRequest<TwoFactorSignInRequest>
+                                                                                             .WithoutParam
+                                                                                             .WithActionResult
 {
     /// <summary>
     /// The service provider.
@@ -35,7 +36,7 @@ public sealed class TwoFactorAuthoriseEndpoint(IServiceProvider services,
     /// <returns>A new <see cref="ActionResult"/></returns>
     [HttpPost("/2fa/authorise")]
     [AllowAnonymous]
-    public override async Task<ActionResult> HandleAsync(TwoFactorSignInRequest request,
+    public override async Task<ActionResult> HandleAsync([FromQuery] TwoFactorSignInRequest request,
                                                    CancellationToken cancellationToken = default)
     {
         try

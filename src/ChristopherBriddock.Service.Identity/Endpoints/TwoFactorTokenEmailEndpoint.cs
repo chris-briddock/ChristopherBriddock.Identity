@@ -1,4 +1,4 @@
-﻿using Ardalis.ApiEndpoints;
+﻿using ChristopherBriddock.ApiEndpoints;
 using ChristopherBriddock.Service.Common.Constants;
 using ChristopherBriddock.Service.Common.Messaging;
 using ChristopherBriddock.Service.Identity.Models;
@@ -23,6 +23,7 @@ public sealed class TwoFactorTokenEmailEndpoint(IServiceProvider services,
                                                 IEmailPublisher emailPublisher,
                                                 ILogger<TwoFactorTokenEmailEndpoint> logger) : EndpointBaseAsync
                                                                                                .WithRequest<TwoFactorTokenEmailRequest>
+                                                                                               .WithoutParam
                                                                                                .WithActionResult
 {
     /// <summary>
@@ -46,7 +47,7 @@ public sealed class TwoFactorTokenEmailEndpoint(IServiceProvider services,
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     [HttpPost("/2fa/email")]
-    public override async Task<ActionResult> HandleAsync(TwoFactorTokenEmailRequest request,
+    public override async Task<ActionResult> HandleAsync([FromQuery] TwoFactorTokenEmailRequest request,
                                                          CancellationToken cancellationToken = default)
     {
         try
