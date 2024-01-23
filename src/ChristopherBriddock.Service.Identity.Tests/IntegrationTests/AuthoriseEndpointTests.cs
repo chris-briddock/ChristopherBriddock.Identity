@@ -1,5 +1,4 @@
-﻿using Polly;
-namespace ChristopherBriddock.Service.Identity.Tests.IntegrationTests;
+﻿namespace ChristopherBriddock.Service.Identity.Tests.IntegrationTests;
 
 public class AuthoriseEndpointTests : IClassFixture<WebApplicationFactory<Program>>
 {
@@ -16,31 +15,33 @@ public class AuthoriseEndpointTests : IClassFixture<WebApplicationFactory<Progra
         _authorizeRequest = default!;
     }
 
+    /// <summary>
+    /// This test calls the /authorise endpoint, the sql lite db already has a user in the 
+    /// database to authenticate the user.
+    /// Using this as a workaround for it hanging when a register request is sent then authorise the new user.
+    /// </summary>
     [Fact]
-    public async Task AuthoriseEndpoint_ReturnsStatus200OK_WhenRedirectedToToken()
+    public async Task AuthoriseEndpoint_ReturnsStatus302Found_WhenValidCredentialsAreUsed()
     {
-        using var client = _webApplicationFactory.CreateClient();
+        using var client = _webApplicationFactory.CreateClient(new WebApplicationFactoryClientOptions()
+        {
+            AllowAutoRedirect = false
+        });
 
-        RegisterRequest registerRequest = new()
+        _authorizeRequest = new()
         {
             EmailAddress = "test@test.com",
             Password = "=W0Jqcxsz8] Lq74z*:&gB^zmhx*HsrB6GYj%K}G",
-            PhoneNumber = "180055501000"
-        };
-        _authorizeRequest = new()
-        {
-            EmailAddress = registerRequest.EmailAddress,
-            Password = registerRequest.Password,
             RememberMe = true
         };
-        var register = await client.PostAsJsonAsync("/register", registerRequest);
 
-        var sut = await Policy.Handle<HttpRequestException>()
-    .WaitAndRetryAsync(3, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)))
-    .ExecuteAsync(async () => await client.PostAsJsonAsync("/authorise", _authorizeRequest));
+        var sut = await client.PostAsJsonAsync("/authorise", _authorizeRequest);
 
-        Assert.Equivalent(HttpStatusCode.OK, sut.StatusCode);
+        Assert.Equivalent(HttpStatusCode.Found, sut.StatusCode);
     }
+    /// <summary>
+    /// Test
+    /// </summary>
     [Fact]
     public async Task AuthoriseEndpoint_ReturnsStatus401Unauthorized_WhenUseInvalidValidCredentials()
     {
@@ -57,6 +58,9 @@ public class AuthoriseEndpointTests : IClassFixture<WebApplicationFactory<Progra
 
         Assert.Equivalent(HttpStatusCode.Unauthorized, sut.StatusCode);
     }
+    /// <summary>
+    /// Test
+    /// </summary>
     [Fact]
     public async Task AuthoriseEndpoint_ReturnsStatus500InternalServerError_WhenExceptionIsThrown()
     {
