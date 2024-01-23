@@ -49,6 +49,23 @@ public class ConfigureJwtBearerOptionsTests
         
         Assert.Equal(configurationBuilder.GetSection("Jwt:Secret").Value, Encoding.UTF8.GetString(symmetricKey.Key));
     }
+    [Fact]
+    public void Configure_Should_Set_Audience_Correctly()
+    {
+        var configurationBuilder = new ConfigurationBuilder()
+            .AddInMemoryCollection(new Dictionary<string, string?>
+            {
+                { "Jwt:Issuer", "https://localhost" },
+                { "Jwt:Secret", "=W0Jqcxsz8] Lq74z*:&gB^zmhx*HsrB6GYj%K}G" },
+                { "Jwt:Audience", "chris@chris.com" }
+            }).Build();
+
+        var jwtOptionsConfigurer = new ConfigureJwtBearerOptions(configurationBuilder);
+
+        jwtOptionsConfigurer.Configure(_jwtBearerOptions);
+        Assert.NotNull(_jwtBearerOptions.TokenValidationParameters.ValidAudience);
+        Assert.Equal(configurationBuilder.GetSection("Jwt:Audience").Value, _jwtBearerOptions.TokenValidationParameters.ValidAudience);
+    }
 
 
 }

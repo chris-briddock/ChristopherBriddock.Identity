@@ -15,11 +15,6 @@ public class AuthoriseEndpointTests : IClassFixture<WebApplicationFactory<Progra
         _authorizeRequest = default!;
     }
 
-    /// <summary>
-    /// This test calls the /authorise endpoint, the sql lite db already has a user in the 
-    /// database to authenticate the user.
-    /// Using this as a workaround for it hanging when a register request is sent then authorise the new user.
-    /// </summary>
     [Fact]
     public async Task AuthoriseEndpoint_ReturnsStatus302Found_WhenValidCredentialsAreUsed()
     {
