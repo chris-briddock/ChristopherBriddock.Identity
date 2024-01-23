@@ -369,3 +369,4 @@ FodyWeavers.xsd
 /src/.sonarqube/conf
 /src/seq-data
 /src/seq
+/src/ChristopherBriddock.Service.Identity.Tests/coveragereport
