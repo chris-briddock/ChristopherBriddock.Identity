@@ -5,6 +5,7 @@ The Identity Service is a robust authentication and authorization component for 
 ## Table of Contents
 
 * [Introduction](#introduction)
+* [User Functionality](#user-functionality)
 * [Endpoints](#endpoints)
 * [Getting Started](#getting-started)
 * [License](#license)
@@ -12,6 +13,33 @@ The Identity Service is a robust authentication and authorization component for 
 ### Introduction
 
 The Identity Service plays a crucial role in your application's security infrastructure, providing essential features for user authentication, authorization, and identity management. This README provides an overview of the service, libraries used, available endpoints, and instructions on getting started.
+
+### User Functionality
+
+|  Features   |
+| ----------- |
+|  Register |
+|  Authorise   |
+| Delete Current User |
+|  Update Current User Password |
+| Reset Current User Password |
+| Update Current User Email Address |
+|  Account Lockout on 3 retries, for 10 minutes. |
+| Two Step Verification |
+| Refresh Bearer Token |
+| Two Factor Recovery Codes |
+
+### Technical Functionality
+
+| RabbitMQ and Azure Service Bus support |
+| API Health Checks |
+| Asynchronous API calls |
+| Secure JWT Bearer Authentication |
+| Application Insights Monitoring |
+| Logging using Serilog (To File, To Console Or To External Logging Server e.g Seq or ElasticSearch) |
+| Resilliant SQL Server connection using Entity Framework Core |
+| Encrypted User Passwords
+| Uses HTTP/3 and fallsback to HTTP/2 or HTTP/1.1 |
 
 ### Endpoints
 
