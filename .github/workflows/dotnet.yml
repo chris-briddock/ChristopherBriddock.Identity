@@ -23,6 +23,6 @@ jobs:
     - name: Build & Restore
       run: dotnet build --configuration Release src/ChristopherBriddock.Service.Identity.sln
     - name: Test
-      run: dotnet test src/ChristopherBriddock.Service.Identity.Tests/ChristopherBriddock.Service.Identity.Tests.csproj
+      run: dotnet test --collect:"XPlat Code Coverage" src/ChristopherBriddock.Service.Identity.Tests/ChristopherBriddock.Service.Identity.Tests.csproj
     - name: Publish
-      run: dotnet publish src/ChristopherBriddock.Identity/ChristopherBriddock.Identity.csproj -c Release
+      run: dotnet publish src/ChristopherBriddock.Service.Identity/ChristopherBriddock.Service.Identity.csproj -c Release
