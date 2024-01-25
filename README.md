@@ -6,6 +6,7 @@ The Identity Service is a robust authentication and authorization component for 
 
 * [Introduction](#introduction)
 * [User Functionality](#user-functionality)
+* [Technical Functionality](#technical-functionality)
 * [Endpoints](#endpoints)
 * [Getting Started](#getting-started)
 * [License](#license)
