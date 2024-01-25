@@ -2,8 +2,6 @@ using ChristopherBriddock.Service.Common.Constants;
 using ChristopherBriddock.Service.Common.Extensions;
 using ChristopherBriddock.Service.Identity.Data;
 using ChristopherBriddock.Service.Identity.Extensions;
-using ChristopherBriddock.Service.Identity.Publishers;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.FeatureManagement;
 
 namespace ChristopherBriddock.Service.Identity;
@@ -32,7 +30,6 @@ public sealed class Program
         builder.Services.AddCustomHealthChecks();
         builder.Services.AddCrossOriginPolicy();
         builder.Services.AddPublisherMessaging();
-        builder.Services.TryAddSingleton<IEmailPublisher, EmailPublisher>();
 
         WebApplication app = builder.Build();
         if (app.Environment.IsDevelopment())

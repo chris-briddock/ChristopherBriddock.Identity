@@ -1,6 +1,4 @@
-﻿using ChristopherBriddock.Service.Identity.Tests.Mocks;
-
-namespace ChristopherBriddock.Service.Identity.Tests.IntegrationTests;
+﻿namespace ChristopherBriddock.Service.Identity.Tests.IntegrationTests;
 
 public class ConfirmEmailEndpointTests : IClassFixture<WebApplicationFactory<Program>>
 {
@@ -9,7 +7,7 @@ public class ConfirmEmailEndpointTests : IClassFixture<WebApplicationFactory<Pro
     private ConfirmEmailRequest _confirmEmailRequest;
 
     public ConfirmEmailEndpointTests(WebApplicationFactory<Program> webApplicationFactory)
-    { 
+    {
         _webApplicationFactory = webApplicationFactory.WithWebHostBuilder(s =>
         {
             s.UseEnvironment("Test");
@@ -45,20 +43,22 @@ public class ConfirmEmailEndpointTests : IClassFixture<WebApplicationFactory<Pro
             Code = "CfDJ8OgQt3GRCbpAqpW/lUkYbKcxoL55kAWWuaMIq6/+FPUL4p7KYF6W5u89C2yjXp/NANvDtxLbOggkSvJs24z/cM7PW1iDmiegeS4f9XLHLBQlVzQWKaYZou4rIWKTBxk9O4sFFTC7006koe3sUS0URACV4Iq0Xw3EON2hm+3ji05UgFz+JHLZ7Oou7063fEBmmfDjpbTP9Lk5YobeYEddf6rCkSLC786AYkht+xM0x0g7"
         };
 
-        UserManagerMock userManagerMock = new();
-        var mock = userManagerMock.Mock().When(x => x.ConfirmEmailAsync(Arg.Any<ApplicationUser>(),
-                                                                        Arg.Any<string>())
-                                                     .Returns(IdentityResult.Success));
+        var userManagerMock = new UserManagerMock<ApplicationUser>().Mock();
+
+        userManagerMock.Setup(s => s.FindByEmailAsync(It.IsAny<string>())).ReturnsAsync(new ApplicationUser());
+
+        userManagerMock.Setup(s => s.ConfirmEmailAsync(It.IsAny<ApplicationUser>(),
+                                                       It.IsAny<string>())).ReturnsAsync(IdentityResult.Success);
 
         using var client = _webApplicationFactory.WithWebHostBuilder(s =>
         {
             s.ConfigureTestServices(s =>
             {
-                s.Replace(new ServiceDescriptor(typeof(UserManager<ApplicationUser>), mock));
+                s.Replace(new ServiceDescriptor(typeof(UserManager<ApplicationUser>), userManagerMock.Object));
             });
         }).CreateClient();
 
-        using var sut = await client.PostAsync($"/confirmemail?EmailAddress=test%40test.com&Code=abdef", null);
+        using var sut = await client.PostAsync($"/confirmemail?EmailAddress=test%40test.com&Code={_confirmEmailRequest.Code}", null);
 
         Assert.Equivalent(HttpStatusCode.OK, sut.StatusCode);
     }
@@ -71,9 +71,5 @@ public class ConfirmEmailEndpointTests : IClassFixture<WebApplicationFactory<Pro
     //        EmailAddress = "test@test.com",
     //        Code = "CfDJ8OgQt3GRCbpAqpW/lUkYbKcxoL55kAWWuaMIq6/+FPUL4p7KYF6W5u89C2yjXp/NANvDtxLbOggkSvJs24z/cM7PW1iDmiegeS4f9XLHLBQlVzQWKaYZou4rIWKTBxk9O4sFFTC7006koe3sUS0URACV4Iq0Xw3EON2hm+3ji05UgFz+JHLZ7Oou7063fEBmmfDjpbTP9Lk5YobeYEddf6rCkSLC786AYkht+xM0x0g7"
     //    };
-
-
-
-
     //}
 }

@@ -1,5 +1,7 @@
 ﻿using ChristopherBriddock.Service.Common.Constants;
 using ChristopherBriddock.Service.Common.Messaging;
+using ChristopherBriddock.Service.Identity.Publishers;
+using Microsoft.FeatureManagement;
 
 namespace ChristopherBriddock.Service.Identity.Tests.UnitTests;
 
@@ -8,17 +10,16 @@ public class EmailPublisherTests
     [Fact]
     public async Task PublishIsSuccessfulWithCorrectMessage()
     {
-        var bus = new IBusMock().Mock();
+        var busMock = new BusMock();
 
-        var messageContents = new EmailMessage()
-        {
-            EmailAddress = "Testing",
-            Type = EmailPublisherConstants.Register,
-            Code = "abcdef"
-        };
+        var featureManagerMock = new Mock<IFeatureManager>();
 
-        await bus.Publish(messageContents);
+        featureManagerMock.Setup(s => s.IsEnabledAsync(FeatureFlagConstants.RabbitMq)).ReturnsAsync(true);
 
-        await bus.Received(1).Publish(messageContents);
+        EmailPublisher publisher = new(busMock.Object, featureManagerMock.Object);
+
+        await publisher.Publish(It.IsAny<EmailMessage>(), It.IsAny<CancellationToken>());
+
+        busMock.Verify(x => x.Publish(It.IsAny<EmailMessage>(), It.IsAny<CancellationToken>()));
     }
 }

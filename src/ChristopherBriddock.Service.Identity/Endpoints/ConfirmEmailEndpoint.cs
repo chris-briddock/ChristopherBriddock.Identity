@@ -57,7 +57,8 @@ public sealed class ConfirmEmailEndpoint(IServiceProvider services,
             }
 
             // NOTE: This code should have been emailed to the user.
-            code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(request.Code));
+            var decodedBytes = WebEncoders.Base64UrlDecode(request.Code);
+            code = Encoding.UTF8.GetString(decodedBytes);
 
             result = await userManager.ConfirmEmailAsync(user, code);
 

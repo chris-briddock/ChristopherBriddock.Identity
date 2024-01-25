@@ -20,10 +20,8 @@ namespace ChristopherBriddock.Service.Identity.Endpoints;
 /// Initializes a new instance of <see cref="RegisterEndpoint"/>
 /// </remarks>
 /// <param name="services">The application's service provider.</param>
-/// <param name="emailSender">The application's email sender.</param>
 /// <param name="logger">The application's logger.</param>
 public sealed class RegisterEndpoint(IServiceProvider services,
-                                    IEmailPublisher emailSender,
                                     ILogger<RegisterEndpoint> logger) : EndpointBaseAsync
                                                                         .WithRequest<RegisterRequest>
                                                                         .WithoutParam
@@ -31,8 +29,6 @@ public sealed class RegisterEndpoint(IServiceProvider services,
 {
     /// <inheritdoc/>
     public IServiceProvider Services { get; } = services;
-    /// <inheritdoc/>
-    public IEmailPublisher EmailPublisher { get; } = emailSender;
     /// <inheritdoc/>
     public ILogger<RegisterEndpoint> Logger { get; } = logger;
 
@@ -54,6 +50,15 @@ public sealed class RegisterEndpoint(IServiceProvider services,
         {
             var userManager = Services.GetRequiredService<UserManager<ApplicationUser>>();
             var roleManager = Services.GetRequiredService<RoleManager<ApplicationRole>>();
+            IEmailPublisher emailPublisher;
+            try
+            {
+                emailPublisher = Services.GetRequiredKeyedService<IEmailPublisher>(KeyedServiceNameConstants.EmailProviderMainImplementation);
+            }
+            catch
+            {
+                emailPublisher = Services.GetRequiredKeyedService<IEmailPublisher>(KeyedServiceNameConstants.EmailProviderNullImplementation);
+            }
 
             var existingUser = await userManager.FindByEmailAsync(request.EmailAddress);
 
@@ -97,7 +102,7 @@ public sealed class RegisterEndpoint(IServiceProvider services,
                 Code = code,
                 Type = EmailPublisherConstants.Register
             };
-            await EmailPublisher.Publish(message, cancellationToken);
+            await emailPublisher.Publish(message, cancellationToken);
 
             return StatusCode(StatusCodes.Status201Created);
         }

@@ -59,10 +59,13 @@ public class AuthoriseEndpointTests : IClassFixture<WebApplicationFactory<Progra
     [Fact]
     public async Task AuthoriseEndpoint_ReturnsStatus500InternalServerError_WhenExceptionIsThrown()
     {
-        ServiceProviderMock serviceProviderMock = new();
-        var mock = serviceProviderMock.Mock()
-                                      .When(x => x.GetRequiredService<SignInManager<ApplicationUser>>()
-                                      .Throws(new InvalidOperationException()));
+        var signInManagerMock = new SignInManagerMock<ApplicationUser>().Mock();
+
+        signInManagerMock.Setup(s => s.PasswordSignInAsync(It.IsAny<ApplicationUser>(),
+                                                           It.IsAny<string>(),
+                                                           It.IsAny<bool>(),
+                                                           It.IsAny<bool>())).ThrowsAsync(new Exception());
+
 
         _authorizeRequest = new()
         {
@@ -75,13 +78,11 @@ public class AuthoriseEndpointTests : IClassFixture<WebApplicationFactory<Progra
         {
             s.ConfigureTestServices(s =>
             {
-                s.Replace(new ServiceDescriptor(typeof(SignInManager<ApplicationUser>), mock));
+                s.Replace(new ServiceDescriptor(typeof(SignInManager<ApplicationUser>), signInManagerMock.Object));
             });
         }).CreateClient();
 
         using var sut = await client.PostAsJsonAsync("/authorise", _authorizeRequest);
         Assert.Equivalent(HttpStatusCode.InternalServerError, sut.StatusCode);
-
-
     }
 }

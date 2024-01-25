@@ -4,6 +4,7 @@ using ChristopherBriddock.Service.Identity.Data;
 using ChristopherBriddock.Service.Identity.Models;
 using ChristopherBriddock.Service.Identity.Options;
 using ChristopherBriddock.Service.Identity.Providers;
+using ChristopherBriddock.Service.Identity.Publishers;
 using MassTransit;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -232,7 +233,11 @@ public static class ServiceCollectionExtensions
         var featureManager = services.BuildServiceProvider()
                                      .GetRequiredService<IFeatureManager>();
 
-        if (featureManager.IsEnabledAsync(FeatureFlagConstants.AzServiceBus).Result)
+        var rabbitMqEnabled = featureManager.IsEnabledAsync(FeatureFlagConstants.RabbitMq).Result;
+
+        var azServiceBusEnabled = featureManager.IsEnabledAsync(FeatureFlagConstants.AzServiceBus).Result;
+
+        if (azServiceBusEnabled)
         {
             services.AddMassTransit(mt =>
             {
@@ -243,7 +248,7 @@ public static class ServiceCollectionExtensions
                 });
             });
         }
-        if (featureManager.IsEnabledAsync(FeatureFlagConstants.RabbitMq).Result)
+        if (rabbitMqEnabled)
         {
             services.AddMassTransit(mt =>
             {
@@ -260,6 +265,15 @@ public static class ServiceCollectionExtensions
                     config.ConfigureEndpoints(context);
                 });
             });
+        }
+
+        if (rabbitMqEnabled || azServiceBusEnabled)
+        {
+            services.TryAddKeyedTransient<IEmailPublisher, EmailPublisher>(KeyedServiceNameConstants.EmailProviderMainImplementation);
+        }
+        else
+        {
+            services.TryAddKeyedTransient<IEmailPublisher, NullEmailPublisher>(KeyedServiceNameConstants.EmailProviderNullImplementation);
         }
 
         return services;

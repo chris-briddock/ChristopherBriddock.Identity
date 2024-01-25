@@ -1,9 +1,9 @@
 ﻿namespace ChristopherBriddock.Service.Identity.Tests.Mocks;
 
-internal class ServiceProviderMock : MockBase<IServiceProvider>
+internal class ServiceProviderMock : Mock<IServiceProvider>, IMockBase<ServiceProviderMock>
 {
-    public override IServiceProvider Mock()
+    public ServiceProviderMock Mock()
     {
-        return Substitute.For<IServiceProvider>();
+        return this;
     }
 }
