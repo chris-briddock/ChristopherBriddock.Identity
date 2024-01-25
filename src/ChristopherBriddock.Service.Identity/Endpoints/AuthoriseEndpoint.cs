@@ -59,24 +59,21 @@ public sealed class AuthoriseEndpoint(IServiceProvider services,
                                                                        request.RememberMe,
                                                                        lockoutOnFailure: true);
 
-            if (!signInResult.Succeeded)
-            {
-                return Unauthorized();
-            }
-
             if (signInResult.RequiresTwoFactor)
             {
                 return LocalRedirect("/2fa/email");
             }
 
-            ApplicationUser? user = await userManager.FindByEmailAsync(request.EmailAddress);
-
-            if (user == null)
+            if (!signInResult.Succeeded)
             {
-                return StatusCode(StatusCodes.Status404NotFound);
+                return Unauthorized();
             }
 
-            await signInManager.CreateUserPrincipalAsync(user);
+            
+
+            ApplicationUser? user = await userManager.FindByEmailAsync(request.EmailAddress);
+
+            await signInManager.CreateUserPrincipalAsync(user!);
 
             return LocalRedirect($"/token");
         }

@@ -43,7 +43,8 @@ public class UpdatePhoneNumberEndpoint(IServiceProvider services,
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    public override async Task<ActionResult> HandleAsync(UpdatePhoneNumberRequest request, CancellationToken cancellationToken = default)
+    public override async Task<ActionResult> HandleAsync(UpdatePhoneNumberRequest request,
+                                                         CancellationToken cancellationToken = default)
     {
         try
         {

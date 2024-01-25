@@ -30,6 +30,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="IntegrationTestingDatabase.db">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="LocalDatabase.db">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

@@ -14,8 +14,7 @@ namespace ChristopherBriddock.Service.Identity.Endpoints;
 /// </remarks>
 /// <param name="services">The application's service provider.</param>
 /// <param name="logger">The application logger.</param>
-public class TokenEndpoint(
-                           IServiceProvider services,
+public class TokenEndpoint(IServiceProvider services,
                            ILogger<TokenEndpoint> logger) : EndpointBaseAsync
                                                             .WithoutRequest
                                                             .WithActionResult<TokenResponse>

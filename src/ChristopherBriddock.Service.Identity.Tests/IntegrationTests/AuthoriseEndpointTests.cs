@@ -25,8 +25,8 @@ public class AuthoriseEndpointTests : IClassFixture<WebApplicationFactory<Progra
 
         _authorizeRequest = new()
         {
-            EmailAddress = "test@test.com",
-            Password = "=W0Jqcxsz8] Lq74z*:&gB^zmhx*HsrB6GYj%K}G",
+            EmailAddress = "test@euiop.com",
+            Password = "w?M`YBqR6}*X,87):$u+eQ",
             RememberMe = true
         };
 
@@ -85,4 +85,27 @@ public class AuthoriseEndpointTests : IClassFixture<WebApplicationFactory<Progra
         using var sut = await client.PostAsJsonAsync("/authorise", _authorizeRequest);
         Assert.Equivalent(HttpStatusCode.InternalServerError, sut.StatusCode);
     }
+
+    [Fact]
+    public async Task AuthoriseEndpoint_ReturnsStatus302Found_WhenTwoFactorIsEnabled()
+    {
+        _authorizeRequest = new()
+        {
+            EmailAddress = "test@asdf.com",
+            Password = "Ar*P`w8R.WyXb7'UKxh;!-",
+            RememberMe = true
+        };
+
+        using var client = _webApplicationFactory.CreateClient(new WebApplicationFactoryClientOptions()
+        {
+            AllowAutoRedirect = false
+        });
+
+
+        using var sut = await client.PostAsJsonAsync("/authorise", _authorizeRequest);
+        Assert.Equivalent(HttpStatusCode.Found, sut.StatusCode);
+
+    }
+
 }
+

@@ -54,4 +54,13 @@
     <ProjectReference Include="..\ChristopherBriddock.Service.Common\ChristopherBriddock.Service.Common.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="IntegrationTestingDatabase.db">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="LocalDatabase.db">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

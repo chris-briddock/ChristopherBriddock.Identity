@@ -17,7 +17,12 @@ namespace ChristopherBriddock.Service.Identity.Providers
         /// <param name="expires">The expiration date and time of the JWT.</param>
         /// <param name="subject">The subject of the JWT.</param>
         /// <returns>A <see cref="JwtResult"/> containing the result of the token creation.</returns>
-        Task<JwtResult> TryCreateRefreshTokenAsync(string email, string jwtSecret, string issuer, string audience, string expires, string subject);
+        Task<JwtResult> TryCreateRefreshTokenAsync(string email,
+                                                   string jwtSecret,
+                                                   string issuer,
+                                                   string audience,
+                                                   string expires,
+                                                   string subject);
         /// <summary>
         /// Tries to create a new refresh JWT (JSON Web Token) asynchronously.
         /// </summary>
@@ -28,7 +33,12 @@ namespace ChristopherBriddock.Service.Identity.Providers
         /// <param name="expires"></param>
         /// <param name="subject"></param>
         /// <returns>A <see cref="JwtResult"/> containing the result of the token creation.</returns>
-        Task<JwtResult> TryCreateTokenAsync(string email, string jwtSecret, string issuer, string audience, string expires, string subject);
+        Task<JwtResult> TryCreateTokenAsync(string email,
+                                            string jwtSecret,
+                                            string issuer,
+                                            string audience,
+                                            string expires,
+                                            string subject);
         /// <summary>
         /// Tries to validate a JWT (JSON Web Token) asynchronously.
         /// </summary>
@@ -37,6 +47,9 @@ namespace ChristopherBriddock.Service.Identity.Providers
         /// <param name="issuer">The expected issuer of the JWT.</param>
         /// <param name="audience">The expected audience of the JWT.</param>
         /// <returns>A <see cref="JwtResult"/> containing the result of the token validation.</returns>
-        Task<JwtResult> TryValidateTokenAsync(string token, string jwtSecret, string issuer, string audience);
+        Task<JwtResult> TryValidateTokenAsync(string token,
+                                              string jwtSecret,
+                                              string issuer,
+                                              string audience);
     }
 }
