@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+﻿using ChristopherBriddock.Service.Common.Constants;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
+using Microsoft.FeatureManagement;
 using System.Text;
 using System.Text.Json;
 
@@ -30,6 +32,46 @@ public static class HealthCheckExtensions
         });
 
         return app;
+    }
+
+    /// <summary>
+    /// Adds health checks for vital infrastructure such as Databases, Caches and Logging.
+    /// </summary>
+    /// <param name="services">The <see cref="IServiceCollection"/> to which authentication services will be added.</param>
+    /// <returns>The modified <see cref="IServiceCollection"/> instance.</returns>
+    public static IServiceCollection AddCustomHealthChecks(this IServiceCollection services)
+    {
+        var featureManager = services.BuildServiceProvider()
+                                     .GetService<IFeatureManager>()!;
+
+        var configuration = services.BuildServiceProvider()
+                                    .GetService<IConfiguration>()!;
+
+        services.AddHealthChecks()
+                .AddNpgSql(configuration.GetConnectionString("Default")!);
+
+
+        if (featureManager.IsEnabledAsync(FeatureFlagConstants.Redis).Result)
+        {
+            services.AddHealthChecks().AddRedis(configuration["ConnectionStrings:Redis"]!,
+                                                null,
+                                                HealthStatus.Unhealthy,
+                                                null,
+                                                null);
+        }
+
+        if (featureManager.IsEnabledAsync(FeatureFlagConstants.Seq).Result)
+        {
+            // TODO: Add Seq Health CHecks.
+        }
+
+        if (featureManager.IsEnabledAsync(FeatureFlagConstants.AzApplicationInsights).Result)
+        {
+            var key = configuration["ApplicationInsights:InstrumentationKey"]!;
+            services.AddHealthChecks().AddAzureApplicationInsights(key);
+        }
+
+        return services;
     }
 }
 

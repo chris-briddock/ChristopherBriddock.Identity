@@ -1,4 +1,4 @@
-﻿using Ardalis.ApiEndpoints;
+﻿using ChristopherBriddock.ApiEndpoints;
 using ChristopherBriddock.Service.Identity.Models;
 using ChristopherBriddock.Service.Identity.Models.Requests;
 using Microsoft.AspNetCore.Authorization;
@@ -20,6 +20,7 @@ namespace ChristopherBriddock.Service.Identity.Endpoints;
 public sealed class ConfirmEmailEndpoint(IServiceProvider services,
                                          ILogger<ConfirmEmailEndpoint> logger) : EndpointBaseAsync
                                                                                  .WithRequest<ConfirmEmailRequest>
+                                                                                 .WithoutParam
                                                                                  .WithActionResult
 {
     /// <inheritdoc/>
@@ -36,7 +37,7 @@ public sealed class ConfirmEmailEndpoint(IServiceProvider services,
     [HttpPost("/confirmemail")]
     [AllowAnonymous]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public override async Task<ActionResult> HandleAsync([FromQuery] ConfirmEmailRequest request,
                                                          CancellationToken cancellationToken = default)
@@ -46,7 +47,7 @@ public sealed class ConfirmEmailEndpoint(IServiceProvider services,
 
         try
         {
-            var userManager = Services.GetRequiredService<UserManager<ApplicationUser>>();
+            var userManager = Services.GetService<UserManager<ApplicationUser>>()!;
 
             var user = await userManager.FindByEmailAsync(request.EmailAddress);
 
@@ -56,7 +57,8 @@ public sealed class ConfirmEmailEndpoint(IServiceProvider services,
             }
 
             // NOTE: This code should have been emailed to the user.
-            code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(request.Code));
+            var decodedBytes = WebEncoders.Base64UrlDecode(request.Code);
+            code = Encoding.UTF8.GetString(decodedBytes);
 
             result = await userManager.ConfirmEmailAsync(user, code);
 
@@ -69,7 +71,7 @@ public sealed class ConfirmEmailEndpoint(IServiceProvider services,
         }
         catch (Exception ex)
         {
-            Logger.LogError($"Error in endpoint: {nameof(ConfirmEmailEndpoint)} - {nameof(HandleAsync)} Error details: {ex}", ex);
+            Logger.LogError("Error in endpoint: {endpointName} - {methodName} Error details: {ex}", nameof(ConfirmEmailEndpoint), nameof(HandleAsync), ex);
             return StatusCode(StatusCodes.Status500InternalServerError);
         }
     }

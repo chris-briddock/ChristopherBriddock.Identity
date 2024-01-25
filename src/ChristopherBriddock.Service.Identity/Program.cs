@@ -1,31 +1,52 @@
+using ChristopherBriddock.Service.Common.Constants;
+using ChristopherBriddock.Service.Common.Extensions;
 using ChristopherBriddock.Service.Identity.Data;
 using ChristopherBriddock.Service.Identity.Extensions;
+using Microsoft.FeatureManagement;
 
-var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddControllers();
-builder.Services.AddSwagger("ChristopherBriddock.Service.Identity.xml");
-builder.Services.AddCustomAuthentication();
-builder.Services.AddCustomAuthorization();
-builder.Services.AddAuthorizationBuilder();
-builder.Services.AddIdentity();
-builder.Services.AddApplicationServices();
-builder.Services.AddDbContext<AppDbContext>();
-builder.Services.AddHealthChecks().AddNpgSql(builder.Configuration.GetConnectionString("Default")!);
-var app = builder.Build();
-if (app.Environment.IsDevelopment())
+namespace ChristopherBriddock.Service.Identity;
+/// <summary>
+/// The entry point for the Web Application.
+/// </summary>
+public sealed class Program
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
-    app.UseDeveloperExceptionPage();
+    private static async Task Main(string[] args)
+    {
+        WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+        builder.Services.AddEndpointsApiExplorer();
+        builder.Services.AddControllers();
+        builder.Services.AddSwagger("ChristopherBriddock.Service.Identity.xml");
+        builder.Services.AddFeatureManagement();
+        builder.Services.AddSerilogWithConfiguration();
+        builder.Services.AddCustomAuthentication();
+        builder.Services.AddCustomAuthorization();
+        builder.Services.AddAuthorizationBuilder();
+        builder.Services.AddIdentity();
+        builder.Services.AddCache();
+        builder.Services.AddCustomSession();
+        builder.Services.AddResponseCaching();
+        builder.Services.AddAzureAppInsights();
+        builder.Services.AddDbContext<AppDbContext>();
+        builder.Services.AddCustomHealthChecks();
+        builder.Services.AddCrossOriginPolicy();
+        builder.Services.AddPublisherMessaging();
+
+        WebApplication app = builder.Build();
+        if (app.Environment.IsDevelopment())
+        {
+            app.UseSwagger();
+            app.UseSwaggerUI();
+            app.UseCors(CorsConstants.PolicyName);
+        }
+        app.UseHsts();
+        app.UseHttpsRedirection();
+        app.UseRouting();
+        app.UseSession();
+        app.UseAuthentication();
+        app.UseAuthorization();
+        app.MapControllers();
+        app.UseCustomHealthCheckMapping();
+        await app.UseDatabaseMigrationsAsync<AppDbContext>();
+        await app.RunAsync();
+    }
 }
-app.UseSession();
-app.UseHsts();
-app.UseHttpsRedirection();
-app.UseRouting();
-app.UseAuthentication();
-app.UseAuthorization();
-app.MapControllers();
-app.UseCustomHealthCheckMapping();
-await app.UseDatabaseMigrationsAsync<AppDbContext>();
-await app.RunAsync();

@@ -1,0 +1,35 @@
+version: '3.4'
+
+services:
+  # christopherbriddock.service.identity:
+  #   image: ${DOCKER_REGISTRY-}christopherbriddockserviceidentity
+  #   build:
+  #     context: .
+  #     dockerfile: ChristopherBriddock.Service.Identity/Dockerfile
+  seq:
+    image: datalust/seq
+    container_name: seq
+    restart: unless-stopped
+    environment:
+      - ACCEPT_EULA=Y
+    ports:
+      - "80:80"
+      - "443:443"
+      - "5341:5341"
+      - "45341:45341"
+    volumes:
+      - ./seq:/data
+  rabbitmq:
+    container_name: rabbitmq
+    restart: unless-stopped
+    image: rabbitmq:3.12.12-management
+    ports:
+      - "5671:5671"
+      - "5672:5672"
+      - "15672:15672"
+    healthcheck:
+      test: [ "CMD", "nc", "-z", "localhost", "5672" ]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+    

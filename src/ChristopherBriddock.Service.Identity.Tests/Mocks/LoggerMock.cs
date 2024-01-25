@@ -1,14 +1,11 @@
 ﻿using Microsoft.Extensions.Logging;
-using NSubstitute;
 
 namespace ChristopherBriddock.Service.Identity.Tests.Mocks;
 
-internal class LoggerMock<T> : MockBase<ILogger<T>> where T : class
+internal class LoggerMock<T> : Mock<ILogger<T>>, IMockBase<LoggerMock<T>> where T : class
 {
-    public override ILogger<T> Mock()
+    public LoggerMock<T> Mock()
     {
-        var logger = Substitute.For<ILogger<T>>();
-
-        return logger;
+        return this;
     }
 }

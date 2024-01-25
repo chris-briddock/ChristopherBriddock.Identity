@@ -1,4 +1,4 @@
-﻿using Ardalis.ApiEndpoints;
+﻿using ChristopherBriddock.ApiEndpoints;
 using ChristopherBriddock.Service.Identity.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -40,7 +40,7 @@ public sealed class LogoutEndpoint(IServiceProvider services,
     {
         try
         {
-            var signInManeger = Services.GetRequiredService<SignInManager<ApplicationUser>>();
+            var signInManeger = Services.GetService<SignInManager<ApplicationUser>>()!;
 
             await signInManeger.SignOutAsync();
 
@@ -48,7 +48,7 @@ public sealed class LogoutEndpoint(IServiceProvider services,
         }
         catch (Exception ex)
         {
-            Logger.LogError($"Error in endpoint: {nameof(LogoutEndpoint)} - {nameof(HandleAsync)} Error details: {ex}", ex);
+            Logger.LogError("Error in endpoint: {endpointName} - {methodName} Error details: {ex}", nameof(LogoutEndpoint), nameof(HandleAsync), ex);
             return StatusCode(StatusCodes.Status500InternalServerError);
         }
 

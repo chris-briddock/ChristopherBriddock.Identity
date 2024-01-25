@@ -1,4 +1,4 @@
-﻿using Ardalis.ApiEndpoints;
+﻿using ChristopherBriddock.ApiEndpoints;
 using ChristopherBriddock.Service.Identity.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -42,7 +42,7 @@ public class TwoFactorRecoveryCodesEndpoint(IServiceProvider services,
     {
         try
         {
-            var userManager = Services.GetRequiredService<UserManager<ApplicationUser>>();
+            var userManager = Services.GetService<UserManager<ApplicationUser>>()!;
             var email = User.FindFirst(ClaimTypes.Email)!.Value;
             var user = await userManager.FindByEmailAsync(email);
             if (user is null)
@@ -54,7 +54,7 @@ public class TwoFactorRecoveryCodesEndpoint(IServiceProvider services,
         }
         catch (Exception ex)
         {
-            Logger.LogError($"Error in endpoint: {nameof(TwoFactorRecoveryCodesEndpoint)} - {nameof(HandleAsync)} Error details: {ex}", ex);
+            Logger.LogError("Error in endpoint: {endpointName} - {methodName} Error details: {ex}", nameof(TwoFactorRecoveryCodesEndpoint), nameof(HandleAsync), ex);
             return StatusCode(StatusCodes.Status500InternalServerError);
         }
     }

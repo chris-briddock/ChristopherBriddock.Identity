@@ -1,4 +1,4 @@
-﻿using Ardalis.ApiEndpoints;
+﻿using ChristopherBriddock.ApiEndpoints;
 using ChristopherBriddock.Service.Identity.Models;
 using ChristopherBriddock.Service.Identity.Models.Requests;
 using Microsoft.AspNetCore.Authorization;
@@ -18,6 +18,7 @@ namespace ChristopherBriddock.Service.Identity.Endpoints;
 public sealed class AuthoriseEndpoint(IServiceProvider services,
                                       ILogger<AuthoriseEndpoint> logger) : EndpointBaseAsync
                                                                           .WithRequest<AuthorizeRequest>
+                                                                          .WithoutParam
                                                                           .WithActionResult
 {
     /// <summary>
@@ -39,15 +40,17 @@ public sealed class AuthoriseEndpoint(IServiceProvider services,
     [HttpPost("/authorise")]
     [AllowAnonymous]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status302Found)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public override async Task<ActionResult> HandleAsync([FromBody] AuthorizeRequest request,
                                                          CancellationToken cancellationToken = default)
     {
         try
         {
-            var signInManager = Services.GetRequiredService<SignInManager<ApplicationUser>>();
+            var signInManager = Services.GetService<SignInManager<ApplicationUser>>()!;
+
+            var userManager = Services.GetService<UserManager<ApplicationUser>>()!;
 
             signInManager.AuthenticationScheme = IdentityConstants.ApplicationScheme;
 
@@ -56,32 +59,28 @@ public sealed class AuthoriseEndpoint(IServiceProvider services,
                                                                        request.RememberMe,
                                                                        lockoutOnFailure: true);
 
+            if (signInResult.RequiresTwoFactor)
+            {
+                return LocalRedirect("/2fa/email");
+            }
+
             if (!signInResult.Succeeded)
             {
                 return Unauthorized();
             }
 
-            if (signInResult.RequiresTwoFactor)
-            {
-                return Ok("Two factor authentication required.");
-            }
+            
 
-            ApplicationUser? user = await signInManager.UserManager.FindByEmailAsync(request.EmailAddress);
+            ApplicationUser? user = await userManager.FindByEmailAsync(request.EmailAddress);
 
-            if (user == null)
-            {
-                return StatusCode(StatusCodes.Status404NotFound);
-            }
-
-            await signInManager.CreateUserPrincipalAsync(user);
+            await signInManager.CreateUserPrincipalAsync(user!);
 
             return LocalRedirect($"/token");
         }
         catch (Exception ex)
         {
-            Logger.LogError($"Error in endpoint: {nameof(AuthoriseEndpoint)} - {nameof(HandleAsync)} Error details: {ex}", ex);
+            Logger.LogError("Error in endpoint: {endpointName} - {methodName} Error details: {ex}", nameof(AuthoriseEndpoint), nameof(HandleAsync), ex);
             return StatusCode(StatusCodes.Status500InternalServerError);
         }
-
     }
 }

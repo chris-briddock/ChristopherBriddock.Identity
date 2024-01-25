@@ -1,4 +1,4 @@
-﻿using Ardalis.ApiEndpoints;
+﻿using ChristopherBriddock.ApiEndpoints;
 using ChristopherBriddock.Service.Identity.Models;
 using ChristopherBriddock.Service.Identity.Models.Requests;
 using Microsoft.AspNetCore.Authorization;
@@ -19,6 +19,7 @@ namespace ChristopherBriddock.Service.Identity.Endpoints;
 public class TwoFactorRecoveryCodesRedeemEndpoint(IServiceProvider services,
                                                   ILogger<TwoFactorRecoveryCodesEndpoint> logger) : EndpointBaseAsync
                                                                                                     .WithRequest<TwoFactorRecoveryCodesRedeemRequest>
+                                                                                                    .WithoutParam
                                                                                                     .WithActionResult
 {
     /// <summary>
@@ -40,12 +41,12 @@ public class TwoFactorRecoveryCodesRedeemEndpoint(IServiceProvider services,
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    public override async Task<ActionResult> HandleAsync(TwoFactorRecoveryCodesRedeemRequest request,
+    public override async Task<ActionResult> HandleAsync([FromQuery] TwoFactorRecoveryCodesRedeemRequest request,
                                                          CancellationToken cancellationToken = default)
     {
         try
         {
-            var userManager = Services.GetRequiredService<UserManager<ApplicationUser>>();
+            var userManager = Services.GetService<UserManager<ApplicationUser>>()!;
 
             var email = User.FindFirst(ClaimTypes.Email)!.Value;
 
@@ -67,7 +68,7 @@ public class TwoFactorRecoveryCodesRedeemEndpoint(IServiceProvider services,
         }
         catch (Exception ex)
         {
-            Logger.LogError($"Error in endpoint: {nameof(TwoFactorRecoveryCodesRedeemEndpoint)} - {nameof(HandleAsync)} Error details: {ex}", ex);
+            Logger.LogError("Error in endpoint: {endpointName} - {methodName} Error details: {ex}", nameof(TwoFactorRecoveryCodesRedeemEndpoint), nameof(HandleAsync), ex);
             return StatusCode(StatusCodes.Status500InternalServerError);
         }
 

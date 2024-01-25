@@ -1,4 +1,4 @@
-﻿using Ardalis.ApiEndpoints;
+﻿using ChristopherBriddock.ApiEndpoints;
 using ChristopherBriddock.Service.Identity.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.Data;
@@ -16,6 +16,7 @@ namespace ChristopherBriddock.Service.Identity.Endpoints;
 public sealed class ResetPasswordEndpoint(IServiceProvider services,
                                           ILogger<ResetPasswordEndpoint> logger) : EndpointBaseAsync
                                                                                   .WithRequest<ResetPasswordRequest>
+                                                                                  .WithoutParam
                                                                                   .WithActionResult
 {
     /// <summary>
@@ -38,12 +39,12 @@ public sealed class ResetPasswordEndpoint(IServiceProvider services,
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    public override async Task<ActionResult> HandleAsync(ResetPasswordRequest request,
+    public override async Task<ActionResult> HandleAsync([FromBody] ResetPasswordRequest request,
                                                    CancellationToken cancellationToken = default)
     {
         try
         {
-            var userManager = Services.GetRequiredService<UserManager<ApplicationUser>>();
+            var userManager = Services.GetService<UserManager<ApplicationUser>>()!;
 
             ApplicationUser? user = await userManager.FindByEmailAsync(request.Email);
 
@@ -57,7 +58,8 @@ public sealed class ResetPasswordEndpoint(IServiceProvider services,
                 bool isConfirmed = await userManager.IsEmailConfirmedAsync(user);
                 if (isConfirmed)
                 {
-                    var code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(request.ResetCode));
+                    var decodedBytes = WebEncoders.Base64UrlDecode(request.ResetCode);
+                    var code = Encoding.UTF8.GetString(decodedBytes);
                     await userManager.ResetPasswordAsync(user, code, request.NewPassword);
                     return NoContent();
                 }
@@ -66,7 +68,7 @@ public sealed class ResetPasswordEndpoint(IServiceProvider services,
         }
         catch (Exception ex)
         {
-            Logger.LogError($"Error in endpoint: {nameof(ResetPasswordEndpoint)} - {nameof(HandleAsync)} Error details: {ex}", ex); Logger.LogError($"Error in endpoint: {nameof(AuthoriseEndpoint)} - {nameof(HandleAsync)} Error details: {ex}", ex);
+            Logger.LogError("Error in endpoint: {endpointName} - {methodName} Error details: {ex}", nameof(ResetPasswordEndpoint), nameof(HandleAsync), ex);
             return StatusCode(StatusCodes.Status500InternalServerError);
         }
 

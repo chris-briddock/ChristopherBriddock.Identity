@@ -17,7 +17,7 @@ public static class WebApplicationExtensions
     {
         ArgumentNullException.ThrowIfNull(app, nameof(app));
         using AsyncServiceScope scope = app.Services.CreateAsyncScope();
-        var service = scope.ServiceProvider.GetRequiredService<TDbContext>().Database;
+        var service = scope.ServiceProvider.GetService<TDbContext>()!.Database;
         await service.MigrateAsync();
         return app;
     }

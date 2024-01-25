@@ -1,4 +1,4 @@
-﻿using Ardalis.ApiEndpoints;
+﻿using ChristopherBriddock.ApiEndpoints;
 using ChristopherBriddock.Service.Identity.Models.Responses;
 using ChristopherBriddock.Service.Identity.Providers;
 using Microsoft.AspNetCore.Authorization;
@@ -12,35 +12,17 @@ namespace ChristopherBriddock.Service.Identity.Endpoints;
 /// <remarks>
 /// Initializes a new instance of <see cref="TokenEndpoint"/>
 /// </remarks>
-/// <param name="configuration">The application's configuration</param>
-/// <param name="jsonWebTokenProvider">The json web token provider.</param>
 /// <param name="services">The application's service provider.</param>
-/// <param name="httpContextAccessor">Allows access to a <see cref="HttpContent"/> via an interface.</param>
 /// <param name="logger">The application logger.</param>
-public class TokenEndpoint(IConfiguration configuration,
-                           IJsonWebTokenProvider jsonWebTokenProvider,
-                           IServiceProvider services,
-                           IHttpContextAccessor httpContextAccessor,
+public class TokenEndpoint(IServiceProvider services,
                            ILogger<TokenEndpoint> logger) : EndpointBaseAsync
-                                                                      .WithoutRequest
-                                                                      .WithActionResult<TokenResponse>
+                                                            .WithoutRequest
+                                                            .WithActionResult<TokenResponse>
 {
-    /// <summary>
-    /// The application's configuration.
-    /// </summary>
-    public IConfiguration Configuration { get; } = configuration;
-    /// <summary>
-    /// The json web token provider.
-    /// </summary>
-    public IJsonWebTokenProvider JsonWebTokenProvider { get; } = jsonWebTokenProvider;
     /// <summary>
     /// The service provider.
     /// </summary>
     public IServiceProvider Services { get; } = services;
-    /// <summary>
-    /// Allows access to a <see cref="HttpContent"/> via an interface.
-    /// </summary>
-    public IHttpContextAccessor HttpContextAccessor { get; } = httpContextAccessor;
     /// <inheritdoc/>
     public ILogger<TokenEndpoint> Logger { get; } = logger;
 
@@ -57,20 +39,24 @@ public class TokenEndpoint(IConfiguration configuration,
     {
         try
         {
-            string email = HttpContextAccessor.HttpContext!.User.Identity!.Name ?? string.Empty;
-            string issuer = Configuration["Jwt:Issuer"]!;
-            string audience = Configuration["Jwt:Audience"]!;
-            string secret = Configuration["Jwt:Secret"]!;
-            string subject = HttpContextAccessor.HttpContext!.User.Identity!.Name ?? string.Empty;
-            string expires = Configuration["Jwt:Expires"]!;
+            var httpContextAccessor = Services.GetService<IHttpContextAccessor>()!;
+            var configuration = Services.GetService<IConfiguration>()!;
+            var jsonWebTokenProvider = Services.GetService<IJsonWebTokenProvider>()!;
 
-            var result = await JsonWebTokenProvider.TryCreateTokenAsync(email,
+            string email = httpContextAccessor.HttpContext!.User.Identity!.Name ?? string.Empty;
+            string issuer = configuration["Jwt:Issuer"]!;
+            string audience = configuration["Jwt:Audience"]!;
+            string secret = configuration["Jwt:Secret"]!;
+            string subject = httpContextAccessor.HttpContext!.User.Identity!.Name ?? string.Empty;
+            string expires = configuration["Jwt:Expires"]!;
+
+            var result = await jsonWebTokenProvider.TryCreateTokenAsync(email,
                                                                         secret,
                                                                         issuer,
                                                                         audience,
                                                                         expires,
                                                                         subject);
-            var refreshToken = await JsonWebTokenProvider.TryCreateRefreshTokenAsync(email,
+            var refreshToken = await jsonWebTokenProvider.TryCreateRefreshTokenAsync(email,
                                                                                      secret,
                                                                                      issuer,
                                                                                      audience,
@@ -78,11 +64,11 @@ public class TokenEndpoint(IConfiguration configuration,
                                                                                      subject);
             if (result.Success && refreshToken.Success)
             {
-                bool isAccessTokenValid = (await JsonWebTokenProvider.TryValidateTokenAsync(result.Token,
+                bool isAccessTokenValid = (await jsonWebTokenProvider.TryValidateTokenAsync(result.Token,
                                                                            secret,
                                                                            issuer,
                                                                            audience)).Success;
-                bool isRefreshTokenValid = (await JsonWebTokenProvider.TryValidateTokenAsync(refreshToken.Token,
+                bool isRefreshTokenValid = (await jsonWebTokenProvider.TryValidateTokenAsync(refreshToken.Token,
                                                                                              secret,
                                                                                              issuer,
                                                                                              audience)).Success;
@@ -103,7 +89,7 @@ public class TokenEndpoint(IConfiguration configuration,
         }
         catch (Exception ex)
         {
-            Logger.LogError($"Error in endpoint: {nameof(TokenEndpoint)} - {nameof(HandleAsync)} Error details: {ex}", ex); Logger.LogError($"Error in endpoint: {nameof(AuthoriseEndpoint)} - {nameof(HandleAsync)} Error details: {ex}", ex);
+            Logger.LogError("Error in endpoint: {endpointName} - {methodName} Error details: {ex}", nameof(TokenEndpoint), nameof(HandleAsync), ex);
             return StatusCode(StatusCodes.Status500InternalServerError);
         }
 

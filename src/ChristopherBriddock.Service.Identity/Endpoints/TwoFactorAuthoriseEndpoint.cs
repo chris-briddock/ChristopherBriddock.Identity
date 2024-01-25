@@ -1,4 +1,4 @@
-﻿using Ardalis.ApiEndpoints;
+﻿using ChristopherBriddock.ApiEndpoints;
 using ChristopherBriddock.Service.Identity.Models;
 using ChristopherBriddock.Service.Identity.Models.Requests;
 using Microsoft.AspNetCore.Authorization;
@@ -11,19 +11,15 @@ namespace ChristopherBriddock.Service.Identity.Endpoints;
 /// Exposes an endpoint that allows the user to sign in using two factor authentication.
 /// </summary>
 public sealed class TwoFactorAuthoriseEndpoint(IServiceProvider services,
-                                               IHttpContextAccessor httpContext,
                                                ILogger<TwoFactorAuthoriseEndpoint> logger) : EndpointBaseAsync
-                                                                                              .WithRequest<TwoFactorSignInRequest>
-                                                                                              .WithActionResult
+                                                                                             .WithRequest<TwoFactorSignInRequest>
+                                                                                             .WithoutParam
+                                                                                             .WithActionResult
 {
     /// <summary>
     /// The service provider.
     /// </summary>
     public IServiceProvider Services { get; } = services;
-    /// <summary>
-    /// The application's http context accessor.
-    /// </summary>
-    public IHttpContextAccessor HttpContextAccessor { get; } = httpContext;
     /// <inheritdoc/>
     public ILogger<TwoFactorAuthoriseEndpoint> Logger { get; } = logger;
 
@@ -35,15 +31,16 @@ public sealed class TwoFactorAuthoriseEndpoint(IServiceProvider services,
     /// <returns>A new <see cref="ActionResult"/></returns>
     [HttpPost("/2fa/authorise")]
     [AllowAnonymous]
-    public override async Task<ActionResult> HandleAsync(TwoFactorSignInRequest request,
+    public override async Task<ActionResult> HandleAsync([FromQuery] TwoFactorSignInRequest request,
                                                    CancellationToken cancellationToken = default)
     {
         try
         {
-            var signInManager = Services.GetRequiredService<SignInManager<ApplicationUser>>();
-            var userManager = Services.GetRequiredService<UserManager<ApplicationUser>>();
+            var signInManager = Services.GetService<SignInManager<ApplicationUser>>()!;
+            var userManager = Services.GetService<UserManager<ApplicationUser>>()!;
+            var httpContextAccessor = Services.GetService<IHttpContextAccessor>()!;
 
-            var user = await userManager.FindByEmailAsync(HttpContextAccessor.HttpContext!.User!.Identity!.Name!);
+            var user = await userManager.FindByEmailAsync(httpContextAccessor.HttpContext!.User!.Identity!.Name!);
 
             if (user == null)
             {
@@ -68,7 +65,7 @@ public sealed class TwoFactorAuthoriseEndpoint(IServiceProvider services,
         }
         catch (Exception ex)
         {
-            Logger.LogError($"Error in endpoint: {nameof(TwoFactorAuthoriseEndpoint)} - {nameof(HandleAsync)} Error details: {ex}", ex);
+            Logger.LogError("Error in endpoint: {endpointName} - {methodName} Error details: {ex}", nameof(TwoFactorAuthoriseEndpoint), nameof(HandleAsync), ex);
             return StatusCode(StatusCodes.Status500InternalServerError);
         }
 

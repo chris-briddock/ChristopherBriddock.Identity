@@ -367,3 +367,6 @@ FodyWeavers.xsd
 /.sonarqube/conf/cs/SonarLint.xml
 /.sonarqube/conf
 /src/.sonarqube/conf
+/src/seq-data
+/src/seq
+/src/ChristopherBriddock.Service.Identity.Tests/coveragereport

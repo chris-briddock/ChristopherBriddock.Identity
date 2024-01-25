@@ -1,4 +1,4 @@
-﻿using Ardalis.ApiEndpoints;
+﻿using ChristopherBriddock.ApiEndpoints;
 using ChristopherBriddock.Service.Identity.Models;
 using ChristopherBriddock.Service.Identity.Models.Requests;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -20,6 +20,7 @@ namespace ChristopherBriddock.Service.Identity.Endpoints;
 public sealed class TwoFactorManageEndpoint(IServiceProvider services,
                                             ILogger<TwoFactorManageEndpoint> logger) : EndpointBaseAsync
                                                                                        .WithRequest<TwoFactorManageRequest>
+                                                                                       .WithoutParam
                                                                                        .WithActionResult
 {
     /// <summary>
@@ -40,12 +41,12 @@ public sealed class TwoFactorManageEndpoint(IServiceProvider services,
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    public override async Task<ActionResult> HandleAsync(TwoFactorManageRequest request,
+    public override async Task<ActionResult> HandleAsync([FromQuery] TwoFactorManageRequest request,
                                                          CancellationToken cancellationToken = default)
     {
         try
         {
-            var userManager = Services.GetRequiredService<UserManager<ApplicationUser>>();
+            var userManager = Services.GetService<UserManager<ApplicationUser>>()!;
 
             string emailAddress = User.FindFirst(ClaimTypes.Email)!.Value;
 
@@ -69,7 +70,7 @@ public sealed class TwoFactorManageEndpoint(IServiceProvider services,
         }
         catch (Exception ex)
         {
-            Logger.LogError($"Error in endpoint: {nameof(TwoFactorManageEndpoint)} - {nameof(HandleAsync)} Error details: {ex}", ex);
+            Logger.LogError("Error in endpoint: {endpointName} - {methodName} Error details: {ex}", nameof(TwoFactorManageEndpoint), nameof(HandleAsync), ex);
             return StatusCode(StatusCodes.Status500InternalServerError);
         }
 

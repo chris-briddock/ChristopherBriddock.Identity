@@ -1,12 +1,16 @@
-﻿using ChristopherBriddock.Service.Identity.Constants;
+﻿using ChristopherBriddock.Service.Common.Constants;
+using ChristopherBriddock.Service.Identity.Constants;
 using ChristopherBriddock.Service.Identity.Data;
 using ChristopherBriddock.Service.Identity.Models;
 using ChristopherBriddock.Service.Identity.Options;
 using ChristopherBriddock.Service.Identity.Providers;
+using ChristopherBriddock.Service.Identity.Publishers;
+using MassTransit;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Options;
+using Microsoft.FeatureManagement;
 using Microsoft.OpenApi.Models;
 
 namespace ChristopherBriddock.Service.Identity.Extensions;
@@ -34,8 +38,6 @@ public static class ServiceCollectionExtensions
             opt.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
             {
                 Description = @"JWT Authorization header using the Bearer scheme.
-
-
                       Enter 'Bearer' [space] and then your token in the text input below.",
                 Name = "Authorization",
                 In = ParameterLocation.Header,
@@ -103,7 +105,7 @@ public static class ServiceCollectionExtensions
     /// <summary>
     /// Extension method for adding authentication services to the IServiceCollection.
     /// </summary>
-    /// <param name="services">The <see cref="IServiceCollection"/> to which authentication services will be added.</param>
+    /// <param name="services">The <see cref="IServiceCollection"/> to which services will be added.</param>
     /// <returns>The modified <see cref="IServiceCollection"/> instance.</returns>
     public static IServiceCollection AddCustomAuthentication(this IServiceCollection services)
     {
@@ -122,7 +124,7 @@ public static class ServiceCollectionExtensions
     /// <summary>
     /// Adds custom authorization policy.
     /// </summary>
-    /// <param name="services">The <see cref="IServiceCollection"/> to which authentication services will be added.</param>
+    /// <param name="services">The <see cref="IServiceCollection"/> to which services will be added.</param>
     /// <returns>The modified <see cref="IServiceCollection"/> instance.</returns>
     public static IServiceCollection AddCustomAuthorization(this IServiceCollection services)
     {
@@ -136,21 +138,144 @@ public static class ServiceCollectionExtensions
     }
 
     /// <summary>
-    /// Adds all needed services to the service collection.
+    /// Add the required services for in-memory and redis services, if redis is enabled in the feature flags.
     /// </summary>
-    /// <param name="services">The <see cref="IServiceCollection"/> to which authentication services will be added.</param>
+    /// <param name="services">The <see cref="IServiceCollection"/> to which services will be added.</param>
     /// <returns>The modified <see cref="IServiceCollection"/> instance.</returns>
-    public static IServiceCollection AddApplicationServices(this IServiceCollection services)
+    public static IServiceCollection AddCache(this IServiceCollection services)
+    {
+        IConfiguration configuration = services
+                                      .BuildServiceProvider()
+                                      .GetService<IConfiguration>()!;
+        IFeatureManager featureManager = services
+                                        .BuildServiceProvider()
+                                        .GetService<IFeatureManager>()!;
+
+        services.AddDistributedMemoryCache();
+
+        if (featureManager.IsEnabledAsync(FeatureFlagConstants.Redis).Result)
+        {
+            services.AddStackExchangeRedisCache(opt =>
+            {
+                opt.Configuration = configuration.GetConnectionString("Redis");
+                opt.InstanceName = configuration.GetConnectionString("RedisInstanceName");
+            });
+        }
+        return services;
+    }
+    /// <summary>
+    /// Adds session support to the application. 
+    /// </summary>
+    /// <param name="services">The <see cref="IServiceCollection"/> to which services will be added.</param>
+    /// <returns>The modified <see cref="IServiceCollection"/> instance.</returns>
+    public static IServiceCollection AddCustomSession(this IServiceCollection services)
     {
         services.AddSession(opt =>
         {
             opt.IdleTimeout = TimeSpan.FromMinutes(60);
-            opt.Cookie.Name = "AspNetCookie.Session";
-            opt.Cookie.Expiration = TimeSpan.FromMinutes(60);
+            opt.Cookie.Name = ".AspNetCookie.Session";
             opt.Cookie.SecurePolicy = CookieSecurePolicy.Always;
             opt.Cookie.IsEssential = true;
         });
-        services.TryAddScoped<IEmailProvider, EmailProvider>();
+        return services;
+    }
+    /// <summary>
+    /// Adds Azure Application Insights, if enabled.
+    /// </summary>
+    /// <param name="services">The <see cref="IServiceCollection"/> to which services will be added.</param>
+    /// <returns>The modified <see cref="IServiceCollection"/> instance.</returns>
+    public static IServiceCollection AddAzureAppInsights(this IServiceCollection services)
+    {
+        var featureManager = services.BuildServiceProvider()
+                                     .GetService<IFeatureManager>()!;
+
+        if (featureManager.IsEnabledAsync(FeatureFlagConstants.AzApplicationInsights).Result)
+        {
+            var configuration = services.BuildServiceProvider().GetService<IConfiguration>()!;
+            services.AddApplicationInsightsTelemetry(options => options.ConnectionString = configuration["ApplicationInsights:InstrumentationKey"]);
+            services.AddApplicationInsightsKubernetesEnricher();
+        }
+        return services;
+    }
+    /// <summary>
+    /// Add cross origin policy.
+    /// </summary>
+    /// <remarks>
+    /// This is only enabled in development, by the middleware <see cref="CorsMiddlewareExtensions.UseCors(IApplicationBuilder)"/>
+    /// </remarks>
+    /// <param name="services">The <see cref="IServiceCollection"/> to which services will be added.</param>
+    /// <returns>The modified <see cref="IServiceCollection"/> instance.</returns>
+    public static IServiceCollection AddCrossOriginPolicy(this IServiceCollection services)
+    {
+        services.AddCors(opt =>
+        {
+            opt.AddPolicy(CorsConstants.PolicyName, opt =>
+            {
+                opt.AllowAnyOrigin();
+                opt.AllowAnyHeader();
+                opt.AllowAnyMethod();
+            });
+        });
+
+        return services;
+    }
+
+    /// <summary>
+    /// Adds publisher messaging for rabbitmq or azure service bus.
+    /// </summary>
+    /// <param name="services">The <see cref="IServiceCollection"/> to which services will be added.</param>
+    /// <returns>The modified <see cref="IServiceCollection"/> instance.</returns>
+    public static IServiceCollection AddPublisherMessaging(this IServiceCollection services)
+    {
+        var configuration = services.BuildServiceProvider()
+                                    .GetService<IConfiguration>()!;
+
+        var featureManager = services.BuildServiceProvider()
+                                     .GetService<IFeatureManager>()!;
+
+        var rabbitMqEnabled = featureManager.IsEnabledAsync(FeatureFlagConstants.RabbitMq).Result;
+
+        var azServiceBusEnabled = featureManager.IsEnabledAsync(FeatureFlagConstants.AzServiceBus).Result;
+
+        if (azServiceBusEnabled)
+        {
+            services.AddMassTransit(mt =>
+            {
+                mt.UsingAzureServiceBus((context, config) =>
+                {
+                    config.Host(configuration["Messaging:AzureServiceBus:ConnectionString"]);
+                    config.ConfigureEndpoints(context);
+                });
+            });
+        }
+        if (rabbitMqEnabled)
+        {
+            services.AddMassTransit(mt =>
+            {
+                mt.SetKebabCaseEndpointNameFormatter();
+
+                mt.UsingRabbitMq((context, config) =>
+                {
+
+                    config.Host(configuration["Messaging:RabbitMQ:Hostname"], "/", r =>
+                    {
+                        r.Username(configuration["Messaging:RabbitMQ:Username"]);
+                        r.Password(configuration["Messaging:RabbitMQ:Password"]);
+                    });
+                    config.ConfigureEndpoints(context);
+                });
+            });
+        }
+
+        if (rabbitMqEnabled || azServiceBusEnabled)
+        {
+            services.TryAddKeyedTransient<IEmailPublisher, EmailPublisher>(KeyedServiceNameConstants.EmailProviderMainImplementation);
+        }
+        else
+        {
+            services.TryAddKeyedTransient<IEmailPublisher, NullEmailPublisher>(KeyedServiceNameConstants.EmailProviderNullImplementation);
+        }
+
         return services;
     }
 }

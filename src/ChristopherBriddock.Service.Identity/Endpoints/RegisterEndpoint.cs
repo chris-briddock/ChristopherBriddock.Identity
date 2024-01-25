@@ -1,8 +1,10 @@
-﻿using Ardalis.ApiEndpoints;
+﻿using ChristopherBriddock.ApiEndpoints;
+using ChristopherBriddock.Service.Common.Constants;
+using ChristopherBriddock.Service.Common.Messaging;
 using ChristopherBriddock.Service.Identity.Constants;
 using ChristopherBriddock.Service.Identity.Models;
 using ChristopherBriddock.Service.Identity.Models.Requests;
-using ChristopherBriddock.Service.Identity.Providers;
+using ChristopherBriddock.Service.Identity.Publishers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -18,18 +20,15 @@ namespace ChristopherBriddock.Service.Identity.Endpoints;
 /// Initializes a new instance of <see cref="RegisterEndpoint"/>
 /// </remarks>
 /// <param name="services">The application's service provider.</param>
-/// <param name="emailSender">The application's email sender.</param>
 /// <param name="logger">The application's logger.</param>
 public sealed class RegisterEndpoint(IServiceProvider services,
-                                    IEmailProvider emailSender,
                                     ILogger<RegisterEndpoint> logger) : EndpointBaseAsync
-                                                                  .WithRequest<RegisterRequest>
-                                                                  .WithActionResult
+                                                                        .WithRequest<RegisterRequest>
+                                                                        .WithoutParam
+                                                                        .WithActionResult
 {
     /// <inheritdoc/>
     public IServiceProvider Services { get; } = services;
-    /// <inheritdoc/>
-    public IEmailProvider EmailSender { get; } = emailSender;
     /// <inheritdoc/>
     public ILogger<RegisterEndpoint> Logger { get; } = logger;
 
@@ -42,14 +41,31 @@ public sealed class RegisterEndpoint(IServiceProvider services,
     [HttpPost("/register")]
     [AllowAnonymous]
     [ProducesResponseType(StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status409Conflict)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public override async Task<ActionResult> HandleAsync(RegisterRequest request,
                                                          CancellationToken cancellationToken = default)
     {
         try
         {
-            var userManager = Services.GetRequiredService<UserManager<ApplicationUser>>();
-            var roleManager = Services.GetRequiredService<RoleManager<ApplicationRole>>();
+            var userManager = Services.GetService<UserManager<ApplicationUser>>()!;
+            var roleManager = Services.GetService<RoleManager<ApplicationRole>>()!;
+            IEmailPublisher emailPublisher;
+            try
+            {
+                emailPublisher = Services.GetRequiredKeyedService<IEmailPublisher>(KeyedServiceNameConstants.EmailProviderMainImplementation);
+            }
+            catch
+            {
+                emailPublisher = Services.GetRequiredKeyedService<IEmailPublisher>(KeyedServiceNameConstants.EmailProviderNullImplementation);
+            }
+
+            var existingUser = await userManager.FindByEmailAsync(request.EmailAddress);
+
+            if (existingUser is not null)
+            {
+                return StatusCode(StatusCodes.Status409Conflict);
+            }
 
             ApplicationUser user = new()
             {
@@ -80,15 +96,19 @@ public sealed class RegisterEndpoint(IServiceProvider services,
             var code = await userManager.GenerateEmailConfirmationTokenAsync(user);
             code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
 
-            await EmailSender.SendConfirmationLinkAsync(user, request.EmailAddress, code);
+            EmailMessage message = new()
+            {
+                EmailAddress = user.Email!,
+                Code = code,
+                Type = EmailPublisherConstants.Register
+            };
+            await emailPublisher.Publish(message, cancellationToken);
 
-            return Created();
-
-
+            return StatusCode(StatusCodes.Status201Created);
         }
         catch (Exception ex)
         {
-            Logger.LogError($"Error in endpoint: {nameof(RegisterEndpoint)} - {nameof(HandleAsync)} Error details: {ex}", ex);
+            Logger.LogError("Error in endpoint: {endpointName} - {methodName} Error details: {ex}", nameof(RegisterEndpoint), nameof(HandleAsync), ex);
             return StatusCode(StatusCodes.Status500InternalServerError);
         }
 

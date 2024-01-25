@@ -1,24 +1,23 @@
-﻿using ChristopherBriddock.Service.Identity.Models;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using NSubstitute;
 
 namespace ChristopherBriddock.Service.Identity.Tests.Mocks;
 
-internal class UserManagerMock : MockBase<UserManager<ApplicationUser>>
+internal class UserManagerMock<T> : IMockBase<Mock<UserManager<T>>> where T : class
 {
-    public override UserManager<ApplicationUser> Mock()
+    public Mock<UserManager<T>> Mock()
     {
-        var userManager = Substitute.For<UserManager<ApplicationUser>>(Substitute.For<IUserStore<ApplicationUser>>(),
-                                                                       Substitute.For<IOptions<IdentityOptions>>(),
-                                                                       Substitute.For<IPasswordHasher<ApplicationUser>>(),
-                                                                       Substitute.For<IEnumerable<IUserValidator<ApplicationUser>>>(),
-                                                                       Substitute.For<IEnumerable<IPasswordHasher<ApplicationUser>>>(),
-                                                                       Substitute.For<ILookupNormalizer>(),
-                                                                       Substitute.For<IServiceProvider>(),
-                                                                       Substitute.For<ILogger<UserManager<ApplicationUser>>>());
+        var userManagerMock = new Mock<UserManager<T>>(
+            new Mock<IUserStore<T>>().Object,
+            new Mock<IOptions<IdentityOptions>>().Object,
+            new Mock<IPasswordHasher<T>>().Object,
+            new IUserValidator<T>[0],
+            new IPasswordValidator<T>[0],
+            new Mock<ILookupNormalizer>().Object,
+            new IdentityErrorDescriber(),
+            new Mock<IServiceProvider>().Object,
+            new Mock<ILogger<UserManager<T>>>().Object);
 
-        return userManager;
+        return userManagerMock;
     }
 }

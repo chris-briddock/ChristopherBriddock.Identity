@@ -1,13 +1,9 @@
-﻿using NSubstitute;
+﻿namespace ChristopherBriddock.Service.Identity.Tests.Mocks;
 
-namespace ChristopherBriddock.Service.Identity.Tests.Mocks;
-
-internal class ServiceProviderMock : MockBase<IServiceProvider>
+internal class ServiceProviderMock : Mock<IServiceProvider>, IMockBase<ServiceProviderMock>
 {
-    public override IServiceProvider Mock()
+    public ServiceProviderMock Mock()
     {
-        var serviceProvider = Substitute.For<IServiceProvider>();
-
-        return serviceProvider;
+        return this;
     }
 }
