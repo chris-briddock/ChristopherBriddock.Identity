@@ -19,17 +19,17 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddSerilogWithConfiguration(this IServiceCollection services)
     {
         var configuration = services.BuildServiceProvider()
-                                   .GetRequiredService<IConfiguration>();
+                                   .GetService<IConfiguration>()!;
 
         var featureManager = services.BuildServiceProvider()
-                             .GetRequiredService<IFeatureManager>();
+                             .GetService<IFeatureManager>()!;
 
         services.AddSerilog();
 
         if (featureManager.IsEnabledAsync(FeatureFlagConstants.Seq).Result)
         {
             Log.Logger = new LoggerConfiguration().ReadFrom
-                                                  .Configuration(configuration)
+                                                  .Configuration(configuration!)
                                                   .CreateLogger();
         }
         else

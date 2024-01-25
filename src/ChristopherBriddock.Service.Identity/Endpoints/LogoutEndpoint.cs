@@ -40,7 +40,7 @@ public sealed class LogoutEndpoint(IServiceProvider services,
     {
         try
         {
-            var signInManeger = Services.GetRequiredService<SignInManager<ApplicationUser>>();
+            var signInManeger = Services.GetService<SignInManager<ApplicationUser>>()!;
 
             await signInManeger.SignOutAsync();
 

@@ -48,8 +48,8 @@ public sealed class RegisterEndpoint(IServiceProvider services,
     {
         try
         {
-            var userManager = Services.GetRequiredService<UserManager<ApplicationUser>>();
-            var roleManager = Services.GetRequiredService<RoleManager<ApplicationRole>>();
+            var userManager = Services.GetService<UserManager<ApplicationUser>>()!;
+            var roleManager = Services.GetService<RoleManager<ApplicationRole>>()!;
             IEmailPublisher emailPublisher;
             try
             {

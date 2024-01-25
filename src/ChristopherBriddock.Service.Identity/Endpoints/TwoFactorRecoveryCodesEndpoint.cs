@@ -42,7 +42,7 @@ public class TwoFactorRecoveryCodesEndpoint(IServiceProvider services,
     {
         try
         {
-            var userManager = Services.GetRequiredService<UserManager<ApplicationUser>>();
+            var userManager = Services.GetService<UserManager<ApplicationUser>>()!;
             var email = User.FindFirst(ClaimTypes.Email)!.Value;
             var user = await userManager.FindByEmailAsync(email);
             if (user is null)

@@ -14,10 +14,10 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddConsumerMessaging(this IServiceCollection services)
     {
         var configuration = services.BuildServiceProvider()
-                                    .GetRequiredService<IConfiguration>();
+                                    .GetService<IConfiguration>()!;
 
         var featureManager = services.BuildServiceProvider()
-                                     .GetRequiredService<IFeatureManager>();
+                                     .GetService<IFeatureManager>()!;
 
         if (featureManager.IsEnabledAsync(FeatureFlagConstants.AzServiceBus).Result)
         {

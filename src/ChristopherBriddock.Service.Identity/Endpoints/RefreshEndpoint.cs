@@ -13,22 +13,20 @@ namespace ChristopherBriddock.Service.Identity.Endpoints;
 /// <remarks>
 /// Initializes a new instance of <see cref="RefreshEndpoint"/>
 /// </remarks>
-/// <param name="jsonWebTokenProvider">Allows the generation of JWTs.</param>
-/// <param name="configuration">The application's configuration.</param>
+/// <param name="services">The service provider.</param>
 /// <param name="logger">The application's logger.</param>
-public class RefreshEndpoint(IJsonWebTokenProvider jsonWebTokenProvider,
-                             IConfiguration configuration,
+public class RefreshEndpoint(IServiceProvider services,
                              ILogger<RefreshEndpoint> logger) : EndpointBaseAsync
                                                                .WithRequest<RefreshRequest>
                                                                .WithoutParam
                                                                .WithActionResult
 {
+    /// <summary>
+    /// The application service provider.
+    /// </summary>
+    private IServiceProvider Services { get; } = services;
     /// <inheritdoc/>
-    public IJsonWebTokenProvider JsonWebTokenProvider { get; } = jsonWebTokenProvider;
-    /// <inheritdoc/>
-    public IConfiguration Configuration { get; } = configuration;
-    /// <inheritdoc/>
-    public ILogger<RefreshEndpoint> Logger { get; } = logger;
+    private ILogger<RefreshEndpoint> Logger { get; } = logger;
 
     /// <summary>
     /// Allows a user to refresh the bearer token.
@@ -41,10 +39,13 @@ public class RefreshEndpoint(IJsonWebTokenProvider jsonWebTokenProvider,
     public override async Task<ActionResult> HandleAsync([FromBody] RefreshRequest request,
                                                          CancellationToken cancellationToken = default)
     {
-        var validationResult = await JsonWebTokenProvider.TryValidateTokenAsync(request.RefreshToken,
-                                                   Configuration["Jwt:Secret"]!,
-                                                   Configuration["Jwt:Issuer"]!,
-                                                   Configuration["Jwt:Audience"]!);
+        var jsonWebTokenProvider = Services.GetService<IJsonWebTokenProvider>()!;
+        var configuration = Services.GetService<IConfiguration>()!;
+
+        var validationResult = await jsonWebTokenProvider.TryValidateTokenAsync(request.RefreshToken,
+                                                   configuration["Jwt:Secret"]!,
+                                                   configuration["Jwt:Issuer"]!,
+                                                   configuration["Jwt:Audience"]!);
         if (!validationResult.Success)
         {
             return Unauthorized();

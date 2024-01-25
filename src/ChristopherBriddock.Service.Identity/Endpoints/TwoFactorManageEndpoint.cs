@@ -46,7 +46,7 @@ public sealed class TwoFactorManageEndpoint(IServiceProvider services,
     {
         try
         {
-            var userManager = Services.GetRequiredService<UserManager<ApplicationUser>>();
+            var userManager = Services.GetService<UserManager<ApplicationUser>>()!;
 
             string emailAddress = User.FindFirst(ClaimTypes.Email)!.Value;
 

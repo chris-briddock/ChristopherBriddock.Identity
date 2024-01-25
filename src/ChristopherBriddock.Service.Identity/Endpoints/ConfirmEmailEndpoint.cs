@@ -47,7 +47,7 @@ public sealed class ConfirmEmailEndpoint(IServiceProvider services,
 
         try
         {
-            var userManager = Services.GetRequiredService<UserManager<ApplicationUser>>();
+            var userManager = Services.GetService<UserManager<ApplicationUser>>()!;
 
             var user = await userManager.FindByEmailAsync(request.EmailAddress);
 

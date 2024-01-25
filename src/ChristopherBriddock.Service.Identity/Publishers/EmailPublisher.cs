@@ -12,26 +12,24 @@ namespace ChristopherBriddock.Service.Identity.Publishers;
 /// <remarks>
 /// Initalizes a new instance of <see cref="EmailPublisher"/>
 /// </remarks>
-public sealed class EmailPublisher(IBus bus, IFeatureManager featureManager) : IEmailPublisher
+public sealed class EmailPublisher(IServiceProvider serviceProvider) : IEmailPublisher
 {
     /// <summary>
-    /// A bus is a logical element that includes a local endpoint and zero or more receive endpoints
+    /// The application's service provider
     /// </summary>
-    public IBus Bus { get; } = bus;
-    /// <summary>
-    /// The application's feature manager.
-    /// </summary>
-    public IFeatureManager FeatureManager { get; } = featureManager;
-
+    public IServiceProvider ServiceProvider { get; } = serviceProvider;
     /// <inheritdoc/>
     public async Task Publish(EmailMessage emailMessage,
                               CancellationToken cancellationToken)
     {
 
-        if (await FeatureManager.IsEnabledAsync(FeatureFlagConstants.RabbitMq) ||
-            await FeatureManager.IsEnabledAsync(FeatureFlagConstants.AzServiceBus))
+        var bus = ServiceProvider.GetService<IBus>()!;
+        var featureManager = ServiceProvider.GetService<IFeatureManager>()!;
+
+        if (await featureManager!.IsEnabledAsync(FeatureFlagConstants.RabbitMq) ||
+            await featureManager!.IsEnabledAsync(FeatureFlagConstants.AzServiceBus))
         {
-            await Bus.Publish(emailMessage, cancellationToken);
+            await bus.Publish(emailMessage, cancellationToken);
         }
     }
 

@@ -18,10 +18,20 @@ public class ConfirmEmailEndpointTests : IClassFixture<WebApplicationFactory<Pro
     [Fact]
     public async Task ConfirmEmailEndpoint_ReturnsStatus500_WithInvalidRequest()
     {
-        using var client = _webApplicationFactory.CreateClient(new WebApplicationFactoryClientOptions()
+        var userManagerMock = new UserManagerMock<ApplicationUser>().Mock();
+
+        userManagerMock.Setup(s => s.FindByEmailAsync(It.IsAny<string>())).ReturnsAsync(new ApplicationUser());
+
+        userManagerMock.Setup(s => s.ConfirmEmailAsync(It.IsAny<ApplicationUser>(),
+                                                       It.IsAny<string>())).ThrowsAsync(new Exception());
+
+        using var client = _webApplicationFactory.WithWebHostBuilder(s =>
         {
-            AllowAutoRedirect = false
-        });
+            s.ConfigureTestServices(s =>
+            {
+                s.Replace(new ServiceDescriptor(typeof(UserManager<ApplicationUser>), userManagerMock.Object));
+            });
+        }).CreateClient();
 
         _confirmEmailRequest = new()
         {
@@ -29,7 +39,7 @@ public class ConfirmEmailEndpointTests : IClassFixture<WebApplicationFactory<Pro
             Code = "CfDJ8OgQt3GRCbpAqpW/lUkYbKcxoL55kAWWuaMIq6/+FPUL4p7KYF6W5u89C2yjXp/NANvDtxLbOggkSvJs24z/cM7PW1iDmiegeS4f9XLHLBQlVzQWKaYZou4rIWKTBxk9O4sFFTC7006koe3sUS0URACV4Iq0Xw3EON2hm+3ji05UgFz+JHLZ7Oou7063fEBmmfDjpbTP9Lk5YobeYEddf6rCkSLC786AYkht+xM0x0g7"
         };
 
-        using var sut = await client.PostAsync($"/confirmemail?EmailAddress=test%40test.com&Code=abdef", null);
+        using var sut = await client.PostAsync($"/confirmemail?EmailAddress=test%40test.com&Code={_confirmEmailRequest.Code}", null);
 
         Assert.Equivalent(HttpStatusCode.InternalServerError, sut.StatusCode);
     }

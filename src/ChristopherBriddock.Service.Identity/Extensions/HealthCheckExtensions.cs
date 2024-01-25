@@ -42,10 +42,10 @@ public static class HealthCheckExtensions
     public static IServiceCollection AddCustomHealthChecks(this IServiceCollection services)
     {
         var featureManager = services.BuildServiceProvider()
-                                     .GetRequiredService<IFeatureManager>();
+                                     .GetService<IFeatureManager>()!;
 
         var configuration = services.BuildServiceProvider()
-                                    .GetRequiredService<IConfiguration>();
+                                    .GetService<IConfiguration>()!;
 
         services.AddHealthChecks()
                 .AddNpgSql(configuration.GetConnectionString("Default")!);

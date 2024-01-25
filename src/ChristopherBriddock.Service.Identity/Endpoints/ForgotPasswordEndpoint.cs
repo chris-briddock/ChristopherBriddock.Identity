@@ -19,10 +19,8 @@ namespace ChristopherBriddock.Service.Identity.Endpoints;
 /// Initializes a new instance of <see cref="ForgotPasswordEndpoint"/>
 /// </remarks>
 /// <param name="services">The applications service provider.</param>
-/// <param name="emailSender">The email sender.</param>
 /// <param name="logger">The application logger</param>
 public sealed class ForgotPasswordEndpoint(IServiceProvider services,
-                                           IEmailPublisher emailSender,
                                            ILogger<ForgotPasswordEndpoint> logger) : EndpointBaseAsync
                                                                                     .WithRequest<ForgotPasswordRequest>
                                                                                     .WithoutParam
@@ -30,8 +28,6 @@ public sealed class ForgotPasswordEndpoint(IServiceProvider services,
 {
     /// <inheritdoc/>
     private IServiceProvider Services { get; } = services;
-    /// <inheritdoc/>
-    private IEmailPublisher EmailPublisher { get; } = emailSender;
     /// <inheritdoc/>
     public ILogger<ForgotPasswordEndpoint> Logger { get; set; } = logger;
 
@@ -51,8 +47,9 @@ public sealed class ForgotPasswordEndpoint(IServiceProvider services,
     {
         try
         {
-            var userManager = Services.GetRequiredService<UserManager<ApplicationUser>>();
+            var userManager = Services.GetService<UserManager<ApplicationUser>>()!;
             var user = await userManager.FindByEmailAsync(request.EmailAddress);
+            var emailPublisher = Services.GetService<IEmailPublisher>()!;
 
             if (user is not null)
             {
@@ -69,7 +66,7 @@ public sealed class ForgotPasswordEndpoint(IServiceProvider services,
                     Code = code,
                     Type = EmailPublisherConstants.ForgotPassword
                 };
-                await EmailPublisher.Publish(message, cancellationToken);
+                await emailPublisher.Publish(message, cancellationToken);
 
                 return NoContent();
             }

@@ -48,7 +48,9 @@ public sealed class AuthoriseEndpoint(IServiceProvider services,
     {
         try
         {
-            var signInManager = Services.GetRequiredService<SignInManager<ApplicationUser>>();
+            var signInManager = Services.GetService<SignInManager<ApplicationUser>>()!;
+
+            var userManager = Services.GetService<UserManager<ApplicationUser>>()!;
 
             signInManager.AuthenticationScheme = IdentityConstants.ApplicationScheme;
 
@@ -67,7 +69,7 @@ public sealed class AuthoriseEndpoint(IServiceProvider services,
                 return LocalRedirect("/2fa/email");
             }
 
-            ApplicationUser? user = await signInManager.UserManager.FindByEmailAsync(request.EmailAddress);
+            ApplicationUser? user = await userManager.FindByEmailAsync(request.EmailAddress);
 
             if (user == null)
             {

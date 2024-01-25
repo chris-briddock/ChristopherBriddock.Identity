@@ -17,10 +17,8 @@ namespace ChristopherBriddock.Service.Identity.Endpoints;
 /// Initializes a new instance of <see cref="TwoFactorTokenEmailEndpoint"/>
 /// </remarks>
 /// <param name="services">The application service provider.</param>
-/// <param name="emailPublisher">Allows the sending of emails for verification purposes.</param>
 /// <param name="logger">The application's logger.</param>
 public sealed class TwoFactorTokenEmailEndpoint(IServiceProvider services,
-                                                IEmailPublisher emailPublisher,
                                                 ILogger<TwoFactorTokenEmailEndpoint> logger) : EndpointBaseAsync
                                                                                                .WithRequest<TwoFactorTokenEmailRequest>
                                                                                                .WithoutParam
@@ -30,8 +28,6 @@ public sealed class TwoFactorTokenEmailEndpoint(IServiceProvider services,
     /// The application service provider.
     /// </summary>
     public IServiceProvider Services { get; } = services;
-    /// <inheritdoc/>
-    public IEmailPublisher EmailPublisher { get; } = emailPublisher;
     /// <inheritdoc/>
     public ILogger<TwoFactorTokenEmailEndpoint> Logger { get; } = logger;
 
@@ -54,7 +50,8 @@ public sealed class TwoFactorTokenEmailEndpoint(IServiceProvider services,
         {
             ApplicationUser? user;
             var userEmail = request.Email;
-            var userManager = Services.GetRequiredService<UserManager<ApplicationUser>>();
+            var userManager = Services.GetService<UserManager<ApplicationUser>>()!;
+            var emailPublisher = Services.GetService<IEmailPublisher>()!;
             if (userEmail is null)
                 return BadRequest();
 
@@ -71,7 +68,7 @@ public sealed class TwoFactorTokenEmailEndpoint(IServiceProvider services,
                 Code = code,
                 Type = EmailPublisherConstants.TwoFactorToken
             };
-            await EmailPublisher.Publish(message, cancellationToken);
+            await emailPublisher.Publish(message, cancellationToken);
 
             return Ok();
         }

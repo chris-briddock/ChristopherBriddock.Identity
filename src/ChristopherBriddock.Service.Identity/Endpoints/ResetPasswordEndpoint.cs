@@ -44,7 +44,7 @@ public sealed class ResetPasswordEndpoint(IServiceProvider services,
     {
         try
         {
-            var userManager = Services.GetRequiredService<UserManager<ApplicationUser>>();
+            var userManager = Services.GetService<UserManager<ApplicationUser>>()!;
 
             ApplicationUser? user = await userManager.FindByEmailAsync(request.Email);
 
