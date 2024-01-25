@@ -31,14 +31,15 @@ The Identity Service plays a crucial role in your application's security infrast
 
 ### Technical Functionality
 
+|   Features   |
+| ----------- |
 | RabbitMQ and Azure Service Bus support |
 | API Health Checks |
-| Asynchronous API calls |
 | Secure JWT Bearer Authentication |
 | Application Insights Monitoring |
-| Logging using Serilog (To File, To Console Or To External Logging Server e.g Seq or ElasticSearch) |
-| Resilliant SQL Server connection using Entity Framework Core |
-| Encrypted User Passwords
+| Logging using Serilog (To File, To Console Or To External Logging Server) e.g Seq or ElasticSearch |
+| Resilliant SQL Server connections using Entity Framework Core |
+| Encrypted User Passwords |
 | Uses HTTP/3 and fallsback to HTTP/2 or HTTP/1.1 |
 
 ### Endpoints
