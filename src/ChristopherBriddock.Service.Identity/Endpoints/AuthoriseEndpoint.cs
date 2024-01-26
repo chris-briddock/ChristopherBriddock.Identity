@@ -54,7 +54,7 @@ public sealed class AuthoriseEndpoint(IServiceProvider services,
             signInManager.AuthenticationScheme = IdentityConstants.ApplicationScheme;
 
             var signInResult = await signInManager.PasswordSignInAsync(request.EmailAddress,
-                                                                       request.Password,
+                                                                       $"""{request.Password}""",
                                                                        request.RememberMe,
                                                                        lockoutOnFailure: true);
 

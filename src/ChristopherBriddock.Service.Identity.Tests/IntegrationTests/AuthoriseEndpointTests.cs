@@ -1,4 +1,6 @@
-﻿namespace ChristopherBriddock.Service.Identity.Tests.IntegrationTests;
+﻿using Microsoft.Extensions.Configuration;
+
+namespace ChristopherBriddock.Service.Identity.Tests.IntegrationTests;
 
 public class AuthoriseEndpointTests : IClassFixture<WebApplicationFactory<Program>>
 {
@@ -30,7 +32,7 @@ public class AuthoriseEndpointTests : IClassFixture<WebApplicationFactory<Progra
             RememberMe = true
         };
 
-        var sut = await client.PostAsJsonAsync("/authorise", _authorizeRequest);
+        using var sut = await client.PostAsJsonAsync("/authorise", _authorizeRequest);
 
         Assert.Equivalent(HttpStatusCode.Found, sut.StatusCode);
     }
