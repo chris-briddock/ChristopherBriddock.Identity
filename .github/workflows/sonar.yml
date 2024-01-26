@@ -44,5 +44,6 @@ jobs:
         shell: powershell
         run: |
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"chris-briddock_ChristopherBriddock.Identity" /o:"chris-briddock" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
-          dotnet build
+          dotnet build --configuration Release src/ChristopherBriddock.Service.Identity/ChristopherBriddock.Service.Identity.csproj
+          dotnet build --configuration Release src/ChristopherBriddock.Service.Email/ChristopherBriddock.Service.Email.csproj
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
