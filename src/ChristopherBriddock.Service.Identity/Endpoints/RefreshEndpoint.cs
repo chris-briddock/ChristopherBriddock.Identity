@@ -43,9 +43,9 @@ public class RefreshEndpoint(IServiceProvider services,
         var configuration = Services.GetService<IConfiguration>()!;
 
         var validationResult = await jsonWebTokenProvider.TryValidateTokenAsync(request.RefreshToken,
-                                                   configuration["Jwt:Secret"]!,
-                                                   configuration["Jwt:Issuer"]!,
-                                                   configuration["Jwt:Audience"]!);
+                                                                                configuration["Jwt:Secret"]!,
+                                                                                configuration["Jwt:Issuer"]!,
+                                                                                configuration["Jwt:Audience"]!);
         if (!validationResult.Success)
         {
             return Unauthorized();

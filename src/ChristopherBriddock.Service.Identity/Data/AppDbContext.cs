@@ -16,7 +16,9 @@ public sealed class AppDbContext(IConfiguration configuration,
     /// The application's configuration.
     /// </summary>
     private IConfiguration Configuration { get; } = configuration;
-    /// <inheritdoc/>
+    /// <summary>
+    /// The web host environment provides information about the environment it is running in.
+    /// </summary>
     public IWebHostEnvironment WebHostEnvironment { get; } = webHostEnvironment;
     /// <inheritdoc/>
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

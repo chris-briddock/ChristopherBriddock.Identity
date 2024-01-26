@@ -1,12 +1,11 @@
 ﻿using ChristopherBriddock.Service.Identity.Publishers;
 
-namespace ChristopherBriddock.Service.Identity.Tests.Mocks
+namespace ChristopherBriddock.Service.Identity.Tests.Mocks;
+
+internal class EmailPublisherMock : Mock<IEmailPublisher>, IMockBase<EmailPublisherMock>
 {
-    internal class EmailPublisherMock : Mock<IEmailPublisher>, IMockBase<EmailPublisherMock>
+    public EmailPublisherMock Mock()
     {
-        public EmailPublisherMock Mock()
-        {
-            return this;
-        }
+        return this;
     }
 }

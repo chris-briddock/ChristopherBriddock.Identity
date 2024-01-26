@@ -57,7 +57,7 @@ public static class HealthCheckExtensions
                                                 null,
                                                 HealthStatus.Unhealthy,
                                                 null,
-                                                null);
+                                                TimeSpan.FromMinutes(10));
         }
 
         if (featureManager.IsEnabledAsync(FeatureFlagConstants.Seq).Result)
@@ -69,6 +69,15 @@ public static class HealthCheckExtensions
         {
             var key = configuration["ApplicationInsights:InstrumentationKey"]!;
             services.AddHealthChecks().AddAzureApplicationInsights(key);
+        }
+
+        if (featureManager.IsEnabledAsync(FeatureFlagConstants.RabbitMq).Result)
+        {
+
+            services.AddHealthChecks().AddRabbitMQ(null,
+                                                   HealthStatus.Unhealthy,
+                                                   null,
+                                                   TimeSpan.FromMinutes(10));
         }
 
         return services;
