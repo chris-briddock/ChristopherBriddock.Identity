@@ -36,7 +36,6 @@ public sealed class TwoFactorAuthoriseEndpoint(IServiceProvider services,
     {
         try
         {
-            var signInManager = Services.GetService<SignInManager<ApplicationUser>>()!;
             var userManager = Services.GetService<UserManager<ApplicationUser>>()!;
             var httpContextAccessor = Services.GetService<IHttpContextAccessor>()!;
 

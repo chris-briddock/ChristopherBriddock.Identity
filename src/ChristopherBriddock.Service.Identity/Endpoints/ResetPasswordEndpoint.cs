@@ -53,16 +53,14 @@ public sealed class ResetPasswordEndpoint(IServiceProvider services,
                 return NotFound("User not found.");
             }
 
-            if (user is not null)
+            bool isConfirmed = await userManager.IsEmailConfirmedAsync(user);
+            
+            if (isConfirmed)
             {
-                bool isConfirmed = await userManager.IsEmailConfirmedAsync(user);
-                if (isConfirmed)
-                {
-                    var decodedBytes = WebEncoders.Base64UrlDecode(request.ResetCode);
-                    var code = Encoding.UTF8.GetString(decodedBytes);
-                    await userManager.ResetPasswordAsync(user, code, request.NewPassword);
-                    return NoContent();
-                }
+                var decodedBytes = WebEncoders.Base64UrlDecode(request.ResetCode);
+                var code = Encoding.UTF8.GetString(decodedBytes);
+                await userManager.ResetPasswordAsync(user, code, request.NewPassword);
+                return NoContent();
             }
             return BadRequest();
         }

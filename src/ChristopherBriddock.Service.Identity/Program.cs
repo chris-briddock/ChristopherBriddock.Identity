@@ -10,6 +10,9 @@ namespace ChristopherBriddock.Service.Identity;
 /// </summary>
 public sealed class Program
 {
+
+    private Program() { }
+
     private static async Task Main(string[] args)
     {
         WebApplicationBuilder builder = WebApplication.CreateBuilder(args);

@@ -3,7 +3,7 @@
 /// <summary>
 /// Exception class for errors related to the JWT secret being null or empty.
 /// </summary>
-internal class JwtSecretNullOrEmptyException : Exception
+public class JwtSecretNullOrEmptyException : Exception
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="JwtSecretNullOrEmptyException"/> class.
