@@ -21,7 +21,7 @@ jobs:
       with:
         dotnet-version: 8.0.x
     - name: Build & Restore
-      run: dotnet build --configuration Release src/ChristopherBriddock.Service.Identity.sln
+      run: dotnet build --configuration Release src/ChristopherBriddock.Service.Identity/ChristopherBriddock.Service.Identity.csproj
     - name: Test
       run: dotnet test --collect:"XPlat Code Coverage" src/ChristopherBriddock.Service.Identity.Tests/ChristopherBriddock.Service.Identity.Tests.csproj
     - name: Publish

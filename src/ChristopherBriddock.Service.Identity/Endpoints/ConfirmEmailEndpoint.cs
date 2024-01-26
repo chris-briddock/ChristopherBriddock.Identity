@@ -16,7 +16,7 @@ namespace ChristopherBriddock.Service.Identity.Endpoints;
 /// Initializses a new instance of <see cref="ConfirmEmailEndpoint"/>
 /// </remarks>
 /// <param name="services"> The <see cref="IServiceProvider"/> </param>
-/// <param name="logger"></param>
+/// <param name="logger">The logger for this endpoint.</param>
 public sealed class ConfirmEmailEndpoint(IServiceProvider services,
                                          ILogger<ConfirmEmailEndpoint> logger) : EndpointBaseAsync
                                                                                  .WithRequest<ConfirmEmailRequest>

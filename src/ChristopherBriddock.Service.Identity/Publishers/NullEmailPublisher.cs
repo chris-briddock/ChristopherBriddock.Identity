@@ -11,6 +11,7 @@ namespace ChristopherBriddock.Service.Identity.Publishers;
 /// </summary>
 public class NullEmailPublisher : IEmailPublisher
 {
+    /// <inheritdoc/>
     public async Task Publish(EmailMessage emailMessage, CancellationToken cancellationToken)
     {
         await Task.CompletedTask;

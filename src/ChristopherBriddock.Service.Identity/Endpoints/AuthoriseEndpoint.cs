@@ -34,12 +34,11 @@ public sealed class AuthoriseEndpoint(IServiceProvider services,
     /// <summary>
     /// Allows a user to be authorized.
     /// </summary>
-    /// <param name="request">The object which encapsulates the request.</param>
+    /// <param name="request">The object which encapsulates the request body.</param>
     /// <param name="cancellationToken">The cancellation token to cancel the operation.</param>
     /// <returns>A new <see cref="ActionResult"/></returns>
     [HttpPost("/authorise")]
     [AllowAnonymous]
-    [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -68,8 +67,6 @@ public sealed class AuthoriseEndpoint(IServiceProvider services,
             {
                 return Unauthorized();
             }
-
-            
 
             ApplicationUser? user = await userManager.FindByEmailAsync(request.EmailAddress);
 

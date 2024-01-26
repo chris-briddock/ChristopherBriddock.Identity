@@ -72,6 +72,5 @@ public class TwoFactorRecoveryCodesRedeemEndpoint(IServiceProvider services,
             return StatusCode(StatusCodes.Status500InternalServerError);
         }
 
-
     }
 }

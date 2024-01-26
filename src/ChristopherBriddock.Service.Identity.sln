@@ -23,6 +23,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Utilities", "Utilities", "{
 		Set-UserSecrets.ps1 = Set-UserSecrets.ps1
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChristopherBriddock.Service.Email.Tests", "ChristopherBriddock.Service.Email.Tests\ChristopherBriddock.Service.Email.Tests.csproj", "{22E5D170-1DE5-4FAF-988E-E99EAC04EFA1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,12 +51,17 @@ Global
 		{55AF770B-80FF-4735-9014-24008C39E27A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{55AF770B-80FF-4735-9014-24008C39E27A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{55AF770B-80FF-4735-9014-24008C39E27A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22E5D170-1DE5-4FAF-988E-E99EAC04EFA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22E5D170-1DE5-4FAF-988E-E99EAC04EFA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22E5D170-1DE5-4FAF-988E-E99EAC04EFA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22E5D170-1DE5-4FAF-988E-E99EAC04EFA1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{019FB266-27C6-4BD1-A0E0-D31B0FE8DC93} = {F12FB90F-85BC-4184-BAE6-90A520AA2072}
+		{22E5D170-1DE5-4FAF-988E-E99EAC04EFA1} = {F12FB90F-85BC-4184-BAE6-90A520AA2072}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AFC8F73B-E3E7-482B-A804-DBF4F6BFD8DC}

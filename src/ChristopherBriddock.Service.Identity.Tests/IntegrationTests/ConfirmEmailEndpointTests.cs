@@ -1,6 +1,4 @@
-﻿using ChristopherBriddock.Service.Identity.Tests.Mocks;
-
-namespace ChristopherBriddock.Service.Identity.Tests.IntegrationTests;
+﻿namespace ChristopherBriddock.Service.Identity.Tests.IntegrationTests;
 
 public class ConfirmEmailEndpointTests : IClassFixture<WebApplicationFactory<Program>>
 {

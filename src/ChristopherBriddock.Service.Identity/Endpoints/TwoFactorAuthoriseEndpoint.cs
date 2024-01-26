@@ -54,7 +54,9 @@ public sealed class TwoFactorAuthoriseEndpoint(IServiceProvider services,
                 return Unauthorized("User does not have two factor enabled.");
             }
 
-            var result = await userManager.VerifyTwoFactorTokenAsync(user, TokenOptions.DefaultEmailProvider, request.Token);
+            var result = await userManager.VerifyTwoFactorTokenAsync(user,
+                                                                     TokenOptions.DefaultEmailProvider,
+                                                                     request.Token);
 
             if (!result)
             {
