@@ -32,6 +32,7 @@ public class DeleteAccountEndpoint(ILogger<DeleteAccountEndpoint> logger,
     [HttpDelete("/account/delete")]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public override async Task<ActionResult> HandleAsync(CancellationToken cancellationToken = default)
     {

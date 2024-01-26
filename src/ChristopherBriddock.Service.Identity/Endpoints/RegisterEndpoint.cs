@@ -72,7 +72,7 @@ public sealed class RegisterEndpoint(IServiceProvider services,
                 Email = request.EmailAddress,
                 PhoneNumber = request.PhoneNumber
             };
-            user.PasswordHash = userManager.PasswordHasher.HashPassword(user, request.Password);
+            user.PasswordHash = userManager.PasswordHasher.HashPassword(user, $"""{request.Password}""");
             await userManager.SetUserNameAsync(user, user.Email);
             await userManager.SetEmailAsync(user, user.Email);
             await userManager.SetPhoneNumberAsync(user, user.PhoneNumber);
