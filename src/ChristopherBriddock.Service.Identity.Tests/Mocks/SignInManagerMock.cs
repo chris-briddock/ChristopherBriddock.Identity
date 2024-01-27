@@ -5,16 +5,16 @@ using Microsoft.Extensions.Options;
 
 namespace ChristopherBriddock.Service.Identity.Tests.Mocks;
 
-internal class SignInManagerMock<T> : IMockBase<Mock<SignInManager<T>>> where T : class
+internal class SignInManagerMock<TUser> : IMockBase<Mock<SignInManager<TUser>>> where TUser : IdentityUser<Guid>
 {
-    public Mock<SignInManager<T>> Mock()
+    public Mock<SignInManager<TUser>> Mock()
     {
-        return new Mock<SignInManager<T>>(new UserManagerMock<T>().Mock().Object,
+        return new Mock<SignInManager<TUser>>(new UserManagerMock<TUser>().Mock().Object,
                                           new Mock<IHttpContextAccessor>().Object,
-                                          new Mock<IUserClaimsPrincipalFactory<T>>().Object,
+                                          new Mock<IUserClaimsPrincipalFactory<TUser>>().Object,
                                           new Mock<IOptions<IdentityOptions>>().Object,
-                                          new Mock<ILogger<SignInManager<T>>>().Object,
+                                          new Mock<ILogger<SignInManager<TUser>>>().Object,
                                           new Mock<IAuthenticationSchemeProvider>().Object,
-                                          new Mock<IUserConfirmation<T>>().Object);
+                                          new Mock<IUserConfirmation<TUser>>().Object);
     }
 }
