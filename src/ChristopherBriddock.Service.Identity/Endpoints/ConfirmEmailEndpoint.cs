@@ -51,7 +51,7 @@ public sealed class ConfirmEmailEndpoint(IServiceProvider services,
 
             var user = await userManager.FindByEmailAsync(request.EmailAddress);
 
-            if (user is null)
+            if (user is null || user.IsDeleted)
             {
                 return NotFound("User has not been found.");
             }

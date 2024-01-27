@@ -51,7 +51,7 @@ public sealed class ForgotPasswordEndpoint(IServiceProvider services,
             var user = await userManager.FindByEmailAsync(request.EmailAddress);
             var emailPublisher = Services.GetService<IEmailPublisher>()!;
 
-            if (user is not null)
+            if (user is not null || user!.IsDeleted)
             {
                 if (await userManager.IsEmailConfirmedAsync(user))
                 {
@@ -71,7 +71,7 @@ public sealed class ForgotPasswordEndpoint(IServiceProvider services,
                 return NoContent();
             }
 
-            return NotFound();
+            return NotFound("User is deleted or does not exist.");
 
         }
         catch (Exception ex)

@@ -62,9 +62,11 @@ public sealed class RegisterEndpoint(IServiceProvider services,
 
             var existingUser = await userManager.FindByEmailAsync(request.EmailAddress);
 
-            if (existingUser is not null)
+
+
+            if (existingUser is not null && !existingUser.IsDeleted)
             {
-                return StatusCode(StatusCodes.Status409Conflict);
+                return StatusCode(StatusCodes.Status409Conflict, "User is deleted, or already exists.");
             }
 
             ApplicationUser user = new()

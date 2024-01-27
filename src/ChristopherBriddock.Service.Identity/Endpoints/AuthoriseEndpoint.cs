@@ -70,6 +70,11 @@ public sealed class AuthoriseEndpoint(IServiceProvider services,
 
             ApplicationUser? user = await userManager.FindByEmailAsync(request.EmailAddress);
 
+            if (user!.IsDeleted)
+            {
+                return Unauthorized();
+            }
+
             await signInManager.CreateUserPrincipalAsync(user!);
 
             return LocalRedirect($"/token");

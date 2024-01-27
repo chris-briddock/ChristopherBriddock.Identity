@@ -44,7 +44,9 @@ public class DeleteAccountEndpoint(ILogger<DeleteAccountEndpoint> logger,
 
             var user = await userManager.FindByEmailAsync(emailAddress);
 
-            await userManager.DeleteAsync(user!);
+            user!.IsDeleted = true;
+
+            await userManager.UpdateAsync(user);
 
             return NoContent();
         }
