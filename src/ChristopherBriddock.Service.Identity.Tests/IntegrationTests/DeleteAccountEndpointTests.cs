@@ -126,29 +126,11 @@ public class DeleteAccountEndpointTests : IClassFixture<WebApplicationFactory<Pr
     [Fact]
     public async Task DeleteAccountEndpoint_Returns401_WhenUserIsUnauthorized()
     {
-        AuthorizeRequest authorizeRequest = new()
-        {
-            EmailAddress = "atesty@testing.com",
-            Password = "7XAl@Dg()[=8rV;[wD[:GY$yw:$ltHAauaf!aUQ",
-            RememberMe = true
-        };
-
-        var configurationBuilder = new ConfigurationBuilder()
-            .AddInMemoryCollection(new Dictionary<string, string?>
-            {
-                { "Jwt:Issuer", "https://localhost" },
-                { "Jwt:Secret", "=W0Jqcxsz8] Lq74z*:&gB^zmhx*HsrB6GYj%K}G" },
-                { "Jwt:Audience", "atesty@testing.com" },
-                { "Jwt:Expires", "5" }
-            }).Build();
-
         using var client = _webApplicationFactory.CreateClient();
 
         using var sut = await client.DeleteAsync("/account/delete");
 
         Assert.Equivalent(HttpStatusCode.Unauthorized, sut.StatusCode);
-
-
 
     }
 }
