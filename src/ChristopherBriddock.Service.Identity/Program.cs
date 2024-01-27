@@ -2,6 +2,7 @@ using ChristopherBriddock.Service.Common.Constants;
 using ChristopherBriddock.Service.Common.Extensions;
 using ChristopherBriddock.Service.Identity.Data;
 using ChristopherBriddock.Service.Identity.Extensions;
+using ChristopherBriddock.Service.Identity.Services;
 using Microsoft.FeatureManagement;
 
 namespace ChristopherBriddock.Service.Identity;
@@ -29,10 +30,11 @@ public sealed class Program
         builder.Services.AddCustomSession();
         builder.Services.AddResponseCaching();
         builder.Services.AddAzureAppInsights();
-        builder.Services.AddDbContext<AppDbContext>();
+        builder.Services.AddDbContext<AppDbContext>(ServiceLifetime.Singleton);
         builder.Services.AddCustomHealthChecks();
         builder.Services.AddCrossOriginPolicy();
         builder.Services.AddPublisherMessaging();
+        builder.Services.AddHostedService<AccountPurgeBackgroundService>();
 
         WebApplication app = builder.Build();
         if (app.Environment.IsDevelopment())

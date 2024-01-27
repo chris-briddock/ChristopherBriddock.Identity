@@ -37,8 +37,8 @@ The Identity Service plays a crucial role in your application's security infrast
 | RabbitMQ and Azure Service Bus support |
 | API Health Checks |
 | Secure JWT Bearer Authentication |
-| Application Insights Monitoring |
-| Logging using Serilog (To File, To Console Or To External Logging Server) e.g Seq or ElasticSearch |
+| Azure Application Insights Monitoring |
+| Logging using Serilog (To Console Or To External Logging Server) e.g Seq or ElasticSearch |
 | Resilliant SQL Server connections using Entity Framework Core |
 | Encrypted User Passwords |
 | Uses HTTP/3 and fallsback to HTTP/2 or HTTP/1.1 |
@@ -68,7 +68,9 @@ To get started with the Identity Service, follow these steps:
 
 1. Clone the repository: `git clone https://github.com/chris-briddock/ChristopherBriddock.Identity.git`
 2. Open the solution.
-3. Please configure all placeholder values in appsettings.json in both services.
+3. Ensure you have an PostgreSQL database available at minimum. 
+4. Optionally you can also run Seq, RabbitMq or Azure Service Bus, Azure Application Insights and Redis.
+5. Please configure all placeholder values in appsettings.json in both services.
 4. Build and run the Web API.
 
 ### License

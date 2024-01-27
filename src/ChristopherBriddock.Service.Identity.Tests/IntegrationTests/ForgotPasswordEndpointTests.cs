@@ -49,11 +49,12 @@ public class ForgotPasswordEndpointTests : IClassFixture<WebApplicationFactory<P
             EmailAddress = "test@asdf.com"
         };
 
-        var nullEmailPublisherMock = new Mock<NullEmailPublisher>();
 
-        using var client = _webApplicationFactory.WithWebHostBuilder(s =>
+
+        using var client = _webApplicationFactory.WithWebHostBuilder(s => s.ConfigureTestServices(_ =>
         {
-        }).CreateClient();
+            _.RemoveAll<IEmailPublisher>();
+        })).CreateClient();
 
         using var sut = await client.PostAsJsonAsync("/forgotpassword", _forgotPasswordRequest);
 

@@ -50,15 +50,7 @@ public sealed class RegisterEndpoint(IServiceProvider services,
         {
             var userManager = Services.GetService<UserManager<ApplicationUser>>()!;
             var roleManager = Services.GetService<RoleManager<ApplicationRole>>()!;
-            IEmailPublisher emailPublisher;
-            try
-            {
-                emailPublisher = Services.GetRequiredKeyedService<IEmailPublisher>(KeyedServiceNameConstants.EmailProviderMainImplementation);
-            }
-            catch
-            {
-                emailPublisher = Services.GetRequiredKeyedService<IEmailPublisher>(KeyedServiceNameConstants.EmailProviderNullImplementation);
-            }
+            IEmailPublisher emailPublisher = Services.GetService<IEmailPublisher>()!;
 
             var existingUser = await userManager.FindByEmailAsync(request.EmailAddress);
 

@@ -51,6 +51,11 @@ public sealed class ForgotPasswordEndpoint(IServiceProvider services,
             var user = await userManager.FindByEmailAsync(request.EmailAddress);
             var emailPublisher = Services.GetService<IEmailPublisher>()!;
 
+            if (user is null) 
+            {
+                return NotFound("User has not been found.");
+            }
+
             var code = await userManager.GeneratePasswordResetTokenAsync(user);
             code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
 
