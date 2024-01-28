@@ -105,7 +105,5 @@ public sealed class RegisterEndpoint(IServiceProvider services,
             Logger.LogError("Error in endpoint: {endpointName} - {methodName} Error details: {ex}", nameof(RegisterEndpoint), nameof(HandleAsync), ex);
             return StatusCode(StatusCodes.Status500InternalServerError);
         }
-
-
     }
 }

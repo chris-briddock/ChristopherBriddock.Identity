@@ -40,6 +40,7 @@ public sealed class TwoFactorManageEndpoint(IServiceProvider services,
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public override async Task<ActionResult> HandleAsync([FromQuery] TwoFactorManageRequest request,
                                                          CancellationToken cancellationToken = default)
@@ -56,7 +57,7 @@ public sealed class TwoFactorManageEndpoint(IServiceProvider services,
                 return NotFound("User is not found.");
 
             if (await userManager.GetTwoFactorEnabledAsync(user))
-                return BadRequest("User has two factor enabled.");
+                return BadRequest("User already has two factor enabled.");
 
             var result = await userManager.SetTwoFactorEnabledAsync(user, request.IsEnabled);
 

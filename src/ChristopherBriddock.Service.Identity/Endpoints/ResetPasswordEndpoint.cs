@@ -37,7 +37,6 @@ public sealed class ResetPasswordEndpoint(IServiceProvider services,
     [HttpPost("/resetpassword")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public override async Task<ActionResult> HandleAsync([FromBody] ResetPasswordRequest request,
                                                    CancellationToken cancellationToken = default)
@@ -48,18 +47,13 @@ public sealed class ResetPasswordEndpoint(IServiceProvider services,
 
             ApplicationUser? user = await userManager.FindByEmailAsync(request.Email);
 
-            if (user is null)
-            {
-                return NotFound("User not found.");
-            }
-
-            bool isConfirmed = await userManager.IsEmailConfirmedAsync(user);
+            bool isConfirmed = await userManager.IsEmailConfirmedAsync(user!);
 
             if (isConfirmed)
             {
                 var decodedBytes = WebEncoders.Base64UrlDecode(request.ResetCode);
                 var code = Encoding.UTF8.GetString(decodedBytes);
-                await userManager.ResetPasswordAsync(user, code, request.NewPassword);
+                await userManager.ResetPasswordAsync(user!, code, request.NewPassword);
                 return NoContent();
             }
             return BadRequest();

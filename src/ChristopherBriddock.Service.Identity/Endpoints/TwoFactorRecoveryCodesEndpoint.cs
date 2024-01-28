@@ -36,7 +36,7 @@ public class TwoFactorRecoveryCodesEndpoint(IServiceProvider services,
     [HttpGet("/2fa/codes")]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public override async Task<ActionResult> HandleAsync(CancellationToken cancellationToken = default)
     {

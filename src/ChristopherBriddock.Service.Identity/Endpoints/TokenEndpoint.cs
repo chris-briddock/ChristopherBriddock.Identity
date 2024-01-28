@@ -35,6 +35,7 @@ public class TokenEndpoint(IServiceProvider services,
     [Authorize(Policy = "UserRolePolicy")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public override async Task<ActionResult<TokenResponse>> HandleAsync(CancellationToken cancellationToken = default)
     {
         try
@@ -92,6 +93,5 @@ public class TokenEndpoint(IServiceProvider services,
             Logger.LogError("Error in endpoint: {endpointName} - {methodName} Error details: {ex}", nameof(TokenEndpoint), nameof(HandleAsync), ex);
             return StatusCode(StatusCodes.Status500InternalServerError);
         }
-
     }
 }

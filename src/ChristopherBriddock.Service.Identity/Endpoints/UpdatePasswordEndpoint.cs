@@ -40,7 +40,8 @@ public class UpdatePasswordEndpoint(IServiceProvider services,
     /// <returns>A new <see cref="ActionResult"/></returns>
     [HttpPost("/account/password")]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-    public override async Task<ActionResult> HandleAsync(UpdatePasswordRequest request, CancellationToken cancellationToken = default)
+    public override async Task<ActionResult> HandleAsync(UpdatePasswordRequest request,
+                                                         CancellationToken cancellationToken = default)
     {
         try
         {
@@ -53,7 +54,9 @@ public class UpdatePasswordEndpoint(IServiceProvider services,
             {
                 return NotFound();
             }
-            var result = await userManager.ChangePasswordAsync(user, request.CurrentPassword, request.NewPassword);
+            var result = await userManager.ChangePasswordAsync(user,
+                                                               request.CurrentPassword,
+                                                               request.NewPassword);
 
             if (!result.Succeeded)
             {

@@ -4,7 +4,8 @@
       "commandName": "DockerCompose",
       "commandVersion": "1.0",
       "serviceActions": {
-        "christopherbriddock.service.identity": "StartDebugging"
+        "christopherbriddock.service.identity": "StartDebugging",
+        "christopherbriddock.service.email": "StartDebugging"
       }
     }
   }
