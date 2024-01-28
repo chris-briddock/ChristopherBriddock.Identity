@@ -45,7 +45,7 @@ public class LogoutEndpointTests : IClassFixture<WebApplicationFactory<Program>>
                 { "Jwt:Expires", "60" }
             }).Build();
 
-        using var client = _webApplicationFactory.WithWebHostBuilder(s =>
+        var client = _webApplicationFactory.WithWebHostBuilder(s =>
         {
             s.ConfigureTestServices(s =>
             {
