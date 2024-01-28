@@ -1,6 +1,9 @@
 trigger:
 - main
 
+pool:
+  name: Default
+
 jobs:
 - job: Build
   displayName: 'Build'
