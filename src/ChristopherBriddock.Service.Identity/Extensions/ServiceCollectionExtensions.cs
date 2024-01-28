@@ -269,11 +269,11 @@ public static class ServiceCollectionExtensions
 
         if (rabbitMqEnabled || azServiceBusEnabled)
         {
-            services.TryAddKeyedTransient<IEmailPublisher, EmailPublisher>(KeyedServiceNameConstants.EmailProviderMainImplementation);
+            services.TryAddTransient<IEmailPublisher, EmailPublisher>();
         }
         else
         {
-            services.TryAddKeyedTransient<IEmailPublisher, NullEmailPublisher>(KeyedServiceNameConstants.EmailProviderNullImplementation);
+            services.TryAddTransient<IEmailPublisher, NullEmailPublisher>();
         }
 
         return services;

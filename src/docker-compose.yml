@@ -1,11 +1,18 @@
 version: '3.4'
 
 services:
-  # christopherbriddock.service.identity:
-  #   image: ${DOCKER_REGISTRY-}christopherbriddockserviceidentity
-  #   build:
-  #     context: .
-  #     dockerfile: ChristopherBriddock.Service.Identity/Dockerfile
+  christopherbriddock.service.identity:
+    image: ${DOCKER_REGISTRY-}christopherbriddockserviceidentity
+    build:
+      context: .
+      dockerfile: ChristopherBriddock.Service.Identity/Dockerfile
+
+  christopherbriddock.service.email:
+    image: ${DOCKER_REGISTRY-}christopherbriddockserviceemail
+    build:
+      context: .
+      dockerfile: ChristopherBriddock.Service.Email/Dockerfile
+  
   seq:
     image: datalust/seq
     container_name: seq
@@ -19,6 +26,7 @@ services:
       - "45341:45341"
     volumes:
       - ./seq:/data
+
   rabbitmq:
     container_name: rabbitmq
     restart: unless-stopped
@@ -32,4 +40,4 @@ services:
       interval: 10s
       timeout: 10s
       retries: 5
-    
+

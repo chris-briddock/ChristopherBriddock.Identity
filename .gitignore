@@ -370,3 +370,5 @@ FodyWeavers.xsd
 /src/seq-data
 /src/seq
 /src/ChristopherBriddock.Service.Identity.Tests/coveragereport
+/src/ChristopherBriddock.Service.Identity/LocalDatabase.db-shm
+/src/ChristopherBriddock.Service.Identity/LocalDatabase.db-wal

@@ -5,7 +5,7 @@ if ($currentPath -notcontains "src/ChristopherBriddock.Service.Identity")
     Set-Location "ChristopherBriddock.Service.Identity"
 }
 
-dotnet user-secrets set "ConnectionStrings:Default" "Host=172.16.1.8;Port=5432;Username=pguser;Password=drRhxp397NP4__;Database=ChristopherBriddock.Service.Identity;"
+dotnet user-secrets set "ConnectionStrings:Default" "Host=hostHere;Port=5432;Username=pguser;Password=pwHere;Database=dbHere;"
 dotnet user-secrets set "ConnectionStrings:Redis" ""
 dotnet user-secrets set "ConnectionStrings:RedisInstanceName" ""
 dotnet user-secrets set "Jwt:Audience" "https://localhost:7081"

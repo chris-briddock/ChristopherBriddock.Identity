@@ -50,21 +50,15 @@ public sealed class RegisterEndpoint(IServiceProvider services,
         {
             var userManager = Services.GetService<UserManager<ApplicationUser>>()!;
             var roleManager = Services.GetService<RoleManager<ApplicationRole>>()!;
-            IEmailPublisher emailPublisher;
-            try
-            {
-                emailPublisher = Services.GetRequiredKeyedService<IEmailPublisher>(KeyedServiceNameConstants.EmailProviderMainImplementation);
-            }
-            catch
-            {
-                emailPublisher = Services.GetRequiredKeyedService<IEmailPublisher>(KeyedServiceNameConstants.EmailProviderNullImplementation);
-            }
+            IEmailPublisher emailPublisher = Services.GetService<IEmailPublisher>()!;
 
             var existingUser = await userManager.FindByEmailAsync(request.EmailAddress);
 
-            if (existingUser is not null)
+
+
+            if (existingUser is not null && !existingUser.IsDeleted)
             {
-                return StatusCode(StatusCodes.Status409Conflict);
+                return StatusCode(StatusCodes.Status409Conflict, "User is deleted, or already exists.");
             }
 
             ApplicationUser user = new()
@@ -72,7 +66,7 @@ public sealed class RegisterEndpoint(IServiceProvider services,
                 Email = request.EmailAddress,
                 PhoneNumber = request.PhoneNumber
             };
-            user.PasswordHash = userManager.PasswordHasher.HashPassword(user, request.Password);
+            user.PasswordHash = userManager.PasswordHasher.HashPassword(user, $"""{request.Password}""");
             await userManager.SetUserNameAsync(user, user.Email);
             await userManager.SetEmailAsync(user, user.Email);
             await userManager.SetPhoneNumberAsync(user, user.PhoneNumber);
@@ -111,7 +105,5 @@ public sealed class RegisterEndpoint(IServiceProvider services,
             Logger.LogError("Error in endpoint: {endpointName} - {methodName} Error details: {ex}", nameof(RegisterEndpoint), nameof(HandleAsync), ex);
             return StatusCode(StatusCodes.Status500InternalServerError);
         }
-
-
     }
 }

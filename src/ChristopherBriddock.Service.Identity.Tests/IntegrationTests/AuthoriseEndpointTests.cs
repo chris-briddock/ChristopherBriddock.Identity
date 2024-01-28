@@ -30,7 +30,7 @@ public class AuthoriseEndpointTests : IClassFixture<WebApplicationFactory<Progra
             RememberMe = true
         };
 
-        var sut = await client.PostAsJsonAsync("/authorise", _authorizeRequest);
+        using var sut = await client.PostAsJsonAsync("/authorise", _authorizeRequest);
 
         Assert.Equivalent(HttpStatusCode.Found, sut.StatusCode);
     }

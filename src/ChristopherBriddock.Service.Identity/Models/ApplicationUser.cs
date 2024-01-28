@@ -11,4 +11,12 @@ public sealed class ApplicationUser : IdentityUser<Guid>
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public override Guid Id { get; set; } = Guid.NewGuid();
+    /// <summary>
+    /// Gets or sets whether the user is soft deleted.
+    /// </summary>
+    public bool IsDeleted { get; set; } = false;
+    /// <summary>
+    /// Gets or sets the deleted date of the account.
+    /// </summary>
+    public DateTime DeletedDateTime { get; set; }
 }

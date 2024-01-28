@@ -31,12 +31,15 @@ public sealed class TwoFactorAuthoriseEndpoint(IServiceProvider services,
     /// <returns>A new <see cref="ActionResult"/></returns>
     [HttpPost("/2fa/authorise")]
     [AllowAnonymous]
+    [ProducesResponseType(StatusCodes.Status302Found)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public override async Task<ActionResult> HandleAsync([FromQuery] TwoFactorSignInRequest request,
                                                    CancellationToken cancellationToken = default)
     {
         try
         {
-            var signInManager = Services.GetService<SignInManager<ApplicationUser>>()!;
             var userManager = Services.GetService<UserManager<ApplicationUser>>()!;
             var httpContextAccessor = Services.GetService<IHttpContextAccessor>()!;
 
@@ -60,7 +63,7 @@ public sealed class TwoFactorAuthoriseEndpoint(IServiceProvider services,
 
             if (!result)
             {
-                return BadRequest();
+                return Unauthorized("Two factor token could not be verified.");
             }
 
             return LocalRedirect("/token");

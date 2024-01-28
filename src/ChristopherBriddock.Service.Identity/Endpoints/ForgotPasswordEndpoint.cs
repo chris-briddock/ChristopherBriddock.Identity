@@ -39,7 +39,7 @@ public sealed class ForgotPasswordEndpoint(IServiceProvider services,
     /// <returns>A new <see cref="ActionResult"/></returns>
     [HttpPost("/forgotpassword")]
     [AllowAnonymous]
-    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status409Conflict)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public override async Task<ActionResult> HandleAsync([FromBody] ForgotPasswordRequest request,
@@ -51,28 +51,23 @@ public sealed class ForgotPasswordEndpoint(IServiceProvider services,
             var user = await userManager.FindByEmailAsync(request.EmailAddress);
             var emailPublisher = Services.GetService<IEmailPublisher>()!;
 
-            if (user is not null)
+            if (user is null)
             {
-                if (await userManager.IsEmailConfirmedAsync(user))
-                {
-                    return Conflict("Email is not confirmed.");
-                }
-                var code = await userManager.GeneratePasswordResetTokenAsync(user);
-                code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-
-                EmailMessage message = new()
-                {
-                    EmailAddress = user.Email!,
-                    Code = code,
-                    Type = EmailPublisherConstants.ForgotPassword
-                };
-                await emailPublisher.Publish(message, cancellationToken);
-
-                return NoContent();
+                return NotFound("User has not been found.");
             }
 
-            return NotFound();
+            var code = await userManager.GeneratePasswordResetTokenAsync(user);
+            code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
 
+            EmailMessage message = new()
+            {
+                EmailAddress = user.Email!,
+                Code = code,
+                Type = EmailPublisherConstants.ForgotPassword
+            };
+            await emailPublisher.Publish(message, cancellationToken);
+
+            return NoContent();
         }
         catch (Exception ex)
         {

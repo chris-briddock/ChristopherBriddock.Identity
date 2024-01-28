@@ -41,6 +41,7 @@ public class UpdateEmailEndpoint(IServiceProvider services,
     [HttpPost("/account/email")]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public override async Task<ActionResult> HandleAsync([FromQuery] UpdateEmailRequest request, CancellationToken cancellationToken = default)

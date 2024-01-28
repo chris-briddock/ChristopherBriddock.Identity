@@ -54,7 +54,7 @@ public sealed class AuthoriseEndpoint(IServiceProvider services,
             signInManager.AuthenticationScheme = IdentityConstants.ApplicationScheme;
 
             var signInResult = await signInManager.PasswordSignInAsync(request.EmailAddress,
-                                                                       request.Password,
+                                                                       $"""{request.Password}""",
                                                                        request.RememberMe,
                                                                        lockoutOnFailure: true);
 
@@ -69,6 +69,11 @@ public sealed class AuthoriseEndpoint(IServiceProvider services,
             }
 
             ApplicationUser? user = await userManager.FindByEmailAsync(request.EmailAddress);
+
+            if (user!.IsDeleted)
+            {
+                return Unauthorized();
+            }
 
             await signInManager.CreateUserPrincipalAsync(user!);
 
