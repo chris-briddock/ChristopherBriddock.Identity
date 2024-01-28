@@ -23,6 +23,10 @@ jobs:
   - script: |
       dotnet publish src/ChristopherBriddock.Service.Identity/ChristopherBriddock.Service.Identity.csproj -c Release
     displayName: 'Publish'
+  - script: |
+      cd src/ChristopherBriddock.Service.Identity.Tests/TestResults
+      reportgenerator -reports:"*/coverage.cobertura.xml" -targetdir:"../coveragereport" -reporttypes:Html
+    displayName: 'Code Coverage Report'
   - task: CopyFiles@2
     inputs:
       SourceFolder: '$(System.DefaultWorkingDirectory)'
