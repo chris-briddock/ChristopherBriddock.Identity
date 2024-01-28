@@ -23,6 +23,11 @@ jobs:
   - script: |
       dotnet publish src/ChristopherBriddock.Service.Identity/ChristopherBriddock.Service.Identity.csproj -c Release
     displayName: 'Publish'
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: '$(System.DefaultWorkingDirectory)'
+      Contents: 'src/ChristopherBriddock.Service.Identity/bin/Release/net8.0/publish**'
+      TargetFolder: '$(Build.ArtifactStagingDirectory)'
   - task: PublishBuildArtifacts@1
     inputs:
       PathtoPublish: '$(Build.ArtifactStagingDirectory)'
