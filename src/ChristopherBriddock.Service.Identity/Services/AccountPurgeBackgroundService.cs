@@ -25,6 +25,6 @@ public class AccountPurgeBackgroundService(AppDbContext appDbContext) : Backgrou
 
         AppDbContext.RemoveRange(userToBeDeleted);
         await AppDbContext.SaveChangesAsync(stoppingToken);
-        
+
     }
 }

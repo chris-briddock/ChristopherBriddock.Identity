@@ -34,22 +34,30 @@ public class RefreshEndpoint(IServiceProvider services,
     /// <param name="request">The object which encapsulates the request.</param>
     /// <param name="cancellationToken">The cancellation token to cancel the operation.</param>
     /// <returns>A new <see cref="ActionResult"/></returns>
-    [HttpGet("/refresh")]
+    [HttpPost("/refresh")]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public override async Task<ActionResult> HandleAsync([FromBody] RefreshRequest request,
                                                          CancellationToken cancellationToken = default)
     {
-        var jsonWebTokenProvider = Services.GetService<IJsonWebTokenProvider>()!;
-        var configuration = Services.GetService<IConfiguration>()!;
-
-        var validationResult = await jsonWebTokenProvider.TryValidateTokenAsync(request.RefreshToken,
-                                                                                configuration["Jwt:Secret"]!,
-                                                                                configuration["Jwt:Issuer"]!,
-                                                                                configuration["Jwt:Audience"]!);
-        if (!validationResult.Success)
+        try
         {
-            return Unauthorized();
+            var jsonWebTokenProvider = Services.GetService<IJsonWebTokenProvider>()!;
+            var configuration = Services.GetService<IConfiguration>()!;
+
+            var validationResult = await jsonWebTokenProvider.TryValidateTokenAsync(request.RefreshToken,
+                                                                                    configuration["Jwt:Secret"]!,
+                                                                                    configuration["Jwt:Issuer"]!,
+                                                                                    configuration["Jwt:Audience"]!);
+            if (!validationResult.Success)
+            {
+                return Unauthorized();
+            }
+            return LocalRedirect("/token");
         }
-        return LocalRedirect("/token");
+        catch(Exception ex)
+        {
+            Logger.LogError("Error in endpoint: {endpointName} - {methodName} Error details: {ex}", nameof(RefreshEndpoint), nameof(HandleAsync), ex);
+            return StatusCode(StatusCodes.Status500InternalServerError);
+        }
     }
 }

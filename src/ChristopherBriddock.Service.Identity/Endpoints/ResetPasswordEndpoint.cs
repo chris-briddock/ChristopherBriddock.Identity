@@ -54,7 +54,7 @@ public sealed class ResetPasswordEndpoint(IServiceProvider services,
             }
 
             bool isConfirmed = await userManager.IsEmailConfirmedAsync(user);
-            
+
             if (isConfirmed)
             {
                 var decodedBytes = WebEncoders.Base64UrlDecode(request.ResetCode);

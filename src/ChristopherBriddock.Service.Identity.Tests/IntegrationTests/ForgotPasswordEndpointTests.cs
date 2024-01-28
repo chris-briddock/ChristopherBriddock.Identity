@@ -1,5 +1,4 @@
-﻿using ChristopherBriddock.Service.Common.Constants;
-using ChristopherBriddock.Service.Identity.Publishers;
+﻿using ChristopherBriddock.Service.Identity.Publishers;
 
 namespace ChristopherBriddock.Service.Identity.Tests.IntegrationTests;
 
@@ -25,16 +24,7 @@ public class ForgotPasswordEndpointTests : IClassFixture<WebApplicationFactory<P
             EmailAddress = "test@euiop.com"
         };
 
-        var nullEmailPublisherMock = new Mock<NullEmailPublisher>();
-
-        using var client = _webApplicationFactory.WithWebHostBuilder(s =>
-        {
-            s.ConfigureTestServices(s =>
-            {
-                s.RemoveAllKeyed(typeof(IEmailPublisher), KeyedServiceNameConstants.EmailProviderNullImplementation);
-                s.AddTransient<IEmailPublisher, NullEmailPublisher>();
-            });
-        }).CreateClient();
+        using var client = _webApplicationFactory.CreateClient();
 
         using var sut = await client.PostAsJsonAsync("/forgotpassword", _forgotPasswordRequest);
 
@@ -49,8 +39,6 @@ public class ForgotPasswordEndpointTests : IClassFixture<WebApplicationFactory<P
             EmailAddress = "test@asdf.com"
         };
 
-
-
         using var client = _webApplicationFactory.WithWebHostBuilder(s => s.ConfigureTestServices(_ =>
         {
             _.RemoveAll<IEmailPublisher>();
@@ -60,6 +48,4 @@ public class ForgotPasswordEndpointTests : IClassFixture<WebApplicationFactory<P
 
         Assert.Equivalent(HttpStatusCode.InternalServerError, sut.StatusCode);
     }
-
-
 }
