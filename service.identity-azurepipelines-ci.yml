@@ -29,6 +29,10 @@ jobs:
       cd src/ChristopherBriddock.Service.Identity.Tests/TestResults
       reportgenerator -reports:"*/coverage.cobertura.xml" -targetdir:"../coveragereport" -reporttypes:Html
     displayName: 'Code Coverage Report'
+  - task: PublishCodeCoverageResults@2
+    inputs:
+      summaryFileLocation: 'src/ChristopherBriddock.Service.Identity.Tests/TestResults/*/coverage.cobertura.xml'
+      pathToSources: 'src/ChristopherBriddock.Service.Identity/'
   - task: CopyFiles@2
     inputs:
       SourceFolder: '$(System.DefaultWorkingDirectory)'
