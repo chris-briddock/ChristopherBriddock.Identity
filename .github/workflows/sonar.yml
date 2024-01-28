@@ -48,4 +48,6 @@ jobs:
           dotnet build --configuration Release src/ChristopherBriddock.Service.Email/ChristopherBriddock.Service.Email.csproj
           dotnet test --collect:"XPlat Code Coverage" src/ChristopherBriddock.Service.Email.Tests/ChristopherBriddock.Service.Email.Tests.csproj
           dotnet test --collect:"XPlat Code Coverage" src/ChristopherBriddock.Service.Identity.Tests/ChristopherBriddock.Service.Identity.Tests.csproj
+          dotnet tool install --global dotnet-coverage
+          dotnet-coverage collect "dotnet test" -f xml -o "coverage.xml" 
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
