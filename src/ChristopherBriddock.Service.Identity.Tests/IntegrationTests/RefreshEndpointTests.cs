@@ -14,7 +14,10 @@ public class RefreshEndpointTests : IClassFixture<WebApplicationFactory<Program>
 
     public RefreshEndpointTests(WebApplicationFactory<Program> webApplicationFactory)
     {
-        _webApplicationFactory = webApplicationFactory;
+        _webApplicationFactory = webApplicationFactory.WithWebHostBuilder(s =>
+        {
+            s.UseEnvironment("Test");
+        });
     }
 
     [Fact]

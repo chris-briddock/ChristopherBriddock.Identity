@@ -29,8 +29,9 @@ public sealed class AppDbContext(IConfiguration configuration,
         }
         else
         {
-            optionsBuilder.UseNpgsql(Configuration.GetConnectionString("Default"),
-            opt => opt.EnableRetryOnFailure());
+            optionsBuilder.UseSqlite("Data Source=LocalDatabase.db");
+            //optionsBuilder.UseNpgsql(Configuration.GetConnectionString("Default"),
+            //opt => opt.EnableRetryOnFailure());
         }
 
         base.OnConfiguring(optionsBuilder);

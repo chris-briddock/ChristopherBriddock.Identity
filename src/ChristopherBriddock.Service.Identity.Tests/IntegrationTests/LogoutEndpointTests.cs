@@ -10,7 +10,10 @@ public class LogoutEndpointTests : IClassFixture<WebApplicationFactory<Program>>
 
     public LogoutEndpointTests(WebApplicationFactory<Program> webApplicationFactory)
     {
-        _webApplicationFactory = webApplicationFactory;
+        _webApplicationFactory = webApplicationFactory.WithWebHostBuilder(s =>
+        {
+            s.UseEnvironment("Test");
+        });
     }
 
     [Fact]
