@@ -14,7 +14,7 @@ jobs:
       packageType: 'sdk'
       version: '8.0.x'
   - script: |
-      dotnet build --configuration Release dotnet build --configuration Release src/ChristopherBriddock.Service.Identity/ChristopherBriddock.Service.Identity.csproj
+      dotnet build --configuration Release src/ChristopherBriddock.Service.Identity/ChristopherBriddock.Service.Identity.csproj
     displayName: 'Build & Restore'
   - script: |
       dotnet test --collect:"XPlat Code Coverage" src/ChristopherBriddock.Service.Identity.Tests/ChristopherBriddock.Service.Identity.Tests.csproj
