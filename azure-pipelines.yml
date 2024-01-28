@@ -1,0 +1,24 @@
+trigger:
+- main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+jobs:
+- job: Build
+  displayName: 'Build'
+  steps:
+  - checkout: self
+  - task: UseDotNet@2
+    inputs:
+      packageType: 'sdk'
+      version: '8.0.x'
+  - script: |
+      dotnet build --configuration Release src/ChristopherBriddock.Service.Email/ChristopherBriddock.Service.Email.csproj
+    displayName: 'Build & Restore'
+  - script: |
+      dotnet test --collect:"XPlat Code Coverage" src/ChristopherBriddock.Service.Email.Tests/ChristopherBriddock.Service.Email.Tests.csproj
+    displayName: 'Test'
+  - script: |
+      dotnet publish src/ChristopherBriddock.Service.Email/ChristopherBriddock.Service.Email.csproj -c Release
+    displayName: 'Publish'
