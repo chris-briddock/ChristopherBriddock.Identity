@@ -4,6 +4,9 @@ The Identity Service is a robust authentication and authorization component for 
 
 ![Azure DevOps builds](https://img.shields.io/azure-devops/build/chris1997/91f2d938-549b-497e-980d-188da969448a/7)
 ![Azure DevOps coverage](https://img.shields.io/azure-devops/coverage/chris1997/91f2d938-549b-497e-980d-188da969448a/7)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=chris-briddock_ChristopherBriddock.Identity&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=chris-briddock_ChristopherBriddock.Identity)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=chris-briddock_ChristopherBriddock.Identity&metric=bugs)](https://sonarcloud.io/summary/new_code?id=chris-briddock_ChristopherBriddock.Identity)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=chris-briddock_ChristopherBriddock.Identity&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=chris-briddock_ChristopherBriddock.Identity)
 
 Technical documentation generated with DocFX is [here](https://chris-briddock.github.io/ChristopherBriddock.Identity/api/ChristopherBriddock.Service.Common.Constants.html)
 
