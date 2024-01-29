@@ -2,6 +2,9 @@
 
 The Identity Service is a robust authentication and authorization component for your application, developed using ASP.NET 8 and integrating various libraries to ensure secure identity management.
 
+![Azure DevOps builds](https://img.shields.io/azure-devops/build/chris1997/91f2d938-549b-497e-980d-188da969448a/7)
+![Azure DevOps coverage](https://img.shields.io/azure-devops/coverage/chris1997/91f2d938-549b-497e-980d-188da969448a/7)
+
 Technical documentation generated with DocFX is [here](https://chris-briddock.github.io/ChristopherBriddock.Identity/api/ChristopherBriddock.Service.Common.Constants.html)
 
 ## Table of Contents
@@ -79,4 +82,5 @@ To get started with the Identity Service, follow these steps:
 
 ### License
 
-This project is licensed under the [MIT License](LICENSE). See the LICENSE file for details.
+This project is licensed under the ![GitHub License](https://img.shields.io/github/license/chris-briddock/ChristopherBriddock.Identity) 
+See the [LICENSE](LICENSE) file for details.
