@@ -2,6 +2,8 @@
 
 The Identity Service is a robust authentication and authorization component for your application, developed using ASP.NET 8 and integrating various libraries to ensure secure identity management.
 
+Technical documentation generated with DocFX is [here](https://chris-briddock.github.io/ChristopherBriddock.Identity/api/ChristopherBriddock.Service.Common.Constants.html)
+
 ## Table of Contents
 
 * [Introduction](#introduction)
