@@ -1,48 +1,44 @@
-name: Docs
-
+# Your GitHub workflow file under .github/workflows/
+# Trigger the action on push to main
 on:
   push:
     branches:
-    - main
-    paths:
-    - src/**
-    - docs/**
-    - .github/workflows/docs.yml
-  pull_request:
-    branches:
-    - main
-    paths:
-    - docs/**
-    - .github/workflows/docs.yml
-  workflow_dispatch:
+      - main
 
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  actions: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+  
 jobs:
-  generate-docs:
-
-    runs-on: windows-latest
-
+  publish-docs:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-
-    - name: Setup .NET 8.0
-      uses: actions/setup-dotnet@v1
+    - name: Checkout
+      uses: actions/checkout@v3
+    - name: Dotnet Setup
+      uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: 8.0.x
+        dotnet-version: 8.x
 
-    - name: Setup DocFX
-      uses: crazy-max/ghaction-chocolatey@v1
+    - run: dotnet tool update -g docfx
+    - run: docfx docfx.json
+
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v3
       with:
-        args: install docfx
-
-    - name: DocFX Build
-      working-directory: .
-      run: docfx .\docfx.json
-      continue-on-error: false
-
-    - name: Publish
-      if: github.event_name == 'push'
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: docs/_site
-        force_orphan: true
+        # Upload entire repository
+        path: '_site'
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v4
