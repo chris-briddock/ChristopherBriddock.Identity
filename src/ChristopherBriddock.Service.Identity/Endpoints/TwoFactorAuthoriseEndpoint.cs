@@ -29,7 +29,7 @@ public sealed class TwoFactorAuthoriseEndpoint(IServiceProvider services,
     /// <param name="request">The object which encapsulates the request.</param>
     /// <param name="cancellationToken">The cancellation token to cancel the operation.</param>
     /// <returns>A new <see cref="ActionResult"/></returns>
-    [HttpPost("/2fa/authorise")]
+    [HttpGet("/2fa/authorise")]
     [AllowAnonymous]
     [ProducesResponseType(StatusCodes.Status302Found)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]

@@ -28,8 +28,6 @@ public static class ServiceCollectionExtensions
     /// <returns>The modified <see cref="IServiceCollection"/> instance.</returns>
     public static IServiceCollection AddSwagger(this IServiceCollection services, string xmlFile)
     {
-        ArgumentNullException.ThrowIfNull(services, nameof(services));
-
         services.AddSwaggerGen(opt =>
         {
             var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
@@ -109,7 +107,6 @@ public static class ServiceCollectionExtensions
     /// <returns>The modified <see cref="IServiceCollection"/> instance.</returns>
     public static IServiceCollection AddCustomAuthentication(this IServiceCollection services)
     {
-        ArgumentNullException.ThrowIfNull(services, nameof(services));
         services.TryAddSingleton<IJsonWebTokenProvider, JsonWebTokenProvider>();
         services.TryAddSingleton<IConfigureOptions<JwtBearerOptions>, ConfigureJwtBearerOptions>();
         services.AddAuthentication(opt =>

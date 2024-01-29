@@ -1,23 +1,23 @@
-ï»¿using ChristopherBriddock.Service.Common.Constants;
+using ChristopherBriddock.Service.Common.Constants;
 using ChristopherBriddock.Service.Common.Messaging;
 using MassTransit;
 using System.Net;
 using System.Net.Mail;
 
-namespace ChristopherBriddock.Service.Email;
+namespace ChristopherBriddock.WorkerService.Email;
 
 /// <summary>
-/// Initializes a new instance of <see cref="EmailConsumer"/>
+/// Initializes a new instance of <see cref="Worker"/>
 /// </summary>
 /// <param name="logger">The application logger.</param>
 /// <param name="configuration">The configuration of the application. </param> 
-public class EmailConsumer(ILogger<EmailConsumer> logger,
+public class Worker(ILogger<Worker> logger,
                            IConfiguration configuration) : IConsumer<EmailMessage>
 {
     /// <summary>
     /// The application logger.
     /// </summary>
-    public ILogger<EmailConsumer> Logger { get; } = logger;
+    public ILogger<Worker> Logger { get; } = logger;
     /// <summary>
     /// The application configuration.
     /// </summary>
@@ -30,7 +30,6 @@ public class EmailConsumer(ILogger<EmailConsumer> logger,
     /// <remarks>
     /// This method is automatically executed, as MassTransit registers consumers and pushliers (producers) 
     /// as a <see cref="BackgroundService"/> which implements <see cref="IHostedService"/> 
-    /// There is no need to implement any endpoints.
     /// </remarks>
     /// <returns>An asyncronous <see cref="Task"/></returns>
     public async Task Consume(ConsumeContext<EmailMessage> context)
@@ -69,10 +68,10 @@ public class EmailConsumer(ILogger<EmailConsumer> logger,
         <img src=""your-company-logo.png"" alt=""Your Company Logo"" class=""mx-auto mb-4"">
         <h2 class=""text-2xl font-semibold mb-4 text-gray-800"">Confirm your email</h2>
         <p class=""text-gray-700"">Dear <span class=""font-bold text-indigo-800"">{context.Message.EmailAddress}</span>,</p>
-        <p class=""text-gray-700"">Your confirmation email link is <a href=""https://REPLACEME.com"" class=""text-indigo-600"">here</a></p>
+        <p class=""text-gray-700"">Your confirmation email link is <a href=""{context.Message.Link}"" class=""text-indigo-600"">here</a></p>
         <p class=""text-gray-700"">If you did not request this or have any concerns, please contact our support team.</p>
         <p class=""mt-4 text-gray-700"">Thank you,<br>Your Company Name</p>
-        <p class=""mt-2 text-gray-600"">Â© 2024 Your Company. All rights reserved.</p>
+        <p class=""mt-2 text-gray-600"">© 2024 Your Company. All rights reserved.</p>
     </div>
 </body>
 </html>";
@@ -93,10 +92,10 @@ public class EmailConsumer(ILogger<EmailConsumer> logger,
         <img src=""your-company-logo.png"" alt=""Your Company Logo"" class=""mx-auto mb-4"">
         <h2 class=""text-2xl font-semibold mb-4 text-gray-800"">Two-Factor Verification Code</h2>
         <p class=""text-gray-700"">Dear <span class=""font-bold text-indigo-800"">{context.Message.EmailAddress}</span>,</p>
-        <p class=""text-gray-700"">Your two factor code is {context.Message.Code}</p>
+        <p class=""text-gray-700"">Your two factor code is {context.Message.Link}</p>
         <p class=""text-gray-700"">If you did not request this or have any concerns, please contact our support team.</p>
         <p class=""mt-4 text-gray-700"">Thank you,<br>Your Company Name</p>
-        <p class=""mt-2 text-gray-600"">Â© 2024 Your Company. All rights reserved.</p>
+        <p class=""mt-2 text-gray-600"">© 2024 Your Company. All rights reserved.</p>
     </div>
 </body>
 </html>";
@@ -120,7 +119,7 @@ public class EmailConsumer(ILogger<EmailConsumer> logger,
         <p class=""text-gray-700"">Your password reset link is <a href=""https://REPLACEME.com"" class=""text-indigo-600"">here</a></p>
         <p class=""text-gray-700"">If you did not request this or have any concerns, please contact our support team.</p>
         <p class=""mt-4 text-gray-700"">Thank you,<br>Your Company Name</p>
-        <p class=""mt-2 text-gray-600"">Â© 2024 Your Company. All rights reserved.</p>
+        <p class=""mt-2 text-gray-600"">© 2024 Your Company. All rights reserved.</p>
     </div>
 </body>
 </html>";
@@ -132,7 +131,7 @@ public class EmailConsumer(ILogger<EmailConsumer> logger,
 
             await client.SendMailAsync(mailMessage);
         }
-        catch (Exception)
+        catch (Exception ex)
         {
             throw;
         }

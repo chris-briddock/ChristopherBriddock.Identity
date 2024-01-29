@@ -4,6 +4,7 @@ using ChristopherBriddock.Service.Common.Messaging;
 using ChristopherBriddock.Service.Identity.Constants;
 using ChristopherBriddock.Service.Identity.Models;
 using ChristopherBriddock.Service.Identity.Models.Requests;
+using ChristopherBriddock.Service.Identity.Providers;
 using ChristopherBriddock.Service.Identity.Publishers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -51,10 +52,10 @@ public sealed class RegisterEndpoint(IServiceProvider services,
             var userManager = Services.GetService<UserManager<ApplicationUser>>()!;
             var roleManager = Services.GetService<RoleManager<ApplicationRole>>()!;
             IEmailPublisher emailPublisher = Services.GetService<IEmailPublisher>()!;
+            var linkProvider = Services.GetService<ILinkProvider>()!;
+            var httpContext = Services.GetService<IHttpContextAccessor>()!;
 
             var existingUser = await userManager.FindByEmailAsync(request.EmailAddress);
-
-
 
             if (existingUser is not null && !existingUser.IsDeleted)
             {
@@ -90,10 +91,18 @@ public sealed class RegisterEndpoint(IServiceProvider services,
             var code = await userManager.GenerateEmailConfirmationTokenAsync(user);
             code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
 
+            RouteValueDictionary routeValues = new()
+            {
+                ["EmailAddress"] = user.Email,
+                ["Code"] = code
+            };
+
+           var link =  linkProvider.GetUri(httpContext.HttpContext!, "confirmemail", routeValues);
+
             EmailMessage message = new()
             {
                 EmailAddress = user.Email!,
-                Code = code,
+                Link = link,
                 Type = EmailPublisherConstants.Register
             };
             await emailPublisher.Publish(message, cancellationToken);

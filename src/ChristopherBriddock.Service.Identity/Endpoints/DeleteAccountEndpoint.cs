@@ -49,7 +49,7 @@ public class DeleteAccountEndpoint(ILogger<DeleteAccountEndpoint> logger,
                 return NotFound("User has not been found.");
             }
             user.IsDeleted = true;
-            user.DeletedDateTime = DateTime.Now;
+            user.DeletedDateTime = DateTime.Now.ToUniversalTime();
 
             await userManager.UpdateAsync(user);
 
