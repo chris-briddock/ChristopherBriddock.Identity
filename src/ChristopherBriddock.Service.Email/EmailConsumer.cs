@@ -9,12 +9,18 @@ namespace ChristopherBriddock.Service.Email;
 /// <summary>
 /// Initializes a new instance of <see cref="EmailConsumer"/>
 /// </summary>
-/// <param name="bus">A logical element that includes a local endpoint and zero or more receive endpoints</param>
+/// <param name="logger">The application logger.</param>
+/// <param name="configuration">The configuration of the application. </param> 
 public class EmailConsumer(ILogger<EmailConsumer> logger,
                            IConfiguration configuration) : IConsumer<EmailMessage>
 {
-
+    /// <summary>
+    /// The application logger.
+    /// </summary>
     public ILogger<EmailConsumer> Logger { get; } = logger;
+    /// <summary>
+    /// The application configuration.
+    /// </summary>
     public IConfiguration Configuration { get; } = configuration;
 
     /// <summary>
