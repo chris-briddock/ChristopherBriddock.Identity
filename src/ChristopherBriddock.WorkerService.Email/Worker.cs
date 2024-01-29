@@ -34,8 +34,6 @@ public class Worker(ILogger<Worker> logger,
     /// <returns>An asyncronous <see cref="Task"/></returns>
     public async Task Consume(ConsumeContext<EmailMessage> context)
     {
-        try
-        {
             var smtpServer = Configuration["Email:Server"]!;
             int smtpPort = Convert.ToInt16(Configuration["Email:Port"]!);
             var smtpUsername = Configuration["Email:Credentials:EmailAddress"]!;
@@ -130,10 +128,5 @@ public class Worker(ILogger<Worker> logger,
             mailMessage.To.Add(context.Message.EmailAddress);
 
             await client.SendMailAsync(mailMessage);
-        }
-        catch (Exception ex)
-        {
-            throw;
-        }
     }
 }
