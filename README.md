@@ -81,5 +81,5 @@ To get started with the Identity Service, follow these steps:
 7. Build and run the Web API.
 
 ### License
-
+![GitHub License](https://img.shields.io/github/license/chris-briddock/ChristopherBriddock.Identity)
 This project is licensed under the [MIT License](LICENSE). See the LICENSE file for details.
