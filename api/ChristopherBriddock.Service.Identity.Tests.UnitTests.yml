@@ -1,0 +1,37 @@
+### YamlMime:ManagedReference
+items:
+- uid: ChristopherBriddock.Service.Identity.Tests.UnitTests
+  commentId: N:ChristopherBriddock.Service.Identity.Tests.UnitTests
+  id: ChristopherBriddock.Service.Identity.Tests.UnitTests
+  children:
+  - ChristopherBriddock.Service.Identity.Tests.UnitTests.ConfigureJwtBearerOptionsTests
+  - ChristopherBriddock.Service.Identity.Tests.UnitTests.EmailPublisherTests
+  - ChristopherBriddock.Service.Identity.Tests.UnitTests.JsonWebTokenProviderTests
+  langs:
+  - csharp
+  - vb
+  name: ChristopherBriddock.Service.Identity.Tests.UnitTests
+  nameWithType: ChristopherBriddock.Service.Identity.Tests.UnitTests
+  fullName: ChristopherBriddock.Service.Identity.Tests.UnitTests
+  type: Namespace
+  assemblies:
+  - ChristopherBriddock.Service.Identity.Tests
+references:
+- uid: ChristopherBriddock.Service.Identity.Tests.UnitTests.ConfigureJwtBearerOptionsTests
+  commentId: T:ChristopherBriddock.Service.Identity.Tests.UnitTests.ConfigureJwtBearerOptionsTests
+  href: ChristopherBriddock.Service.Identity.Tests.UnitTests.ConfigureJwtBearerOptionsTests.html
+  name: ConfigureJwtBearerOptionsTests
+  nameWithType: ConfigureJwtBearerOptionsTests
+  fullName: ChristopherBriddock.Service.Identity.Tests.UnitTests.ConfigureJwtBearerOptionsTests
+- uid: ChristopherBriddock.Service.Identity.Tests.UnitTests.EmailPublisherTests
+  commentId: T:ChristopherBriddock.Service.Identity.Tests.UnitTests.EmailPublisherTests
+  href: ChristopherBriddock.Service.Identity.Tests.UnitTests.EmailPublisherTests.html
+  name: EmailPublisherTests
+  nameWithType: EmailPublisherTests
+  fullName: ChristopherBriddock.Service.Identity.Tests.UnitTests.EmailPublisherTests
+- uid: ChristopherBriddock.Service.Identity.Tests.UnitTests.JsonWebTokenProviderTests
+  commentId: T:ChristopherBriddock.Service.Identity.Tests.UnitTests.JsonWebTokenProviderTests
+  href: ChristopherBriddock.Service.Identity.Tests.UnitTests.JsonWebTokenProviderTests.html
+  name: JsonWebTokenProviderTests
+  nameWithType: JsonWebTokenProviderTests
+  fullName: ChristopherBriddock.Service.Identity.Tests.UnitTests.JsonWebTokenProviderTests

@@ -1,0 +1,62 @@
+### YamlMime:ManagedReference
+items:
+- uid: ChristopherBriddock.Service.Common.Messaging
+  commentId: N:ChristopherBriddock.Service.Common.Messaging
+  id: ChristopherBriddock.Service.Common.Messaging
+  children:
+  - ChristopherBriddock.Service.Common.Messaging.EmailMessage
+  langs:
+  - csharp
+  - vb
+  name: ChristopherBriddock.Service.Common.Messaging
+  nameWithType: ChristopherBriddock.Service.Common.Messaging
+  fullName: ChristopherBriddock.Service.Common.Messaging
+  type: Namespace
+  assemblies:
+  - ChristopherBriddock.Service.Common
+references:
+- uid: ChristopherBriddock.Service.Common.Messaging.EmailMessage
+  commentId: T:ChristopherBriddock.Service.Common.Messaging.EmailMessage
+  parent: ChristopherBriddock.Service.Common.Messaging
+  href: ChristopherBriddock.Service.Common.Messaging.EmailMessage.html
+  name: EmailMessage
+  nameWithType: EmailMessage
+  fullName: ChristopherBriddock.Service.Common.Messaging.EmailMessage
+- uid: ChristopherBriddock.Service.Common.Messaging
+  commentId: N:ChristopherBriddock.Service.Common.Messaging
+  href: ChristopherBriddock.html
+  name: ChristopherBriddock.Service.Common.Messaging
+  nameWithType: ChristopherBriddock.Service.Common.Messaging
+  fullName: ChristopherBriddock.Service.Common.Messaging
+  spec.csharp:
+  - uid: ChristopherBriddock
+    name: ChristopherBriddock
+    href: ChristopherBriddock.html
+  - name: .
+  - uid: ChristopherBriddock.Service
+    name: Service
+    href: ChristopherBriddock.Service.html
+  - name: .
+  - uid: ChristopherBriddock.Service.Common
+    name: Common
+    href: ChristopherBriddock.Service.Common.html
+  - name: .
+  - uid: ChristopherBriddock.Service.Common.Messaging
+    name: Messaging
+    href: ChristopherBriddock.Service.Common.Messaging.html
+  spec.vb:
+  - uid: ChristopherBriddock
+    name: ChristopherBriddock
+    href: ChristopherBriddock.html
+  - name: .
+  - uid: ChristopherBriddock.Service
+    name: Service
+    href: ChristopherBriddock.Service.html
+  - name: .
+  - uid: ChristopherBriddock.Service.Common
+    name: Common
+    href: ChristopherBriddock.Service.Common.html
+  - name: .
+  - uid: ChristopherBriddock.Service.Common.Messaging
+    name: Messaging
+    href: ChristopherBriddock.Service.Common.Messaging.html

@@ -1,0 +1,222 @@
+### YamlMime:TableOfContent
+items:
+- uid: ChristopherBriddock.Service.Common.Constants
+  name: ChristopherBriddock.Service.Common.Constants
+  items:
+  - uid: ChristopherBriddock.Service.Common.Constants.CorsConstants
+    name: CorsConstants
+  - uid: ChristopherBriddock.Service.Common.Constants.EmailPublisherConstants
+    name: EmailPublisherConstants
+  - uid: ChristopherBriddock.Service.Common.Constants.FeatureFlagConstants
+    name: FeatureFlagConstants
+- uid: ChristopherBriddock.Service.Common.Extensions
+  name: ChristopherBriddock.Service.Common.Extensions
+  items:
+  - uid: ChristopherBriddock.Service.Common.Extensions.ServiceCollectionExtensions
+    name: ServiceCollectionExtensions
+- uid: ChristopherBriddock.Service.Common.Messaging
+  name: ChristopherBriddock.Service.Common.Messaging
+  items:
+  - uid: ChristopherBriddock.Service.Common.Messaging.EmailMessage
+    name: EmailMessage
+- uid: ChristopherBriddock.Service.Email
+  name: ChristopherBriddock.Service.Email
+  items:
+  - uid: ChristopherBriddock.Service.Email.EmailConsumer
+    name: EmailConsumer
+- uid: ChristopherBriddock.Service.Email.Extensions
+  name: ChristopherBriddock.Service.Email.Extensions
+  items:
+  - uid: ChristopherBriddock.Service.Email.Extensions.ServiceCollectionExtensions
+    name: ServiceCollectionExtensions
+- uid: ChristopherBriddock.Service.Email.Tests
+  name: ChristopherBriddock.Service.Email.Tests
+  items:
+  - uid: ChristopherBriddock.Service.Email.Tests.UnitTest1
+    name: UnitTest1
+- uid: ChristopherBriddock.Service.Identity
+  name: ChristopherBriddock.Service.Identity
+  items:
+  - uid: ChristopherBriddock.Service.Identity.Program
+    name: Program
+- uid: ChristopherBriddock.Service.Identity.Constants
+  name: ChristopherBriddock.Service.Identity.Constants
+  items:
+  - uid: ChristopherBriddock.Service.Identity.Constants.RoleConstants
+    name: RoleConstants
+- uid: ChristopherBriddock.Service.Identity.Data
+  name: ChristopherBriddock.Service.Identity.Data
+  items:
+  - uid: ChristopherBriddock.Service.Identity.Data.AppDbContext
+    name: AppDbContext
+- uid: ChristopherBriddock.Service.Identity.Endpoints
+  name: ChristopherBriddock.Service.Identity.Endpoints
+  items:
+  - uid: ChristopherBriddock.Service.Identity.Endpoints.AuthoriseEndpoint
+    name: AuthoriseEndpoint
+  - uid: ChristopherBriddock.Service.Identity.Endpoints.ConfirmEmailEndpoint
+    name: ConfirmEmailEndpoint
+  - uid: ChristopherBriddock.Service.Identity.Endpoints.DeleteAccountEndpoint
+    name: DeleteAccountEndpoint
+  - uid: ChristopherBriddock.Service.Identity.Endpoints.ForgotPasswordEndpoint
+    name: ForgotPasswordEndpoint
+  - uid: ChristopherBriddock.Service.Identity.Endpoints.LogoutEndpoint
+    name: LogoutEndpoint
+  - uid: ChristopherBriddock.Service.Identity.Endpoints.RefreshEndpoint
+    name: RefreshEndpoint
+  - uid: ChristopherBriddock.Service.Identity.Endpoints.RegisterEndpoint
+    name: RegisterEndpoint
+  - uid: ChristopherBriddock.Service.Identity.Endpoints.ResetPasswordEndpoint
+    name: ResetPasswordEndpoint
+  - uid: ChristopherBriddock.Service.Identity.Endpoints.TokenEndpoint
+    name: TokenEndpoint
+  - uid: ChristopherBriddock.Service.Identity.Endpoints.TwoFactorAuthoriseEndpoint
+    name: TwoFactorAuthoriseEndpoint
+  - uid: ChristopherBriddock.Service.Identity.Endpoints.TwoFactorManageEndpoint
+    name: TwoFactorManageEndpoint
+  - uid: ChristopherBriddock.Service.Identity.Endpoints.TwoFactorRecoveryCodesEndpoint
+    name: TwoFactorRecoveryCodesEndpoint
+  - uid: ChristopherBriddock.Service.Identity.Endpoints.TwoFactorRecoveryCodesRedeemEndpoint
+    name: TwoFactorRecoveryCodesRedeemEndpoint
+  - uid: ChristopherBriddock.Service.Identity.Endpoints.TwoFactorTokenEmailEndpoint
+    name: TwoFactorTokenEmailEndpoint
+  - uid: ChristopherBriddock.Service.Identity.Endpoints.UpdateEmailEndpoint
+    name: UpdateEmailEndpoint
+  - uid: ChristopherBriddock.Service.Identity.Endpoints.UpdatePasswordEndpoint
+    name: UpdatePasswordEndpoint
+  - uid: ChristopherBriddock.Service.Identity.Endpoints.UpdatePhoneNumberEndpoint
+    name: UpdatePhoneNumberEndpoint
+- uid: ChristopherBriddock.Service.Identity.Exceptions
+  name: ChristopherBriddock.Service.Identity.Exceptions
+  items:
+  - uid: ChristopherBriddock.Service.Identity.Exceptions.CreateJwtException
+    name: CreateJwtException
+  - uid: ChristopherBriddock.Service.Identity.Exceptions.JwtSecretNullOrEmptyException
+    name: JwtSecretNullOrEmptyException
+  - uid: ChristopherBriddock.Service.Identity.Exceptions.ValidateJwtException
+    name: ValidateJwtException
+- uid: ChristopherBriddock.Service.Identity.Extensions
+  name: ChristopherBriddock.Service.Identity.Extensions
+  items:
+  - uid: ChristopherBriddock.Service.Identity.Extensions.HealthCheckExtensions
+    name: HealthCheckExtensions
+  - uid: ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions
+    name: ServiceCollectionExtensions
+  - uid: ChristopherBriddock.Service.Identity.Extensions.WebApplicationExtensions
+    name: WebApplicationExtensions
+  - uid: ChristopherBriddock.Service.Identity.Extensions.WebHostBuilderExtensions
+    name: WebHostBuilderExtensions
+- uid: ChristopherBriddock.Service.Identity.Models
+  name: ChristopherBriddock.Service.Identity.Models
+  items:
+  - uid: ChristopherBriddock.Service.Identity.Models.ApplicationRole
+    name: ApplicationRole
+  - uid: ChristopherBriddock.Service.Identity.Models.ApplicationRoleClaim
+    name: ApplicationRoleClaim
+  - uid: ChristopherBriddock.Service.Identity.Models.ApplicationUser
+    name: ApplicationUser
+  - uid: ChristopherBriddock.Service.Identity.Models.ApplicationUserClaims
+    name: ApplicationUserClaims
+  - uid: ChristopherBriddock.Service.Identity.Models.ApplicationUserLogin
+    name: ApplicationUserLogin
+  - uid: ChristopherBriddock.Service.Identity.Models.ApplicationUserRole
+    name: ApplicationUserRole
+  - uid: ChristopherBriddock.Service.Identity.Models.ApplicationUserToken
+    name: ApplicationUserToken
+- uid: ChristopherBriddock.Service.Identity.Models.Requests
+  name: ChristopherBriddock.Service.Identity.Models.Requests
+  items:
+  - uid: ChristopherBriddock.Service.Identity.Models.Requests.AuthorizeRequest
+    name: AuthorizeRequest
+  - uid: ChristopherBriddock.Service.Identity.Models.Requests.ConfirmEmailRequest
+    name: ConfirmEmailRequest
+  - uid: ChristopherBriddock.Service.Identity.Models.Requests.ForgotPasswordRequest
+    name: ForgotPasswordRequest
+  - uid: ChristopherBriddock.Service.Identity.Models.Requests.RefreshRequest
+    name: RefreshRequest
+  - uid: ChristopherBriddock.Service.Identity.Models.Requests.RegisterRequest
+    name: RegisterRequest
+  - uid: ChristopherBriddock.Service.Identity.Models.Requests.TwoFactorManageRequest
+    name: TwoFactorManageRequest
+  - uid: ChristopherBriddock.Service.Identity.Models.Requests.TwoFactorRecoveryCodesRedeemRequest
+    name: TwoFactorRecoveryCodesRedeemRequest
+  - uid: ChristopherBriddock.Service.Identity.Models.Requests.TwoFactorSignInRequest
+    name: TwoFactorSignInRequest
+  - uid: ChristopherBriddock.Service.Identity.Models.Requests.TwoFactorTokenEmailRequest
+    name: TwoFactorTokenEmailRequest
+  - uid: ChristopherBriddock.Service.Identity.Models.Requests.UpdateEmailRequest
+    name: UpdateEmailRequest
+  - uid: ChristopherBriddock.Service.Identity.Models.Requests.UpdatePasswordRequest
+    name: UpdatePasswordRequest
+  - uid: ChristopherBriddock.Service.Identity.Models.Requests.UpdatePhoneNumberRequest
+    name: UpdatePhoneNumberRequest
+- uid: ChristopherBriddock.Service.Identity.Models.Responses
+  name: ChristopherBriddock.Service.Identity.Models.Responses
+  items:
+  - uid: ChristopherBriddock.Service.Identity.Models.Responses.TokenResponse
+    name: TokenResponse
+- uid: ChristopherBriddock.Service.Identity.Models.Results
+  name: ChristopherBriddock.Service.Identity.Models.Results
+  items:
+  - uid: ChristopherBriddock.Service.Identity.Models.Results.JwtResult
+    name: JwtResult
+- uid: ChristopherBriddock.Service.Identity.Options
+  name: ChristopherBriddock.Service.Identity.Options
+  items:
+  - uid: ChristopherBriddock.Service.Identity.Options.ConfigureJwtBearerOptions
+    name: ConfigureJwtBearerOptions
+- uid: ChristopherBriddock.Service.Identity.Providers
+  name: ChristopherBriddock.Service.Identity.Providers
+  items:
+  - uid: ChristopherBriddock.Service.Identity.Providers.IJsonWebTokenProvider
+    name: IJsonWebTokenProvider
+  - uid: ChristopherBriddock.Service.Identity.Providers.JsonWebTokenProvider
+    name: JsonWebTokenProvider
+- uid: ChristopherBriddock.Service.Identity.Publishers
+  name: ChristopherBriddock.Service.Identity.Publishers
+  items:
+  - uid: ChristopherBriddock.Service.Identity.Publishers.EmailPublisher
+    name: EmailPublisher
+  - uid: ChristopherBriddock.Service.Identity.Publishers.IEmailPublisher
+    name: IEmailPublisher
+  - uid: ChristopherBriddock.Service.Identity.Publishers.NullEmailPublisher
+    name: NullEmailPublisher
+- uid: ChristopherBriddock.Service.Identity.Services
+  name: ChristopherBriddock.Service.Identity.Services
+  items:
+  - uid: ChristopherBriddock.Service.Identity.Services.AccountPurgeBackgroundService
+    name: AccountPurgeBackgroundService
+- uid: ChristopherBriddock.Service.Identity.Tests.IntegrationTests
+  name: ChristopherBriddock.Service.Identity.Tests.IntegrationTests
+  items:
+  - uid: ChristopherBriddock.Service.Identity.Tests.IntegrationTests.AuthoriseEndpointTests
+    name: AuthoriseEndpointTests
+  - uid: ChristopherBriddock.Service.Identity.Tests.IntegrationTests.ConfirmEmailEndpointTests
+    name: ConfirmEmailEndpointTests
+  - uid: ChristopherBriddock.Service.Identity.Tests.IntegrationTests.DeleteAccountEndpointTests
+    name: DeleteAccountEndpointTests
+  - uid: ChristopherBriddock.Service.Identity.Tests.IntegrationTests.ForgotPasswordEndpointTests
+    name: ForgotPasswordEndpointTests
+  - uid: ChristopherBriddock.Service.Identity.Tests.IntegrationTests.LogoutEndpointTests
+    name: LogoutEndpointTests
+  - uid: ChristopherBriddock.Service.Identity.Tests.IntegrationTests.RefreshEndpointTests
+    name: RefreshEndpointTests
+  - uid: ChristopherBriddock.Service.Identity.Tests.IntegrationTests.RegisterEndpointTests
+    name: RegisterEndpointTests
+  - uid: ChristopherBriddock.Service.Identity.Tests.IntegrationTests.ResetPasswordEndpointTests
+    name: ResetPasswordEndpointTests
+- uid: ChristopherBriddock.Service.Identity.Tests.Mocks
+  name: ChristopherBriddock.Service.Identity.Tests.Mocks
+  items:
+  - uid: ChristopherBriddock.Service.Identity.Tests.Mocks.JsonWebTokenProviderMock
+    name: JsonWebTokenProviderMock
+- uid: ChristopherBriddock.Service.Identity.Tests.UnitTests
+  name: ChristopherBriddock.Service.Identity.Tests.UnitTests
+  items:
+  - uid: ChristopherBriddock.Service.Identity.Tests.UnitTests.ConfigureJwtBearerOptionsTests
+    name: ConfigureJwtBearerOptionsTests
+  - uid: ChristopherBriddock.Service.Identity.Tests.UnitTests.EmailPublisherTests
+    name: EmailPublisherTests
+  - uid: ChristopherBriddock.Service.Identity.Tests.UnitTests.JsonWebTokenProviderTests
+    name: JsonWebTokenProviderTests
+memberLayout: SamePage

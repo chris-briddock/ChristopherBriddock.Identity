@@ -1,0 +1,44 @@
+### YamlMime:ManagedReference
+items:
+- uid: ChristopherBriddock.Service.Identity.Extensions
+  commentId: N:ChristopherBriddock.Service.Identity.Extensions
+  id: ChristopherBriddock.Service.Identity.Extensions
+  children:
+  - ChristopherBriddock.Service.Identity.Extensions.HealthCheckExtensions
+  - ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions
+  - ChristopherBriddock.Service.Identity.Extensions.WebApplicationExtensions
+  - ChristopherBriddock.Service.Identity.Extensions.WebHostBuilderExtensions
+  langs:
+  - csharp
+  - vb
+  name: ChristopherBriddock.Service.Identity.Extensions
+  nameWithType: ChristopherBriddock.Service.Identity.Extensions
+  fullName: ChristopherBriddock.Service.Identity.Extensions
+  type: Namespace
+  assemblies:
+  - ChristopherBriddock.Service.Identity
+references:
+- uid: ChristopherBriddock.Service.Identity.Extensions.HealthCheckExtensions
+  commentId: T:ChristopherBriddock.Service.Identity.Extensions.HealthCheckExtensions
+  href: ChristopherBriddock.Service.Identity.Extensions.HealthCheckExtensions.html
+  name: HealthCheckExtensions
+  nameWithType: HealthCheckExtensions
+  fullName: ChristopherBriddock.Service.Identity.Extensions.HealthCheckExtensions
+- uid: ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions
+  commentId: T:ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions
+  href: ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions.html
+  name: ServiceCollectionExtensions
+  nameWithType: ServiceCollectionExtensions
+  fullName: ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions
+- uid: ChristopherBriddock.Service.Identity.Extensions.WebApplicationExtensions
+  commentId: T:ChristopherBriddock.Service.Identity.Extensions.WebApplicationExtensions
+  href: ChristopherBriddock.Service.Identity.Extensions.WebApplicationExtensions.html
+  name: WebApplicationExtensions
+  nameWithType: WebApplicationExtensions
+  fullName: ChristopherBriddock.Service.Identity.Extensions.WebApplicationExtensions
+- uid: ChristopherBriddock.Service.Identity.Extensions.WebHostBuilderExtensions
+  commentId: T:ChristopherBriddock.Service.Identity.Extensions.WebHostBuilderExtensions
+  href: ChristopherBriddock.Service.Identity.Extensions.WebHostBuilderExtensions.html
+  name: WebHostBuilderExtensions
+  nameWithType: WebHostBuilderExtensions
+  fullName: ChristopherBriddock.Service.Identity.Extensions.WebHostBuilderExtensions

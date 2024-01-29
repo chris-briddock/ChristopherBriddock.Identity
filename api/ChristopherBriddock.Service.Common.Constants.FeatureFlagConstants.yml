@@ -1,0 +1,583 @@
+### YamlMime:ManagedReference
+items:
+- uid: ChristopherBriddock.Service.Common.Constants.FeatureFlagConstants
+  commentId: T:ChristopherBriddock.Service.Common.Constants.FeatureFlagConstants
+  id: FeatureFlagConstants
+  parent: ChristopherBriddock.Service.Common.Constants
+  children:
+  - ChristopherBriddock.Service.Common.Constants.FeatureFlagConstants.AzApplicationInsights
+  - ChristopherBriddock.Service.Common.Constants.FeatureFlagConstants.AzServiceBus
+  - ChristopherBriddock.Service.Common.Constants.FeatureFlagConstants.RabbitMq
+  - ChristopherBriddock.Service.Common.Constants.FeatureFlagConstants.Redis
+  - ChristopherBriddock.Service.Common.Constants.FeatureFlagConstants.Seq
+  langs:
+  - csharp
+  - vb
+  name: FeatureFlagConstants
+  nameWithType: FeatureFlagConstants
+  fullName: ChristopherBriddock.Service.Common.Constants.FeatureFlagConstants
+  type: Class
+  source:
+    remote:
+      path: src/ChristopherBriddock.Service.Common/Constants/FeatureFlagConstants.cs
+      branch: dev
+      repo: https://github.com/chris-briddock/ChristopherBriddock.Identity.git
+    id: FeatureFlagConstants
+    path: src/ChristopherBriddock.Service.Common/Constants/FeatureFlagConstants.cs
+    startLine: 7
+  assemblies:
+  - ChristopherBriddock.Service.Common
+  namespace: ChristopherBriddock.Service.Common.Constants
+  summary: Contains configuration definitions for features that can be disabled or enabled.
+  example: []
+  syntax:
+    content: public static class FeatureFlagConstants
+    content.vb: Public Module FeatureFlagConstants
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: ChristopherBriddock.Service.Common.Constants.FeatureFlagConstants.Redis
+  commentId: F:ChristopherBriddock.Service.Common.Constants.FeatureFlagConstants.Redis
+  id: Redis
+  parent: ChristopherBriddock.Service.Common.Constants.FeatureFlagConstants
+  langs:
+  - csharp
+  - vb
+  name: Redis
+  nameWithType: FeatureFlagConstants.Redis
+  fullName: ChristopherBriddock.Service.Common.Constants.FeatureFlagConstants.Redis
+  type: Field
+  source:
+    remote:
+      path: src/ChristopherBriddock.Service.Common/Constants/FeatureFlagConstants.cs
+      branch: dev
+      repo: https://github.com/chris-briddock/ChristopherBriddock.Identity.git
+    id: Redis
+    path: src/ChristopherBriddock.Service.Common/Constants/FeatureFlagConstants.cs
+    startLine: 16
+  assemblies:
+  - ChristopherBriddock.Service.Common
+  namespace: ChristopherBriddock.Service.Common.Constants
+  summary: Gets or sets the boolean to enable or disable Redis caching.
+  remarks: >-
+    This const string value is used by <xref href="Microsoft.FeatureManagement" data-throw-if-not-resolved="false"></xref> to check 
+
+    the appsetings.json when this method is called <xref href="Microsoft.FeatureManagement.IFeatureManager.IsEnabledAsync(System.String)" data-throw-if-not-resolved="false"></xref>
+  example: []
+  syntax:
+    content: public const string Redis = "Redis"
+    return:
+      type: System.String
+    content.vb: Public Const Redis As String = "Redis"
+- uid: ChristopherBriddock.Service.Common.Constants.FeatureFlagConstants.AzApplicationInsights
+  commentId: F:ChristopherBriddock.Service.Common.Constants.FeatureFlagConstants.AzApplicationInsights
+  id: AzApplicationInsights
+  parent: ChristopherBriddock.Service.Common.Constants.FeatureFlagConstants
+  langs:
+  - csharp
+  - vb
+  name: AzApplicationInsights
+  nameWithType: FeatureFlagConstants.AzApplicationInsights
+  fullName: ChristopherBriddock.Service.Common.Constants.FeatureFlagConstants.AzApplicationInsights
+  type: Field
+  source:
+    remote:
+      path: src/ChristopherBriddock.Service.Common/Constants/FeatureFlagConstants.cs
+      branch: dev
+      repo: https://github.com/chris-briddock/ChristopherBriddock.Identity.git
+    id: AzApplicationInsights
+    path: src/ChristopherBriddock.Service.Common/Constants/FeatureFlagConstants.cs
+    startLine: 24
+  assemblies:
+  - ChristopherBriddock.Service.Common
+  namespace: ChristopherBriddock.Service.Common.Constants
+  summary: Gets or sets the boolean to enable or disable Azure Application Insights.
+  remarks: >-
+    This const string value is used by <xref href="Microsoft.FeatureManagement" data-throw-if-not-resolved="false"></xref> to check 
+
+    the appsetings.json when this method is called <xref href="Microsoft.FeatureManagement.IFeatureManager.IsEnabledAsync(System.String)" data-throw-if-not-resolved="false"></xref>
+  example: []
+  syntax:
+    content: public const string AzApplicationInsights = "ApplicationInsights"
+    return:
+      type: System.String
+    content.vb: Public Const AzApplicationInsights As String = "ApplicationInsights"
+- uid: ChristopherBriddock.Service.Common.Constants.FeatureFlagConstants.Seq
+  commentId: F:ChristopherBriddock.Service.Common.Constants.FeatureFlagConstants.Seq
+  id: Seq
+  parent: ChristopherBriddock.Service.Common.Constants.FeatureFlagConstants
+  langs:
+  - csharp
+  - vb
+  name: Seq
+  nameWithType: FeatureFlagConstants.Seq
+  fullName: ChristopherBriddock.Service.Common.Constants.FeatureFlagConstants.Seq
+  type: Field
+  source:
+    remote:
+      path: src/ChristopherBriddock.Service.Common/Constants/FeatureFlagConstants.cs
+      branch: dev
+      repo: https://github.com/chris-briddock/ChristopherBriddock.Identity.git
+    id: Seq
+    path: src/ChristopherBriddock.Service.Common/Constants/FeatureFlagConstants.cs
+    startLine: 32
+  assemblies:
+  - ChristopherBriddock.Service.Common
+  namespace: ChristopherBriddock.Service.Common.Constants
+  summary: Gets or sets the boolean to enable or disable the external logging server.
+  remarks: >-
+    This const string value is used by <xref href="Microsoft.FeatureManagement" data-throw-if-not-resolved="false"></xref> to check 
+
+    the appsetings.json when this method is called <xref href="Microsoft.FeatureManagement.IFeatureManager.IsEnabledAsync(System.String)" data-throw-if-not-resolved="false"></xref>
+  example: []
+  syntax:
+    content: public const string Seq = "Seq"
+    return:
+      type: System.String
+    content.vb: Public Const Seq As String = "Seq"
+- uid: ChristopherBriddock.Service.Common.Constants.FeatureFlagConstants.AzServiceBus
+  commentId: F:ChristopherBriddock.Service.Common.Constants.FeatureFlagConstants.AzServiceBus
+  id: AzServiceBus
+  parent: ChristopherBriddock.Service.Common.Constants.FeatureFlagConstants
+  langs:
+  - csharp
+  - vb
+  name: AzServiceBus
+  nameWithType: FeatureFlagConstants.AzServiceBus
+  fullName: ChristopherBriddock.Service.Common.Constants.FeatureFlagConstants.AzServiceBus
+  type: Field
+  source:
+    remote:
+      path: src/ChristopherBriddock.Service.Common/Constants/FeatureFlagConstants.cs
+      branch: dev
+      repo: https://github.com/chris-briddock/ChristopherBriddock.Identity.git
+    id: AzServiceBus
+    path: src/ChristopherBriddock.Service.Common/Constants/FeatureFlagConstants.cs
+    startLine: 40
+  assemblies:
+  - ChristopherBriddock.Service.Common
+  namespace: ChristopherBriddock.Service.Common.Constants
+  summary: Gets or sets the boolean to enable or disable
+  remarks: >-
+    This const string value is used by <xref href="Microsoft.FeatureManagement" data-throw-if-not-resolved="false"></xref> to check 
+
+    the appsetings.json when this method is called <xref href="Microsoft.FeatureManagement.IFeatureManager.IsEnabledAsync(System.String)" data-throw-if-not-resolved="false"></xref>
+  example: []
+  syntax:
+    content: public const string AzServiceBus = "ServiceBus"
+    return:
+      type: System.String
+    content.vb: Public Const AzServiceBus As String = "ServiceBus"
+- uid: ChristopherBriddock.Service.Common.Constants.FeatureFlagConstants.RabbitMq
+  commentId: F:ChristopherBriddock.Service.Common.Constants.FeatureFlagConstants.RabbitMq
+  id: RabbitMq
+  parent: ChristopherBriddock.Service.Common.Constants.FeatureFlagConstants
+  langs:
+  - csharp
+  - vb
+  name: RabbitMq
+  nameWithType: FeatureFlagConstants.RabbitMq
+  fullName: ChristopherBriddock.Service.Common.Constants.FeatureFlagConstants.RabbitMq
+  type: Field
+  source:
+    remote:
+      path: src/ChristopherBriddock.Service.Common/Constants/FeatureFlagConstants.cs
+      branch: dev
+      repo: https://github.com/chris-briddock/ChristopherBriddock.Identity.git
+    id: RabbitMq
+    path: src/ChristopherBriddock.Service.Common/Constants/FeatureFlagConstants.cs
+    startLine: 48
+  assemblies:
+  - ChristopherBriddock.Service.Common
+  namespace: ChristopherBriddock.Service.Common.Constants
+  summary: Gets or sets the boolean to enable or disable
+  remarks: >-
+    This const string value is used by <xref href="Microsoft.FeatureManagement" data-throw-if-not-resolved="false"></xref> to check 
+
+    the appsetings.json when this method is called <xref href="Microsoft.FeatureManagement.FeatureManager.IsEnabledAsync(System.String)" data-throw-if-not-resolved="false"></xref>
+  example: []
+  syntax:
+    content: public const string RabbitMq = "RabbitMq"
+    return:
+      type: System.String
+    content.vb: Public Const RabbitMq As String = "RabbitMq"
+references:
+- uid: ChristopherBriddock.Service.Common.Constants
+  commentId: N:ChristopherBriddock.Service.Common.Constants
+  href: ChristopherBriddock.html
+  name: ChristopherBriddock.Service.Common.Constants
+  nameWithType: ChristopherBriddock.Service.Common.Constants
+  fullName: ChristopherBriddock.Service.Common.Constants
+  spec.csharp:
+  - uid: ChristopherBriddock
+    name: ChristopherBriddock
+    href: ChristopherBriddock.html
+  - name: .
+  - uid: ChristopherBriddock.Service
+    name: Service
+    href: ChristopherBriddock.Service.html
+  - name: .
+  - uid: ChristopherBriddock.Service.Common
+    name: Common
+    href: ChristopherBriddock.Service.Common.html
+  - name: .
+  - uid: ChristopherBriddock.Service.Common.Constants
+    name: Constants
+    href: ChristopherBriddock.Service.Common.Constants.html
+  spec.vb:
+  - uid: ChristopherBriddock
+    name: ChristopherBriddock
+    href: ChristopherBriddock.html
+  - name: .
+  - uid: ChristopherBriddock.Service
+    name: Service
+    href: ChristopherBriddock.Service.html
+  - name: .
+  - uid: ChristopherBriddock.Service.Common
+    name: Common
+    href: ChristopherBriddock.Service.Common.html
+  - name: .
+  - uid: ChristopherBriddock.Service.Common.Constants
+    name: Constants
+    href: ChristopherBriddock.Service.Common.Constants.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Microsoft.FeatureManagement
+  commentId: N:Microsoft.FeatureManagement
+  isExternal: true
+  name: Microsoft.FeatureManagement
+  nameWithType: Microsoft.FeatureManagement
+  fullName: Microsoft.FeatureManagement
+  spec.csharp:
+  - uid: Microsoft
+    name: Microsoft
+    isExternal: true
+  - name: .
+  - uid: Microsoft.FeatureManagement
+    name: FeatureManagement
+    isExternal: true
+  spec.vb:
+  - uid: Microsoft
+    name: Microsoft
+    isExternal: true
+  - name: .
+  - uid: Microsoft.FeatureManagement
+    name: FeatureManagement
+    isExternal: true
+- uid: Microsoft.FeatureManagement.IFeatureManager.IsEnabledAsync(System.String)
+  commentId: M:Microsoft.FeatureManagement.IFeatureManager.IsEnabledAsync(System.String)
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.featuremanagement.ifeaturemanager.isenabledasync#microsoft-featuremanagement-ifeaturemanager-isenabledasync(system-string)
+  name: IsEnabledAsync(string)
+  nameWithType: IFeatureManager.IsEnabledAsync(string)
+  fullName: Microsoft.FeatureManagement.IFeatureManager.IsEnabledAsync(string)
+  nameWithType.vb: IFeatureManager.IsEnabledAsync(String)
+  fullName.vb: Microsoft.FeatureManagement.IFeatureManager.IsEnabledAsync(String)
+  name.vb: IsEnabledAsync(String)
+  spec.csharp:
+  - uid: Microsoft.FeatureManagement.IFeatureManager.IsEnabledAsync(System.String)
+    name: IsEnabledAsync
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.featuremanagement.ifeaturemanager.isenabledasync#microsoft-featuremanagement-ifeaturemanager-isenabledasync(system-string)
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  spec.vb:
+  - uid: Microsoft.FeatureManagement.IFeatureManager.IsEnabledAsync(System.String)
+    name: IsEnabledAsync
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.featuremanagement.ifeaturemanager.isenabledasync#microsoft-featuremanagement-ifeaturemanager-isenabledasync(system-string)
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: Microsoft.FeatureManagement.FeatureManager.IsEnabledAsync(System.String)
+  commentId: M:Microsoft.FeatureManagement.FeatureManager.IsEnabledAsync(System.String)
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.featuremanagement.featuremanager.isenabledasync#microsoft-featuremanagement-featuremanager-isenabledasync(system-string)
+  name: IsEnabledAsync(string)
+  nameWithType: FeatureManager.IsEnabledAsync(string)
+  fullName: Microsoft.FeatureManagement.FeatureManager.IsEnabledAsync(string)
+  nameWithType.vb: FeatureManager.IsEnabledAsync(String)
+  fullName.vb: Microsoft.FeatureManagement.FeatureManager.IsEnabledAsync(String)
+  name.vb: IsEnabledAsync(String)
+  spec.csharp:
+  - uid: Microsoft.FeatureManagement.FeatureManager.IsEnabledAsync(System.String)
+    name: IsEnabledAsync
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.featuremanagement.featuremanager.isenabledasync#microsoft-featuremanagement-featuremanager-isenabledasync(system-string)
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )
+  spec.vb:
+  - uid: Microsoft.FeatureManagement.FeatureManager.IsEnabledAsync(System.String)
+    name: IsEnabledAsync
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.featuremanagement.featuremanager.isenabledasync#microsoft-featuremanagement-featuremanager-isenabledasync(system-string)
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: )

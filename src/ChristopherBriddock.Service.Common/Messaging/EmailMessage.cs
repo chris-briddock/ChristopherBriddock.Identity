@@ -1,4 +1,6 @@
-﻿namespace ChristopherBriddock.Service.Common.Messaging;
+﻿using ChristopherBriddock.Service.Common.Constants;
+
+namespace ChristopherBriddock.Service.Common.Messaging;
 
 /// <summary>
 /// Represent an message to be published to the message queue for emails.

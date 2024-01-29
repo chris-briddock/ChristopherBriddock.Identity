@@ -1,0 +1,878 @@
+### YamlMime:ManagedReference
+items:
+- uid: ChristopherBriddock.Service.Identity.Models.ApplicationUser
+  commentId: T:ChristopherBriddock.Service.Identity.Models.ApplicationUser
+  id: ApplicationUser
+  parent: ChristopherBriddock.Service.Identity.Models
+  children:
+  - ChristopherBriddock.Service.Identity.Models.ApplicationUser.DeletedDateTime
+  - ChristopherBriddock.Service.Identity.Models.ApplicationUser.Id
+  - ChristopherBriddock.Service.Identity.Models.ApplicationUser.IsDeleted
+  langs:
+  - csharp
+  - vb
+  name: ApplicationUser
+  nameWithType: ApplicationUser
+  fullName: ChristopherBriddock.Service.Identity.Models.ApplicationUser
+  type: Class
+  source:
+    remote:
+      path: src/ChristopherBriddock.Service.Identity/Models/ApplicationUser.cs
+      branch: dev
+      repo: https://github.com/chris-briddock/ChristopherBriddock.Identity.git
+    id: ApplicationUser
+    path: src/ChristopherBriddock.Service.Identity/Models/ApplicationUser.cs
+    startLine: 7
+  assemblies:
+  - ChristopherBriddock.Service.Identity
+  namespace: ChristopherBriddock.Service.Identity.Models
+  summary: Represents a user in the identity system
+  example: []
+  syntax:
+    content: 'public sealed class ApplicationUser : IdentityUser<Guid>'
+    content.vb: Public NotInheritable Class ApplicationUser Inherits IdentityUser(Of Guid)
+  inheritance:
+  - System.Object
+  - Microsoft.AspNetCore.Identity.IdentityUser{System.Guid}
+  inheritedMembers:
+  - Microsoft.AspNetCore.Identity.IdentityUser{System.Guid}.ToString
+  - Microsoft.AspNetCore.Identity.IdentityUser{System.Guid}.UserName
+  - Microsoft.AspNetCore.Identity.IdentityUser{System.Guid}.NormalizedUserName
+  - Microsoft.AspNetCore.Identity.IdentityUser{System.Guid}.Email
+  - Microsoft.AspNetCore.Identity.IdentityUser{System.Guid}.NormalizedEmail
+  - Microsoft.AspNetCore.Identity.IdentityUser{System.Guid}.EmailConfirmed
+  - Microsoft.AspNetCore.Identity.IdentityUser{System.Guid}.PasswordHash
+  - Microsoft.AspNetCore.Identity.IdentityUser{System.Guid}.SecurityStamp
+  - Microsoft.AspNetCore.Identity.IdentityUser{System.Guid}.ConcurrencyStamp
+  - Microsoft.AspNetCore.Identity.IdentityUser{System.Guid}.PhoneNumber
+  - Microsoft.AspNetCore.Identity.IdentityUser{System.Guid}.PhoneNumberConfirmed
+  - Microsoft.AspNetCore.Identity.IdentityUser{System.Guid}.TwoFactorEnabled
+  - Microsoft.AspNetCore.Identity.IdentityUser{System.Guid}.LockoutEnd
+  - Microsoft.AspNetCore.Identity.IdentityUser{System.Guid}.LockoutEnabled
+  - Microsoft.AspNetCore.Identity.IdentityUser{System.Guid}.AccessFailedCount
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+- uid: ChristopherBriddock.Service.Identity.Models.ApplicationUser.Id
+  commentId: P:ChristopherBriddock.Service.Identity.Models.ApplicationUser.Id
+  id: Id
+  parent: ChristopherBriddock.Service.Identity.Models.ApplicationUser
+  langs:
+  - csharp
+  - vb
+  name: Id
+  nameWithType: ApplicationUser.Id
+  fullName: ChristopherBriddock.Service.Identity.Models.ApplicationUser.Id
+  type: Property
+  source:
+    remote:
+      path: src/ChristopherBriddock.Service.Identity/Models/ApplicationUser.cs
+      branch: dev
+      repo: https://github.com/chris-briddock/ChristopherBriddock.Identity.git
+    id: Id
+    path: src/ChristopherBriddock.Service.Identity/Models/ApplicationUser.cs
+    startLine: 10
+  assemblies:
+  - ChristopherBriddock.Service.Identity
+  namespace: ChristopherBriddock.Service.Identity.Models
+  summary: Gets or sets the primary key for this user.
+  example: []
+  syntax:
+    content: >-
+      [Key]
+
+      [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+
+      public override Guid Id { get; set; }
+    parameters: []
+    return:
+      type: System.Guid
+    content.vb: >-
+      <Key>
+
+      <DatabaseGenerated(DatabaseGeneratedOption.Identity)>
+
+      Public Overrides Property Id As Guid
+  overridden: Microsoft.AspNetCore.Identity.IdentityUser{System.Guid}.Id
+  overload: ChristopherBriddock.Service.Identity.Models.ApplicationUser.Id*
+  attributes:
+  - type: System.ComponentModel.DataAnnotations.KeyAttribute
+    ctor: System.ComponentModel.DataAnnotations.KeyAttribute.#ctor
+    arguments: []
+  - type: System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedAttribute
+    ctor: System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedAttribute.#ctor(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption)
+    arguments:
+    - type: System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption
+      value: 1
+- uid: ChristopherBriddock.Service.Identity.Models.ApplicationUser.IsDeleted
+  commentId: P:ChristopherBriddock.Service.Identity.Models.ApplicationUser.IsDeleted
+  id: IsDeleted
+  parent: ChristopherBriddock.Service.Identity.Models.ApplicationUser
+  langs:
+  - csharp
+  - vb
+  name: IsDeleted
+  nameWithType: ApplicationUser.IsDeleted
+  fullName: ChristopherBriddock.Service.Identity.Models.ApplicationUser.IsDeleted
+  type: Property
+  source:
+    remote:
+      path: src/ChristopherBriddock.Service.Identity/Models/ApplicationUser.cs
+      branch: dev
+      repo: https://github.com/chris-briddock/ChristopherBriddock.Identity.git
+    id: IsDeleted
+    path: src/ChristopherBriddock.Service.Identity/Models/ApplicationUser.cs
+    startLine: 16
+  assemblies:
+  - ChristopherBriddock.Service.Identity
+  namespace: ChristopherBriddock.Service.Identity.Models
+  summary: Gets or sets whether the user is soft deleted.
+  example: []
+  syntax:
+    content: public bool IsDeleted { get; set; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public Property IsDeleted As Boolean
+  overload: ChristopherBriddock.Service.Identity.Models.ApplicationUser.IsDeleted*
+- uid: ChristopherBriddock.Service.Identity.Models.ApplicationUser.DeletedDateTime
+  commentId: P:ChristopherBriddock.Service.Identity.Models.ApplicationUser.DeletedDateTime
+  id: DeletedDateTime
+  parent: ChristopherBriddock.Service.Identity.Models.ApplicationUser
+  langs:
+  - csharp
+  - vb
+  name: DeletedDateTime
+  nameWithType: ApplicationUser.DeletedDateTime
+  fullName: ChristopherBriddock.Service.Identity.Models.ApplicationUser.DeletedDateTime
+  type: Property
+  source:
+    remote:
+      path: src/ChristopherBriddock.Service.Identity/Models/ApplicationUser.cs
+      branch: dev
+      repo: https://github.com/chris-briddock/ChristopherBriddock.Identity.git
+    id: DeletedDateTime
+    path: src/ChristopherBriddock.Service.Identity/Models/ApplicationUser.cs
+    startLine: 20
+  assemblies:
+  - ChristopherBriddock.Service.Identity
+  namespace: ChristopherBriddock.Service.Identity.Models
+  summary: Gets or sets the deleted date of the account.
+  example: []
+  syntax:
+    content: public DateTime DeletedDateTime { get; set; }
+    parameters: []
+    return:
+      type: System.DateTime
+    content.vb: Public Property DeletedDateTime As Date
+  overload: ChristopherBriddock.Service.Identity.Models.ApplicationUser.DeletedDateTime*
+references:
+- uid: ChristopherBriddock.Service.Identity.Models
+  commentId: N:ChristopherBriddock.Service.Identity.Models
+  href: ChristopherBriddock.html
+  name: ChristopherBriddock.Service.Identity.Models
+  nameWithType: ChristopherBriddock.Service.Identity.Models
+  fullName: ChristopherBriddock.Service.Identity.Models
+  spec.csharp:
+  - uid: ChristopherBriddock
+    name: ChristopherBriddock
+    href: ChristopherBriddock.html
+  - name: .
+  - uid: ChristopherBriddock.Service
+    name: Service
+    href: ChristopherBriddock.Service.html
+  - name: .
+  - uid: ChristopherBriddock.Service.Identity
+    name: Identity
+    href: ChristopherBriddock.Service.Identity.html
+  - name: .
+  - uid: ChristopherBriddock.Service.Identity.Models
+    name: Models
+    href: ChristopherBriddock.Service.Identity.Models.html
+  spec.vb:
+  - uid: ChristopherBriddock
+    name: ChristopherBriddock
+    href: ChristopherBriddock.html
+  - name: .
+  - uid: ChristopherBriddock.Service
+    name: Service
+    href: ChristopherBriddock.Service.html
+  - name: .
+  - uid: ChristopherBriddock.Service.Identity
+    name: Identity
+    href: ChristopherBriddock.Service.Identity.html
+  - name: .
+  - uid: ChristopherBriddock.Service.Identity.Models
+    name: Models
+    href: ChristopherBriddock.Service.Identity.Models.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: Microsoft.AspNetCore.Identity.IdentityUser{System.Guid}
+  commentId: T:Microsoft.AspNetCore.Identity.IdentityUser{System.Guid}
+  parent: Microsoft.AspNetCore.Identity
+  definition: Microsoft.AspNetCore.Identity.IdentityUser`1
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityuser-1
+  name: IdentityUser<Guid>
+  nameWithType: IdentityUser<Guid>
+  fullName: Microsoft.AspNetCore.Identity.IdentityUser<System.Guid>
+  nameWithType.vb: IdentityUser(Of Guid)
+  fullName.vb: Microsoft.AspNetCore.Identity.IdentityUser(Of System.Guid)
+  name.vb: IdentityUser(Of Guid)
+  spec.csharp:
+  - uid: Microsoft.AspNetCore.Identity.IdentityUser`1
+    name: IdentityUser
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityuser-1
+  - name: <
+  - uid: System.Guid
+    name: Guid
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.guid
+  - name: '>'
+  spec.vb:
+  - uid: Microsoft.AspNetCore.Identity.IdentityUser`1
+    name: IdentityUser
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityuser-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Guid
+    name: Guid
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.guid
+  - name: )
+- uid: Microsoft.AspNetCore.Identity.IdentityUser{System.Guid}.ToString
+  commentId: M:Microsoft.AspNetCore.Identity.IdentityUser{System.Guid}.ToString
+  parent: Microsoft.AspNetCore.Identity.IdentityUser{System.Guid}
+  definition: Microsoft.AspNetCore.Identity.IdentityUser`1.ToString
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityuser-1.tostring
+  name: ToString()
+  nameWithType: IdentityUser<Guid>.ToString()
+  fullName: Microsoft.AspNetCore.Identity.IdentityUser<System.Guid>.ToString()
+  nameWithType.vb: IdentityUser(Of Guid).ToString()
+  fullName.vb: Microsoft.AspNetCore.Identity.IdentityUser(Of System.Guid).ToString()
+  spec.csharp:
+  - uid: Microsoft.AspNetCore.Identity.IdentityUser{System.Guid}.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityuser-1.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Microsoft.AspNetCore.Identity.IdentityUser{System.Guid}.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityuser-1.tostring
+  - name: (
+  - name: )
+- uid: Microsoft.AspNetCore.Identity.IdentityUser{System.Guid}.UserName
+  commentId: P:Microsoft.AspNetCore.Identity.IdentityUser{System.Guid}.UserName
+  parent: Microsoft.AspNetCore.Identity.IdentityUser{System.Guid}
+  definition: Microsoft.AspNetCore.Identity.IdentityUser`1.UserName
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityuser-1.username
+  name: UserName
+  nameWithType: IdentityUser<Guid>.UserName
+  fullName: Microsoft.AspNetCore.Identity.IdentityUser<System.Guid>.UserName
+  nameWithType.vb: IdentityUser(Of Guid).UserName
+  fullName.vb: Microsoft.AspNetCore.Identity.IdentityUser(Of System.Guid).UserName
+- uid: Microsoft.AspNetCore.Identity.IdentityUser{System.Guid}.NormalizedUserName
+  commentId: P:Microsoft.AspNetCore.Identity.IdentityUser{System.Guid}.NormalizedUserName
+  parent: Microsoft.AspNetCore.Identity.IdentityUser{System.Guid}
+  definition: Microsoft.AspNetCore.Identity.IdentityUser`1.NormalizedUserName
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityuser-1.normalizedusername
+  name: NormalizedUserName
+  nameWithType: IdentityUser<Guid>.NormalizedUserName
+  fullName: Microsoft.AspNetCore.Identity.IdentityUser<System.Guid>.NormalizedUserName
+  nameWithType.vb: IdentityUser(Of Guid).NormalizedUserName
+  fullName.vb: Microsoft.AspNetCore.Identity.IdentityUser(Of System.Guid).NormalizedUserName
+- uid: Microsoft.AspNetCore.Identity.IdentityUser{System.Guid}.Email
+  commentId: P:Microsoft.AspNetCore.Identity.IdentityUser{System.Guid}.Email
+  parent: Microsoft.AspNetCore.Identity.IdentityUser{System.Guid}
+  definition: Microsoft.AspNetCore.Identity.IdentityUser`1.Email
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityuser-1.email
+  name: Email
+  nameWithType: IdentityUser<Guid>.Email
+  fullName: Microsoft.AspNetCore.Identity.IdentityUser<System.Guid>.Email
+  nameWithType.vb: IdentityUser(Of Guid).Email
+  fullName.vb: Microsoft.AspNetCore.Identity.IdentityUser(Of System.Guid).Email
+- uid: Microsoft.AspNetCore.Identity.IdentityUser{System.Guid}.NormalizedEmail
+  commentId: P:Microsoft.AspNetCore.Identity.IdentityUser{System.Guid}.NormalizedEmail
+  parent: Microsoft.AspNetCore.Identity.IdentityUser{System.Guid}
+  definition: Microsoft.AspNetCore.Identity.IdentityUser`1.NormalizedEmail
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityuser-1.normalizedemail
+  name: NormalizedEmail
+  nameWithType: IdentityUser<Guid>.NormalizedEmail
+  fullName: Microsoft.AspNetCore.Identity.IdentityUser<System.Guid>.NormalizedEmail
+  nameWithType.vb: IdentityUser(Of Guid).NormalizedEmail
+  fullName.vb: Microsoft.AspNetCore.Identity.IdentityUser(Of System.Guid).NormalizedEmail
+- uid: Microsoft.AspNetCore.Identity.IdentityUser{System.Guid}.EmailConfirmed
+  commentId: P:Microsoft.AspNetCore.Identity.IdentityUser{System.Guid}.EmailConfirmed
+  parent: Microsoft.AspNetCore.Identity.IdentityUser{System.Guid}
+  definition: Microsoft.AspNetCore.Identity.IdentityUser`1.EmailConfirmed
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityuser-1.emailconfirmed
+  name: EmailConfirmed
+  nameWithType: IdentityUser<Guid>.EmailConfirmed
+  fullName: Microsoft.AspNetCore.Identity.IdentityUser<System.Guid>.EmailConfirmed
+  nameWithType.vb: IdentityUser(Of Guid).EmailConfirmed
+  fullName.vb: Microsoft.AspNetCore.Identity.IdentityUser(Of System.Guid).EmailConfirmed
+- uid: Microsoft.AspNetCore.Identity.IdentityUser{System.Guid}.PasswordHash
+  commentId: P:Microsoft.AspNetCore.Identity.IdentityUser{System.Guid}.PasswordHash
+  parent: Microsoft.AspNetCore.Identity.IdentityUser{System.Guid}
+  definition: Microsoft.AspNetCore.Identity.IdentityUser`1.PasswordHash
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityuser-1.passwordhash
+  name: PasswordHash
+  nameWithType: IdentityUser<Guid>.PasswordHash
+  fullName: Microsoft.AspNetCore.Identity.IdentityUser<System.Guid>.PasswordHash
+  nameWithType.vb: IdentityUser(Of Guid).PasswordHash
+  fullName.vb: Microsoft.AspNetCore.Identity.IdentityUser(Of System.Guid).PasswordHash
+- uid: Microsoft.AspNetCore.Identity.IdentityUser{System.Guid}.SecurityStamp
+  commentId: P:Microsoft.AspNetCore.Identity.IdentityUser{System.Guid}.SecurityStamp
+  parent: Microsoft.AspNetCore.Identity.IdentityUser{System.Guid}
+  definition: Microsoft.AspNetCore.Identity.IdentityUser`1.SecurityStamp
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityuser-1.securitystamp
+  name: SecurityStamp
+  nameWithType: IdentityUser<Guid>.SecurityStamp
+  fullName: Microsoft.AspNetCore.Identity.IdentityUser<System.Guid>.SecurityStamp
+  nameWithType.vb: IdentityUser(Of Guid).SecurityStamp
+  fullName.vb: Microsoft.AspNetCore.Identity.IdentityUser(Of System.Guid).SecurityStamp
+- uid: Microsoft.AspNetCore.Identity.IdentityUser{System.Guid}.ConcurrencyStamp
+  commentId: P:Microsoft.AspNetCore.Identity.IdentityUser{System.Guid}.ConcurrencyStamp
+  parent: Microsoft.AspNetCore.Identity.IdentityUser{System.Guid}
+  definition: Microsoft.AspNetCore.Identity.IdentityUser`1.ConcurrencyStamp
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityuser-1.concurrencystamp
+  name: ConcurrencyStamp
+  nameWithType: IdentityUser<Guid>.ConcurrencyStamp
+  fullName: Microsoft.AspNetCore.Identity.IdentityUser<System.Guid>.ConcurrencyStamp
+  nameWithType.vb: IdentityUser(Of Guid).ConcurrencyStamp
+  fullName.vb: Microsoft.AspNetCore.Identity.IdentityUser(Of System.Guid).ConcurrencyStamp
+- uid: Microsoft.AspNetCore.Identity.IdentityUser{System.Guid}.PhoneNumber
+  commentId: P:Microsoft.AspNetCore.Identity.IdentityUser{System.Guid}.PhoneNumber
+  parent: Microsoft.AspNetCore.Identity.IdentityUser{System.Guid}
+  definition: Microsoft.AspNetCore.Identity.IdentityUser`1.PhoneNumber
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityuser-1.phonenumber
+  name: PhoneNumber
+  nameWithType: IdentityUser<Guid>.PhoneNumber
+  fullName: Microsoft.AspNetCore.Identity.IdentityUser<System.Guid>.PhoneNumber
+  nameWithType.vb: IdentityUser(Of Guid).PhoneNumber
+  fullName.vb: Microsoft.AspNetCore.Identity.IdentityUser(Of System.Guid).PhoneNumber
+- uid: Microsoft.AspNetCore.Identity.IdentityUser{System.Guid}.PhoneNumberConfirmed
+  commentId: P:Microsoft.AspNetCore.Identity.IdentityUser{System.Guid}.PhoneNumberConfirmed
+  parent: Microsoft.AspNetCore.Identity.IdentityUser{System.Guid}
+  definition: Microsoft.AspNetCore.Identity.IdentityUser`1.PhoneNumberConfirmed
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityuser-1.phonenumberconfirmed
+  name: PhoneNumberConfirmed
+  nameWithType: IdentityUser<Guid>.PhoneNumberConfirmed
+  fullName: Microsoft.AspNetCore.Identity.IdentityUser<System.Guid>.PhoneNumberConfirmed
+  nameWithType.vb: IdentityUser(Of Guid).PhoneNumberConfirmed
+  fullName.vb: Microsoft.AspNetCore.Identity.IdentityUser(Of System.Guid).PhoneNumberConfirmed
+- uid: Microsoft.AspNetCore.Identity.IdentityUser{System.Guid}.TwoFactorEnabled
+  commentId: P:Microsoft.AspNetCore.Identity.IdentityUser{System.Guid}.TwoFactorEnabled
+  parent: Microsoft.AspNetCore.Identity.IdentityUser{System.Guid}
+  definition: Microsoft.AspNetCore.Identity.IdentityUser`1.TwoFactorEnabled
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityuser-1.twofactorenabled
+  name: TwoFactorEnabled
+  nameWithType: IdentityUser<Guid>.TwoFactorEnabled
+  fullName: Microsoft.AspNetCore.Identity.IdentityUser<System.Guid>.TwoFactorEnabled
+  nameWithType.vb: IdentityUser(Of Guid).TwoFactorEnabled
+  fullName.vb: Microsoft.AspNetCore.Identity.IdentityUser(Of System.Guid).TwoFactorEnabled
+- uid: Microsoft.AspNetCore.Identity.IdentityUser{System.Guid}.LockoutEnd
+  commentId: P:Microsoft.AspNetCore.Identity.IdentityUser{System.Guid}.LockoutEnd
+  parent: Microsoft.AspNetCore.Identity.IdentityUser{System.Guid}
+  definition: Microsoft.AspNetCore.Identity.IdentityUser`1.LockoutEnd
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityuser-1.lockoutend
+  name: LockoutEnd
+  nameWithType: IdentityUser<Guid>.LockoutEnd
+  fullName: Microsoft.AspNetCore.Identity.IdentityUser<System.Guid>.LockoutEnd
+  nameWithType.vb: IdentityUser(Of Guid).LockoutEnd
+  fullName.vb: Microsoft.AspNetCore.Identity.IdentityUser(Of System.Guid).LockoutEnd
+- uid: Microsoft.AspNetCore.Identity.IdentityUser{System.Guid}.LockoutEnabled
+  commentId: P:Microsoft.AspNetCore.Identity.IdentityUser{System.Guid}.LockoutEnabled
+  parent: Microsoft.AspNetCore.Identity.IdentityUser{System.Guid}
+  definition: Microsoft.AspNetCore.Identity.IdentityUser`1.LockoutEnabled
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityuser-1.lockoutenabled
+  name: LockoutEnabled
+  nameWithType: IdentityUser<Guid>.LockoutEnabled
+  fullName: Microsoft.AspNetCore.Identity.IdentityUser<System.Guid>.LockoutEnabled
+  nameWithType.vb: IdentityUser(Of Guid).LockoutEnabled
+  fullName.vb: Microsoft.AspNetCore.Identity.IdentityUser(Of System.Guid).LockoutEnabled
+- uid: Microsoft.AspNetCore.Identity.IdentityUser{System.Guid}.AccessFailedCount
+  commentId: P:Microsoft.AspNetCore.Identity.IdentityUser{System.Guid}.AccessFailedCount
+  parent: Microsoft.AspNetCore.Identity.IdentityUser{System.Guid}
+  definition: Microsoft.AspNetCore.Identity.IdentityUser`1.AccessFailedCount
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityuser-1.accessfailedcount
+  name: AccessFailedCount
+  nameWithType: IdentityUser<Guid>.AccessFailedCount
+  fullName: Microsoft.AspNetCore.Identity.IdentityUser<System.Guid>.AccessFailedCount
+  nameWithType.vb: IdentityUser(Of Guid).AccessFailedCount
+  fullName.vb: Microsoft.AspNetCore.Identity.IdentityUser(Of System.Guid).AccessFailedCount
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Microsoft.AspNetCore.Identity.IdentityUser`1
+  commentId: T:Microsoft.AspNetCore.Identity.IdentityUser`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityuser-1
+  name: IdentityUser<TKey>
+  nameWithType: IdentityUser<TKey>
+  fullName: Microsoft.AspNetCore.Identity.IdentityUser<TKey>
+  nameWithType.vb: IdentityUser(Of TKey)
+  fullName.vb: Microsoft.AspNetCore.Identity.IdentityUser(Of TKey)
+  name.vb: IdentityUser(Of TKey)
+  spec.csharp:
+  - uid: Microsoft.AspNetCore.Identity.IdentityUser`1
+    name: IdentityUser
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityuser-1
+  - name: <
+  - name: TKey
+  - name: '>'
+  spec.vb:
+  - uid: Microsoft.AspNetCore.Identity.IdentityUser`1
+    name: IdentityUser
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityuser-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TKey
+  - name: )
+- uid: Microsoft.AspNetCore.Identity
+  commentId: N:Microsoft.AspNetCore.Identity
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft
+  name: Microsoft.AspNetCore.Identity
+  nameWithType: Microsoft.AspNetCore.Identity
+  fullName: Microsoft.AspNetCore.Identity
+  spec.csharp:
+  - uid: Microsoft
+    name: Microsoft
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft
+  - name: .
+  - uid: Microsoft.AspNetCore
+    name: AspNetCore
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore
+  - name: .
+  - uid: Microsoft.AspNetCore.Identity
+    name: Identity
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity
+  spec.vb:
+  - uid: Microsoft
+    name: Microsoft
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft
+  - name: .
+  - uid: Microsoft.AspNetCore
+    name: AspNetCore
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore
+  - name: .
+  - uid: Microsoft.AspNetCore.Identity
+    name: Identity
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity
+- uid: Microsoft.AspNetCore.Identity.IdentityUser`1.ToString
+  commentId: M:Microsoft.AspNetCore.Identity.IdentityUser`1.ToString
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityuser-1.tostring
+  name: ToString()
+  nameWithType: IdentityUser<TKey>.ToString()
+  fullName: Microsoft.AspNetCore.Identity.IdentityUser<TKey>.ToString()
+  nameWithType.vb: IdentityUser(Of TKey).ToString()
+  fullName.vb: Microsoft.AspNetCore.Identity.IdentityUser(Of TKey).ToString()
+  spec.csharp:
+  - uid: Microsoft.AspNetCore.Identity.IdentityUser`1.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityuser-1.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Microsoft.AspNetCore.Identity.IdentityUser`1.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityuser-1.tostring
+  - name: (
+  - name: )
+- uid: Microsoft.AspNetCore.Identity.IdentityUser`1.UserName
+  commentId: P:Microsoft.AspNetCore.Identity.IdentityUser`1.UserName
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityuser-1.username
+  name: UserName
+  nameWithType: IdentityUser<TKey>.UserName
+  fullName: Microsoft.AspNetCore.Identity.IdentityUser<TKey>.UserName
+  nameWithType.vb: IdentityUser(Of TKey).UserName
+  fullName.vb: Microsoft.AspNetCore.Identity.IdentityUser(Of TKey).UserName
+- uid: Microsoft.AspNetCore.Identity.IdentityUser`1.NormalizedUserName
+  commentId: P:Microsoft.AspNetCore.Identity.IdentityUser`1.NormalizedUserName
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityuser-1.normalizedusername
+  name: NormalizedUserName
+  nameWithType: IdentityUser<TKey>.NormalizedUserName
+  fullName: Microsoft.AspNetCore.Identity.IdentityUser<TKey>.NormalizedUserName
+  nameWithType.vb: IdentityUser(Of TKey).NormalizedUserName
+  fullName.vb: Microsoft.AspNetCore.Identity.IdentityUser(Of TKey).NormalizedUserName
+- uid: Microsoft.AspNetCore.Identity.IdentityUser`1.Email
+  commentId: P:Microsoft.AspNetCore.Identity.IdentityUser`1.Email
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityuser-1.email
+  name: Email
+  nameWithType: IdentityUser<TKey>.Email
+  fullName: Microsoft.AspNetCore.Identity.IdentityUser<TKey>.Email
+  nameWithType.vb: IdentityUser(Of TKey).Email
+  fullName.vb: Microsoft.AspNetCore.Identity.IdentityUser(Of TKey).Email
+- uid: Microsoft.AspNetCore.Identity.IdentityUser`1.NormalizedEmail
+  commentId: P:Microsoft.AspNetCore.Identity.IdentityUser`1.NormalizedEmail
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityuser-1.normalizedemail
+  name: NormalizedEmail
+  nameWithType: IdentityUser<TKey>.NormalizedEmail
+  fullName: Microsoft.AspNetCore.Identity.IdentityUser<TKey>.NormalizedEmail
+  nameWithType.vb: IdentityUser(Of TKey).NormalizedEmail
+  fullName.vb: Microsoft.AspNetCore.Identity.IdentityUser(Of TKey).NormalizedEmail
+- uid: Microsoft.AspNetCore.Identity.IdentityUser`1.EmailConfirmed
+  commentId: P:Microsoft.AspNetCore.Identity.IdentityUser`1.EmailConfirmed
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityuser-1.emailconfirmed
+  name: EmailConfirmed
+  nameWithType: IdentityUser<TKey>.EmailConfirmed
+  fullName: Microsoft.AspNetCore.Identity.IdentityUser<TKey>.EmailConfirmed
+  nameWithType.vb: IdentityUser(Of TKey).EmailConfirmed
+  fullName.vb: Microsoft.AspNetCore.Identity.IdentityUser(Of TKey).EmailConfirmed
+- uid: Microsoft.AspNetCore.Identity.IdentityUser`1.PasswordHash
+  commentId: P:Microsoft.AspNetCore.Identity.IdentityUser`1.PasswordHash
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityuser-1.passwordhash
+  name: PasswordHash
+  nameWithType: IdentityUser<TKey>.PasswordHash
+  fullName: Microsoft.AspNetCore.Identity.IdentityUser<TKey>.PasswordHash
+  nameWithType.vb: IdentityUser(Of TKey).PasswordHash
+  fullName.vb: Microsoft.AspNetCore.Identity.IdentityUser(Of TKey).PasswordHash
+- uid: Microsoft.AspNetCore.Identity.IdentityUser`1.SecurityStamp
+  commentId: P:Microsoft.AspNetCore.Identity.IdentityUser`1.SecurityStamp
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityuser-1.securitystamp
+  name: SecurityStamp
+  nameWithType: IdentityUser<TKey>.SecurityStamp
+  fullName: Microsoft.AspNetCore.Identity.IdentityUser<TKey>.SecurityStamp
+  nameWithType.vb: IdentityUser(Of TKey).SecurityStamp
+  fullName.vb: Microsoft.AspNetCore.Identity.IdentityUser(Of TKey).SecurityStamp
+- uid: Microsoft.AspNetCore.Identity.IdentityUser`1.ConcurrencyStamp
+  commentId: P:Microsoft.AspNetCore.Identity.IdentityUser`1.ConcurrencyStamp
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityuser-1.concurrencystamp
+  name: ConcurrencyStamp
+  nameWithType: IdentityUser<TKey>.ConcurrencyStamp
+  fullName: Microsoft.AspNetCore.Identity.IdentityUser<TKey>.ConcurrencyStamp
+  nameWithType.vb: IdentityUser(Of TKey).ConcurrencyStamp
+  fullName.vb: Microsoft.AspNetCore.Identity.IdentityUser(Of TKey).ConcurrencyStamp
+- uid: Microsoft.AspNetCore.Identity.IdentityUser`1.PhoneNumber
+  commentId: P:Microsoft.AspNetCore.Identity.IdentityUser`1.PhoneNumber
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityuser-1.phonenumber
+  name: PhoneNumber
+  nameWithType: IdentityUser<TKey>.PhoneNumber
+  fullName: Microsoft.AspNetCore.Identity.IdentityUser<TKey>.PhoneNumber
+  nameWithType.vb: IdentityUser(Of TKey).PhoneNumber
+  fullName.vb: Microsoft.AspNetCore.Identity.IdentityUser(Of TKey).PhoneNumber
+- uid: Microsoft.AspNetCore.Identity.IdentityUser`1.PhoneNumberConfirmed
+  commentId: P:Microsoft.AspNetCore.Identity.IdentityUser`1.PhoneNumberConfirmed
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityuser-1.phonenumberconfirmed
+  name: PhoneNumberConfirmed
+  nameWithType: IdentityUser<TKey>.PhoneNumberConfirmed
+  fullName: Microsoft.AspNetCore.Identity.IdentityUser<TKey>.PhoneNumberConfirmed
+  nameWithType.vb: IdentityUser(Of TKey).PhoneNumberConfirmed
+  fullName.vb: Microsoft.AspNetCore.Identity.IdentityUser(Of TKey).PhoneNumberConfirmed
+- uid: Microsoft.AspNetCore.Identity.IdentityUser`1.TwoFactorEnabled
+  commentId: P:Microsoft.AspNetCore.Identity.IdentityUser`1.TwoFactorEnabled
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityuser-1.twofactorenabled
+  name: TwoFactorEnabled
+  nameWithType: IdentityUser<TKey>.TwoFactorEnabled
+  fullName: Microsoft.AspNetCore.Identity.IdentityUser<TKey>.TwoFactorEnabled
+  nameWithType.vb: IdentityUser(Of TKey).TwoFactorEnabled
+  fullName.vb: Microsoft.AspNetCore.Identity.IdentityUser(Of TKey).TwoFactorEnabled
+- uid: Microsoft.AspNetCore.Identity.IdentityUser`1.LockoutEnd
+  commentId: P:Microsoft.AspNetCore.Identity.IdentityUser`1.LockoutEnd
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityuser-1.lockoutend
+  name: LockoutEnd
+  nameWithType: IdentityUser<TKey>.LockoutEnd
+  fullName: Microsoft.AspNetCore.Identity.IdentityUser<TKey>.LockoutEnd
+  nameWithType.vb: IdentityUser(Of TKey).LockoutEnd
+  fullName.vb: Microsoft.AspNetCore.Identity.IdentityUser(Of TKey).LockoutEnd
+- uid: Microsoft.AspNetCore.Identity.IdentityUser`1.LockoutEnabled
+  commentId: P:Microsoft.AspNetCore.Identity.IdentityUser`1.LockoutEnabled
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityuser-1.lockoutenabled
+  name: LockoutEnabled
+  nameWithType: IdentityUser<TKey>.LockoutEnabled
+  fullName: Microsoft.AspNetCore.Identity.IdentityUser<TKey>.LockoutEnabled
+  nameWithType.vb: IdentityUser(Of TKey).LockoutEnabled
+  fullName.vb: Microsoft.AspNetCore.Identity.IdentityUser(Of TKey).LockoutEnabled
+- uid: Microsoft.AspNetCore.Identity.IdentityUser`1.AccessFailedCount
+  commentId: P:Microsoft.AspNetCore.Identity.IdentityUser`1.AccessFailedCount
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityuser-1.accessfailedcount
+  name: AccessFailedCount
+  nameWithType: IdentityUser<TKey>.AccessFailedCount
+  fullName: Microsoft.AspNetCore.Identity.IdentityUser<TKey>.AccessFailedCount
+  nameWithType.vb: IdentityUser(Of TKey).AccessFailedCount
+  fullName.vb: Microsoft.AspNetCore.Identity.IdentityUser(Of TKey).AccessFailedCount
+- uid: Microsoft.AspNetCore.Identity.IdentityUser{System.Guid}.Id
+  commentId: P:Microsoft.AspNetCore.Identity.IdentityUser{System.Guid}.Id
+  parent: Microsoft.AspNetCore.Identity.IdentityUser{System.Guid}
+  definition: Microsoft.AspNetCore.Identity.IdentityUser`1.Id
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityuser-1.id
+  name: Id
+  nameWithType: IdentityUser<Guid>.Id
+  fullName: Microsoft.AspNetCore.Identity.IdentityUser<System.Guid>.Id
+  nameWithType.vb: IdentityUser(Of Guid).Id
+  fullName.vb: Microsoft.AspNetCore.Identity.IdentityUser(Of System.Guid).Id
+- uid: ChristopherBriddock.Service.Identity.Models.ApplicationUser.Id*
+  commentId: Overload:ChristopherBriddock.Service.Identity.Models.ApplicationUser.Id
+  href: ChristopherBriddock.Service.Identity.Models.ApplicationUser.html#ChristopherBriddock_Service_Identity_Models_ApplicationUser_Id
+  name: Id
+  nameWithType: ApplicationUser.Id
+  fullName: ChristopherBriddock.Service.Identity.Models.ApplicationUser.Id
+- uid: System.Guid
+  commentId: T:System.Guid
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.guid
+  name: Guid
+  nameWithType: Guid
+  fullName: System.Guid
+- uid: Microsoft.AspNetCore.Identity.IdentityUser`1.Id
+  commentId: P:Microsoft.AspNetCore.Identity.IdentityUser`1.Id
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityuser-1.id
+  name: Id
+  nameWithType: IdentityUser<TKey>.Id
+  fullName: Microsoft.AspNetCore.Identity.IdentityUser<TKey>.Id
+  nameWithType.vb: IdentityUser(Of TKey).Id
+  fullName.vb: Microsoft.AspNetCore.Identity.IdentityUser(Of TKey).Id
+- uid: ChristopherBriddock.Service.Identity.Models.ApplicationUser.IsDeleted*
+  commentId: Overload:ChristopherBriddock.Service.Identity.Models.ApplicationUser.IsDeleted
+  href: ChristopherBriddock.Service.Identity.Models.ApplicationUser.html#ChristopherBriddock_Service_Identity_Models_ApplicationUser_IsDeleted
+  name: IsDeleted
+  nameWithType: ApplicationUser.IsDeleted
+  fullName: ChristopherBriddock.Service.Identity.Models.ApplicationUser.IsDeleted
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: ChristopherBriddock.Service.Identity.Models.ApplicationUser.DeletedDateTime*
+  commentId: Overload:ChristopherBriddock.Service.Identity.Models.ApplicationUser.DeletedDateTime
+  href: ChristopherBriddock.Service.Identity.Models.ApplicationUser.html#ChristopherBriddock_Service_Identity_Models_ApplicationUser_DeletedDateTime
+  name: DeletedDateTime
+  nameWithType: ApplicationUser.DeletedDateTime
+  fullName: ChristopherBriddock.Service.Identity.Models.ApplicationUser.DeletedDateTime
+- uid: System.DateTime
+  commentId: T:System.DateTime
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.datetime
+  name: DateTime
+  nameWithType: DateTime
+  fullName: System.DateTime
+  nameWithType.vb: Date
+  fullName.vb: Date
+  name.vb: Date

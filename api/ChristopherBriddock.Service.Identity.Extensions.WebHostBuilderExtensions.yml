@@ -1,0 +1,418 @@
+### YamlMime:ManagedReference
+items:
+- uid: ChristopherBriddock.Service.Identity.Extensions.WebHostBuilderExtensions
+  commentId: T:ChristopherBriddock.Service.Identity.Extensions.WebHostBuilderExtensions
+  id: WebHostBuilderExtensions
+  parent: ChristopherBriddock.Service.Identity.Extensions
+  children:
+  - ChristopherBriddock.Service.Identity.Extensions.WebHostBuilderExtensions.AddKestrelConfiguration(Microsoft.AspNetCore.Hosting.IWebHostBuilder,System.Int32)
+  langs:
+  - csharp
+  - vb
+  name: WebHostBuilderExtensions
+  nameWithType: WebHostBuilderExtensions
+  fullName: ChristopherBriddock.Service.Identity.Extensions.WebHostBuilderExtensions
+  type: Class
+  source:
+    remote:
+      path: src/ChristopherBriddock.Service.Identity/Extensions/WebHostBuilderExtensions.cs
+      branch: dev
+      repo: https://github.com/chris-briddock/ChristopherBriddock.Identity.git
+    id: WebHostBuilderExtensions
+    path: src/ChristopherBriddock.Service.Identity/Extensions/WebHostBuilderExtensions.cs
+    startLine: 7
+  assemblies:
+  - ChristopherBriddock.Service.Identity
+  namespace: ChristopherBriddock.Service.Identity.Extensions
+  summary: Extensions methods for the <xref href="Microsoft.AspNetCore.Hosting.IWebHostBuilder" data-throw-if-not-resolved="false"></xref>
+  example: []
+  syntax:
+    content: public static class WebHostBuilderExtensions
+    content.vb: Public Module WebHostBuilderExtensions
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: ChristopherBriddock.Service.Identity.Extensions.WebHostBuilderExtensions.AddKestrelConfiguration(Microsoft.AspNetCore.Hosting.IWebHostBuilder,System.Int32)
+  commentId: M:ChristopherBriddock.Service.Identity.Extensions.WebHostBuilderExtensions.AddKestrelConfiguration(Microsoft.AspNetCore.Hosting.IWebHostBuilder,System.Int32)
+  id: AddKestrelConfiguration(Microsoft.AspNetCore.Hosting.IWebHostBuilder,System.Int32)
+  isExtensionMethod: true
+  parent: ChristopherBriddock.Service.Identity.Extensions.WebHostBuilderExtensions
+  langs:
+  - csharp
+  - vb
+  name: AddKestrelConfiguration(IWebHostBuilder, int)
+  nameWithType: WebHostBuilderExtensions.AddKestrelConfiguration(IWebHostBuilder, int)
+  fullName: ChristopherBriddock.Service.Identity.Extensions.WebHostBuilderExtensions.AddKestrelConfiguration(Microsoft.AspNetCore.Hosting.IWebHostBuilder, int)
+  type: Method
+  source:
+    remote:
+      path: src/ChristopherBriddock.Service.Identity/Extensions/WebHostBuilderExtensions.cs
+      branch: dev
+      repo: https://github.com/chris-briddock/ChristopherBriddock.Identity.git
+    id: AddKestrelConfiguration
+    path: src/ChristopherBriddock.Service.Identity/Extensions/WebHostBuilderExtensions.cs
+    startLine: 14
+  assemblies:
+  - ChristopherBriddock.Service.Identity
+  namespace: ChristopherBriddock.Service.Identity.Extensions
+  summary: Adds Kestrel server configuration to the web host builder.
+  example: []
+  syntax:
+    content: public static void AddKestrelConfiguration(this IWebHostBuilder webHostBuilder, int portNumber)
+    parameters:
+    - id: webHostBuilder
+      type: Microsoft.AspNetCore.Hosting.IWebHostBuilder
+      description: The IWebHostBuilder instance.
+    - id: portNumber
+      type: System.Int32
+      description: ''
+    content.vb: Public Shared Sub AddKestrelConfiguration(webHostBuilder As IWebHostBuilder, portNumber As Integer)
+  overload: ChristopherBriddock.Service.Identity.Extensions.WebHostBuilderExtensions.AddKestrelConfiguration*
+  nameWithType.vb: WebHostBuilderExtensions.AddKestrelConfiguration(IWebHostBuilder, Integer)
+  fullName.vb: ChristopherBriddock.Service.Identity.Extensions.WebHostBuilderExtensions.AddKestrelConfiguration(Microsoft.AspNetCore.Hosting.IWebHostBuilder, Integer)
+  name.vb: AddKestrelConfiguration(IWebHostBuilder, Integer)
+references:
+- uid: Microsoft.AspNetCore.Hosting.IWebHostBuilder
+  commentId: T:Microsoft.AspNetCore.Hosting.IWebHostBuilder
+  parent: Microsoft.AspNetCore.Hosting
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.hosting.iwebhostbuilder
+  name: IWebHostBuilder
+  nameWithType: IWebHostBuilder
+  fullName: Microsoft.AspNetCore.Hosting.IWebHostBuilder
+- uid: ChristopherBriddock.Service.Identity.Extensions
+  commentId: N:ChristopherBriddock.Service.Identity.Extensions
+  href: ChristopherBriddock.html
+  name: ChristopherBriddock.Service.Identity.Extensions
+  nameWithType: ChristopherBriddock.Service.Identity.Extensions
+  fullName: ChristopherBriddock.Service.Identity.Extensions
+  spec.csharp:
+  - uid: ChristopherBriddock
+    name: ChristopherBriddock
+    href: ChristopherBriddock.html
+  - name: .
+  - uid: ChristopherBriddock.Service
+    name: Service
+    href: ChristopherBriddock.Service.html
+  - name: .
+  - uid: ChristopherBriddock.Service.Identity
+    name: Identity
+    href: ChristopherBriddock.Service.Identity.html
+  - name: .
+  - uid: ChristopherBriddock.Service.Identity.Extensions
+    name: Extensions
+    href: ChristopherBriddock.Service.Identity.Extensions.html
+  spec.vb:
+  - uid: ChristopherBriddock
+    name: ChristopherBriddock
+    href: ChristopherBriddock.html
+  - name: .
+  - uid: ChristopherBriddock.Service
+    name: Service
+    href: ChristopherBriddock.Service.html
+  - name: .
+  - uid: ChristopherBriddock.Service.Identity
+    name: Identity
+    href: ChristopherBriddock.Service.Identity.html
+  - name: .
+  - uid: ChristopherBriddock.Service.Identity.Extensions
+    name: Extensions
+    href: ChristopherBriddock.Service.Identity.Extensions.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: Microsoft.AspNetCore.Hosting
+  commentId: N:Microsoft.AspNetCore.Hosting
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft
+  name: Microsoft.AspNetCore.Hosting
+  nameWithType: Microsoft.AspNetCore.Hosting
+  fullName: Microsoft.AspNetCore.Hosting
+  spec.csharp:
+  - uid: Microsoft
+    name: Microsoft
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft
+  - name: .
+  - uid: Microsoft.AspNetCore
+    name: AspNetCore
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore
+  - name: .
+  - uid: Microsoft.AspNetCore.Hosting
+    name: Hosting
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.hosting
+  spec.vb:
+  - uid: Microsoft
+    name: Microsoft
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft
+  - name: .
+  - uid: Microsoft.AspNetCore
+    name: AspNetCore
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore
+  - name: .
+  - uid: Microsoft.AspNetCore.Hosting
+    name: Hosting
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.hosting
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: ChristopherBriddock.Service.Identity.Extensions.WebHostBuilderExtensions.AddKestrelConfiguration*
+  commentId: Overload:ChristopherBriddock.Service.Identity.Extensions.WebHostBuilderExtensions.AddKestrelConfiguration
+  href: ChristopherBriddock.Service.Identity.Extensions.WebHostBuilderExtensions.html#ChristopherBriddock_Service_Identity_Extensions_WebHostBuilderExtensions_AddKestrelConfiguration_Microsoft_AspNetCore_Hosting_IWebHostBuilder_System_Int32_
+  name: AddKestrelConfiguration
+  nameWithType: WebHostBuilderExtensions.AddKestrelConfiguration
+  fullName: ChristopherBriddock.Service.Identity.Extensions.WebHostBuilderExtensions.AddKestrelConfiguration
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer

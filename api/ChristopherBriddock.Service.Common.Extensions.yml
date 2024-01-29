@@ -1,0 +1,23 @@
+### YamlMime:ManagedReference
+items:
+- uid: ChristopherBriddock.Service.Common.Extensions
+  commentId: N:ChristopherBriddock.Service.Common.Extensions
+  id: ChristopherBriddock.Service.Common.Extensions
+  children:
+  - ChristopherBriddock.Service.Common.Extensions.ServiceCollectionExtensions
+  langs:
+  - csharp
+  - vb
+  name: ChristopherBriddock.Service.Common.Extensions
+  nameWithType: ChristopherBriddock.Service.Common.Extensions
+  fullName: ChristopherBriddock.Service.Common.Extensions
+  type: Namespace
+  assemblies:
+  - ChristopherBriddock.Service.Common
+references:
+- uid: ChristopherBriddock.Service.Common.Extensions.ServiceCollectionExtensions
+  commentId: T:ChristopherBriddock.Service.Common.Extensions.ServiceCollectionExtensions
+  href: ChristopherBriddock.Service.Common.Extensions.ServiceCollectionExtensions.html
+  name: ServiceCollectionExtensions
+  nameWithType: ServiceCollectionExtensions
+  fullName: ChristopherBriddock.Service.Common.Extensions.ServiceCollectionExtensions

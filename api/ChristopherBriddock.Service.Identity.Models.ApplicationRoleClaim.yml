@@ -1,0 +1,584 @@
+### YamlMime:ManagedReference
+items:
+- uid: ChristopherBriddock.Service.Identity.Models.ApplicationRoleClaim
+  commentId: T:ChristopherBriddock.Service.Identity.Models.ApplicationRoleClaim
+  id: ApplicationRoleClaim
+  parent: ChristopherBriddock.Service.Identity.Models
+  children: []
+  langs:
+  - csharp
+  - vb
+  name: ApplicationRoleClaim
+  nameWithType: ApplicationRoleClaim
+  fullName: ChristopherBriddock.Service.Identity.Models.ApplicationRoleClaim
+  type: Class
+  source:
+    remote:
+      path: src/ChristopherBriddock.Service.Identity/Models/ApplicationRoleClaim.cs
+      branch: dev
+      repo: https://github.com/chris-briddock/ChristopherBriddock.Identity.git
+    id: ApplicationRoleClaim
+    path: src/ChristopherBriddock.Service.Identity/Models/ApplicationRoleClaim.cs
+    startLine: 5
+  assemblies:
+  - ChristopherBriddock.Service.Identity
+  namespace: ChristopherBriddock.Service.Identity.Models
+  summary: Represents a claim that is granted to all users within a role.
+  example: []
+  syntax:
+    content: 'public sealed class ApplicationRoleClaim : IdentityRoleClaim<Guid>'
+    content.vb: Public NotInheritable Class ApplicationRoleClaim Inherits IdentityRoleClaim(Of Guid)
+  inheritance:
+  - System.Object
+  - Microsoft.AspNetCore.Identity.IdentityRoleClaim{System.Guid}
+  inheritedMembers:
+  - Microsoft.AspNetCore.Identity.IdentityRoleClaim{System.Guid}.ToClaim
+  - Microsoft.AspNetCore.Identity.IdentityRoleClaim{System.Guid}.InitializeFromClaim(System.Security.Claims.Claim)
+  - Microsoft.AspNetCore.Identity.IdentityRoleClaim{System.Guid}.Id
+  - Microsoft.AspNetCore.Identity.IdentityRoleClaim{System.Guid}.RoleId
+  - Microsoft.AspNetCore.Identity.IdentityRoleClaim{System.Guid}.ClaimType
+  - Microsoft.AspNetCore.Identity.IdentityRoleClaim{System.Guid}.ClaimValue
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+references:
+- uid: ChristopherBriddock.Service.Identity.Models
+  commentId: N:ChristopherBriddock.Service.Identity.Models
+  href: ChristopherBriddock.html
+  name: ChristopherBriddock.Service.Identity.Models
+  nameWithType: ChristopherBriddock.Service.Identity.Models
+  fullName: ChristopherBriddock.Service.Identity.Models
+  spec.csharp:
+  - uid: ChristopherBriddock
+    name: ChristopherBriddock
+    href: ChristopherBriddock.html
+  - name: .
+  - uid: ChristopherBriddock.Service
+    name: Service
+    href: ChristopherBriddock.Service.html
+  - name: .
+  - uid: ChristopherBriddock.Service.Identity
+    name: Identity
+    href: ChristopherBriddock.Service.Identity.html
+  - name: .
+  - uid: ChristopherBriddock.Service.Identity.Models
+    name: Models
+    href: ChristopherBriddock.Service.Identity.Models.html
+  spec.vb:
+  - uid: ChristopherBriddock
+    name: ChristopherBriddock
+    href: ChristopherBriddock.html
+  - name: .
+  - uid: ChristopherBriddock.Service
+    name: Service
+    href: ChristopherBriddock.Service.html
+  - name: .
+  - uid: ChristopherBriddock.Service.Identity
+    name: Identity
+    href: ChristopherBriddock.Service.Identity.html
+  - name: .
+  - uid: ChristopherBriddock.Service.Identity.Models
+    name: Models
+    href: ChristopherBriddock.Service.Identity.Models.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: Microsoft.AspNetCore.Identity.IdentityRoleClaim{System.Guid}
+  commentId: T:Microsoft.AspNetCore.Identity.IdentityRoleClaim{System.Guid}
+  parent: Microsoft.AspNetCore.Identity
+  definition: Microsoft.AspNetCore.Identity.IdentityRoleClaim`1
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityroleclaim-1
+  name: IdentityRoleClaim<Guid>
+  nameWithType: IdentityRoleClaim<Guid>
+  fullName: Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>
+  nameWithType.vb: IdentityRoleClaim(Of Guid)
+  fullName.vb: Microsoft.AspNetCore.Identity.IdentityRoleClaim(Of System.Guid)
+  name.vb: IdentityRoleClaim(Of Guid)
+  spec.csharp:
+  - uid: Microsoft.AspNetCore.Identity.IdentityRoleClaim`1
+    name: IdentityRoleClaim
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityroleclaim-1
+  - name: <
+  - uid: System.Guid
+    name: Guid
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.guid
+  - name: '>'
+  spec.vb:
+  - uid: Microsoft.AspNetCore.Identity.IdentityRoleClaim`1
+    name: IdentityRoleClaim
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityroleclaim-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Guid
+    name: Guid
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.guid
+  - name: )
+- uid: Microsoft.AspNetCore.Identity.IdentityRoleClaim{System.Guid}.ToClaim
+  commentId: M:Microsoft.AspNetCore.Identity.IdentityRoleClaim{System.Guid}.ToClaim
+  parent: Microsoft.AspNetCore.Identity.IdentityRoleClaim{System.Guid}
+  definition: Microsoft.AspNetCore.Identity.IdentityRoleClaim`1.ToClaim
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityroleclaim-1.toclaim
+  name: ToClaim()
+  nameWithType: IdentityRoleClaim<Guid>.ToClaim()
+  fullName: Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>.ToClaim()
+  nameWithType.vb: IdentityRoleClaim(Of Guid).ToClaim()
+  fullName.vb: Microsoft.AspNetCore.Identity.IdentityRoleClaim(Of System.Guid).ToClaim()
+  spec.csharp:
+  - uid: Microsoft.AspNetCore.Identity.IdentityRoleClaim{System.Guid}.ToClaim
+    name: ToClaim
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityroleclaim-1.toclaim
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Microsoft.AspNetCore.Identity.IdentityRoleClaim{System.Guid}.ToClaim
+    name: ToClaim
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityroleclaim-1.toclaim
+  - name: (
+  - name: )
+- uid: Microsoft.AspNetCore.Identity.IdentityRoleClaim{System.Guid}.InitializeFromClaim(System.Security.Claims.Claim)
+  commentId: M:Microsoft.AspNetCore.Identity.IdentityRoleClaim{System.Guid}.InitializeFromClaim(System.Security.Claims.Claim)
+  parent: Microsoft.AspNetCore.Identity.IdentityRoleClaim{System.Guid}
+  definition: Microsoft.AspNetCore.Identity.IdentityRoleClaim`1.InitializeFromClaim(System.Security.Claims.Claim)
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityroleclaim-1.initializefromclaim
+  name: InitializeFromClaim(Claim)
+  nameWithType: IdentityRoleClaim<Guid>.InitializeFromClaim(Claim)
+  fullName: Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>.InitializeFromClaim(System.Security.Claims.Claim)
+  nameWithType.vb: IdentityRoleClaim(Of Guid).InitializeFromClaim(Claim)
+  fullName.vb: Microsoft.AspNetCore.Identity.IdentityRoleClaim(Of System.Guid).InitializeFromClaim(System.Security.Claims.Claim)
+  spec.csharp:
+  - uid: Microsoft.AspNetCore.Identity.IdentityRoleClaim{System.Guid}.InitializeFromClaim(System.Security.Claims.Claim)
+    name: InitializeFromClaim
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityroleclaim-1.initializefromclaim
+  - name: (
+  - uid: System.Security.Claims.Claim
+    name: Claim
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.security.claims.claim
+  - name: )
+  spec.vb:
+  - uid: Microsoft.AspNetCore.Identity.IdentityRoleClaim{System.Guid}.InitializeFromClaim(System.Security.Claims.Claim)
+    name: InitializeFromClaim
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityroleclaim-1.initializefromclaim
+  - name: (
+  - uid: System.Security.Claims.Claim
+    name: Claim
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.security.claims.claim
+  - name: )
+- uid: Microsoft.AspNetCore.Identity.IdentityRoleClaim{System.Guid}.Id
+  commentId: P:Microsoft.AspNetCore.Identity.IdentityRoleClaim{System.Guid}.Id
+  parent: Microsoft.AspNetCore.Identity.IdentityRoleClaim{System.Guid}
+  definition: Microsoft.AspNetCore.Identity.IdentityRoleClaim`1.Id
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityroleclaim-1.id
+  name: Id
+  nameWithType: IdentityRoleClaim<Guid>.Id
+  fullName: Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>.Id
+  nameWithType.vb: IdentityRoleClaim(Of Guid).Id
+  fullName.vb: Microsoft.AspNetCore.Identity.IdentityRoleClaim(Of System.Guid).Id
+- uid: Microsoft.AspNetCore.Identity.IdentityRoleClaim{System.Guid}.RoleId
+  commentId: P:Microsoft.AspNetCore.Identity.IdentityRoleClaim{System.Guid}.RoleId
+  parent: Microsoft.AspNetCore.Identity.IdentityRoleClaim{System.Guid}
+  definition: Microsoft.AspNetCore.Identity.IdentityRoleClaim`1.RoleId
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityroleclaim-1.roleid
+  name: RoleId
+  nameWithType: IdentityRoleClaim<Guid>.RoleId
+  fullName: Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>.RoleId
+  nameWithType.vb: IdentityRoleClaim(Of Guid).RoleId
+  fullName.vb: Microsoft.AspNetCore.Identity.IdentityRoleClaim(Of System.Guid).RoleId
+- uid: Microsoft.AspNetCore.Identity.IdentityRoleClaim{System.Guid}.ClaimType
+  commentId: P:Microsoft.AspNetCore.Identity.IdentityRoleClaim{System.Guid}.ClaimType
+  parent: Microsoft.AspNetCore.Identity.IdentityRoleClaim{System.Guid}
+  definition: Microsoft.AspNetCore.Identity.IdentityRoleClaim`1.ClaimType
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityroleclaim-1.claimtype
+  name: ClaimType
+  nameWithType: IdentityRoleClaim<Guid>.ClaimType
+  fullName: Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>.ClaimType
+  nameWithType.vb: IdentityRoleClaim(Of Guid).ClaimType
+  fullName.vb: Microsoft.AspNetCore.Identity.IdentityRoleClaim(Of System.Guid).ClaimType
+- uid: Microsoft.AspNetCore.Identity.IdentityRoleClaim{System.Guid}.ClaimValue
+  commentId: P:Microsoft.AspNetCore.Identity.IdentityRoleClaim{System.Guid}.ClaimValue
+  parent: Microsoft.AspNetCore.Identity.IdentityRoleClaim{System.Guid}
+  definition: Microsoft.AspNetCore.Identity.IdentityRoleClaim`1.ClaimValue
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityroleclaim-1.claimvalue
+  name: ClaimValue
+  nameWithType: IdentityRoleClaim<Guid>.ClaimValue
+  fullName: Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>.ClaimValue
+  nameWithType.vb: IdentityRoleClaim(Of Guid).ClaimValue
+  fullName.vb: Microsoft.AspNetCore.Identity.IdentityRoleClaim(Of System.Guid).ClaimValue
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Microsoft.AspNetCore.Identity.IdentityRoleClaim`1
+  commentId: T:Microsoft.AspNetCore.Identity.IdentityRoleClaim`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityroleclaim-1
+  name: IdentityRoleClaim<TKey>
+  nameWithType: IdentityRoleClaim<TKey>
+  fullName: Microsoft.AspNetCore.Identity.IdentityRoleClaim<TKey>
+  nameWithType.vb: IdentityRoleClaim(Of TKey)
+  fullName.vb: Microsoft.AspNetCore.Identity.IdentityRoleClaim(Of TKey)
+  name.vb: IdentityRoleClaim(Of TKey)
+  spec.csharp:
+  - uid: Microsoft.AspNetCore.Identity.IdentityRoleClaim`1
+    name: IdentityRoleClaim
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityroleclaim-1
+  - name: <
+  - name: TKey
+  - name: '>'
+  spec.vb:
+  - uid: Microsoft.AspNetCore.Identity.IdentityRoleClaim`1
+    name: IdentityRoleClaim
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityroleclaim-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TKey
+  - name: )
+- uid: Microsoft.AspNetCore.Identity
+  commentId: N:Microsoft.AspNetCore.Identity
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft
+  name: Microsoft.AspNetCore.Identity
+  nameWithType: Microsoft.AspNetCore.Identity
+  fullName: Microsoft.AspNetCore.Identity
+  spec.csharp:
+  - uid: Microsoft
+    name: Microsoft
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft
+  - name: .
+  - uid: Microsoft.AspNetCore
+    name: AspNetCore
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore
+  - name: .
+  - uid: Microsoft.AspNetCore.Identity
+    name: Identity
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity
+  spec.vb:
+  - uid: Microsoft
+    name: Microsoft
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft
+  - name: .
+  - uid: Microsoft.AspNetCore
+    name: AspNetCore
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore
+  - name: .
+  - uid: Microsoft.AspNetCore.Identity
+    name: Identity
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity
+- uid: Microsoft.AspNetCore.Identity.IdentityRoleClaim`1.ToClaim
+  commentId: M:Microsoft.AspNetCore.Identity.IdentityRoleClaim`1.ToClaim
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityroleclaim-1.toclaim
+  name: ToClaim()
+  nameWithType: IdentityRoleClaim<TKey>.ToClaim()
+  fullName: Microsoft.AspNetCore.Identity.IdentityRoleClaim<TKey>.ToClaim()
+  nameWithType.vb: IdentityRoleClaim(Of TKey).ToClaim()
+  fullName.vb: Microsoft.AspNetCore.Identity.IdentityRoleClaim(Of TKey).ToClaim()
+  spec.csharp:
+  - uid: Microsoft.AspNetCore.Identity.IdentityRoleClaim`1.ToClaim
+    name: ToClaim
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityroleclaim-1.toclaim
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Microsoft.AspNetCore.Identity.IdentityRoleClaim`1.ToClaim
+    name: ToClaim
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityroleclaim-1.toclaim
+  - name: (
+  - name: )
+- uid: Microsoft.AspNetCore.Identity.IdentityRoleClaim`1.InitializeFromClaim(System.Security.Claims.Claim)
+  commentId: M:Microsoft.AspNetCore.Identity.IdentityRoleClaim`1.InitializeFromClaim(System.Security.Claims.Claim)
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityroleclaim-1.initializefromclaim
+  name: InitializeFromClaim(Claim)
+  nameWithType: IdentityRoleClaim<TKey>.InitializeFromClaim(Claim)
+  fullName: Microsoft.AspNetCore.Identity.IdentityRoleClaim<TKey>.InitializeFromClaim(System.Security.Claims.Claim)
+  nameWithType.vb: IdentityRoleClaim(Of TKey).InitializeFromClaim(Claim)
+  fullName.vb: Microsoft.AspNetCore.Identity.IdentityRoleClaim(Of TKey).InitializeFromClaim(System.Security.Claims.Claim)
+  spec.csharp:
+  - uid: Microsoft.AspNetCore.Identity.IdentityRoleClaim`1.InitializeFromClaim(System.Security.Claims.Claim)
+    name: InitializeFromClaim
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityroleclaim-1.initializefromclaim
+  - name: (
+  - uid: System.Security.Claims.Claim
+    name: Claim
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.security.claims.claim
+  - name: )
+  spec.vb:
+  - uid: Microsoft.AspNetCore.Identity.IdentityRoleClaim`1.InitializeFromClaim(System.Security.Claims.Claim)
+    name: InitializeFromClaim
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityroleclaim-1.initializefromclaim
+  - name: (
+  - uid: System.Security.Claims.Claim
+    name: Claim
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.security.claims.claim
+  - name: )
+- uid: Microsoft.AspNetCore.Identity.IdentityRoleClaim`1.Id
+  commentId: P:Microsoft.AspNetCore.Identity.IdentityRoleClaim`1.Id
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityroleclaim-1.id
+  name: Id
+  nameWithType: IdentityRoleClaim<TKey>.Id
+  fullName: Microsoft.AspNetCore.Identity.IdentityRoleClaim<TKey>.Id
+  nameWithType.vb: IdentityRoleClaim(Of TKey).Id
+  fullName.vb: Microsoft.AspNetCore.Identity.IdentityRoleClaim(Of TKey).Id
+- uid: Microsoft.AspNetCore.Identity.IdentityRoleClaim`1.RoleId
+  commentId: P:Microsoft.AspNetCore.Identity.IdentityRoleClaim`1.RoleId
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityroleclaim-1.roleid
+  name: RoleId
+  nameWithType: IdentityRoleClaim<TKey>.RoleId
+  fullName: Microsoft.AspNetCore.Identity.IdentityRoleClaim<TKey>.RoleId
+  nameWithType.vb: IdentityRoleClaim(Of TKey).RoleId
+  fullName.vb: Microsoft.AspNetCore.Identity.IdentityRoleClaim(Of TKey).RoleId
+- uid: Microsoft.AspNetCore.Identity.IdentityRoleClaim`1.ClaimType
+  commentId: P:Microsoft.AspNetCore.Identity.IdentityRoleClaim`1.ClaimType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityroleclaim-1.claimtype
+  name: ClaimType
+  nameWithType: IdentityRoleClaim<TKey>.ClaimType
+  fullName: Microsoft.AspNetCore.Identity.IdentityRoleClaim<TKey>.ClaimType
+  nameWithType.vb: IdentityRoleClaim(Of TKey).ClaimType
+  fullName.vb: Microsoft.AspNetCore.Identity.IdentityRoleClaim(Of TKey).ClaimType
+- uid: Microsoft.AspNetCore.Identity.IdentityRoleClaim`1.ClaimValue
+  commentId: P:Microsoft.AspNetCore.Identity.IdentityRoleClaim`1.ClaimValue
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityroleclaim-1.claimvalue
+  name: ClaimValue
+  nameWithType: IdentityRoleClaim<TKey>.ClaimValue
+  fullName: Microsoft.AspNetCore.Identity.IdentityRoleClaim<TKey>.ClaimValue
+  nameWithType.vb: IdentityRoleClaim(Of TKey).ClaimValue
+  fullName.vb: Microsoft.AspNetCore.Identity.IdentityRoleClaim(Of TKey).ClaimValue

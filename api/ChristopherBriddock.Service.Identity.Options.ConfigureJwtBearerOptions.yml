@@ -1,0 +1,843 @@
+### YamlMime:ManagedReference
+items:
+- uid: ChristopherBriddock.Service.Identity.Options.ConfigureJwtBearerOptions
+  commentId: T:ChristopherBriddock.Service.Identity.Options.ConfigureJwtBearerOptions
+  id: ConfigureJwtBearerOptions
+  parent: ChristopherBriddock.Service.Identity.Options
+  children:
+  - ChristopherBriddock.Service.Identity.Options.ConfigureJwtBearerOptions.#ctor(Microsoft.Extensions.Configuration.IConfiguration)
+  - ChristopherBriddock.Service.Identity.Options.ConfigureJwtBearerOptions.Configure(Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions)
+  - ChristopherBriddock.Service.Identity.Options.ConfigureJwtBearerOptions.Configure(System.String,Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions)
+  langs:
+  - csharp
+  - vb
+  name: ConfigureJwtBearerOptions
+  nameWithType: ConfigureJwtBearerOptions
+  fullName: ChristopherBriddock.Service.Identity.Options.ConfigureJwtBearerOptions
+  type: Class
+  source:
+    remote:
+      path: src/ChristopherBriddock.Service.Identity/Options/ConfigureJwtBearerOptions.cs
+      branch: dev
+      repo: https://github.com/chris-briddock/ChristopherBriddock.Identity.git
+    id: ConfigureJwtBearerOptions
+    path: src/ChristopherBriddock.Service.Identity/Options/ConfigureJwtBearerOptions.cs
+    startLine: 15
+  assemblies:
+  - ChristopherBriddock.Service.Identity
+  namespace: ChristopherBriddock.Service.Identity.Options
+  summary: Configures JWT Bearer authentication options using the Options pattern.
+  remarks: Initializes a new instance of the <xref href="ChristopherBriddock.Service.Identity.Options.ConfigureJwtBearerOptions" data-throw-if-not-resolved="false"></xref> class.
+  example: []
+  syntax:
+    content: 'public sealed class ConfigureJwtBearerOptions : IConfigureNamedOptions<JwtBearerOptions>, IConfigureOptions<JwtBearerOptions>'
+    content.vb: Public NotInheritable Class ConfigureJwtBearerOptions Implements IConfigureNamedOptions(Of JwtBearerOptions), IConfigureOptions(Of JwtBearerOptions)
+  inheritance:
+  - System.Object
+  implements:
+  - Microsoft.Extensions.Options.IConfigureNamedOptions{Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions}
+  - Microsoft.Extensions.Options.IConfigureOptions{Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions}
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: ChristopherBriddock.Service.Identity.Options.ConfigureJwtBearerOptions.#ctor(Microsoft.Extensions.Configuration.IConfiguration)
+  commentId: M:ChristopherBriddock.Service.Identity.Options.ConfigureJwtBearerOptions.#ctor(Microsoft.Extensions.Configuration.IConfiguration)
+  id: '#ctor(Microsoft.Extensions.Configuration.IConfiguration)'
+  parent: ChristopherBriddock.Service.Identity.Options.ConfigureJwtBearerOptions
+  langs:
+  - csharp
+  - vb
+  name: ConfigureJwtBearerOptions(IConfiguration)
+  nameWithType: ConfigureJwtBearerOptions.ConfigureJwtBearerOptions(IConfiguration)
+  fullName: ChristopherBriddock.Service.Identity.Options.ConfigureJwtBearerOptions.ConfigureJwtBearerOptions(Microsoft.Extensions.Configuration.IConfiguration)
+  type: Constructor
+  source:
+    remote:
+      path: src/ChristopherBriddock.Service.Identity/Options/ConfigureJwtBearerOptions.cs
+      branch: dev
+      repo: https://github.com/chris-briddock/ChristopherBriddock.Identity.git
+    id: .ctor
+    path: src/ChristopherBriddock.Service.Identity/Options/ConfigureJwtBearerOptions.cs
+    startLine: 15
+  assemblies:
+  - ChristopherBriddock.Service.Identity
+  namespace: ChristopherBriddock.Service.Identity.Options
+  summary: Configures JWT Bearer authentication options using the Options pattern.
+  remarks: Initializes a new instance of the <xref href="ChristopherBriddock.Service.Identity.Options.ConfigureJwtBearerOptions" data-throw-if-not-resolved="false"></xref> class.
+  example: []
+  syntax:
+    content: public ConfigureJwtBearerOptions(IConfiguration configuration)
+    parameters:
+    - id: configuration
+      type: Microsoft.Extensions.Configuration.IConfiguration
+      description: The application configuration.
+    content.vb: Public Sub New(configuration As IConfiguration)
+  overload: ChristopherBriddock.Service.Identity.Options.ConfigureJwtBearerOptions.#ctor*
+  nameWithType.vb: ConfigureJwtBearerOptions.New(IConfiguration)
+  fullName.vb: ChristopherBriddock.Service.Identity.Options.ConfigureJwtBearerOptions.New(Microsoft.Extensions.Configuration.IConfiguration)
+  name.vb: New(IConfiguration)
+- uid: ChristopherBriddock.Service.Identity.Options.ConfigureJwtBearerOptions.Configure(System.String,Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions)
+  commentId: M:ChristopherBriddock.Service.Identity.Options.ConfigureJwtBearerOptions.Configure(System.String,Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions)
+  id: Configure(System.String,Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions)
+  parent: ChristopherBriddock.Service.Identity.Options.ConfigureJwtBearerOptions
+  langs:
+  - csharp
+  - vb
+  name: Configure(string?, JwtBearerOptions)
+  nameWithType: ConfigureJwtBearerOptions.Configure(string?, JwtBearerOptions)
+  fullName: ChristopherBriddock.Service.Identity.Options.ConfigureJwtBearerOptions.Configure(string?, Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions)
+  type: Method
+  source:
+    remote:
+      path: src/ChristopherBriddock.Service.Identity/Options/ConfigureJwtBearerOptions.cs
+      branch: dev
+      repo: https://github.com/chris-briddock/ChristopherBriddock.Identity.git
+    id: Configure
+    path: src/ChristopherBriddock.Service.Identity/Options/ConfigureJwtBearerOptions.cs
+    startLine: 27
+  assemblies:
+  - ChristopherBriddock.Service.Identity
+  namespace: ChristopherBriddock.Service.Identity.Options
+  summary: Configures JWT Bearer options.
+  example: []
+  syntax:
+    content: public void Configure(string? name, JwtBearerOptions options)
+    parameters:
+    - id: name
+      type: System.String
+      description: The name of the options.
+    - id: options
+      type: Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions
+      description: The JWT Bearer authentication options to configure.
+    content.vb: Public Sub Configure(name As String, options As JwtBearerOptions)
+  overload: ChristopherBriddock.Service.Identity.Options.ConfigureJwtBearerOptions.Configure*
+  implements:
+  - Microsoft.Extensions.Options.IConfigureNamedOptions{Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions}.Configure(System.String,Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions)
+  nameWithType.vb: ConfigureJwtBearerOptions.Configure(String, JwtBearerOptions)
+  fullName.vb: ChristopherBriddock.Service.Identity.Options.ConfigureJwtBearerOptions.Configure(String, Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions)
+  name.vb: Configure(String, JwtBearerOptions)
+- uid: ChristopherBriddock.Service.Identity.Options.ConfigureJwtBearerOptions.Configure(Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions)
+  commentId: M:ChristopherBriddock.Service.Identity.Options.ConfigureJwtBearerOptions.Configure(Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions)
+  id: Configure(Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions)
+  parent: ChristopherBriddock.Service.Identity.Options.ConfigureJwtBearerOptions
+  langs:
+  - csharp
+  - vb
+  name: Configure(JwtBearerOptions)
+  nameWithType: ConfigureJwtBearerOptions.Configure(JwtBearerOptions)
+  fullName: ChristopherBriddock.Service.Identity.Options.ConfigureJwtBearerOptions.Configure(Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions)
+  type: Method
+  source:
+    remote:
+      path: src/ChristopherBriddock.Service.Identity/Options/ConfigureJwtBearerOptions.cs
+      branch: dev
+      repo: https://github.com/chris-briddock/ChristopherBriddock.Identity.git
+    id: Configure
+    path: src/ChristopherBriddock.Service.Identity/Options/ConfigureJwtBearerOptions.cs
+    startLine: 33
+  assemblies:
+  - ChristopherBriddock.Service.Identity
+  namespace: ChristopherBriddock.Service.Identity.Options
+  summary: Configures JWT Bearer options.
+  example: []
+  syntax:
+    content: public void Configure(JwtBearerOptions options)
+    parameters:
+    - id: options
+      type: Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions
+      description: The JWT Bearer authentication options to configure.
+    content.vb: Public Sub Configure(options As JwtBearerOptions)
+  overload: ChristopherBriddock.Service.Identity.Options.ConfigureJwtBearerOptions.Configure*
+  implements:
+  - Microsoft.Extensions.Options.IConfigureOptions{Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions}.Configure(Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions)
+references:
+- uid: ChristopherBriddock.Service.Identity.Options.ConfigureJwtBearerOptions
+  commentId: T:ChristopherBriddock.Service.Identity.Options.ConfigureJwtBearerOptions
+  href: ChristopherBriddock.Service.Identity.Options.ConfigureJwtBearerOptions.html
+  name: ConfigureJwtBearerOptions
+  nameWithType: ConfigureJwtBearerOptions
+  fullName: ChristopherBriddock.Service.Identity.Options.ConfigureJwtBearerOptions
+- uid: ChristopherBriddock.Service.Identity.Options
+  commentId: N:ChristopherBriddock.Service.Identity.Options
+  href: ChristopherBriddock.html
+  name: ChristopherBriddock.Service.Identity.Options
+  nameWithType: ChristopherBriddock.Service.Identity.Options
+  fullName: ChristopherBriddock.Service.Identity.Options
+  spec.csharp:
+  - uid: ChristopherBriddock
+    name: ChristopherBriddock
+    href: ChristopherBriddock.html
+  - name: .
+  - uid: ChristopherBriddock.Service
+    name: Service
+    href: ChristopherBriddock.Service.html
+  - name: .
+  - uid: ChristopherBriddock.Service.Identity
+    name: Identity
+    href: ChristopherBriddock.Service.Identity.html
+  - name: .
+  - uid: ChristopherBriddock.Service.Identity.Options
+    name: Options
+    href: ChristopherBriddock.Service.Identity.Options.html
+  spec.vb:
+  - uid: ChristopherBriddock
+    name: ChristopherBriddock
+    href: ChristopherBriddock.html
+  - name: .
+  - uid: ChristopherBriddock.Service
+    name: Service
+    href: ChristopherBriddock.Service.html
+  - name: .
+  - uid: ChristopherBriddock.Service.Identity
+    name: Identity
+    href: ChristopherBriddock.Service.Identity.html
+  - name: .
+  - uid: ChristopherBriddock.Service.Identity.Options
+    name: Options
+    href: ChristopherBriddock.Service.Identity.Options.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: Microsoft.Extensions.Options.IConfigureNamedOptions{Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions}
+  commentId: T:Microsoft.Extensions.Options.IConfigureNamedOptions{Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions}
+  parent: Microsoft.Extensions.Options
+  definition: Microsoft.Extensions.Options.IConfigureNamedOptions`1
+  href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.options.iconfigurenamedoptions-1
+  name: IConfigureNamedOptions<JwtBearerOptions>
+  nameWithType: IConfigureNamedOptions<JwtBearerOptions>
+  fullName: Microsoft.Extensions.Options.IConfigureNamedOptions<Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions>
+  nameWithType.vb: IConfigureNamedOptions(Of JwtBearerOptions)
+  fullName.vb: Microsoft.Extensions.Options.IConfigureNamedOptions(Of Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions)
+  name.vb: IConfigureNamedOptions(Of JwtBearerOptions)
+  spec.csharp:
+  - uid: Microsoft.Extensions.Options.IConfigureNamedOptions`1
+    name: IConfigureNamedOptions
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.options.iconfigurenamedoptions-1
+  - name: <
+  - uid: Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions
+    name: JwtBearerOptions
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.authentication.jwtbearer.jwtbeareroptions
+  - name: '>'
+  spec.vb:
+  - uid: Microsoft.Extensions.Options.IConfigureNamedOptions`1
+    name: IConfigureNamedOptions
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.options.iconfigurenamedoptions-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions
+    name: JwtBearerOptions
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.authentication.jwtbearer.jwtbeareroptions
+  - name: )
+- uid: Microsoft.Extensions.Options.IConfigureOptions{Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions}
+  commentId: T:Microsoft.Extensions.Options.IConfigureOptions{Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions}
+  parent: Microsoft.Extensions.Options
+  definition: Microsoft.Extensions.Options.IConfigureOptions`1
+  href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.options.iconfigureoptions-1
+  name: IConfigureOptions<JwtBearerOptions>
+  nameWithType: IConfigureOptions<JwtBearerOptions>
+  fullName: Microsoft.Extensions.Options.IConfigureOptions<Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions>
+  nameWithType.vb: IConfigureOptions(Of JwtBearerOptions)
+  fullName.vb: Microsoft.Extensions.Options.IConfigureOptions(Of Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions)
+  name.vb: IConfigureOptions(Of JwtBearerOptions)
+  spec.csharp:
+  - uid: Microsoft.Extensions.Options.IConfigureOptions`1
+    name: IConfigureOptions
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.options.iconfigureoptions-1
+  - name: <
+  - uid: Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions
+    name: JwtBearerOptions
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.authentication.jwtbearer.jwtbeareroptions
+  - name: '>'
+  spec.vb:
+  - uid: Microsoft.Extensions.Options.IConfigureOptions`1
+    name: IConfigureOptions
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.options.iconfigureoptions-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions
+    name: JwtBearerOptions
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.authentication.jwtbearer.jwtbeareroptions
+  - name: )
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Microsoft.Extensions.Options.IConfigureNamedOptions`1
+  commentId: T:Microsoft.Extensions.Options.IConfigureNamedOptions`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.options.iconfigurenamedoptions-1
+  name: IConfigureNamedOptions<TOptions>
+  nameWithType: IConfigureNamedOptions<TOptions>
+  fullName: Microsoft.Extensions.Options.IConfigureNamedOptions<TOptions>
+  nameWithType.vb: IConfigureNamedOptions(Of TOptions)
+  fullName.vb: Microsoft.Extensions.Options.IConfigureNamedOptions(Of TOptions)
+  name.vb: IConfigureNamedOptions(Of TOptions)
+  spec.csharp:
+  - uid: Microsoft.Extensions.Options.IConfigureNamedOptions`1
+    name: IConfigureNamedOptions
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.options.iconfigurenamedoptions-1
+  - name: <
+  - name: TOptions
+  - name: '>'
+  spec.vb:
+  - uid: Microsoft.Extensions.Options.IConfigureNamedOptions`1
+    name: IConfigureNamedOptions
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.options.iconfigurenamedoptions-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TOptions
+  - name: )
+- uid: Microsoft.Extensions.Options
+  commentId: N:Microsoft.Extensions.Options
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft
+  name: Microsoft.Extensions.Options
+  nameWithType: Microsoft.Extensions.Options
+  fullName: Microsoft.Extensions.Options
+  spec.csharp:
+  - uid: Microsoft
+    name: Microsoft
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft
+  - name: .
+  - uid: Microsoft.Extensions
+    name: Extensions
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions
+  - name: .
+  - uid: Microsoft.Extensions.Options
+    name: Options
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.options
+  spec.vb:
+  - uid: Microsoft
+    name: Microsoft
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft
+  - name: .
+  - uid: Microsoft.Extensions
+    name: Extensions
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions
+  - name: .
+  - uid: Microsoft.Extensions.Options
+    name: Options
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.options
+- uid: Microsoft.Extensions.Options.IConfigureOptions`1
+  commentId: T:Microsoft.Extensions.Options.IConfigureOptions`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.options.iconfigureoptions-1
+  name: IConfigureOptions<TOptions>
+  nameWithType: IConfigureOptions<TOptions>
+  fullName: Microsoft.Extensions.Options.IConfigureOptions<TOptions>
+  nameWithType.vb: IConfigureOptions(Of TOptions)
+  fullName.vb: Microsoft.Extensions.Options.IConfigureOptions(Of TOptions)
+  name.vb: IConfigureOptions(Of TOptions)
+  spec.csharp:
+  - uid: Microsoft.Extensions.Options.IConfigureOptions`1
+    name: IConfigureOptions
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.options.iconfigureoptions-1
+  - name: <
+  - name: TOptions
+  - name: '>'
+  spec.vb:
+  - uid: Microsoft.Extensions.Options.IConfigureOptions`1
+    name: IConfigureOptions
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.options.iconfigureoptions-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TOptions
+  - name: )
+- uid: ChristopherBriddock.Service.Identity.Options.ConfigureJwtBearerOptions.#ctor*
+  commentId: Overload:ChristopherBriddock.Service.Identity.Options.ConfigureJwtBearerOptions.#ctor
+  href: ChristopherBriddock.Service.Identity.Options.ConfigureJwtBearerOptions.html#ChristopherBriddock_Service_Identity_Options_ConfigureJwtBearerOptions__ctor_Microsoft_Extensions_Configuration_IConfiguration_
+  name: ConfigureJwtBearerOptions
+  nameWithType: ConfigureJwtBearerOptions.ConfigureJwtBearerOptions
+  fullName: ChristopherBriddock.Service.Identity.Options.ConfigureJwtBearerOptions.ConfigureJwtBearerOptions
+  nameWithType.vb: ConfigureJwtBearerOptions.New
+  fullName.vb: ChristopherBriddock.Service.Identity.Options.ConfigureJwtBearerOptions.New
+  name.vb: New
+- uid: Microsoft.Extensions.Configuration.IConfiguration
+  commentId: T:Microsoft.Extensions.Configuration.IConfiguration
+  parent: Microsoft.Extensions.Configuration
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.configuration.iconfiguration
+  name: IConfiguration
+  nameWithType: IConfiguration
+  fullName: Microsoft.Extensions.Configuration.IConfiguration
+- uid: Microsoft.Extensions.Configuration
+  commentId: N:Microsoft.Extensions.Configuration
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft
+  name: Microsoft.Extensions.Configuration
+  nameWithType: Microsoft.Extensions.Configuration
+  fullName: Microsoft.Extensions.Configuration
+  spec.csharp:
+  - uid: Microsoft
+    name: Microsoft
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft
+  - name: .
+  - uid: Microsoft.Extensions
+    name: Extensions
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions
+  - name: .
+  - uid: Microsoft.Extensions.Configuration
+    name: Configuration
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.configuration
+  spec.vb:
+  - uid: Microsoft
+    name: Microsoft
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft
+  - name: .
+  - uid: Microsoft.Extensions
+    name: Extensions
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions
+  - name: .
+  - uid: Microsoft.Extensions.Configuration
+    name: Configuration
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.configuration
+- uid: ChristopherBriddock.Service.Identity.Options.ConfigureJwtBearerOptions.Configure*
+  commentId: Overload:ChristopherBriddock.Service.Identity.Options.ConfigureJwtBearerOptions.Configure
+  href: ChristopherBriddock.Service.Identity.Options.ConfigureJwtBearerOptions.html#ChristopherBriddock_Service_Identity_Options_ConfigureJwtBearerOptions_Configure_System_String_Microsoft_AspNetCore_Authentication_JwtBearer_JwtBearerOptions_
+  name: Configure
+  nameWithType: ConfigureJwtBearerOptions.Configure
+  fullName: ChristopherBriddock.Service.Identity.Options.ConfigureJwtBearerOptions.Configure
+- uid: Microsoft.Extensions.Options.IConfigureNamedOptions{Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions}.Configure(System.String,Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions)
+  commentId: M:Microsoft.Extensions.Options.IConfigureNamedOptions{Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions}.Configure(System.String,Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions)
+  parent: Microsoft.Extensions.Options.IConfigureNamedOptions{Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions}
+  definition: Microsoft.Extensions.Options.IConfigureNamedOptions`1.Configure(System.String,`0)
+  href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.options.iconfigurenamedoptions-1.configure
+  name: Configure(string, JwtBearerOptions)
+  nameWithType: IConfigureNamedOptions<JwtBearerOptions>.Configure(string, JwtBearerOptions)
+  fullName: Microsoft.Extensions.Options.IConfigureNamedOptions<Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions>.Configure(string, Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions)
+  nameWithType.vb: IConfigureNamedOptions(Of JwtBearerOptions).Configure(String, JwtBearerOptions)
+  fullName.vb: Microsoft.Extensions.Options.IConfigureNamedOptions(Of Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions).Configure(String, Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions)
+  name.vb: Configure(String, JwtBearerOptions)
+  spec.csharp:
+  - uid: Microsoft.Extensions.Options.IConfigureNamedOptions{Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions}.Configure(System.String,Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions)
+    name: Configure
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.options.iconfigurenamedoptions-1.configure
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions
+    name: JwtBearerOptions
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.authentication.jwtbearer.jwtbeareroptions
+  - name: )
+  spec.vb:
+  - uid: Microsoft.Extensions.Options.IConfigureNamedOptions{Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions}.Configure(System.String,Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions)
+    name: Configure
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.options.iconfigurenamedoptions-1.configure
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions
+    name: JwtBearerOptions
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.authentication.jwtbearer.jwtbeareroptions
+  - name: )
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions
+  commentId: T:Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions
+  parent: Microsoft.AspNetCore.Authentication.JwtBearer
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.authentication.jwtbearer.jwtbeareroptions
+  name: JwtBearerOptions
+  nameWithType: JwtBearerOptions
+  fullName: Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions
+- uid: Microsoft.Extensions.Options.IConfigureNamedOptions`1.Configure(System.String,`0)
+  commentId: M:Microsoft.Extensions.Options.IConfigureNamedOptions`1.Configure(System.String,`0)
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.options.iconfigurenamedoptions-1.configure
+  name: Configure(string, TOptions)
+  nameWithType: IConfigureNamedOptions<TOptions>.Configure(string, TOptions)
+  fullName: Microsoft.Extensions.Options.IConfigureNamedOptions<TOptions>.Configure(string, TOptions)
+  nameWithType.vb: IConfigureNamedOptions(Of TOptions).Configure(String, TOptions)
+  fullName.vb: Microsoft.Extensions.Options.IConfigureNamedOptions(Of TOptions).Configure(String, TOptions)
+  name.vb: Configure(String, TOptions)
+  spec.csharp:
+  - uid: Microsoft.Extensions.Options.IConfigureNamedOptions`1.Configure(System.String,`0)
+    name: Configure
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.options.iconfigurenamedoptions-1.configure
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - name: TOptions
+  - name: )
+  spec.vb:
+  - uid: Microsoft.Extensions.Options.IConfigureNamedOptions`1.Configure(System.String,`0)
+    name: Configure
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.options.iconfigurenamedoptions-1.configure
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - name: TOptions
+  - name: )
+- uid: Microsoft.AspNetCore.Authentication.JwtBearer
+  commentId: N:Microsoft.AspNetCore.Authentication.JwtBearer
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft
+  name: Microsoft.AspNetCore.Authentication.JwtBearer
+  nameWithType: Microsoft.AspNetCore.Authentication.JwtBearer
+  fullName: Microsoft.AspNetCore.Authentication.JwtBearer
+  spec.csharp:
+  - uid: Microsoft
+    name: Microsoft
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft
+  - name: .
+  - uid: Microsoft.AspNetCore
+    name: AspNetCore
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore
+  - name: .
+  - uid: Microsoft.AspNetCore.Authentication
+    name: Authentication
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.authentication
+  - name: .
+  - uid: Microsoft.AspNetCore.Authentication.JwtBearer
+    name: JwtBearer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.authentication.jwtbearer
+  spec.vb:
+  - uid: Microsoft
+    name: Microsoft
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft
+  - name: .
+  - uid: Microsoft.AspNetCore
+    name: AspNetCore
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore
+  - name: .
+  - uid: Microsoft.AspNetCore.Authentication
+    name: Authentication
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.authentication
+  - name: .
+  - uid: Microsoft.AspNetCore.Authentication.JwtBearer
+    name: JwtBearer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.authentication.jwtbearer
+- uid: Microsoft.Extensions.Options.IConfigureOptions{Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions}.Configure(Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions)
+  commentId: M:Microsoft.Extensions.Options.IConfigureOptions{Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions}.Configure(Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions)
+  parent: Microsoft.Extensions.Options.IConfigureOptions{Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions}
+  definition: Microsoft.Extensions.Options.IConfigureOptions`1.Configure(`0)
+  href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.options.iconfigureoptions-1.configure
+  name: Configure(JwtBearerOptions)
+  nameWithType: IConfigureOptions<JwtBearerOptions>.Configure(JwtBearerOptions)
+  fullName: Microsoft.Extensions.Options.IConfigureOptions<Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions>.Configure(Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions)
+  nameWithType.vb: IConfigureOptions(Of JwtBearerOptions).Configure(JwtBearerOptions)
+  fullName.vb: Microsoft.Extensions.Options.IConfigureOptions(Of Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions).Configure(Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions)
+  spec.csharp:
+  - uid: Microsoft.Extensions.Options.IConfigureOptions{Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions}.Configure(Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions)
+    name: Configure
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.options.iconfigureoptions-1.configure
+  - name: (
+  - uid: Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions
+    name: JwtBearerOptions
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.authentication.jwtbearer.jwtbeareroptions
+  - name: )
+  spec.vb:
+  - uid: Microsoft.Extensions.Options.IConfigureOptions{Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions}.Configure(Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions)
+    name: Configure
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.options.iconfigureoptions-1.configure
+  - name: (
+  - uid: Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions
+    name: JwtBearerOptions
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.authentication.jwtbearer.jwtbeareroptions
+  - name: )
+- uid: Microsoft.Extensions.Options.IConfigureOptions`1.Configure(`0)
+  commentId: M:Microsoft.Extensions.Options.IConfigureOptions`1.Configure(`0)
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.options.iconfigureoptions-1.configure
+  name: Configure(TOptions)
+  nameWithType: IConfigureOptions<TOptions>.Configure(TOptions)
+  fullName: Microsoft.Extensions.Options.IConfigureOptions<TOptions>.Configure(TOptions)
+  nameWithType.vb: IConfigureOptions(Of TOptions).Configure(TOptions)
+  fullName.vb: Microsoft.Extensions.Options.IConfigureOptions(Of TOptions).Configure(TOptions)
+  spec.csharp:
+  - uid: Microsoft.Extensions.Options.IConfigureOptions`1.Configure(`0)
+    name: Configure
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.options.iconfigureoptions-1.configure
+  - name: (
+  - name: TOptions
+  - name: )
+  spec.vb:
+  - uid: Microsoft.Extensions.Options.IConfigureOptions`1.Configure(`0)
+    name: Configure
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.options.iconfigureoptions-1.configure
+  - name: (
+  - name: TOptions
+  - name: )

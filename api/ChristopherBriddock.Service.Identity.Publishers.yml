@@ -1,0 +1,76 @@
+### YamlMime:ManagedReference
+items:
+- uid: ChristopherBriddock.Service.Identity.Publishers
+  commentId: N:ChristopherBriddock.Service.Identity.Publishers
+  id: ChristopherBriddock.Service.Identity.Publishers
+  children:
+  - ChristopherBriddock.Service.Identity.Publishers.EmailPublisher
+  - ChristopherBriddock.Service.Identity.Publishers.IEmailPublisher
+  - ChristopherBriddock.Service.Identity.Publishers.NullEmailPublisher
+  langs:
+  - csharp
+  - vb
+  name: ChristopherBriddock.Service.Identity.Publishers
+  nameWithType: ChristopherBriddock.Service.Identity.Publishers
+  fullName: ChristopherBriddock.Service.Identity.Publishers
+  type: Namespace
+  assemblies:
+  - ChristopherBriddock.Service.Identity
+references:
+- uid: ChristopherBriddock.Service.Identity.Publishers.EmailPublisher
+  commentId: T:ChristopherBriddock.Service.Identity.Publishers.EmailPublisher
+  href: ChristopherBriddock.Service.Identity.Publishers.EmailPublisher.html
+  name: EmailPublisher
+  nameWithType: EmailPublisher
+  fullName: ChristopherBriddock.Service.Identity.Publishers.EmailPublisher
+- uid: ChristopherBriddock.Service.Identity.Publishers.IEmailPublisher
+  commentId: T:ChristopherBriddock.Service.Identity.Publishers.IEmailPublisher
+  parent: ChristopherBriddock.Service.Identity.Publishers
+  href: ChristopherBriddock.Service.Identity.Publishers.IEmailPublisher.html
+  name: IEmailPublisher
+  nameWithType: IEmailPublisher
+  fullName: ChristopherBriddock.Service.Identity.Publishers.IEmailPublisher
+- uid: ChristopherBriddock.Service.Identity.Publishers.NullEmailPublisher
+  commentId: T:ChristopherBriddock.Service.Identity.Publishers.NullEmailPublisher
+  href: ChristopherBriddock.Service.Identity.Publishers.NullEmailPublisher.html
+  name: NullEmailPublisher
+  nameWithType: NullEmailPublisher
+  fullName: ChristopherBriddock.Service.Identity.Publishers.NullEmailPublisher
+- uid: ChristopherBriddock.Service.Identity.Publishers
+  commentId: N:ChristopherBriddock.Service.Identity.Publishers
+  href: ChristopherBriddock.html
+  name: ChristopherBriddock.Service.Identity.Publishers
+  nameWithType: ChristopherBriddock.Service.Identity.Publishers
+  fullName: ChristopherBriddock.Service.Identity.Publishers
+  spec.csharp:
+  - uid: ChristopherBriddock
+    name: ChristopherBriddock
+    href: ChristopherBriddock.html
+  - name: .
+  - uid: ChristopherBriddock.Service
+    name: Service
+    href: ChristopherBriddock.Service.html
+  - name: .
+  - uid: ChristopherBriddock.Service.Identity
+    name: Identity
+    href: ChristopherBriddock.Service.Identity.html
+  - name: .
+  - uid: ChristopherBriddock.Service.Identity.Publishers
+    name: Publishers
+    href: ChristopherBriddock.Service.Identity.Publishers.html
+  spec.vb:
+  - uid: ChristopherBriddock
+    name: ChristopherBriddock
+    href: ChristopherBriddock.html
+  - name: .
+  - uid: ChristopherBriddock.Service
+    name: Service
+    href: ChristopherBriddock.Service.html
+  - name: .
+  - uid: ChristopherBriddock.Service.Identity
+    name: Identity
+    href: ChristopherBriddock.Service.Identity.html
+  - name: .
+  - uid: ChristopherBriddock.Service.Identity.Publishers
+    name: Publishers
+    href: ChristopherBriddock.Service.Identity.Publishers.html

@@ -1,0 +1,23 @@
+### YamlMime:ManagedReference
+items:
+- uid: ChristopherBriddock.Service.Identity.Options
+  commentId: N:ChristopherBriddock.Service.Identity.Options
+  id: ChristopherBriddock.Service.Identity.Options
+  children:
+  - ChristopherBriddock.Service.Identity.Options.ConfigureJwtBearerOptions
+  langs:
+  - csharp
+  - vb
+  name: ChristopherBriddock.Service.Identity.Options
+  nameWithType: ChristopherBriddock.Service.Identity.Options
+  fullName: ChristopherBriddock.Service.Identity.Options
+  type: Namespace
+  assemblies:
+  - ChristopherBriddock.Service.Identity
+references:
+- uid: ChristopherBriddock.Service.Identity.Options.ConfigureJwtBearerOptions
+  commentId: T:ChristopherBriddock.Service.Identity.Options.ConfigureJwtBearerOptions
+  href: ChristopherBriddock.Service.Identity.Options.ConfigureJwtBearerOptions.html
+  name: ConfigureJwtBearerOptions
+  nameWithType: ConfigureJwtBearerOptions
+  fullName: ChristopherBriddock.Service.Identity.Options.ConfigureJwtBearerOptions

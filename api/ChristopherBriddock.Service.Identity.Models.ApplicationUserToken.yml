@@ -1,0 +1,472 @@
+### YamlMime:ManagedReference
+items:
+- uid: ChristopherBriddock.Service.Identity.Models.ApplicationUserToken
+  commentId: T:ChristopherBriddock.Service.Identity.Models.ApplicationUserToken
+  id: ApplicationUserToken
+  parent: ChristopherBriddock.Service.Identity.Models
+  children: []
+  langs:
+  - csharp
+  - vb
+  name: ApplicationUserToken
+  nameWithType: ApplicationUserToken
+  fullName: ChristopherBriddock.Service.Identity.Models.ApplicationUserToken
+  type: Class
+  source:
+    remote:
+      path: src/ChristopherBriddock.Service.Identity/Models/ApplicationUserToken.cs
+      branch: dev
+      repo: https://github.com/chris-briddock/ChristopherBriddock.Identity.git
+    id: ApplicationUserToken
+    path: src/ChristopherBriddock.Service.Identity/Models/ApplicationUserToken.cs
+    startLine: 5
+  assemblies:
+  - ChristopherBriddock.Service.Identity
+  namespace: ChristopherBriddock.Service.Identity.Models
+  summary: Represents an authentication token for a user.
+  example: []
+  syntax:
+    content: 'public sealed class ApplicationUserToken : IdentityUserToken<Guid>'
+    content.vb: Public NotInheritable Class ApplicationUserToken Inherits IdentityUserToken(Of Guid)
+  inheritance:
+  - System.Object
+  - Microsoft.AspNetCore.Identity.IdentityUserToken{System.Guid}
+  inheritedMembers:
+  - Microsoft.AspNetCore.Identity.IdentityUserToken{System.Guid}.UserId
+  - Microsoft.AspNetCore.Identity.IdentityUserToken{System.Guid}.LoginProvider
+  - Microsoft.AspNetCore.Identity.IdentityUserToken{System.Guid}.Name
+  - Microsoft.AspNetCore.Identity.IdentityUserToken{System.Guid}.Value
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+references:
+- uid: ChristopherBriddock.Service.Identity.Models
+  commentId: N:ChristopherBriddock.Service.Identity.Models
+  href: ChristopherBriddock.html
+  name: ChristopherBriddock.Service.Identity.Models
+  nameWithType: ChristopherBriddock.Service.Identity.Models
+  fullName: ChristopherBriddock.Service.Identity.Models
+  spec.csharp:
+  - uid: ChristopherBriddock
+    name: ChristopherBriddock
+    href: ChristopherBriddock.html
+  - name: .
+  - uid: ChristopherBriddock.Service
+    name: Service
+    href: ChristopherBriddock.Service.html
+  - name: .
+  - uid: ChristopherBriddock.Service.Identity
+    name: Identity
+    href: ChristopherBriddock.Service.Identity.html
+  - name: .
+  - uid: ChristopherBriddock.Service.Identity.Models
+    name: Models
+    href: ChristopherBriddock.Service.Identity.Models.html
+  spec.vb:
+  - uid: ChristopherBriddock
+    name: ChristopherBriddock
+    href: ChristopherBriddock.html
+  - name: .
+  - uid: ChristopherBriddock.Service
+    name: Service
+    href: ChristopherBriddock.Service.html
+  - name: .
+  - uid: ChristopherBriddock.Service.Identity
+    name: Identity
+    href: ChristopherBriddock.Service.Identity.html
+  - name: .
+  - uid: ChristopherBriddock.Service.Identity.Models
+    name: Models
+    href: ChristopherBriddock.Service.Identity.Models.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: Microsoft.AspNetCore.Identity.IdentityUserToken{System.Guid}
+  commentId: T:Microsoft.AspNetCore.Identity.IdentityUserToken{System.Guid}
+  parent: Microsoft.AspNetCore.Identity
+  definition: Microsoft.AspNetCore.Identity.IdentityUserToken`1
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityusertoken-1
+  name: IdentityUserToken<Guid>
+  nameWithType: IdentityUserToken<Guid>
+  fullName: Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>
+  nameWithType.vb: IdentityUserToken(Of Guid)
+  fullName.vb: Microsoft.AspNetCore.Identity.IdentityUserToken(Of System.Guid)
+  name.vb: IdentityUserToken(Of Guid)
+  spec.csharp:
+  - uid: Microsoft.AspNetCore.Identity.IdentityUserToken`1
+    name: IdentityUserToken
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityusertoken-1
+  - name: <
+  - uid: System.Guid
+    name: Guid
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.guid
+  - name: '>'
+  spec.vb:
+  - uid: Microsoft.AspNetCore.Identity.IdentityUserToken`1
+    name: IdentityUserToken
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityusertoken-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Guid
+    name: Guid
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.guid
+  - name: )
+- uid: Microsoft.AspNetCore.Identity.IdentityUserToken{System.Guid}.UserId
+  commentId: P:Microsoft.AspNetCore.Identity.IdentityUserToken{System.Guid}.UserId
+  parent: Microsoft.AspNetCore.Identity.IdentityUserToken{System.Guid}
+  definition: Microsoft.AspNetCore.Identity.IdentityUserToken`1.UserId
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityusertoken-1.userid
+  name: UserId
+  nameWithType: IdentityUserToken<Guid>.UserId
+  fullName: Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>.UserId
+  nameWithType.vb: IdentityUserToken(Of Guid).UserId
+  fullName.vb: Microsoft.AspNetCore.Identity.IdentityUserToken(Of System.Guid).UserId
+- uid: Microsoft.AspNetCore.Identity.IdentityUserToken{System.Guid}.LoginProvider
+  commentId: P:Microsoft.AspNetCore.Identity.IdentityUserToken{System.Guid}.LoginProvider
+  parent: Microsoft.AspNetCore.Identity.IdentityUserToken{System.Guid}
+  definition: Microsoft.AspNetCore.Identity.IdentityUserToken`1.LoginProvider
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityusertoken-1.loginprovider
+  name: LoginProvider
+  nameWithType: IdentityUserToken<Guid>.LoginProvider
+  fullName: Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>.LoginProvider
+  nameWithType.vb: IdentityUserToken(Of Guid).LoginProvider
+  fullName.vb: Microsoft.AspNetCore.Identity.IdentityUserToken(Of System.Guid).LoginProvider
+- uid: Microsoft.AspNetCore.Identity.IdentityUserToken{System.Guid}.Name
+  commentId: P:Microsoft.AspNetCore.Identity.IdentityUserToken{System.Guid}.Name
+  parent: Microsoft.AspNetCore.Identity.IdentityUserToken{System.Guid}
+  definition: Microsoft.AspNetCore.Identity.IdentityUserToken`1.Name
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityusertoken-1.name
+  name: Name
+  nameWithType: IdentityUserToken<Guid>.Name
+  fullName: Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>.Name
+  nameWithType.vb: IdentityUserToken(Of Guid).Name
+  fullName.vb: Microsoft.AspNetCore.Identity.IdentityUserToken(Of System.Guid).Name
+- uid: Microsoft.AspNetCore.Identity.IdentityUserToken{System.Guid}.Value
+  commentId: P:Microsoft.AspNetCore.Identity.IdentityUserToken{System.Guid}.Value
+  parent: Microsoft.AspNetCore.Identity.IdentityUserToken{System.Guid}
+  definition: Microsoft.AspNetCore.Identity.IdentityUserToken`1.Value
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityusertoken-1.value
+  name: Value
+  nameWithType: IdentityUserToken<Guid>.Value
+  fullName: Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>.Value
+  nameWithType.vb: IdentityUserToken(Of Guid).Value
+  fullName.vb: Microsoft.AspNetCore.Identity.IdentityUserToken(Of System.Guid).Value
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Microsoft.AspNetCore.Identity.IdentityUserToken`1
+  commentId: T:Microsoft.AspNetCore.Identity.IdentityUserToken`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityusertoken-1
+  name: IdentityUserToken<TKey>
+  nameWithType: IdentityUserToken<TKey>
+  fullName: Microsoft.AspNetCore.Identity.IdentityUserToken<TKey>
+  nameWithType.vb: IdentityUserToken(Of TKey)
+  fullName.vb: Microsoft.AspNetCore.Identity.IdentityUserToken(Of TKey)
+  name.vb: IdentityUserToken(Of TKey)
+  spec.csharp:
+  - uid: Microsoft.AspNetCore.Identity.IdentityUserToken`1
+    name: IdentityUserToken
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityusertoken-1
+  - name: <
+  - name: TKey
+  - name: '>'
+  spec.vb:
+  - uid: Microsoft.AspNetCore.Identity.IdentityUserToken`1
+    name: IdentityUserToken
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityusertoken-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TKey
+  - name: )
+- uid: Microsoft.AspNetCore.Identity
+  commentId: N:Microsoft.AspNetCore.Identity
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft
+  name: Microsoft.AspNetCore.Identity
+  nameWithType: Microsoft.AspNetCore.Identity
+  fullName: Microsoft.AspNetCore.Identity
+  spec.csharp:
+  - uid: Microsoft
+    name: Microsoft
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft
+  - name: .
+  - uid: Microsoft.AspNetCore
+    name: AspNetCore
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore
+  - name: .
+  - uid: Microsoft.AspNetCore.Identity
+    name: Identity
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity
+  spec.vb:
+  - uid: Microsoft
+    name: Microsoft
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft
+  - name: .
+  - uid: Microsoft.AspNetCore
+    name: AspNetCore
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore
+  - name: .
+  - uid: Microsoft.AspNetCore.Identity
+    name: Identity
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity
+- uid: Microsoft.AspNetCore.Identity.IdentityUserToken`1.UserId
+  commentId: P:Microsoft.AspNetCore.Identity.IdentityUserToken`1.UserId
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityusertoken-1.userid
+  name: UserId
+  nameWithType: IdentityUserToken<TKey>.UserId
+  fullName: Microsoft.AspNetCore.Identity.IdentityUserToken<TKey>.UserId
+  nameWithType.vb: IdentityUserToken(Of TKey).UserId
+  fullName.vb: Microsoft.AspNetCore.Identity.IdentityUserToken(Of TKey).UserId
+- uid: Microsoft.AspNetCore.Identity.IdentityUserToken`1.LoginProvider
+  commentId: P:Microsoft.AspNetCore.Identity.IdentityUserToken`1.LoginProvider
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityusertoken-1.loginprovider
+  name: LoginProvider
+  nameWithType: IdentityUserToken<TKey>.LoginProvider
+  fullName: Microsoft.AspNetCore.Identity.IdentityUserToken<TKey>.LoginProvider
+  nameWithType.vb: IdentityUserToken(Of TKey).LoginProvider
+  fullName.vb: Microsoft.AspNetCore.Identity.IdentityUserToken(Of TKey).LoginProvider
+- uid: Microsoft.AspNetCore.Identity.IdentityUserToken`1.Name
+  commentId: P:Microsoft.AspNetCore.Identity.IdentityUserToken`1.Name
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityusertoken-1.name
+  name: Name
+  nameWithType: IdentityUserToken<TKey>.Name
+  fullName: Microsoft.AspNetCore.Identity.IdentityUserToken<TKey>.Name
+  nameWithType.vb: IdentityUserToken(Of TKey).Name
+  fullName.vb: Microsoft.AspNetCore.Identity.IdentityUserToken(Of TKey).Name
+- uid: Microsoft.AspNetCore.Identity.IdentityUserToken`1.Value
+  commentId: P:Microsoft.AspNetCore.Identity.IdentityUserToken`1.Value
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.identityusertoken-1.value
+  name: Value
+  nameWithType: IdentityUserToken<TKey>.Value
+  fullName: Microsoft.AspNetCore.Identity.IdentityUserToken<TKey>.Value
+  nameWithType.vb: IdentityUserToken(Of TKey).Value
+  fullName.vb: Microsoft.AspNetCore.Identity.IdentityUserToken(Of TKey).Value
