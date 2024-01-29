@@ -3,6 +3,7 @@ using ChristopherBriddock.Service.Common.Constants;
 using ChristopherBriddock.Service.Common.Messaging;
 using ChristopherBriddock.Service.Identity.Models;
 using ChristopherBriddock.Service.Identity.Models.Requests;
+using ChristopherBriddock.Service.Identity.Providers;
 using ChristopherBriddock.Service.Identity.Publishers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -50,6 +51,7 @@ public sealed class ForgotPasswordEndpoint(IServiceProvider services,
             var userManager = Services.GetService<UserManager<ApplicationUser>>()!;
             var user = await userManager.FindByEmailAsync(request.EmailAddress);
             var emailPublisher = Services.GetService<IEmailPublisher>()!;
+            var httpContext = Services.GetService<IHttpContextAccessor>()!;
 
             if (user is null)
             {
@@ -62,7 +64,7 @@ public sealed class ForgotPasswordEndpoint(IServiceProvider services,
             EmailMessage message = new()
             {
                 EmailAddress = user.Email!,
-                Code = code,
+                Link = code,
                 Type = EmailPublisherConstants.ForgotPassword
             };
             await emailPublisher.Publish(message, cancellationToken);

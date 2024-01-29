@@ -2,6 +2,7 @@ using ChristopherBriddock.Service.Common.Constants;
 using ChristopherBriddock.Service.Common.Extensions;
 using ChristopherBriddock.Service.Identity.Data;
 using ChristopherBriddock.Service.Identity.Extensions;
+using ChristopherBriddock.Service.Identity.Providers;
 using ChristopherBriddock.Service.Identity.Services;
 using Microsoft.FeatureManagement;
 
@@ -35,6 +36,7 @@ public sealed class Program
         builder.Services.AddCrossOriginPolicy();
         builder.Services.AddPublisherMessaging();
         builder.Services.AddHostedService<AccountPurgeBackgroundService>();
+        builder.Services.AddScoped<ILinkProvider, LinkProvider>();
 
         WebApplication app = builder.Build();
         if (app.Environment.IsDevelopment())

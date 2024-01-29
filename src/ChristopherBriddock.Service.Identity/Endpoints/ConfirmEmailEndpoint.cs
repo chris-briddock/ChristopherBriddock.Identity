@@ -34,7 +34,7 @@ public sealed class ConfirmEmailEndpoint(IServiceProvider services,
     /// <param name="request">The object which encapsulates the request.</param>
     /// <param name="cancellationToken">The cancellation token to cancel the operation.</param>
     /// <returns>A new <see cref="ActionResult"/></returns>
-    [HttpPost("/confirmemail")]
+    [HttpGet("/confirmemail")]
     [AllowAnonymous]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]

@@ -69,10 +69,11 @@ To get started with the Identity Service, follow these steps:
 
 1. Clone the repository: `git clone https://github.com/chris-briddock/ChristopherBriddock.Identity.git`
 2. Open the solution.
-3. Ensure you have an PostgreSQL database available at minimum. 
-4. Optionally you can also run Seq, RabbitMq or Azure Service Bus, Azure Application Insights and Redis.
-5. Please configure all placeholder values in appsettings.json in both services.
-4. Build and run the Web API.
+3. Ensure you have added migrations for the Service.Identity project with Entity Framework Core.
+4. Ensure you have an PostgreSQL database and RabbitMQ or Azure Service Bus available at minimum. 
+5. Optionally you can also use Seq, Azure Application Insights and Redis.
+6. Please configure all placeholder values in appsettings.json in both services.
+7. Build and run the Web API.
 
 ### License
 

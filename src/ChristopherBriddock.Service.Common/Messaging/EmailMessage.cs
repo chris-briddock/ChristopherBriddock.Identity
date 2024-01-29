@@ -16,7 +16,12 @@ public sealed class EmailMessage
     /// </summary>
     public string Type { get; set; } = default!;
     /// <summary>
-    /// The code for two factor, forgotpassword, and registration.
+    /// The link for two factor, forgotpassword, and registration.
+    /// </summary>
+    public string? Link { get; set; } = default!;
+
+    /// <summary>
+    /// The code for the user to enter sent via email.
     /// </summary>
     public string Code { get; set; } = default!;
 }

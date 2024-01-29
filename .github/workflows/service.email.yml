@@ -21,8 +21,8 @@ jobs:
       with:
         dotnet-version: 8.0.x
     - name: Build & Restore
-      run: dotnet build --configuration Release src/ChristopherBriddock.Service.Email/ChristopherBriddock.Service.Email.csproj
+      run: dotnet build --configuration Release src/ChristopherBriddock.WorkerService.Email/ChristopherBriddock.WorkerService.Email.csproj
     - name: Test
-      run: dotnet test --collect:"XPlat Code Coverage" src/ChristopherBriddock.Service.Email.Tests/ChristopherBriddock.Service.Email.Tests.csproj
+      run: dotnet test --collect:"XPlat Code Coverage" src/ChristopherBriddock.WorkerService.Email.Tests/ChristopherBriddock.WorkerService.Email.Tests.csproj
     - name: Publish
-      run: dotnet publish src/ChristopherBriddock.Service.Email/ChristopherBriddock.Service.Email.csproj -c Release
+      run: dotnet publish src/ChristopherBriddock.WorkerService.Email/ChristopherBriddock.WorkerService.Email.csproj -c Release

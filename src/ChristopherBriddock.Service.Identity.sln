@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChristopherBriddock.Service
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChristopherBriddock.Service.Identity.Tests", "ChristopherBriddock.Service.Identity.Tests\ChristopherBriddock.Service.Identity.Tests.csproj", "{019FB266-27C6-4BD1-A0E0-D31B0FE8DC93}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChristopherBriddock.Service.Email", "ChristopherBriddock.Service.Email\ChristopherBriddock.Service.Email.csproj", "{E0E643C5-A4BA-416A-9F84-1C8F7D2EA9A8}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChristopherBriddock.Service.Common", "ChristopherBriddock.Service.Common\ChristopherBriddock.Service.Common.csproj", "{55AF770B-80FF-4735-9014-24008C39E27A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{F12FB90F-85BC-4184-BAE6-90A520AA2072}"
@@ -21,8 +19,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Utilities", "Utilities", "{
 		Set-UserSecrets.ps1 = Set-UserSecrets.ps1
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChristopherBriddock.Service.Email.Tests", "ChristopherBriddock.Service.Email.Tests\ChristopherBriddock.Service.Email.Tests.csproj", "{22E5D170-1DE5-4FAF-988E-E99EAC04EFA1}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Azure Pipelines", "Azure Pipelines", "{43EB3D4E-4A56-49C5-B9D8-F24A2D449846}"
 	ProjectSection(SolutionItems) = preProject
 		..\service.email-azurepipelines-ci.yml = ..\service.email-azurepipelines-ci.yml
@@ -30,6 +26,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Azure Pipelines", "Azure Pi
 	EndProjectSection
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{3E15539C-E6E1-46C5-92F8-C8A6E7B12A77}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChristopherBriddock.WorkerService.Email", "ChristopherBriddock.WorkerService.Email\ChristopherBriddock.WorkerService.Email.csproj", "{749B8DDA-E87C-4B3A-B089-93BC4BC7CF2C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChristopherBriddock.WorkerService.Email.Tests", "ChristopherBriddock.Service.Email.Tests\ChristopherBriddock.WorkerService.Email.Tests.csproj", "{5CE8788E-E652-4D01-9D36-890F0FEEB191}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,29 +45,29 @@ Global
 		{019FB266-27C6-4BD1-A0E0-D31B0FE8DC93}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{019FB266-27C6-4BD1-A0E0-D31B0FE8DC93}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{019FB266-27C6-4BD1-A0E0-D31B0FE8DC93}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E0E643C5-A4BA-416A-9F84-1C8F7D2EA9A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E0E643C5-A4BA-416A-9F84-1C8F7D2EA9A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E0E643C5-A4BA-416A-9F84-1C8F7D2EA9A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E0E643C5-A4BA-416A-9F84-1C8F7D2EA9A8}.Release|Any CPU.Build.0 = Release|Any CPU
 		{55AF770B-80FF-4735-9014-24008C39E27A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{55AF770B-80FF-4735-9014-24008C39E27A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{55AF770B-80FF-4735-9014-24008C39E27A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{55AF770B-80FF-4735-9014-24008C39E27A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{22E5D170-1DE5-4FAF-988E-E99EAC04EFA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{22E5D170-1DE5-4FAF-988E-E99EAC04EFA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{22E5D170-1DE5-4FAF-988E-E99EAC04EFA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{22E5D170-1DE5-4FAF-988E-E99EAC04EFA1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3E15539C-E6E1-46C5-92F8-C8A6E7B12A77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3E15539C-E6E1-46C5-92F8-C8A6E7B12A77}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3E15539C-E6E1-46C5-92F8-C8A6E7B12A77}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3E15539C-E6E1-46C5-92F8-C8A6E7B12A77}.Release|Any CPU.Build.0 = Release|Any CPU
+		{749B8DDA-E87C-4B3A-B089-93BC4BC7CF2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{749B8DDA-E87C-4B3A-B089-93BC4BC7CF2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{749B8DDA-E87C-4B3A-B089-93BC4BC7CF2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{749B8DDA-E87C-4B3A-B089-93BC4BC7CF2C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5CE8788E-E652-4D01-9D36-890F0FEEB191}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CE8788E-E652-4D01-9D36-890F0FEEB191}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5CE8788E-E652-4D01-9D36-890F0FEEB191}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5CE8788E-E652-4D01-9D36-890F0FEEB191}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{019FB266-27C6-4BD1-A0E0-D31B0FE8DC93} = {F12FB90F-85BC-4184-BAE6-90A520AA2072}
-		{22E5D170-1DE5-4FAF-988E-E99EAC04EFA1} = {F12FB90F-85BC-4184-BAE6-90A520AA2072}
+		{5CE8788E-E652-4D01-9D36-890F0FEEB191} = {F12FB90F-85BC-4184-BAE6-90A520AA2072}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AFC8F73B-E3E7-482B-A804-DBF4F6BFD8DC}

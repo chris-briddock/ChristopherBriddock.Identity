@@ -2,9 +2,9 @@
 using MassTransit;
 using Microsoft.FeatureManagement;
 
-namespace ChristopherBriddock.Service.Email.Extensions;
+namespace ChristopherBriddock.WorkerService.Email;
 
-public static class ServiceCollectionExtensions
+internal static class ServiceCollectionExtensions
 {
     /// <summary>
     /// Adds consumer messages for rabbitmq or azure service bus.
@@ -13,11 +13,9 @@ public static class ServiceCollectionExtensions
     /// <returns>The modified <see cref="IServiceCollection"/> instance.</returns>
     public static IServiceCollection AddConsumerMessaging(this IServiceCollection services)
     {
-        var configuration = services.BuildServiceProvider()
-                                    .GetService<IConfiguration>()!;
+        var configuration = services.BuildServiceProvider().GetRequiredService<IConfiguration>();
 
-        var featureManager = services.BuildServiceProvider()
-                                     .GetService<IFeatureManager>()!;
+        var featureManager = services.BuildServiceProvider().GetRequiredService<IFeatureManager>();
 
         if (featureManager.IsEnabledAsync(FeatureFlagConstants.AzServiceBus).Result)
         {
@@ -25,7 +23,7 @@ public static class ServiceCollectionExtensions
             {
                 mt.SetKebabCaseEndpointNameFormatter();
 
-                mt.AddConsumer<EmailConsumer>();
+                mt.AddConsumer<Worker>();
 
                 mt.UsingAzureServiceBus((context, config) =>
                 {
@@ -38,19 +36,22 @@ public static class ServiceCollectionExtensions
         {
 
             services.AddMassTransit(x =>
+        {
+            x.SetKebabCaseEndpointNameFormatter();
+
+            x.AddConsumer<Worker>();
+
+            x.UsingRabbitMq((context, config) =>
             {
-                x.UsingRabbitMq((context, config) =>
+
+                config.Host(configuration["Messaging:RabbitMQ:Hostname"], "/", r =>
                 {
-                    x.SetKebabCaseEndpointNameFormatter();
-                    x.AddConsumer<EmailConsumer>();
-                    config.Host(configuration["Messaging:RabbitMQ:Hostname"], "/", r =>
-                    {
-                        r.Username(configuration["Messaging:RabbitMQ:Username"]);
-                        r.Password(configuration["Messaging:RabbitMQ:Password"]);
-                    });
-                    config.ConfigureEndpoints(context);
+                    r.Username(configuration["Messaging:RabbitMQ:Username"]);
+                    r.Password(configuration["Messaging:RabbitMQ:Password"]);
                 });
+                config.ConfigureEndpoints(context);
             });
+        });
 
         }
         return services;

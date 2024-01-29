@@ -3,6 +3,7 @@ using ChristopherBriddock.Service.Common.Constants;
 using ChristopherBriddock.Service.Common.Messaging;
 using ChristopherBriddock.Service.Identity.Models;
 using ChristopherBriddock.Service.Identity.Models.Requests;
+using ChristopherBriddock.Service.Identity.Providers;
 using ChristopherBriddock.Service.Identity.Publishers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -52,6 +53,8 @@ public sealed class TwoFactorTokenEmailEndpoint(IServiceProvider services,
             var userEmail = request.Email;
             var userManager = Services.GetService<UserManager<ApplicationUser>>()!;
             var emailPublisher = Services.GetService<IEmailPublisher>()!;
+            var httpContext = Services.GetService<IHttpContextAccessor>()!;
+            var linkGenerator = Services.GetService<ILinkProvider>()!;
             if (userEmail is null)
                 return BadRequest();
 
@@ -62,10 +65,17 @@ public sealed class TwoFactorTokenEmailEndpoint(IServiceProvider services,
 
             var code = await userManager.GenerateTwoFactorTokenAsync(user!, TokenOptions.DefaultProvider);
 
+            var routeValues = new RouteValueDictionary()
+            {
+                ["token"] = code,
+            };
+
+            string? twoFactorUri = linkGenerator.GetUri(httpContext.HttpContext!, "2fa/authorise", routeValues);
+
             EmailMessage message = new()
             {
                 EmailAddress = user.Email!,
-                Code = code,
+                Link = twoFactorUri ,
                 Type = EmailPublisherConstants.TwoFactorToken
             };
             await emailPublisher.Publish(message, cancellationToken);
