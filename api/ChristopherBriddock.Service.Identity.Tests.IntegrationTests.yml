@@ -1,0 +1,72 @@
+### YamlMime:ManagedReference
+items:
+- uid: ChristopherBriddock.Service.Identity.Tests.IntegrationTests
+  commentId: N:ChristopherBriddock.Service.Identity.Tests.IntegrationTests
+  id: ChristopherBriddock.Service.Identity.Tests.IntegrationTests
+  children:
+  - ChristopherBriddock.Service.Identity.Tests.IntegrationTests.AuthoriseEndpointTests
+  - ChristopherBriddock.Service.Identity.Tests.IntegrationTests.ConfirmEmailEndpointTests
+  - ChristopherBriddock.Service.Identity.Tests.IntegrationTests.DeleteAccountEndpointTests
+  - ChristopherBriddock.Service.Identity.Tests.IntegrationTests.ForgotPasswordEndpointTests
+  - ChristopherBriddock.Service.Identity.Tests.IntegrationTests.LogoutEndpointTests
+  - ChristopherBriddock.Service.Identity.Tests.IntegrationTests.RefreshEndpointTests
+  - ChristopherBriddock.Service.Identity.Tests.IntegrationTests.RegisterEndpointTests
+  - ChristopherBriddock.Service.Identity.Tests.IntegrationTests.ResetPasswordEndpointTests
+  langs:
+  - csharp
+  - vb
+  name: ChristopherBriddock.Service.Identity.Tests.IntegrationTests
+  nameWithType: ChristopherBriddock.Service.Identity.Tests.IntegrationTests
+  fullName: ChristopherBriddock.Service.Identity.Tests.IntegrationTests
+  type: Namespace
+  assemblies:
+  - ChristopherBriddock.Service.Identity.Tests
+references:
+- uid: ChristopherBriddock.Service.Identity.Tests.IntegrationTests.AuthoriseEndpointTests
+  commentId: T:ChristopherBriddock.Service.Identity.Tests.IntegrationTests.AuthoriseEndpointTests
+  href: ChristopherBriddock.Service.Identity.Tests.IntegrationTests.AuthoriseEndpointTests.html
+  name: AuthoriseEndpointTests
+  nameWithType: AuthoriseEndpointTests
+  fullName: ChristopherBriddock.Service.Identity.Tests.IntegrationTests.AuthoriseEndpointTests
+- uid: ChristopherBriddock.Service.Identity.Tests.IntegrationTests.ConfirmEmailEndpointTests
+  commentId: T:ChristopherBriddock.Service.Identity.Tests.IntegrationTests.ConfirmEmailEndpointTests
+  href: ChristopherBriddock.Service.Identity.Tests.IntegrationTests.ConfirmEmailEndpointTests.html
+  name: ConfirmEmailEndpointTests
+  nameWithType: ConfirmEmailEndpointTests
+  fullName: ChristopherBriddock.Service.Identity.Tests.IntegrationTests.ConfirmEmailEndpointTests
+- uid: ChristopherBriddock.Service.Identity.Tests.IntegrationTests.DeleteAccountEndpointTests
+  commentId: T:ChristopherBriddock.Service.Identity.Tests.IntegrationTests.DeleteAccountEndpointTests
+  href: ChristopherBriddock.Service.Identity.Tests.IntegrationTests.DeleteAccountEndpointTests.html
+  name: DeleteAccountEndpointTests
+  nameWithType: DeleteAccountEndpointTests
+  fullName: ChristopherBriddock.Service.Identity.Tests.IntegrationTests.DeleteAccountEndpointTests
+- uid: ChristopherBriddock.Service.Identity.Tests.IntegrationTests.ForgotPasswordEndpointTests
+  commentId: T:ChristopherBriddock.Service.Identity.Tests.IntegrationTests.ForgotPasswordEndpointTests
+  href: ChristopherBriddock.Service.Identity.Tests.IntegrationTests.ForgotPasswordEndpointTests.html
+  name: ForgotPasswordEndpointTests
+  nameWithType: ForgotPasswordEndpointTests
+  fullName: ChristopherBriddock.Service.Identity.Tests.IntegrationTests.ForgotPasswordEndpointTests
+- uid: ChristopherBriddock.Service.Identity.Tests.IntegrationTests.LogoutEndpointTests
+  commentId: T:ChristopherBriddock.Service.Identity.Tests.IntegrationTests.LogoutEndpointTests
+  href: ChristopherBriddock.Service.Identity.Tests.IntegrationTests.LogoutEndpointTests.html
+  name: LogoutEndpointTests
+  nameWithType: LogoutEndpointTests
+  fullName: ChristopherBriddock.Service.Identity.Tests.IntegrationTests.LogoutEndpointTests
+- uid: ChristopherBriddock.Service.Identity.Tests.IntegrationTests.RefreshEndpointTests
+  commentId: T:ChristopherBriddock.Service.Identity.Tests.IntegrationTests.RefreshEndpointTests
+  href: ChristopherBriddock.Service.Identity.Tests.IntegrationTests.RefreshEndpointTests.html
+  name: RefreshEndpointTests
+  nameWithType: RefreshEndpointTests
+  fullName: ChristopherBriddock.Service.Identity.Tests.IntegrationTests.RefreshEndpointTests
+- uid: ChristopherBriddock.Service.Identity.Tests.IntegrationTests.RegisterEndpointTests
+  commentId: T:ChristopherBriddock.Service.Identity.Tests.IntegrationTests.RegisterEndpointTests
+  href: ChristopherBriddock.Service.Identity.Tests.IntegrationTests.RegisterEndpointTests.html
+  name: RegisterEndpointTests
+  nameWithType: RegisterEndpointTests
+  fullName: ChristopherBriddock.Service.Identity.Tests.IntegrationTests.RegisterEndpointTests
+- uid: ChristopherBriddock.Service.Identity.Tests.IntegrationTests.ResetPasswordEndpointTests
+  commentId: T:ChristopherBriddock.Service.Identity.Tests.IntegrationTests.ResetPasswordEndpointTests
+  href: ChristopherBriddock.Service.Identity.Tests.IntegrationTests.ResetPasswordEndpointTests.html
+  name: ResetPasswordEndpointTests
+  nameWithType: ResetPasswordEndpointTests
+  fullName: ChristopherBriddock.Service.Identity.Tests.IntegrationTests.ResetPasswordEndpointTests

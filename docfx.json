@@ -1,0 +1,39 @@
+{
+  "metadata": [
+    {
+      "src": ["src/**/*.csproj"],
+      "dest": "api",
+      "disableDefaultFilter": true
+    }
+  ],
+  "build": {
+    "content": [
+      {
+        "files": [
+          "**/*.{md,yml}"
+        ],
+        "exclude": [
+          "_site/**"
+        ]
+      }
+    ],
+    "resource": [
+      {
+        "files": [
+          "images/**"
+        ]
+      }
+    ],
+    "output": "_site",
+    "template": [
+      "default",
+      "modern"
+    ],
+    "globalMetadata": {
+      "_appName": "ChristopherBriddock.Identity",
+      "_appTitle": "ChristopherBriddock.Identity",
+      "_enableSearch": true,
+      "pdf": true
+    }
+  }
+}

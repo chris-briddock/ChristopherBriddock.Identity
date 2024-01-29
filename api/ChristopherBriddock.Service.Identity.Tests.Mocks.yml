@@ -1,0 +1,70 @@
+### YamlMime:ManagedReference
+items:
+- uid: ChristopherBriddock.Service.Identity.Tests.Mocks
+  commentId: N:ChristopherBriddock.Service.Identity.Tests.Mocks
+  id: ChristopherBriddock.Service.Identity.Tests.Mocks
+  children:
+  - ChristopherBriddock.Service.Identity.Tests.Mocks.JsonWebTokenProviderMock
+  langs:
+  - csharp
+  - vb
+  name: ChristopherBriddock.Service.Identity.Tests.Mocks
+  nameWithType: ChristopherBriddock.Service.Identity.Tests.Mocks
+  fullName: ChristopherBriddock.Service.Identity.Tests.Mocks
+  type: Namespace
+  assemblies:
+  - ChristopherBriddock.Service.Identity.Tests
+references:
+- uid: ChristopherBriddock.Service.Identity.Tests.Mocks.JsonWebTokenProviderMock
+  commentId: T:ChristopherBriddock.Service.Identity.Tests.Mocks.JsonWebTokenProviderMock
+  parent: ChristopherBriddock.Service.Identity.Tests.Mocks
+  href: ChristopherBriddock.Service.Identity.Tests.Mocks.JsonWebTokenProviderMock.html
+  name: JsonWebTokenProviderMock
+  nameWithType: JsonWebTokenProviderMock
+  fullName: ChristopherBriddock.Service.Identity.Tests.Mocks.JsonWebTokenProviderMock
+- uid: ChristopherBriddock.Service.Identity.Tests.Mocks
+  commentId: N:ChristopherBriddock.Service.Identity.Tests.Mocks
+  href: ChristopherBriddock.html
+  name: ChristopherBriddock.Service.Identity.Tests.Mocks
+  nameWithType: ChristopherBriddock.Service.Identity.Tests.Mocks
+  fullName: ChristopherBriddock.Service.Identity.Tests.Mocks
+  spec.csharp:
+  - uid: ChristopherBriddock
+    name: ChristopherBriddock
+    href: ChristopherBriddock.html
+  - name: .
+  - uid: ChristopherBriddock.Service
+    name: Service
+    href: ChristopherBriddock.Service.html
+  - name: .
+  - uid: ChristopherBriddock.Service.Identity
+    name: Identity
+    href: ChristopherBriddock.Service.Identity.html
+  - name: .
+  - uid: ChristopherBriddock.Service.Identity.Tests
+    name: Tests
+    href: ChristopherBriddock.Service.Identity.Tests.html
+  - name: .
+  - uid: ChristopherBriddock.Service.Identity.Tests.Mocks
+    name: Mocks
+    href: ChristopherBriddock.Service.Identity.Tests.Mocks.html
+  spec.vb:
+  - uid: ChristopherBriddock
+    name: ChristopherBriddock
+    href: ChristopherBriddock.html
+  - name: .
+  - uid: ChristopherBriddock.Service
+    name: Service
+    href: ChristopherBriddock.Service.html
+  - name: .
+  - uid: ChristopherBriddock.Service.Identity
+    name: Identity
+    href: ChristopherBriddock.Service.Identity.html
+  - name: .
+  - uid: ChristopherBriddock.Service.Identity.Tests
+    name: Tests
+    href: ChristopherBriddock.Service.Identity.Tests.html
+  - name: .
+  - uid: ChristopherBriddock.Service.Identity.Tests.Mocks
+    name: Mocks
+    href: ChristopherBriddock.Service.Identity.Tests.Mocks.html

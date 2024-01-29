@@ -1,0 +1,921 @@
+### YamlMime:ManagedReference
+items:
+- uid: ChristopherBriddock.Service.Email.EmailConsumer
+  commentId: T:ChristopherBriddock.Service.Email.EmailConsumer
+  id: EmailConsumer
+  parent: ChristopherBriddock.Service.Email
+  children:
+  - ChristopherBriddock.Service.Email.EmailConsumer.#ctor(Microsoft.Extensions.Logging.ILogger{ChristopherBriddock.Service.Email.EmailConsumer},Microsoft.Extensions.Configuration.IConfiguration)
+  - ChristopherBriddock.Service.Email.EmailConsumer.Configuration
+  - ChristopherBriddock.Service.Email.EmailConsumer.Consume(MassTransit.ConsumeContext{ChristopherBriddock.Service.Common.Messaging.EmailMessage})
+  - ChristopherBriddock.Service.Email.EmailConsumer.Logger
+  langs:
+  - csharp
+  - vb
+  name: EmailConsumer
+  nameWithType: EmailConsumer
+  fullName: ChristopherBriddock.Service.Email.EmailConsumer
+  type: Class
+  source:
+    remote:
+      path: src/ChristopherBriddock.Service.Email/EmailConsumer.cs
+      branch: dev
+      repo: https://github.com/chris-briddock/ChristopherBriddock.Identity.git
+    id: EmailConsumer
+    path: src/ChristopherBriddock.Service.Email/EmailConsumer.cs
+    startLine: 12
+  assemblies:
+  - ChristopherBriddock.Service.Email
+  namespace: ChristopherBriddock.Service.Email
+  summary: Initializes a new instance of <xref href="ChristopherBriddock.Service.Email.EmailConsumer" data-throw-if-not-resolved="false"></xref>
+  example: []
+  syntax:
+    content: 'public class EmailConsumer : IConsumer<EmailMessage>, IConsumer'
+    content.vb: Public Class EmailConsumer Implements IConsumer(Of EmailMessage), IConsumer
+  inheritance:
+  - System.Object
+  implements:
+  - MassTransit.IConsumer{ChristopherBriddock.Service.Common.Messaging.EmailMessage}
+  - MassTransit.IConsumer
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: ChristopherBriddock.Service.Email.EmailConsumer.#ctor(Microsoft.Extensions.Logging.ILogger{ChristopherBriddock.Service.Email.EmailConsumer},Microsoft.Extensions.Configuration.IConfiguration)
+  commentId: M:ChristopherBriddock.Service.Email.EmailConsumer.#ctor(Microsoft.Extensions.Logging.ILogger{ChristopherBriddock.Service.Email.EmailConsumer},Microsoft.Extensions.Configuration.IConfiguration)
+  id: '#ctor(Microsoft.Extensions.Logging.ILogger{ChristopherBriddock.Service.Email.EmailConsumer},Microsoft.Extensions.Configuration.IConfiguration)'
+  parent: ChristopherBriddock.Service.Email.EmailConsumer
+  langs:
+  - csharp
+  - vb
+  name: EmailConsumer(ILogger<EmailConsumer>, IConfiguration)
+  nameWithType: EmailConsumer.EmailConsumer(ILogger<EmailConsumer>, IConfiguration)
+  fullName: ChristopherBriddock.Service.Email.EmailConsumer.EmailConsumer(Microsoft.Extensions.Logging.ILogger<ChristopherBriddock.Service.Email.EmailConsumer>, Microsoft.Extensions.Configuration.IConfiguration)
+  type: Constructor
+  source:
+    remote:
+      path: src/ChristopherBriddock.Service.Email/EmailConsumer.cs
+      branch: dev
+      repo: https://github.com/chris-briddock/ChristopherBriddock.Identity.git
+    id: .ctor
+    path: src/ChristopherBriddock.Service.Email/EmailConsumer.cs
+    startLine: 12
+  assemblies:
+  - ChristopherBriddock.Service.Email
+  namespace: ChristopherBriddock.Service.Email
+  summary: Initializes a new instance of <xref href="ChristopherBriddock.Service.Email.EmailConsumer" data-throw-if-not-resolved="false"></xref>
+  example: []
+  syntax:
+    content: public EmailConsumer(ILogger<EmailConsumer> logger, IConfiguration configuration)
+    parameters:
+    - id: logger
+      type: Microsoft.Extensions.Logging.ILogger{ChristopherBriddock.Service.Email.EmailConsumer}
+    - id: configuration
+      type: Microsoft.Extensions.Configuration.IConfiguration
+    content.vb: Public Sub New(logger As ILogger(Of EmailConsumer), configuration As IConfiguration)
+  overload: ChristopherBriddock.Service.Email.EmailConsumer.#ctor*
+  nameWithType.vb: EmailConsumer.New(ILogger(Of EmailConsumer), IConfiguration)
+  fullName.vb: ChristopherBriddock.Service.Email.EmailConsumer.New(Microsoft.Extensions.Logging.ILogger(Of ChristopherBriddock.Service.Email.EmailConsumer), Microsoft.Extensions.Configuration.IConfiguration)
+  name.vb: New(ILogger(Of EmailConsumer), IConfiguration)
+- uid: ChristopherBriddock.Service.Email.EmailConsumer.Logger
+  commentId: P:ChristopherBriddock.Service.Email.EmailConsumer.Logger
+  id: Logger
+  parent: ChristopherBriddock.Service.Email.EmailConsumer
+  langs:
+  - csharp
+  - vb
+  name: Logger
+  nameWithType: EmailConsumer.Logger
+  fullName: ChristopherBriddock.Service.Email.EmailConsumer.Logger
+  type: Property
+  source:
+    remote:
+      path: src/ChristopherBriddock.Service.Email/EmailConsumer.cs
+      branch: dev
+      repo: https://github.com/chris-briddock/ChristopherBriddock.Identity.git
+    id: Logger
+    path: src/ChristopherBriddock.Service.Email/EmailConsumer.cs
+    startLine: 16
+  assemblies:
+  - ChristopherBriddock.Service.Email
+  namespace: ChristopherBriddock.Service.Email
+  syntax:
+    content: public ILogger<EmailConsumer> Logger { get; }
+    parameters: []
+    return:
+      type: Microsoft.Extensions.Logging.ILogger{ChristopherBriddock.Service.Email.EmailConsumer}
+    content.vb: Public ReadOnly Property Logger As ILogger(Of EmailConsumer)
+  overload: ChristopherBriddock.Service.Email.EmailConsumer.Logger*
+- uid: ChristopherBriddock.Service.Email.EmailConsumer.Configuration
+  commentId: P:ChristopherBriddock.Service.Email.EmailConsumer.Configuration
+  id: Configuration
+  parent: ChristopherBriddock.Service.Email.EmailConsumer
+  langs:
+  - csharp
+  - vb
+  name: Configuration
+  nameWithType: EmailConsumer.Configuration
+  fullName: ChristopherBriddock.Service.Email.EmailConsumer.Configuration
+  type: Property
+  source:
+    remote:
+      path: src/ChristopherBriddock.Service.Email/EmailConsumer.cs
+      branch: dev
+      repo: https://github.com/chris-briddock/ChristopherBriddock.Identity.git
+    id: Configuration
+    path: src/ChristopherBriddock.Service.Email/EmailConsumer.cs
+    startLine: 17
+  assemblies:
+  - ChristopherBriddock.Service.Email
+  namespace: ChristopherBriddock.Service.Email
+  syntax:
+    content: public IConfiguration Configuration { get; }
+    parameters: []
+    return:
+      type: Microsoft.Extensions.Configuration.IConfiguration
+    content.vb: Public ReadOnly Property Configuration As IConfiguration
+  overload: ChristopherBriddock.Service.Email.EmailConsumer.Configuration*
+- uid: ChristopherBriddock.Service.Email.EmailConsumer.Consume(MassTransit.ConsumeContext{ChristopherBriddock.Service.Common.Messaging.EmailMessage})
+  commentId: M:ChristopherBriddock.Service.Email.EmailConsumer.Consume(MassTransit.ConsumeContext{ChristopherBriddock.Service.Common.Messaging.EmailMessage})
+  id: Consume(MassTransit.ConsumeContext{ChristopherBriddock.Service.Common.Messaging.EmailMessage})
+  parent: ChristopherBriddock.Service.Email.EmailConsumer
+  langs:
+  - csharp
+  - vb
+  name: Consume(ConsumeContext<EmailMessage>)
+  nameWithType: EmailConsumer.Consume(ConsumeContext<EmailMessage>)
+  fullName: ChristopherBriddock.Service.Email.EmailConsumer.Consume(MassTransit.ConsumeContext<ChristopherBriddock.Service.Common.Messaging.EmailMessage>)
+  type: Method
+  source:
+    remote:
+      path: src/ChristopherBriddock.Service.Email/EmailConsumer.cs
+      branch: dev
+      repo: https://github.com/chris-briddock/ChristopherBriddock.Identity.git
+    id: Consume
+    path: src/ChristopherBriddock.Service.Email/EmailConsumer.cs
+    startLine: 29
+  assemblies:
+  - ChristopherBriddock.Service.Email
+  namespace: ChristopherBriddock.Service.Email
+  summary: Consumes a message from the message queue.
+  remarks: >-
+    This method is automatically executed, as MassTransit registers consumers and pushliers (producers) 
+
+    as a <xref href="Microsoft.Extensions.Hosting.BackgroundService" data-throw-if-not-resolved="false"></xref> which implements <xref href="Microsoft.Extensions.Hosting.IHostedService" data-throw-if-not-resolved="false"></xref> 
+
+    There is no need to implement any endpoints.
+  example: []
+  syntax:
+    content: public Task Consume(ConsumeContext<EmailMessage> context)
+    parameters:
+    - id: context
+      type: MassTransit.ConsumeContext{ChristopherBriddock.Service.Common.Messaging.EmailMessage}
+      description: The <xref href="MassTransit.ConsumeContext%601" data-throw-if-not-resolved="false"></xref> that allows for message consumption.
+    return:
+      type: System.Threading.Tasks.Task
+      description: An asyncronous <xref href="System.Threading.Tasks.Task" data-throw-if-not-resolved="false"></xref>
+    content.vb: Public Function Consume(context As ConsumeContext(Of EmailMessage)) As Task
+  overload: ChristopherBriddock.Service.Email.EmailConsumer.Consume*
+  implements:
+  - MassTransit.IConsumer{ChristopherBriddock.Service.Common.Messaging.EmailMessage}.Consume(MassTransit.ConsumeContext{ChristopherBriddock.Service.Common.Messaging.EmailMessage})
+  nameWithType.vb: EmailConsumer.Consume(ConsumeContext(Of EmailMessage))
+  fullName.vb: ChristopherBriddock.Service.Email.EmailConsumer.Consume(MassTransit.ConsumeContext(Of ChristopherBriddock.Service.Common.Messaging.EmailMessage))
+  name.vb: Consume(ConsumeContext(Of EmailMessage))
+references:
+- uid: ChristopherBriddock.Service.Email.EmailConsumer
+  commentId: T:ChristopherBriddock.Service.Email.EmailConsumer
+  href: ChristopherBriddock.Service.Email.EmailConsumer.html
+  name: EmailConsumer
+  nameWithType: EmailConsumer
+  fullName: ChristopherBriddock.Service.Email.EmailConsumer
+- uid: ChristopherBriddock.Service.Email
+  commentId: N:ChristopherBriddock.Service.Email
+  href: ChristopherBriddock.html
+  name: ChristopherBriddock.Service.Email
+  nameWithType: ChristopherBriddock.Service.Email
+  fullName: ChristopherBriddock.Service.Email
+  spec.csharp:
+  - uid: ChristopherBriddock
+    name: ChristopherBriddock
+    href: ChristopherBriddock.html
+  - name: .
+  - uid: ChristopherBriddock.Service
+    name: Service
+    href: ChristopherBriddock.Service.html
+  - name: .
+  - uid: ChristopherBriddock.Service.Email
+    name: Email
+    href: ChristopherBriddock.Service.Email.html
+  spec.vb:
+  - uid: ChristopherBriddock
+    name: ChristopherBriddock
+    href: ChristopherBriddock.html
+  - name: .
+  - uid: ChristopherBriddock.Service
+    name: Service
+    href: ChristopherBriddock.Service.html
+  - name: .
+  - uid: ChristopherBriddock.Service.Email
+    name: Email
+    href: ChristopherBriddock.Service.Email.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: MassTransit.IConsumer{ChristopherBriddock.Service.Common.Messaging.EmailMessage}
+  commentId: T:MassTransit.IConsumer{ChristopherBriddock.Service.Common.Messaging.EmailMessage}
+  parent: MassTransit
+  definition: MassTransit.IConsumer`1
+  name: IConsumer<EmailMessage>
+  nameWithType: IConsumer<EmailMessage>
+  fullName: MassTransit.IConsumer<ChristopherBriddock.Service.Common.Messaging.EmailMessage>
+  nameWithType.vb: IConsumer(Of EmailMessage)
+  fullName.vb: MassTransit.IConsumer(Of ChristopherBriddock.Service.Common.Messaging.EmailMessage)
+  name.vb: IConsumer(Of EmailMessage)
+  spec.csharp:
+  - uid: MassTransit.IConsumer`1
+    name: IConsumer
+    isExternal: true
+  - name: <
+  - uid: ChristopherBriddock.Service.Common.Messaging.EmailMessage
+    name: EmailMessage
+  - name: '>'
+  spec.vb:
+  - uid: MassTransit.IConsumer`1
+    name: IConsumer
+    isExternal: true
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: ChristopherBriddock.Service.Common.Messaging.EmailMessage
+    name: EmailMessage
+  - name: )
+- uid: MassTransit.IConsumer
+  commentId: T:MassTransit.IConsumer
+  parent: MassTransit
+  isExternal: true
+  name: IConsumer
+  nameWithType: IConsumer
+  fullName: MassTransit.IConsumer
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: MassTransit.IConsumer`1
+  commentId: T:MassTransit.IConsumer`1
+  isExternal: true
+  name: IConsumer<TMessage>
+  nameWithType: IConsumer<TMessage>
+  fullName: MassTransit.IConsumer<TMessage>
+  nameWithType.vb: IConsumer(Of TMessage)
+  fullName.vb: MassTransit.IConsumer(Of TMessage)
+  name.vb: IConsumer(Of TMessage)
+  spec.csharp:
+  - uid: MassTransit.IConsumer`1
+    name: IConsumer
+    isExternal: true
+  - name: <
+  - name: TMessage
+  - name: '>'
+  spec.vb:
+  - uid: MassTransit.IConsumer`1
+    name: IConsumer
+    isExternal: true
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TMessage
+  - name: )
+- uid: MassTransit
+  commentId: N:MassTransit
+  isExternal: true
+  name: MassTransit
+  nameWithType: MassTransit
+  fullName: MassTransit
+- uid: ChristopherBriddock.Service.Email.EmailConsumer.#ctor*
+  commentId: Overload:ChristopherBriddock.Service.Email.EmailConsumer.#ctor
+  href: ChristopherBriddock.Service.Email.EmailConsumer.html#ChristopherBriddock_Service_Email_EmailConsumer__ctor_Microsoft_Extensions_Logging_ILogger_ChristopherBriddock_Service_Email_EmailConsumer__Microsoft_Extensions_Configuration_IConfiguration_
+  name: EmailConsumer
+  nameWithType: EmailConsumer.EmailConsumer
+  fullName: ChristopherBriddock.Service.Email.EmailConsumer.EmailConsumer
+  nameWithType.vb: EmailConsumer.New
+  fullName.vb: ChristopherBriddock.Service.Email.EmailConsumer.New
+  name.vb: New
+- uid: Microsoft.Extensions.Logging.ILogger{ChristopherBriddock.Service.Email.EmailConsumer}
+  commentId: T:Microsoft.Extensions.Logging.ILogger{ChristopherBriddock.Service.Email.EmailConsumer}
+  parent: Microsoft.Extensions.Logging
+  definition: Microsoft.Extensions.Logging.ILogger`1
+  href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.ilogger-1
+  name: ILogger<EmailConsumer>
+  nameWithType: ILogger<EmailConsumer>
+  fullName: Microsoft.Extensions.Logging.ILogger<ChristopherBriddock.Service.Email.EmailConsumer>
+  nameWithType.vb: ILogger(Of EmailConsumer)
+  fullName.vb: Microsoft.Extensions.Logging.ILogger(Of ChristopherBriddock.Service.Email.EmailConsumer)
+  name.vb: ILogger(Of EmailConsumer)
+  spec.csharp:
+  - uid: Microsoft.Extensions.Logging.ILogger`1
+    name: ILogger
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.ilogger-1
+  - name: <
+  - uid: ChristopherBriddock.Service.Email.EmailConsumer
+    name: EmailConsumer
+    href: ChristopherBriddock.Service.Email.EmailConsumer.html
+  - name: '>'
+  spec.vb:
+  - uid: Microsoft.Extensions.Logging.ILogger`1
+    name: ILogger
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.ilogger-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: ChristopherBriddock.Service.Email.EmailConsumer
+    name: EmailConsumer
+    href: ChristopherBriddock.Service.Email.EmailConsumer.html
+  - name: )
+- uid: Microsoft.Extensions.Configuration.IConfiguration
+  commentId: T:Microsoft.Extensions.Configuration.IConfiguration
+  parent: Microsoft.Extensions.Configuration
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.configuration.iconfiguration
+  name: IConfiguration
+  nameWithType: IConfiguration
+  fullName: Microsoft.Extensions.Configuration.IConfiguration
+- uid: Microsoft.Extensions.Logging.ILogger`1
+  commentId: T:Microsoft.Extensions.Logging.ILogger`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.ilogger-1
+  name: ILogger<TCategoryName>
+  nameWithType: ILogger<TCategoryName>
+  fullName: Microsoft.Extensions.Logging.ILogger<TCategoryName>
+  nameWithType.vb: ILogger(Of TCategoryName)
+  fullName.vb: Microsoft.Extensions.Logging.ILogger(Of TCategoryName)
+  name.vb: ILogger(Of TCategoryName)
+  spec.csharp:
+  - uid: Microsoft.Extensions.Logging.ILogger`1
+    name: ILogger
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.ilogger-1
+  - name: <
+  - name: TCategoryName
+  - name: '>'
+  spec.vb:
+  - uid: Microsoft.Extensions.Logging.ILogger`1
+    name: ILogger
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.ilogger-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TCategoryName
+  - name: )
+- uid: Microsoft.Extensions.Logging
+  commentId: N:Microsoft.Extensions.Logging
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft
+  name: Microsoft.Extensions.Logging
+  nameWithType: Microsoft.Extensions.Logging
+  fullName: Microsoft.Extensions.Logging
+  spec.csharp:
+  - uid: Microsoft
+    name: Microsoft
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft
+  - name: .
+  - uid: Microsoft.Extensions
+    name: Extensions
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions
+  - name: .
+  - uid: Microsoft.Extensions.Logging
+    name: Logging
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging
+  spec.vb:
+  - uid: Microsoft
+    name: Microsoft
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft
+  - name: .
+  - uid: Microsoft.Extensions
+    name: Extensions
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions
+  - name: .
+  - uid: Microsoft.Extensions.Logging
+    name: Logging
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging
+- uid: Microsoft.Extensions.Configuration
+  commentId: N:Microsoft.Extensions.Configuration
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft
+  name: Microsoft.Extensions.Configuration
+  nameWithType: Microsoft.Extensions.Configuration
+  fullName: Microsoft.Extensions.Configuration
+  spec.csharp:
+  - uid: Microsoft
+    name: Microsoft
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft
+  - name: .
+  - uid: Microsoft.Extensions
+    name: Extensions
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions
+  - name: .
+  - uid: Microsoft.Extensions.Configuration
+    name: Configuration
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.configuration
+  spec.vb:
+  - uid: Microsoft
+    name: Microsoft
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft
+  - name: .
+  - uid: Microsoft.Extensions
+    name: Extensions
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions
+  - name: .
+  - uid: Microsoft.Extensions.Configuration
+    name: Configuration
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.configuration
+- uid: ChristopherBriddock.Service.Email.EmailConsumer.Logger*
+  commentId: Overload:ChristopherBriddock.Service.Email.EmailConsumer.Logger
+  href: ChristopherBriddock.Service.Email.EmailConsumer.html#ChristopherBriddock_Service_Email_EmailConsumer_Logger
+  name: Logger
+  nameWithType: EmailConsumer.Logger
+  fullName: ChristopherBriddock.Service.Email.EmailConsumer.Logger
+- uid: ChristopherBriddock.Service.Email.EmailConsumer.Configuration*
+  commentId: Overload:ChristopherBriddock.Service.Email.EmailConsumer.Configuration
+  href: ChristopherBriddock.Service.Email.EmailConsumer.html#ChristopherBriddock_Service_Email_EmailConsumer_Configuration
+  name: Configuration
+  nameWithType: EmailConsumer.Configuration
+  fullName: ChristopherBriddock.Service.Email.EmailConsumer.Configuration
+- uid: MassTransit.ConsumeContext`1
+  commentId: T:MassTransit.ConsumeContext`1
+  isExternal: true
+  name: ConsumeContext<T>
+  nameWithType: ConsumeContext<T>
+  fullName: MassTransit.ConsumeContext<T>
+  nameWithType.vb: ConsumeContext(Of T)
+  fullName.vb: MassTransit.ConsumeContext(Of T)
+  name.vb: ConsumeContext(Of T)
+  spec.csharp:
+  - uid: MassTransit.ConsumeContext`1
+    name: ConsumeContext
+    isExternal: true
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: MassTransit.ConsumeContext`1
+    name: ConsumeContext
+    isExternal: true
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: Microsoft.Extensions.Hosting.BackgroundService
+  commentId: T:Microsoft.Extensions.Hosting.BackgroundService
+  parent: Microsoft.Extensions.Hosting
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.hosting.backgroundservice
+  name: BackgroundService
+  nameWithType: BackgroundService
+  fullName: Microsoft.Extensions.Hosting.BackgroundService
+- uid: Microsoft.Extensions.Hosting.IHostedService
+  commentId: T:Microsoft.Extensions.Hosting.IHostedService
+  parent: Microsoft.Extensions.Hosting
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.hosting.ihostedservice
+  name: IHostedService
+  nameWithType: IHostedService
+  fullName: Microsoft.Extensions.Hosting.IHostedService
+- uid: System.Threading.Tasks.Task
+  commentId: T:System.Threading.Tasks.Task
+  parent: System.Threading.Tasks
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task
+  name: Task
+  nameWithType: Task
+  fullName: System.Threading.Tasks.Task
+- uid: ChristopherBriddock.Service.Email.EmailConsumer.Consume*
+  commentId: Overload:ChristopherBriddock.Service.Email.EmailConsumer.Consume
+  href: ChristopherBriddock.Service.Email.EmailConsumer.html#ChristopherBriddock_Service_Email_EmailConsumer_Consume_MassTransit_ConsumeContext_ChristopherBriddock_Service_Common_Messaging_EmailMessage__
+  name: Consume
+  nameWithType: EmailConsumer.Consume
+  fullName: ChristopherBriddock.Service.Email.EmailConsumer.Consume
+- uid: MassTransit.IConsumer{ChristopherBriddock.Service.Common.Messaging.EmailMessage}.Consume(MassTransit.ConsumeContext{ChristopherBriddock.Service.Common.Messaging.EmailMessage})
+  commentId: M:MassTransit.IConsumer{ChristopherBriddock.Service.Common.Messaging.EmailMessage}.Consume(MassTransit.ConsumeContext{ChristopherBriddock.Service.Common.Messaging.EmailMessage})
+  parent: MassTransit.IConsumer{ChristopherBriddock.Service.Common.Messaging.EmailMessage}
+  definition: MassTransit.IConsumer`1.Consume(MassTransit.ConsumeContext{`0})
+  name: Consume(ConsumeContext<EmailMessage>)
+  nameWithType: IConsumer<EmailMessage>.Consume(ConsumeContext<EmailMessage>)
+  fullName: MassTransit.IConsumer<ChristopherBriddock.Service.Common.Messaging.EmailMessage>.Consume(MassTransit.ConsumeContext<ChristopherBriddock.Service.Common.Messaging.EmailMessage>)
+  nameWithType.vb: IConsumer(Of EmailMessage).Consume(ConsumeContext(Of EmailMessage))
+  fullName.vb: MassTransit.IConsumer(Of ChristopherBriddock.Service.Common.Messaging.EmailMessage).Consume(MassTransit.ConsumeContext(Of ChristopherBriddock.Service.Common.Messaging.EmailMessage))
+  name.vb: Consume(ConsumeContext(Of EmailMessage))
+  spec.csharp:
+  - uid: MassTransit.IConsumer{ChristopherBriddock.Service.Common.Messaging.EmailMessage}.Consume(MassTransit.ConsumeContext{ChristopherBriddock.Service.Common.Messaging.EmailMessage})
+    name: Consume
+    isExternal: true
+  - name: (
+  - uid: MassTransit.ConsumeContext`1
+    name: ConsumeContext
+    isExternal: true
+  - name: <
+  - uid: ChristopherBriddock.Service.Common.Messaging.EmailMessage
+    name: EmailMessage
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: MassTransit.IConsumer{ChristopherBriddock.Service.Common.Messaging.EmailMessage}.Consume(MassTransit.ConsumeContext{ChristopherBriddock.Service.Common.Messaging.EmailMessage})
+    name: Consume
+    isExternal: true
+  - name: (
+  - uid: MassTransit.ConsumeContext`1
+    name: ConsumeContext
+    isExternal: true
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: ChristopherBriddock.Service.Common.Messaging.EmailMessage
+    name: EmailMessage
+  - name: )
+  - name: )
+- uid: MassTransit.ConsumeContext{ChristopherBriddock.Service.Common.Messaging.EmailMessage}
+  commentId: T:MassTransit.ConsumeContext{ChristopherBriddock.Service.Common.Messaging.EmailMessage}
+  parent: MassTransit
+  definition: MassTransit.ConsumeContext`1
+  name: ConsumeContext<EmailMessage>
+  nameWithType: ConsumeContext<EmailMessage>
+  fullName: MassTransit.ConsumeContext<ChristopherBriddock.Service.Common.Messaging.EmailMessage>
+  nameWithType.vb: ConsumeContext(Of EmailMessage)
+  fullName.vb: MassTransit.ConsumeContext(Of ChristopherBriddock.Service.Common.Messaging.EmailMessage)
+  name.vb: ConsumeContext(Of EmailMessage)
+  spec.csharp:
+  - uid: MassTransit.ConsumeContext`1
+    name: ConsumeContext
+    isExternal: true
+  - name: <
+  - uid: ChristopherBriddock.Service.Common.Messaging.EmailMessage
+    name: EmailMessage
+  - name: '>'
+  spec.vb:
+  - uid: MassTransit.ConsumeContext`1
+    name: ConsumeContext
+    isExternal: true
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: ChristopherBriddock.Service.Common.Messaging.EmailMessage
+    name: EmailMessage
+  - name: )
+- uid: Microsoft.Extensions.Hosting
+  commentId: N:Microsoft.Extensions.Hosting
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft
+  name: Microsoft.Extensions.Hosting
+  nameWithType: Microsoft.Extensions.Hosting
+  fullName: Microsoft.Extensions.Hosting
+  spec.csharp:
+  - uid: Microsoft
+    name: Microsoft
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft
+  - name: .
+  - uid: Microsoft.Extensions
+    name: Extensions
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions
+  - name: .
+  - uid: Microsoft.Extensions.Hosting
+    name: Hosting
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.hosting
+  spec.vb:
+  - uid: Microsoft
+    name: Microsoft
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft
+  - name: .
+  - uid: Microsoft.Extensions
+    name: Extensions
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions
+  - name: .
+  - uid: Microsoft.Extensions.Hosting
+    name: Hosting
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.hosting
+- uid: System.Threading.Tasks
+  commentId: N:System.Threading.Tasks
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Threading.Tasks
+  nameWithType: System.Threading.Tasks
+  fullName: System.Threading.Tasks
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks
+- uid: MassTransit.IConsumer`1.Consume(MassTransit.ConsumeContext{`0})
+  commentId: M:MassTransit.IConsumer`1.Consume(MassTransit.ConsumeContext{`0})
+  isExternal: true
+  name: Consume(ConsumeContext<TMessage>)
+  nameWithType: IConsumer<TMessage>.Consume(ConsumeContext<TMessage>)
+  fullName: MassTransit.IConsumer<TMessage>.Consume(MassTransit.ConsumeContext<TMessage>)
+  nameWithType.vb: IConsumer(Of TMessage).Consume(ConsumeContext(Of TMessage))
+  fullName.vb: MassTransit.IConsumer(Of TMessage).Consume(MassTransit.ConsumeContext(Of TMessage))
+  name.vb: Consume(ConsumeContext(Of TMessage))
+  spec.csharp:
+  - uid: MassTransit.IConsumer`1.Consume(MassTransit.ConsumeContext{`0})
+    name: Consume
+    isExternal: true
+  - name: (
+  - uid: MassTransit.ConsumeContext`1
+    name: ConsumeContext
+    isExternal: true
+  - name: <
+  - name: TMessage
+  - name: '>'
+  - name: )
+  spec.vb:
+  - uid: MassTransit.IConsumer`1.Consume(MassTransit.ConsumeContext{`0})
+    name: Consume
+    isExternal: true
+  - name: (
+  - uid: MassTransit.ConsumeContext`1
+    name: ConsumeContext
+    isExternal: true
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TMessage
+  - name: )
+  - name: )

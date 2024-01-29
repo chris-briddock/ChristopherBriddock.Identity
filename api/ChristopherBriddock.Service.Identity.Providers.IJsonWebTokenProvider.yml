@@ -1,0 +1,371 @@
+### YamlMime:ManagedReference
+items:
+- uid: ChristopherBriddock.Service.Identity.Providers.IJsonWebTokenProvider
+  commentId: T:ChristopherBriddock.Service.Identity.Providers.IJsonWebTokenProvider
+  id: IJsonWebTokenProvider
+  parent: ChristopherBriddock.Service.Identity.Providers
+  children:
+  - ChristopherBriddock.Service.Identity.Providers.IJsonWebTokenProvider.TryCreateRefreshTokenAsync(System.String,System.String,System.String,System.String,System.String,System.String)
+  - ChristopherBriddock.Service.Identity.Providers.IJsonWebTokenProvider.TryCreateTokenAsync(System.String,System.String,System.String,System.String,System.String,System.String)
+  - ChristopherBriddock.Service.Identity.Providers.IJsonWebTokenProvider.TryValidateTokenAsync(System.String,System.String,System.String,System.String)
+  langs:
+  - csharp
+  - vb
+  name: IJsonWebTokenProvider
+  nameWithType: IJsonWebTokenProvider
+  fullName: ChristopherBriddock.Service.Identity.Providers.IJsonWebTokenProvider
+  type: Interface
+  source:
+    remote:
+      path: src/ChristopherBriddock.Service.Identity/Providers/IJsonWebTokenProvider.cs
+      branch: dev
+      repo: https://github.com/chris-briddock/ChristopherBriddock.Identity.git
+    id: IJsonWebTokenProvider
+    path: src/ChristopherBriddock.Service.Identity/Providers/IJsonWebTokenProvider.cs
+    startLine: 7
+  assemblies:
+  - ChristopherBriddock.Service.Identity
+  namespace: ChristopherBriddock.Service.Identity.Providers
+  summary: Provides a contract for the JWT Token Provider implementation <xref href="ChristopherBriddock.Service.Identity.Providers.JsonWebTokenProvider" data-throw-if-not-resolved="false"></xref>
+  example: []
+  syntax:
+    content: public interface IJsonWebTokenProvider
+    content.vb: Public Interface IJsonWebTokenProvider
+- uid: ChristopherBriddock.Service.Identity.Providers.IJsonWebTokenProvider.TryCreateRefreshTokenAsync(System.String,System.String,System.String,System.String,System.String,System.String)
+  commentId: M:ChristopherBriddock.Service.Identity.Providers.IJsonWebTokenProvider.TryCreateRefreshTokenAsync(System.String,System.String,System.String,System.String,System.String,System.String)
+  id: TryCreateRefreshTokenAsync(System.String,System.String,System.String,System.String,System.String,System.String)
+  parent: ChristopherBriddock.Service.Identity.Providers.IJsonWebTokenProvider
+  langs:
+  - csharp
+  - vb
+  name: TryCreateRefreshTokenAsync(string, string, string, string, string, string)
+  nameWithType: IJsonWebTokenProvider.TryCreateRefreshTokenAsync(string, string, string, string, string, string)
+  fullName: ChristopherBriddock.Service.Identity.Providers.IJsonWebTokenProvider.TryCreateRefreshTokenAsync(string, string, string, string, string, string)
+  type: Method
+  source:
+    remote:
+      path: src/ChristopherBriddock.Service.Identity/Providers/IJsonWebTokenProvider.cs
+      branch: dev
+      repo: https://github.com/chris-briddock/ChristopherBriddock.Identity.git
+    id: TryCreateRefreshTokenAsync
+    path: src/ChristopherBriddock.Service.Identity/Providers/IJsonWebTokenProvider.cs
+    startLine: 19
+  assemblies:
+  - ChristopherBriddock.Service.Identity
+  namespace: ChristopherBriddock.Service.Identity.Providers
+  summary: Tries to create a JWT (JSON Web Token) asynchronously.
+  example: []
+  syntax:
+    content: Task<JwtResult> TryCreateRefreshTokenAsync(string email, string jwtSecret, string issuer, string audience, string expires, string subject)
+    parameters:
+    - id: email
+      type: System.String
+      description: The email of the token's recipient.
+    - id: jwtSecret
+      type: System.String
+      description: The secret key used to sign the JWT.
+    - id: issuer
+      type: System.String
+      description: The issuer of the JWT.
+    - id: audience
+      type: System.String
+      description: The intended audience of the JWT.
+    - id: expires
+      type: System.String
+      description: The expiration date and time of the JWT.
+    - id: subject
+      type: System.String
+      description: The subject of the JWT.
+    return:
+      type: System.Threading.Tasks.Task{ChristopherBriddock.Service.Identity.Models.Results.JwtResult}
+      description: A <xref href="ChristopherBriddock.Service.Identity.Models.Results.JwtResult" data-throw-if-not-resolved="false"></xref> containing the result of the token creation.
+    content.vb: Function TryCreateRefreshTokenAsync(email As String, jwtSecret As String, issuer As String, audience As String, expires As String, subject As String) As Task(Of JwtResult)
+  overload: ChristopherBriddock.Service.Identity.Providers.IJsonWebTokenProvider.TryCreateRefreshTokenAsync*
+  nameWithType.vb: IJsonWebTokenProvider.TryCreateRefreshTokenAsync(String, String, String, String, String, String)
+  fullName.vb: ChristopherBriddock.Service.Identity.Providers.IJsonWebTokenProvider.TryCreateRefreshTokenAsync(String, String, String, String, String, String)
+  name.vb: TryCreateRefreshTokenAsync(String, String, String, String, String, String)
+- uid: ChristopherBriddock.Service.Identity.Providers.IJsonWebTokenProvider.TryCreateTokenAsync(System.String,System.String,System.String,System.String,System.String,System.String)
+  commentId: M:ChristopherBriddock.Service.Identity.Providers.IJsonWebTokenProvider.TryCreateTokenAsync(System.String,System.String,System.String,System.String,System.String,System.String)
+  id: TryCreateTokenAsync(System.String,System.String,System.String,System.String,System.String,System.String)
+  parent: ChristopherBriddock.Service.Identity.Providers.IJsonWebTokenProvider
+  langs:
+  - csharp
+  - vb
+  name: TryCreateTokenAsync(string, string, string, string, string, string)
+  nameWithType: IJsonWebTokenProvider.TryCreateTokenAsync(string, string, string, string, string, string)
+  fullName: ChristopherBriddock.Service.Identity.Providers.IJsonWebTokenProvider.TryCreateTokenAsync(string, string, string, string, string, string)
+  type: Method
+  source:
+    remote:
+      path: src/ChristopherBriddock.Service.Identity/Providers/IJsonWebTokenProvider.cs
+      branch: dev
+      repo: https://github.com/chris-briddock/ChristopherBriddock.Identity.git
+    id: TryCreateTokenAsync
+    path: src/ChristopherBriddock.Service.Identity/Providers/IJsonWebTokenProvider.cs
+    startLine: 35
+  assemblies:
+  - ChristopherBriddock.Service.Identity
+  namespace: ChristopherBriddock.Service.Identity.Providers
+  summary: Tries to create a new refresh JWT (JSON Web Token) asynchronously.
+  example: []
+  syntax:
+    content: Task<JwtResult> TryCreateTokenAsync(string email, string jwtSecret, string issuer, string audience, string expires, string subject)
+    parameters:
+    - id: email
+      type: System.String
+      description: ''
+    - id: jwtSecret
+      type: System.String
+      description: ''
+    - id: issuer
+      type: System.String
+      description: ''
+    - id: audience
+      type: System.String
+      description: ''
+    - id: expires
+      type: System.String
+      description: ''
+    - id: subject
+      type: System.String
+      description: ''
+    return:
+      type: System.Threading.Tasks.Task{ChristopherBriddock.Service.Identity.Models.Results.JwtResult}
+      description: A <xref href="ChristopherBriddock.Service.Identity.Models.Results.JwtResult" data-throw-if-not-resolved="false"></xref> containing the result of the token creation.
+    content.vb: Function TryCreateTokenAsync(email As String, jwtSecret As String, issuer As String, audience As String, expires As String, subject As String) As Task(Of JwtResult)
+  overload: ChristopherBriddock.Service.Identity.Providers.IJsonWebTokenProvider.TryCreateTokenAsync*
+  nameWithType.vb: IJsonWebTokenProvider.TryCreateTokenAsync(String, String, String, String, String, String)
+  fullName.vb: ChristopherBriddock.Service.Identity.Providers.IJsonWebTokenProvider.TryCreateTokenAsync(String, String, String, String, String, String)
+  name.vb: TryCreateTokenAsync(String, String, String, String, String, String)
+- uid: ChristopherBriddock.Service.Identity.Providers.IJsonWebTokenProvider.TryValidateTokenAsync(System.String,System.String,System.String,System.String)
+  commentId: M:ChristopherBriddock.Service.Identity.Providers.IJsonWebTokenProvider.TryValidateTokenAsync(System.String,System.String,System.String,System.String)
+  id: TryValidateTokenAsync(System.String,System.String,System.String,System.String)
+  parent: ChristopherBriddock.Service.Identity.Providers.IJsonWebTokenProvider
+  langs:
+  - csharp
+  - vb
+  name: TryValidateTokenAsync(string, string, string, string)
+  nameWithType: IJsonWebTokenProvider.TryValidateTokenAsync(string, string, string, string)
+  fullName: ChristopherBriddock.Service.Identity.Providers.IJsonWebTokenProvider.TryValidateTokenAsync(string, string, string, string)
+  type: Method
+  source:
+    remote:
+      path: src/ChristopherBriddock.Service.Identity/Providers/IJsonWebTokenProvider.cs
+      branch: dev
+      repo: https://github.com/chris-briddock/ChristopherBriddock.Identity.git
+    id: TryValidateTokenAsync
+    path: src/ChristopherBriddock.Service.Identity/Providers/IJsonWebTokenProvider.cs
+    startLine: 49
+  assemblies:
+  - ChristopherBriddock.Service.Identity
+  namespace: ChristopherBriddock.Service.Identity.Providers
+  summary: Tries to validate a JWT (JSON Web Token) asynchronously.
+  example: []
+  syntax:
+    content: Task<JwtResult> TryValidateTokenAsync(string token, string jwtSecret, string issuer, string audience)
+    parameters:
+    - id: token
+      type: System.String
+      description: The JWT to validate.
+    - id: jwtSecret
+      type: System.String
+      description: The secret key used to validate the JWT's signature.
+    - id: issuer
+      type: System.String
+      description: The expected issuer of the JWT.
+    - id: audience
+      type: System.String
+      description: The expected audience of the JWT.
+    return:
+      type: System.Threading.Tasks.Task{ChristopherBriddock.Service.Identity.Models.Results.JwtResult}
+      description: A <xref href="ChristopherBriddock.Service.Identity.Models.Results.JwtResult" data-throw-if-not-resolved="false"></xref> containing the result of the token validation.
+    content.vb: Function TryValidateTokenAsync(token As String, jwtSecret As String, issuer As String, audience As String) As Task(Of JwtResult)
+  overload: ChristopherBriddock.Service.Identity.Providers.IJsonWebTokenProvider.TryValidateTokenAsync*
+  nameWithType.vb: IJsonWebTokenProvider.TryValidateTokenAsync(String, String, String, String)
+  fullName.vb: ChristopherBriddock.Service.Identity.Providers.IJsonWebTokenProvider.TryValidateTokenAsync(String, String, String, String)
+  name.vb: TryValidateTokenAsync(String, String, String, String)
+references:
+- uid: ChristopherBriddock.Service.Identity.Providers.JsonWebTokenProvider
+  commentId: T:ChristopherBriddock.Service.Identity.Providers.JsonWebTokenProvider
+  href: ChristopherBriddock.Service.Identity.Providers.JsonWebTokenProvider.html
+  name: JsonWebTokenProvider
+  nameWithType: JsonWebTokenProvider
+  fullName: ChristopherBriddock.Service.Identity.Providers.JsonWebTokenProvider
+- uid: ChristopherBriddock.Service.Identity.Providers
+  commentId: N:ChristopherBriddock.Service.Identity.Providers
+  href: ChristopherBriddock.html
+  name: ChristopherBriddock.Service.Identity.Providers
+  nameWithType: ChristopherBriddock.Service.Identity.Providers
+  fullName: ChristopherBriddock.Service.Identity.Providers
+  spec.csharp:
+  - uid: ChristopherBriddock
+    name: ChristopherBriddock
+    href: ChristopherBriddock.html
+  - name: .
+  - uid: ChristopherBriddock.Service
+    name: Service
+    href: ChristopherBriddock.Service.html
+  - name: .
+  - uid: ChristopherBriddock.Service.Identity
+    name: Identity
+    href: ChristopherBriddock.Service.Identity.html
+  - name: .
+  - uid: ChristopherBriddock.Service.Identity.Providers
+    name: Providers
+    href: ChristopherBriddock.Service.Identity.Providers.html
+  spec.vb:
+  - uid: ChristopherBriddock
+    name: ChristopherBriddock
+    href: ChristopherBriddock.html
+  - name: .
+  - uid: ChristopherBriddock.Service
+    name: Service
+    href: ChristopherBriddock.Service.html
+  - name: .
+  - uid: ChristopherBriddock.Service.Identity
+    name: Identity
+    href: ChristopherBriddock.Service.Identity.html
+  - name: .
+  - uid: ChristopherBriddock.Service.Identity.Providers
+    name: Providers
+    href: ChristopherBriddock.Service.Identity.Providers.html
+- uid: ChristopherBriddock.Service.Identity.Models.Results.JwtResult
+  commentId: T:ChristopherBriddock.Service.Identity.Models.Results.JwtResult
+  href: ChristopherBriddock.Service.Identity.Models.Results.JwtResult.html
+  name: JwtResult
+  nameWithType: JwtResult
+  fullName: ChristopherBriddock.Service.Identity.Models.Results.JwtResult
+- uid: ChristopherBriddock.Service.Identity.Providers.IJsonWebTokenProvider.TryCreateRefreshTokenAsync*
+  commentId: Overload:ChristopherBriddock.Service.Identity.Providers.IJsonWebTokenProvider.TryCreateRefreshTokenAsync
+  href: ChristopherBriddock.Service.Identity.Providers.IJsonWebTokenProvider.html#ChristopherBriddock_Service_Identity_Providers_IJsonWebTokenProvider_TryCreateRefreshTokenAsync_System_String_System_String_System_String_System_String_System_String_System_String_
+  name: TryCreateRefreshTokenAsync
+  nameWithType: IJsonWebTokenProvider.TryCreateRefreshTokenAsync
+  fullName: ChristopherBriddock.Service.Identity.Providers.IJsonWebTokenProvider.TryCreateRefreshTokenAsync
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: System.Threading.Tasks.Task{ChristopherBriddock.Service.Identity.Models.Results.JwtResult}
+  commentId: T:System.Threading.Tasks.Task{ChristopherBriddock.Service.Identity.Models.Results.JwtResult}
+  parent: System.Threading.Tasks
+  definition: System.Threading.Tasks.Task`1
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  name: Task<JwtResult>
+  nameWithType: Task<JwtResult>
+  fullName: System.Threading.Tasks.Task<ChristopherBriddock.Service.Identity.Models.Results.JwtResult>
+  nameWithType.vb: Task(Of JwtResult)
+  fullName.vb: System.Threading.Tasks.Task(Of ChristopherBriddock.Service.Identity.Models.Results.JwtResult)
+  name.vb: Task(Of JwtResult)
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: <
+  - uid: ChristopherBriddock.Service.Identity.Models.Results.JwtResult
+    name: JwtResult
+    href: ChristopherBriddock.Service.Identity.Models.Results.JwtResult.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: ChristopherBriddock.Service.Identity.Models.Results.JwtResult
+    name: JwtResult
+    href: ChristopherBriddock.Service.Identity.Models.Results.JwtResult.html
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.Threading.Tasks.Task`1
+  commentId: T:System.Threading.Tasks.Task`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  name: Task<TResult>
+  nameWithType: Task<TResult>
+  fullName: System.Threading.Tasks.Task<TResult>
+  nameWithType.vb: Task(Of TResult)
+  fullName.vb: System.Threading.Tasks.Task(Of TResult)
+  name.vb: Task(Of TResult)
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: <
+  - name: TResult
+  - name: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TResult
+  - name: )
+- uid: System.Threading.Tasks
+  commentId: N:System.Threading.Tasks
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Threading.Tasks
+  nameWithType: System.Threading.Tasks
+  fullName: System.Threading.Tasks
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks
+- uid: ChristopherBriddock.Service.Identity.Providers.IJsonWebTokenProvider.TryCreateTokenAsync*
+  commentId: Overload:ChristopherBriddock.Service.Identity.Providers.IJsonWebTokenProvider.TryCreateTokenAsync
+  href: ChristopherBriddock.Service.Identity.Providers.IJsonWebTokenProvider.html#ChristopherBriddock_Service_Identity_Providers_IJsonWebTokenProvider_TryCreateTokenAsync_System_String_System_String_System_String_System_String_System_String_System_String_
+  name: TryCreateTokenAsync
+  nameWithType: IJsonWebTokenProvider.TryCreateTokenAsync
+  fullName: ChristopherBriddock.Service.Identity.Providers.IJsonWebTokenProvider.TryCreateTokenAsync
+- uid: ChristopherBriddock.Service.Identity.Providers.IJsonWebTokenProvider.TryValidateTokenAsync*
+  commentId: Overload:ChristopherBriddock.Service.Identity.Providers.IJsonWebTokenProvider.TryValidateTokenAsync
+  href: ChristopherBriddock.Service.Identity.Providers.IJsonWebTokenProvider.html#ChristopherBriddock_Service_Identity_Providers_IJsonWebTokenProvider_TryValidateTokenAsync_System_String_System_String_System_String_System_String_
+  name: TryValidateTokenAsync
+  nameWithType: IJsonWebTokenProvider.TryValidateTokenAsync
+  fullName: ChristopherBriddock.Service.Identity.Providers.IJsonWebTokenProvider.TryValidateTokenAsync

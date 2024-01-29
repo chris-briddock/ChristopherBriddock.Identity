@@ -61,6 +61,7 @@ The Identity Service plays a crucial role in your application's security infrast
 * **/account/email**: Endpoint for managing user account email.
 * **/account/phonenumber**: Endpoint for managing user account phone number.
 * **/account/password**: Endpoint for managing user account password.
+* **/account/delete**: Endpoint for deleting their user account.
 
 ### Getting Started
 

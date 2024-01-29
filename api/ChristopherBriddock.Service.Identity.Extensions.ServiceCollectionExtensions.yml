@@ -1,0 +1,795 @@
+### YamlMime:ManagedReference
+items:
+- uid: ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions
+  commentId: T:ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions
+  id: ServiceCollectionExtensions
+  parent: ChristopherBriddock.Service.Identity.Extensions
+  children:
+  - ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions.AddAzureAppInsights(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  - ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions.AddCache(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  - ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions.AddCrossOriginPolicy(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  - ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions.AddCustomAuthentication(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  - ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions.AddCustomAuthorization(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  - ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions.AddCustomSession(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  - ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions.AddIdentity(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  - ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions.AddPublisherMessaging(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  - ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions.AddSwagger(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String)
+  langs:
+  - csharp
+  - vb
+  name: ServiceCollectionExtensions
+  nameWithType: ServiceCollectionExtensions
+  fullName: ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions
+  type: Class
+  source:
+    remote:
+      path: src/ChristopherBriddock.Service.Identity/Extensions/ServiceCollectionExtensions.cs
+      branch: dev
+      repo: https://github.com/chris-briddock/ChristopherBriddock.Identity.git
+    id: ServiceCollectionExtensions
+    path: src/ChristopherBriddock.Service.Identity/Extensions/ServiceCollectionExtensions.cs
+    startLine: 20
+  assemblies:
+  - ChristopherBriddock.Service.Identity
+  namespace: ChristopherBriddock.Service.Identity.Extensions
+  summary: Extension methods for the <xref href="Microsoft.Extensions.DependencyInjection.IServiceCollection" data-throw-if-not-resolved="false"></xref>
+  example: []
+  syntax:
+    content: public static class ServiceCollectionExtensions
+    content.vb: Public Module ServiceCollectionExtensions
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions.AddSwagger(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String)
+  commentId: M:ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions.AddSwagger(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String)
+  id: AddSwagger(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String)
+  isExtensionMethod: true
+  parent: ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions
+  langs:
+  - csharp
+  - vb
+  name: AddSwagger(IServiceCollection, string)
+  nameWithType: ServiceCollectionExtensions.AddSwagger(IServiceCollection, string)
+  fullName: ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions.AddSwagger(Microsoft.Extensions.DependencyInjection.IServiceCollection, string)
+  type: Method
+  source:
+    remote:
+      path: src/ChristopherBriddock.Service.Identity/Extensions/ServiceCollectionExtensions.cs
+      branch: dev
+      repo: https://github.com/chris-briddock/ChristopherBriddock.Identity.git
+    id: AddSwagger
+    path: src/ChristopherBriddock.Service.Identity/Extensions/ServiceCollectionExtensions.cs
+    startLine: 28
+  assemblies:
+  - ChristopherBriddock.Service.Identity
+  namespace: ChristopherBriddock.Service.Identity.Extensions
+  summary: Adds Swagger with custom configuration.
+  example: []
+  syntax:
+    content: public static IServiceCollection AddSwagger(this IServiceCollection services, string xmlFile)
+    parameters:
+    - id: services
+      type: Microsoft.Extensions.DependencyInjection.IServiceCollection
+      description: The IServiceCollection instance.
+    - id: xmlFile
+      type: System.String
+      description: ''
+    return:
+      type: Microsoft.Extensions.DependencyInjection.IServiceCollection
+      description: The modified <xref href="Microsoft.Extensions.DependencyInjection.IServiceCollection" data-throw-if-not-resolved="false"></xref> instance.
+    content.vb: Public Shared Function AddSwagger(services As IServiceCollection, xmlFile As String) As IServiceCollection
+  overload: ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions.AddSwagger*
+  nameWithType.vb: ServiceCollectionExtensions.AddSwagger(IServiceCollection, String)
+  fullName.vb: ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions.AddSwagger(Microsoft.Extensions.DependencyInjection.IServiceCollection, String)
+  name.vb: AddSwagger(IServiceCollection, String)
+- uid: ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions.AddIdentity(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  commentId: M:ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions.AddIdentity(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  id: AddIdentity(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  isExtensionMethod: true
+  parent: ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions
+  langs:
+  - csharp
+  - vb
+  name: AddIdentity(IServiceCollection)
+  nameWithType: ServiceCollectionExtensions.AddIdentity(IServiceCollection)
+  fullName: ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions.AddIdentity(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  type: Method
+  source:
+    remote:
+      path: src/ChristopherBriddock.Service.Identity/Extensions/ServiceCollectionExtensions.cs
+      branch: dev
+      repo: https://github.com/chris-briddock/ChristopherBriddock.Identity.git
+    id: AddIdentity
+    path: src/ChristopherBriddock.Service.Identity/Extensions/ServiceCollectionExtensions.cs
+    startLine: 76
+  assemblies:
+  - ChristopherBriddock.Service.Identity
+  namespace: ChristopherBriddock.Service.Identity.Extensions
+  summary: Adds the ASP.NET Identity configuration.
+  example: []
+  syntax:
+    content: public static IServiceCollection AddIdentity(this IServiceCollection services)
+    parameters:
+    - id: services
+      type: Microsoft.Extensions.DependencyInjection.IServiceCollection
+      description: The <xref href="Microsoft.Extensions.DependencyInjection.IServiceCollection" data-throw-if-not-resolved="false"></xref> instance.
+    return:
+      type: Microsoft.Extensions.DependencyInjection.IServiceCollection
+      description: The modified <xref href="Microsoft.Extensions.DependencyInjection.IServiceCollection" data-throw-if-not-resolved="false"></xref> instance.
+    content.vb: Public Shared Function AddIdentity(services As IServiceCollection) As IServiceCollection
+  overload: ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions.AddIdentity*
+- uid: ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions.AddCustomAuthentication(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  commentId: M:ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions.AddCustomAuthentication(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  id: AddCustomAuthentication(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  isExtensionMethod: true
+  parent: ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions
+  langs:
+  - csharp
+  - vb
+  name: AddCustomAuthentication(IServiceCollection)
+  nameWithType: ServiceCollectionExtensions.AddCustomAuthentication(IServiceCollection)
+  fullName: ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions.AddCustomAuthentication(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  type: Method
+  source:
+    remote:
+      path: src/ChristopherBriddock.Service.Identity/Extensions/ServiceCollectionExtensions.cs
+      branch: dev
+      repo: https://github.com/chris-briddock/ChristopherBriddock.Identity.git
+    id: AddCustomAuthentication
+    path: src/ChristopherBriddock.Service.Identity/Extensions/ServiceCollectionExtensions.cs
+    startLine: 109
+  assemblies:
+  - ChristopherBriddock.Service.Identity
+  namespace: ChristopherBriddock.Service.Identity.Extensions
+  summary: Extension method for adding authentication services to the IServiceCollection.
+  example: []
+  syntax:
+    content: public static IServiceCollection AddCustomAuthentication(this IServiceCollection services)
+    parameters:
+    - id: services
+      type: Microsoft.Extensions.DependencyInjection.IServiceCollection
+      description: The <xref href="Microsoft.Extensions.DependencyInjection.IServiceCollection" data-throw-if-not-resolved="false"></xref> to which services will be added.
+    return:
+      type: Microsoft.Extensions.DependencyInjection.IServiceCollection
+      description: The modified <xref href="Microsoft.Extensions.DependencyInjection.IServiceCollection" data-throw-if-not-resolved="false"></xref> instance.
+    content.vb: Public Shared Function AddCustomAuthentication(services As IServiceCollection) As IServiceCollection
+  overload: ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions.AddCustomAuthentication*
+- uid: ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions.AddCustomAuthorization(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  commentId: M:ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions.AddCustomAuthorization(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  id: AddCustomAuthorization(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  isExtensionMethod: true
+  parent: ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions
+  langs:
+  - csharp
+  - vb
+  name: AddCustomAuthorization(IServiceCollection)
+  nameWithType: ServiceCollectionExtensions.AddCustomAuthorization(IServiceCollection)
+  fullName: ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions.AddCustomAuthorization(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  type: Method
+  source:
+    remote:
+      path: src/ChristopherBriddock.Service.Identity/Extensions/ServiceCollectionExtensions.cs
+      branch: dev
+      repo: https://github.com/chris-briddock/ChristopherBriddock.Identity.git
+    id: AddCustomAuthorization
+    path: src/ChristopherBriddock.Service.Identity/Extensions/ServiceCollectionExtensions.cs
+    startLine: 128
+  assemblies:
+  - ChristopherBriddock.Service.Identity
+  namespace: ChristopherBriddock.Service.Identity.Extensions
+  summary: Adds custom authorization policy.
+  example: []
+  syntax:
+    content: public static IServiceCollection AddCustomAuthorization(this IServiceCollection services)
+    parameters:
+    - id: services
+      type: Microsoft.Extensions.DependencyInjection.IServiceCollection
+      description: The <xref href="Microsoft.Extensions.DependencyInjection.IServiceCollection" data-throw-if-not-resolved="false"></xref> to which services will be added.
+    return:
+      type: Microsoft.Extensions.DependencyInjection.IServiceCollection
+      description: The modified <xref href="Microsoft.Extensions.DependencyInjection.IServiceCollection" data-throw-if-not-resolved="false"></xref> instance.
+    content.vb: Public Shared Function AddCustomAuthorization(services As IServiceCollection) As IServiceCollection
+  overload: ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions.AddCustomAuthorization*
+- uid: ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions.AddCache(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  commentId: M:ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions.AddCache(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  id: AddCache(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  isExtensionMethod: true
+  parent: ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions
+  langs:
+  - csharp
+  - vb
+  name: AddCache(IServiceCollection)
+  nameWithType: ServiceCollectionExtensions.AddCache(IServiceCollection)
+  fullName: ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions.AddCache(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  type: Method
+  source:
+    remote:
+      path: src/ChristopherBriddock.Service.Identity/Extensions/ServiceCollectionExtensions.cs
+      branch: dev
+      repo: https://github.com/chris-briddock/ChristopherBriddock.Identity.git
+    id: AddCache
+    path: src/ChristopherBriddock.Service.Identity/Extensions/ServiceCollectionExtensions.cs
+    startLine: 144
+  assemblies:
+  - ChristopherBriddock.Service.Identity
+  namespace: ChristopherBriddock.Service.Identity.Extensions
+  summary: Add the required services for in-memory and redis services, if redis is enabled in the feature flags.
+  example: []
+  syntax:
+    content: public static IServiceCollection AddCache(this IServiceCollection services)
+    parameters:
+    - id: services
+      type: Microsoft.Extensions.DependencyInjection.IServiceCollection
+      description: The <xref href="Microsoft.Extensions.DependencyInjection.IServiceCollection" data-throw-if-not-resolved="false"></xref> to which services will be added.
+    return:
+      type: Microsoft.Extensions.DependencyInjection.IServiceCollection
+      description: The modified <xref href="Microsoft.Extensions.DependencyInjection.IServiceCollection" data-throw-if-not-resolved="false"></xref> instance.
+    content.vb: Public Shared Function AddCache(services As IServiceCollection) As IServiceCollection
+  overload: ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions.AddCache*
+- uid: ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions.AddCustomSession(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  commentId: M:ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions.AddCustomSession(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  id: AddCustomSession(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  isExtensionMethod: true
+  parent: ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions
+  langs:
+  - csharp
+  - vb
+  name: AddCustomSession(IServiceCollection)
+  nameWithType: ServiceCollectionExtensions.AddCustomSession(IServiceCollection)
+  fullName: ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions.AddCustomSession(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  type: Method
+  source:
+    remote:
+      path: src/ChristopherBriddock.Service.Identity/Extensions/ServiceCollectionExtensions.cs
+      branch: dev
+      repo: https://github.com/chris-briddock/ChristopherBriddock.Identity.git
+    id: AddCustomSession
+    path: src/ChristopherBriddock.Service.Identity/Extensions/ServiceCollectionExtensions.cs
+    startLine: 170
+  assemblies:
+  - ChristopherBriddock.Service.Identity
+  namespace: ChristopherBriddock.Service.Identity.Extensions
+  summary: Adds session support to the application.
+  example: []
+  syntax:
+    content: public static IServiceCollection AddCustomSession(this IServiceCollection services)
+    parameters:
+    - id: services
+      type: Microsoft.Extensions.DependencyInjection.IServiceCollection
+      description: The <xref href="Microsoft.Extensions.DependencyInjection.IServiceCollection" data-throw-if-not-resolved="false"></xref> to which services will be added.
+    return:
+      type: Microsoft.Extensions.DependencyInjection.IServiceCollection
+      description: The modified <xref href="Microsoft.Extensions.DependencyInjection.IServiceCollection" data-throw-if-not-resolved="false"></xref> instance.
+    content.vb: Public Shared Function AddCustomSession(services As IServiceCollection) As IServiceCollection
+  overload: ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions.AddCustomSession*
+- uid: ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions.AddAzureAppInsights(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  commentId: M:ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions.AddAzureAppInsights(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  id: AddAzureAppInsights(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  isExtensionMethod: true
+  parent: ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions
+  langs:
+  - csharp
+  - vb
+  name: AddAzureAppInsights(IServiceCollection)
+  nameWithType: ServiceCollectionExtensions.AddAzureAppInsights(IServiceCollection)
+  fullName: ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions.AddAzureAppInsights(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  type: Method
+  source:
+    remote:
+      path: src/ChristopherBriddock.Service.Identity/Extensions/ServiceCollectionExtensions.cs
+      branch: dev
+      repo: https://github.com/chris-briddock/ChristopherBriddock.Identity.git
+    id: AddAzureAppInsights
+    path: src/ChristopherBriddock.Service.Identity/Extensions/ServiceCollectionExtensions.cs
+    startLine: 186
+  assemblies:
+  - ChristopherBriddock.Service.Identity
+  namespace: ChristopherBriddock.Service.Identity.Extensions
+  summary: Adds Azure Application Insights, if enabled.
+  example: []
+  syntax:
+    content: public static IServiceCollection AddAzureAppInsights(this IServiceCollection services)
+    parameters:
+    - id: services
+      type: Microsoft.Extensions.DependencyInjection.IServiceCollection
+      description: The <xref href="Microsoft.Extensions.DependencyInjection.IServiceCollection" data-throw-if-not-resolved="false"></xref> to which services will be added.
+    return:
+      type: Microsoft.Extensions.DependencyInjection.IServiceCollection
+      description: The modified <xref href="Microsoft.Extensions.DependencyInjection.IServiceCollection" data-throw-if-not-resolved="false"></xref> instance.
+    content.vb: Public Shared Function AddAzureAppInsights(services As IServiceCollection) As IServiceCollection
+  overload: ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions.AddAzureAppInsights*
+- uid: ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions.AddCrossOriginPolicy(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  commentId: M:ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions.AddCrossOriginPolicy(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  id: AddCrossOriginPolicy(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  isExtensionMethod: true
+  parent: ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions
+  langs:
+  - csharp
+  - vb
+  name: AddCrossOriginPolicy(IServiceCollection)
+  nameWithType: ServiceCollectionExtensions.AddCrossOriginPolicy(IServiceCollection)
+  fullName: ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions.AddCrossOriginPolicy(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  type: Method
+  source:
+    remote:
+      path: src/ChristopherBriddock.Service.Identity/Extensions/ServiceCollectionExtensions.cs
+      branch: dev
+      repo: https://github.com/chris-briddock/ChristopherBriddock.Identity.git
+    id: AddCrossOriginPolicy
+    path: src/ChristopherBriddock.Service.Identity/Extensions/ServiceCollectionExtensions.cs
+    startLine: 207
+  assemblies:
+  - ChristopherBriddock.Service.Identity
+  namespace: ChristopherBriddock.Service.Identity.Extensions
+  summary: Add cross origin policy.
+  remarks: This is only enabled in development, by the middleware <xref href="Microsoft.AspNetCore.Builder.CorsMiddlewareExtensions.UseCors(Microsoft.AspNetCore.Builder.IApplicationBuilder)" data-throw-if-not-resolved="false"></xref>
+  example: []
+  syntax:
+    content: public static IServiceCollection AddCrossOriginPolicy(this IServiceCollection services)
+    parameters:
+    - id: services
+      type: Microsoft.Extensions.DependencyInjection.IServiceCollection
+      description: The <xref href="Microsoft.Extensions.DependencyInjection.IServiceCollection" data-throw-if-not-resolved="false"></xref> to which services will be added.
+    return:
+      type: Microsoft.Extensions.DependencyInjection.IServiceCollection
+      description: The modified <xref href="Microsoft.Extensions.DependencyInjection.IServiceCollection" data-throw-if-not-resolved="false"></xref> instance.
+    content.vb: Public Shared Function AddCrossOriginPolicy(services As IServiceCollection) As IServiceCollection
+  overload: ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions.AddCrossOriginPolicy*
+- uid: ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions.AddPublisherMessaging(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  commentId: M:ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions.AddPublisherMessaging(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  id: AddPublisherMessaging(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  isExtensionMethod: true
+  parent: ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions
+  langs:
+  - csharp
+  - vb
+  name: AddPublisherMessaging(IServiceCollection)
+  nameWithType: ServiceCollectionExtensions.AddPublisherMessaging(IServiceCollection)
+  fullName: ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions.AddPublisherMessaging(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  type: Method
+  source:
+    remote:
+      path: src/ChristopherBriddock.Service.Identity/Extensions/ServiceCollectionExtensions.cs
+      branch: dev
+      repo: https://github.com/chris-briddock/ChristopherBriddock.Identity.git
+    id: AddPublisherMessaging
+    path: src/ChristopherBriddock.Service.Identity/Extensions/ServiceCollectionExtensions.cs
+    startLine: 227
+  assemblies:
+  - ChristopherBriddock.Service.Identity
+  namespace: ChristopherBriddock.Service.Identity.Extensions
+  summary: Adds publisher messaging for rabbitmq or azure service bus.
+  example: []
+  syntax:
+    content: public static IServiceCollection AddPublisherMessaging(this IServiceCollection services)
+    parameters:
+    - id: services
+      type: Microsoft.Extensions.DependencyInjection.IServiceCollection
+      description: The <xref href="Microsoft.Extensions.DependencyInjection.IServiceCollection" data-throw-if-not-resolved="false"></xref> to which services will be added.
+    return:
+      type: Microsoft.Extensions.DependencyInjection.IServiceCollection
+      description: The modified <xref href="Microsoft.Extensions.DependencyInjection.IServiceCollection" data-throw-if-not-resolved="false"></xref> instance.
+    content.vb: Public Shared Function AddPublisherMessaging(services As IServiceCollection) As IServiceCollection
+  overload: ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions.AddPublisherMessaging*
+references:
+- uid: Microsoft.Extensions.DependencyInjection.IServiceCollection
+  commentId: T:Microsoft.Extensions.DependencyInjection.IServiceCollection
+  parent: Microsoft.Extensions.DependencyInjection
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.dependencyinjection.iservicecollection
+  name: IServiceCollection
+  nameWithType: IServiceCollection
+  fullName: Microsoft.Extensions.DependencyInjection.IServiceCollection
+- uid: ChristopherBriddock.Service.Identity.Extensions
+  commentId: N:ChristopherBriddock.Service.Identity.Extensions
+  href: ChristopherBriddock.html
+  name: ChristopherBriddock.Service.Identity.Extensions
+  nameWithType: ChristopherBriddock.Service.Identity.Extensions
+  fullName: ChristopherBriddock.Service.Identity.Extensions
+  spec.csharp:
+  - uid: ChristopherBriddock
+    name: ChristopherBriddock
+    href: ChristopherBriddock.html
+  - name: .
+  - uid: ChristopherBriddock.Service
+    name: Service
+    href: ChristopherBriddock.Service.html
+  - name: .
+  - uid: ChristopherBriddock.Service.Identity
+    name: Identity
+    href: ChristopherBriddock.Service.Identity.html
+  - name: .
+  - uid: ChristopherBriddock.Service.Identity.Extensions
+    name: Extensions
+    href: ChristopherBriddock.Service.Identity.Extensions.html
+  spec.vb:
+  - uid: ChristopherBriddock
+    name: ChristopherBriddock
+    href: ChristopherBriddock.html
+  - name: .
+  - uid: ChristopherBriddock.Service
+    name: Service
+    href: ChristopherBriddock.Service.html
+  - name: .
+  - uid: ChristopherBriddock.Service.Identity
+    name: Identity
+    href: ChristopherBriddock.Service.Identity.html
+  - name: .
+  - uid: ChristopherBriddock.Service.Identity.Extensions
+    name: Extensions
+    href: ChristopherBriddock.Service.Identity.Extensions.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: Microsoft.Extensions.DependencyInjection
+  commentId: N:Microsoft.Extensions.DependencyInjection
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft
+  name: Microsoft.Extensions.DependencyInjection
+  nameWithType: Microsoft.Extensions.DependencyInjection
+  fullName: Microsoft.Extensions.DependencyInjection
+  spec.csharp:
+  - uid: Microsoft
+    name: Microsoft
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft
+  - name: .
+  - uid: Microsoft.Extensions
+    name: Extensions
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions
+  - name: .
+  - uid: Microsoft.Extensions.DependencyInjection
+    name: DependencyInjection
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.dependencyinjection
+  spec.vb:
+  - uid: Microsoft
+    name: Microsoft
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft
+  - name: .
+  - uid: Microsoft.Extensions
+    name: Extensions
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions
+  - name: .
+  - uid: Microsoft.Extensions.DependencyInjection
+    name: DependencyInjection
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.extensions.dependencyinjection
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions.AddSwagger*
+  commentId: Overload:ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions.AddSwagger
+  href: ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions.html#ChristopherBriddock_Service_Identity_Extensions_ServiceCollectionExtensions_AddSwagger_Microsoft_Extensions_DependencyInjection_IServiceCollection_System_String_
+  name: AddSwagger
+  nameWithType: ServiceCollectionExtensions.AddSwagger
+  fullName: ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions.AddSwagger
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions.AddIdentity*
+  commentId: Overload:ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions.AddIdentity
+  href: ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions.html#ChristopherBriddock_Service_Identity_Extensions_ServiceCollectionExtensions_AddIdentity_Microsoft_Extensions_DependencyInjection_IServiceCollection_
+  name: AddIdentity
+  nameWithType: ServiceCollectionExtensions.AddIdentity
+  fullName: ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions.AddIdentity
+- uid: ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions.AddCustomAuthentication*
+  commentId: Overload:ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions.AddCustomAuthentication
+  href: ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions.html#ChristopherBriddock_Service_Identity_Extensions_ServiceCollectionExtensions_AddCustomAuthentication_Microsoft_Extensions_DependencyInjection_IServiceCollection_
+  name: AddCustomAuthentication
+  nameWithType: ServiceCollectionExtensions.AddCustomAuthentication
+  fullName: ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions.AddCustomAuthentication
+- uid: ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions.AddCustomAuthorization*
+  commentId: Overload:ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions.AddCustomAuthorization
+  href: ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions.html#ChristopherBriddock_Service_Identity_Extensions_ServiceCollectionExtensions_AddCustomAuthorization_Microsoft_Extensions_DependencyInjection_IServiceCollection_
+  name: AddCustomAuthorization
+  nameWithType: ServiceCollectionExtensions.AddCustomAuthorization
+  fullName: ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions.AddCustomAuthorization
+- uid: ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions.AddCache*
+  commentId: Overload:ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions.AddCache
+  href: ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions.html#ChristopherBriddock_Service_Identity_Extensions_ServiceCollectionExtensions_AddCache_Microsoft_Extensions_DependencyInjection_IServiceCollection_
+  name: AddCache
+  nameWithType: ServiceCollectionExtensions.AddCache
+  fullName: ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions.AddCache
+- uid: ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions.AddCustomSession*
+  commentId: Overload:ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions.AddCustomSession
+  href: ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions.html#ChristopherBriddock_Service_Identity_Extensions_ServiceCollectionExtensions_AddCustomSession_Microsoft_Extensions_DependencyInjection_IServiceCollection_
+  name: AddCustomSession
+  nameWithType: ServiceCollectionExtensions.AddCustomSession
+  fullName: ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions.AddCustomSession
+- uid: ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions.AddAzureAppInsights*
+  commentId: Overload:ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions.AddAzureAppInsights
+  href: ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions.html#ChristopherBriddock_Service_Identity_Extensions_ServiceCollectionExtensions_AddAzureAppInsights_Microsoft_Extensions_DependencyInjection_IServiceCollection_
+  name: AddAzureAppInsights
+  nameWithType: ServiceCollectionExtensions.AddAzureAppInsights
+  fullName: ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions.AddAzureAppInsights
+- uid: Microsoft.AspNetCore.Builder.CorsMiddlewareExtensions.UseCors(Microsoft.AspNetCore.Builder.IApplicationBuilder)
+  commentId: M:Microsoft.AspNetCore.Builder.CorsMiddlewareExtensions.UseCors(Microsoft.AspNetCore.Builder.IApplicationBuilder)
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.builder.corsmiddlewareextensions.usecors#microsoft-aspnetcore-builder-corsmiddlewareextensions-usecors(microsoft-aspnetcore-builder-iapplicationbuilder)
+  name: UseCors(IApplicationBuilder)
+  nameWithType: CorsMiddlewareExtensions.UseCors(IApplicationBuilder)
+  fullName: Microsoft.AspNetCore.Builder.CorsMiddlewareExtensions.UseCors(Microsoft.AspNetCore.Builder.IApplicationBuilder)
+  spec.csharp:
+  - uid: Microsoft.AspNetCore.Builder.CorsMiddlewareExtensions.UseCors(Microsoft.AspNetCore.Builder.IApplicationBuilder)
+    name: UseCors
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.builder.corsmiddlewareextensions.usecors#microsoft-aspnetcore-builder-corsmiddlewareextensions-usecors(microsoft-aspnetcore-builder-iapplicationbuilder)
+  - name: (
+  - uid: Microsoft.AspNetCore.Builder.IApplicationBuilder
+    name: IApplicationBuilder
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.builder.iapplicationbuilder
+  - name: )
+  spec.vb:
+  - uid: Microsoft.AspNetCore.Builder.CorsMiddlewareExtensions.UseCors(Microsoft.AspNetCore.Builder.IApplicationBuilder)
+    name: UseCors
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.builder.corsmiddlewareextensions.usecors#microsoft-aspnetcore-builder-corsmiddlewareextensions-usecors(microsoft-aspnetcore-builder-iapplicationbuilder)
+  - name: (
+  - uid: Microsoft.AspNetCore.Builder.IApplicationBuilder
+    name: IApplicationBuilder
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.builder.iapplicationbuilder
+  - name: )
+- uid: ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions.AddCrossOriginPolicy*
+  commentId: Overload:ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions.AddCrossOriginPolicy
+  href: ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions.html#ChristopherBriddock_Service_Identity_Extensions_ServiceCollectionExtensions_AddCrossOriginPolicy_Microsoft_Extensions_DependencyInjection_IServiceCollection_
+  name: AddCrossOriginPolicy
+  nameWithType: ServiceCollectionExtensions.AddCrossOriginPolicy
+  fullName: ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions.AddCrossOriginPolicy
+- uid: ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions.AddPublisherMessaging*
+  commentId: Overload:ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions.AddPublisherMessaging
+  href: ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions.html#ChristopherBriddock_Service_Identity_Extensions_ServiceCollectionExtensions_AddPublisherMessaging_Microsoft_Extensions_DependencyInjection_IServiceCollection_
+  name: AddPublisherMessaging
+  nameWithType: ServiceCollectionExtensions.AddPublisherMessaging
+  fullName: ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions.AddPublisherMessaging
