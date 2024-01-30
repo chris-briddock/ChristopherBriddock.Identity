@@ -57,7 +57,7 @@ public class LogoutEndpointTests : IClassFixture<WebApplicationFactory<Program>>
             AllowAutoRedirect = true
         });
 
-        using var authorizeResponse = await client.PostAsJsonAsync("/authorise", authorizeRequest);
+        using var authorizeResponse = await client.PostAsJsonAsync("/authorize", authorizeRequest);
 
         var jsonDocumentRoot = JsonDocument.Parse(authorizeResponse.Content.ReadAsStream()).RootElement;
 
@@ -102,7 +102,7 @@ public class LogoutEndpointTests : IClassFixture<WebApplicationFactory<Program>>
             AllowAutoRedirect = true
         });
 
-        using var authorizeResponse = await client.PostAsJsonAsync("/authorise", authorizeRequest);
+        using var authorizeResponse = await client.PostAsJsonAsync("/authorize", authorizeRequest);
 
         var jsonDocumentRoot = JsonDocument.Parse(authorizeResponse.Content.ReadAsStream()).RootElement;
 

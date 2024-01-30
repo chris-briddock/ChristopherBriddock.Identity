@@ -49,7 +49,7 @@ public class DeleteAccountEndpointTests : IClassFixture<WebApplicationFactory<Pr
             AllowAutoRedirect = true
         });
 
-        using var authorizeResponse = await client.PostAsJsonAsync("/authorise", authorizeRequest);
+        using var authorizeResponse = await client.PostAsJsonAsync("/authorize", authorizeRequest);
 
         var jsonDocumentRoot = JsonDocument.Parse(authorizeResponse.Content.ReadAsStream()).RootElement;
 
@@ -68,8 +68,8 @@ public class DeleteAccountEndpointTests : IClassFixture<WebApplicationFactory<Pr
     {
         AuthorizeRequest authorizeRequest = new()
         {
-            EmailAddress = "test@euiop.com",
-            Password = "w?M`YBqR6}*X,87):$u+eQ",
+            EmailAddress = "testing@tester.com",
+            Password = "7XAl@Dg()[=8rV;[wD[:GY$yw:$ltHA\\uaf!\\UQ`",
             RememberMe = true
         };
 
@@ -78,7 +78,7 @@ public class DeleteAccountEndpointTests : IClassFixture<WebApplicationFactory<Pr
             {
                 { "Jwt:Issuer", "https://localhost" },
                 { "Jwt:Secret", "=W0Jqcxsz8] Lq74z*:&gB^zmhx*HsrB6GYj%K}G" },
-                { "Jwt:Audience", "atesty@testing.com" },
+                { "Jwt:Audience", "test@euiop.com" },
                 { "Jwt:Expires", "60" }
             }).Build();
 
@@ -86,7 +86,6 @@ public class DeleteAccountEndpointTests : IClassFixture<WebApplicationFactory<Pr
         {
             s.ConfigureTestServices(s =>
             {
-
                 s.Replace(new ServiceDescriptor(typeof(IConfiguration), configurationBuilder));
             });
         }).CreateClient(new WebApplicationFactoryClientOptions()
@@ -94,7 +93,7 @@ public class DeleteAccountEndpointTests : IClassFixture<WebApplicationFactory<Pr
             AllowAutoRedirect = true
         });
 
-        using var authorizeResponse = await client.PostAsJsonAsync("/authorise", authorizeRequest);
+        using var authorizeResponse = await client.PostAsJsonAsync("/authorize", authorizeRequest);
 
         var jsonDocumentRoot = JsonDocument.Parse(authorizeResponse.Content.ReadAsStream()).RootElement;
 
@@ -139,8 +138,8 @@ public class DeleteAccountEndpointTests : IClassFixture<WebApplicationFactory<Pr
     {
         AuthorizeRequest authorizeRequest = new()
         {
-            EmailAddress = "test@euiop.com",
-            Password = "w?M`YBqR6}*X,87):$u+eQ",
+            EmailAddress = "testing@tester.com",
+            Password = "7XAl@Dg()[=8rV;[wD[:GY$yw:$ltHA\\uaf!\\UQ`",
             RememberMe = true
         };
 
@@ -157,7 +156,6 @@ public class DeleteAccountEndpointTests : IClassFixture<WebApplicationFactory<Pr
         {
             s.ConfigureTestServices(s =>
             {
-
                 s.Replace(new ServiceDescriptor(typeof(IConfiguration), configurationBuilder));
             });
         }).CreateClient(new WebApplicationFactoryClientOptions()
@@ -165,7 +163,7 @@ public class DeleteAccountEndpointTests : IClassFixture<WebApplicationFactory<Pr
             AllowAutoRedirect = true
         });
 
-        using var authorizeResponse = await client.PostAsJsonAsync("/authorise", authorizeRequest);
+        using var authorizeResponse = await client.PostAsJsonAsync("/authorize", authorizeRequest);
 
         var jsonDocumentRoot = JsonDocument.Parse(authorizeResponse.Content.ReadAsStream()).RootElement;
 

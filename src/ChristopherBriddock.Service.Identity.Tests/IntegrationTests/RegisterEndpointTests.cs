@@ -40,7 +40,7 @@ public class RegisterEndpointTests : IClassFixture<WebApplicationFactory<Program
     {
         RegisterRequest registerRequest = new()
         {
-            EmailAddress = "test@euiop.com",
+            EmailAddress = "testing@tester.com",
             Password = "7XAl@Dg()[=8rV;[wD[:GY$yw:$ltHA\\uaf!\\UQ`",
             PhoneNumber = "1234567890"
         };

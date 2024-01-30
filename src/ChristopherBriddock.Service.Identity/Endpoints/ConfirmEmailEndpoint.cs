@@ -51,16 +51,12 @@ public sealed class ConfirmEmailEndpoint(IServiceProvider services,
 
             var user = await userManager.FindByEmailAsync(request.EmailAddress);
 
-            if (user is null || user.IsDeleted)
-            {
-                return NotFound("User has not been found.");
-            }
 
             // NOTE: This code should have been emailed to the user.
             var decodedBytes = WebEncoders.Base64UrlDecode(request.Code);
             code = Encoding.UTF8.GetString(decodedBytes);
 
-            result = await userManager.ConfirmEmailAsync(user, code);
+            result = await userManager.ConfirmEmailAsync(user!, code);
 
             if (!result.Succeeded)
             {

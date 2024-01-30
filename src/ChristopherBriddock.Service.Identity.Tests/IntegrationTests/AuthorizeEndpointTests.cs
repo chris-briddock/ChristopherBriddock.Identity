@@ -1,12 +1,15 @@
-﻿namespace ChristopherBriddock.Service.Identity.Tests.IntegrationTests;
+﻿using ChristopherBriddock.Service.Identity.Tests.Mocks;
+using Microsoft.Extensions.Configuration;
 
-public class AuthoriseEndpointTests : IClassFixture<WebApplicationFactory<Program>>
+namespace ChristopherBriddock.Service.Identity.Tests.IntegrationTests;
+
+public class AuthorizeEndpointTests : IClassFixture<WebApplicationFactory<Program>>
 {
     private readonly WebApplicationFactory<Program> _webApplicationFactory;
 
     private AuthorizeRequest _authorizeRequest;
 
-    public AuthoriseEndpointTests(WebApplicationFactory<Program> webApplicationFactory)
+    public AuthorizeEndpointTests(WebApplicationFactory<Program> webApplicationFactory)
     {
         _webApplicationFactory = webApplicationFactory.WithWebHostBuilder(s =>
         {
@@ -16,7 +19,7 @@ public class AuthoriseEndpointTests : IClassFixture<WebApplicationFactory<Progra
     }
 
     [Fact]
-    public async Task AuthoriseEndpoint_ReturnsStatus302Found_WhenValidCredentialsAreUsed()
+    public async Task AuthorizeEndpoint_ReturnsStatus302Found_WhenValidCredentialsAreUsed()
     {
         using var client = _webApplicationFactory.CreateClient(new WebApplicationFactoryClientOptions()
         {
@@ -25,12 +28,12 @@ public class AuthoriseEndpointTests : IClassFixture<WebApplicationFactory<Progra
 
         _authorizeRequest = new()
         {
-            EmailAddress = "test@euiop.com",
-            Password = "w?M`YBqR6}*X,87):$u+eQ",
+            EmailAddress = "testing@tester.com",
+            Password = "7XAl@Dg()[=8rV;[wD[:GY$yw:$ltHA\\uaf!\\UQ`",
             RememberMe = true
         };
 
-        using var sut = await client.PostAsJsonAsync("/authorise", _authorizeRequest);
+        using var sut = await client.PostAsJsonAsync("/authorize", _authorizeRequest);
 
         Assert.Equivalent(HttpStatusCode.Found, sut.StatusCode);
     }
@@ -38,7 +41,7 @@ public class AuthoriseEndpointTests : IClassFixture<WebApplicationFactory<Progra
     /// Test
     /// </summary>
     [Fact]
-    public async Task AuthoriseEndpoint_ReturnsStatus401Unauthorized_WhenUseInvalidValidCredentials()
+    public async Task AuthorizeEndpoint_ReturnsStatus401Unauthorized_WhenUseInvalidValidCredentials()
     {
         using var client = _webApplicationFactory.CreateClient();
 
@@ -49,7 +52,7 @@ public class AuthoriseEndpointTests : IClassFixture<WebApplicationFactory<Progra
             RememberMe = true
         };
 
-        using var sut = await client.PostAsJsonAsync("/authorise", _authorizeRequest);
+        using var sut = await client.PostAsJsonAsync("/authorize", _authorizeRequest);
 
         Assert.Equivalent(HttpStatusCode.Unauthorized, sut.StatusCode);
     }
@@ -57,7 +60,7 @@ public class AuthoriseEndpointTests : IClassFixture<WebApplicationFactory<Progra
     /// Test
     /// </summary>
     [Fact]
-    public async Task AuthoriseEndpoint_ReturnsStatus500InternalServerError_WhenExceptionIsThrown()
+    public async Task AuthorizeEndpoint_ReturnsStatus500InternalServerError_WhenExceptionIsThrown()
     {
         var signInManagerMock = new SignInManagerMock<ApplicationUser>().Mock();
 
@@ -82,12 +85,12 @@ public class AuthoriseEndpointTests : IClassFixture<WebApplicationFactory<Progra
             });
         }).CreateClient();
 
-        using var sut = await client.PostAsJsonAsync("/authorise", _authorizeRequest);
+        using var sut = await client.PostAsJsonAsync("/authorize", _authorizeRequest);
         Assert.Equivalent(HttpStatusCode.InternalServerError, sut.StatusCode);
     }
 
     [Fact]
-    public async Task AuthoriseEndpoint_ReturnsStatus302Found_WhenTwoFactorIsEnabled()
+    public async Task AuthorizeEndpoint_ReturnsStatus302Found_WhenTwoFactorIsEnabled()
     {
         _authorizeRequest = new()
         {
@@ -102,10 +105,27 @@ public class AuthoriseEndpointTests : IClassFixture<WebApplicationFactory<Progra
         });
 
 
-        using var sut = await client.PostAsJsonAsync("/authorise", _authorizeRequest);
+        using var sut = await client.PostAsJsonAsync("/authorize", _authorizeRequest);
         Assert.Equivalent(HttpStatusCode.Found, sut.StatusCode);
 
     }
 
+    [Fact]
+    public async Task AuthorizeEndpoint_Returns401Unauthorized_WhenUserIsDeleted()
+    {
+        AuthorizeRequest authorizeRequest = new()
+        {
+            EmailAddress = "test@euiop.com",
+            Password = "w?M`YBqR6}*X,87):$u+eQ",
+            RememberMe = true
+        };
+        using var client = _webApplicationFactory.CreateClient(new WebApplicationFactoryClientOptions()
+        {
+            AllowAutoRedirect = false
+        });
+
+        using var sut = await client.PostAsJsonAsync("/authorize", authorizeRequest);
+        Assert.Equivalent(HttpStatusCode.Unauthorized, sut.StatusCode);
+    }
 }
 

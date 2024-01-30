@@ -11,12 +11,12 @@ namespace ChristopherBriddock.Service.Identity.Endpoints;
 /// Exposes an endpoint for authorizing a user.
 /// </summary>
 /// <remarks>
-/// Initializes a new instance of <see cref="AuthoriseEndpoint"/>
+/// Initializes a new instance of <see cref="AuthorizeEndpoint"/>
 /// </remarks>
 /// <param name="services">The service provider.</param>
 /// <param name="logger">The logger for this endpoint.</param>
-public sealed class AuthoriseEndpoint(IServiceProvider services,
-                                      ILogger<AuthoriseEndpoint> logger) : EndpointBaseAsync
+public sealed class AuthorizeEndpoint(IServiceProvider services,
+                                      ILogger<AuthorizeEndpoint> logger) : EndpointBaseAsync
                                                                           .WithRequest<AuthorizeRequest>
                                                                           .WithoutParam
                                                                           .WithActionResult
@@ -28,7 +28,7 @@ public sealed class AuthoriseEndpoint(IServiceProvider services,
     /// <summary>
     /// The logger for this endpoint.
     /// </summary>
-    private ILogger<AuthoriseEndpoint> Logger { get; } = logger;
+    private ILogger<AuthorizeEndpoint> Logger { get; } = logger;
 
 
     /// <summary>
@@ -37,7 +37,7 @@ public sealed class AuthoriseEndpoint(IServiceProvider services,
     /// <param name="request">The object which encapsulates the request body.</param>
     /// <param name="cancellationToken">The cancellation token to cancel the operation.</param>
     /// <returns>A new <see cref="ActionResult"/></returns>
-    [HttpPost("/authorise")]
+    [HttpPost("/authorize")]
     [AllowAnonymous]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -81,7 +81,7 @@ public sealed class AuthoriseEndpoint(IServiceProvider services,
         }
         catch (Exception ex)
         {
-            Logger.LogError("Error in endpoint: {endpointName} - {methodName} Error details: {ex}", nameof(AuthoriseEndpoint), nameof(HandleAsync), ex);
+            Logger.LogError("Error in endpoint: {endpointName} - {methodName} Error details: {ex}", nameof(AuthorizeEndpoint), nameof(HandleAsync), ex);
             return StatusCode(StatusCodes.Status500InternalServerError);
         }
     }

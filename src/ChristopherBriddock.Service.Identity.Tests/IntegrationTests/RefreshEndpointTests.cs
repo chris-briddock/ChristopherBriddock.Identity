@@ -38,8 +38,8 @@ public class RefreshEndpointTests : IClassFixture<WebApplicationFactory<Program>
     {
         AuthorizeRequest authorizeRequest = new()
         {
-            EmailAddress = "atesty@testing.com",
-            Password = "7XAl@Dg()[=8rV;[wD[:GY$yw:$ltHAauaf!aUQ`",
+            EmailAddress = "testing@tester.com",
+            Password = "7XAl@Dg()[=8rV;[wD[:GY$yw:$ltHA\\uaf!\\UQ`",
             RememberMe = true
         };
 
@@ -64,7 +64,7 @@ public class RefreshEndpointTests : IClassFixture<WebApplicationFactory<Program>
             AllowAutoRedirect = true
         });
 
-        using var authorizeResponse = await client.PostAsJsonAsync("/authorise", authorizeRequest);
+        using var authorizeResponse = await client.PostAsJsonAsync("/authorize", authorizeRequest);
 
         var jsonDocumentRoot = JsonDocument.Parse(authorizeResponse.Content.ReadAsStream()).RootElement;
 
@@ -129,7 +129,7 @@ public class RefreshEndpointTests : IClassFixture<WebApplicationFactory<Program>
             AllowAutoRedirect = true
         });
 
-        using var authorizeResponse = await client.PostAsJsonAsync("/authorise", authorizeRequest);
+        using var authorizeResponse = await client.PostAsJsonAsync("/authorize", authorizeRequest);
 
         var jsonDocumentRoot = JsonDocument.Parse(authorizeResponse.Content.ReadAsStream()).RootElement;
 
@@ -187,12 +187,12 @@ public class RefreshEndpointTests : IClassFixture<WebApplicationFactory<Program>
 
         AuthorizeRequest authorizeRequest = new()
         {
-            EmailAddress = "test@euiop.com",
-            Password = "w?M`YBqR6}*X,87):$u+eQ",
+            EmailAddress = "testing@tester.com",
+            Password = "7XAl@Dg()[=8rV;[wD[:GY$yw:$ltHA\\uaf!\\UQ`",
             RememberMe = true
         };
 
-        using var authorizeResponse = await client.PostAsJsonAsync("/authorise", authorizeRequest);
+        using var authorizeResponse = await client.PostAsJsonAsync("/authorize", authorizeRequest);
 
         var jsonDocumentRoot = JsonDocument.Parse(authorizeResponse.Content.ReadAsStream()).RootElement;
 
