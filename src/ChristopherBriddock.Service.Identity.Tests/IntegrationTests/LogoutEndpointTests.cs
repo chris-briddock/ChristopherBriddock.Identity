@@ -108,8 +108,6 @@ public class LogoutEndpointTests : IClassFixture<WebApplicationFactory<Program>>
 
         string? accessToken = jsonDocumentRoot.GetProperty("accessToken").GetString()!;
 
-        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
-
         var signInManagerMock = new SignInManagerMock<ApplicationUser>().Mock();
 
         signInManagerMock.Setup(s => s.SignOutAsync()).ThrowsAsync(new Exception());
@@ -125,10 +123,13 @@ public class LogoutEndpointTests : IClassFixture<WebApplicationFactory<Program>>
         {
             AllowAutoRedirect = true
         });
+        
+        clientWithForcedError.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+
         using var sut = await clientWithForcedError.PostAsync("/logout", null);
 
         Assert.Equivalent(HttpStatusCode.OK, authorizeResponse.StatusCode);
-        Assert.Equivalent(HttpStatusCode.Unauthorized, sut.StatusCode);
+        Assert.Equivalent(HttpStatusCode.InternalServerError, sut.StatusCode);
 
     }
 }
