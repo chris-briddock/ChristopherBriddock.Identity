@@ -135,7 +135,7 @@ public class DeleteAccountEndpointTests : IClassFixture<WebApplicationFactory<Pr
     }
 
     [Fact]
-    public async Task DeleteAccountEndpoint_Returns404_WhenUserIsNotFound()
+    public async Task DeleteAccountEndpoint_Returns500_WhenUserIsNotFound()
     {
         AuthorizeRequest authorizeRequest = new()
         {
