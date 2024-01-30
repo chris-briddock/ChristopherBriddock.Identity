@@ -77,7 +77,7 @@ public static class ServiceCollectionExtensions
         services.AddIdentity<ApplicationUser, ApplicationRole>(opt =>
         {
             opt.SignIn.RequireConfirmedPhoneNumber = false;
-            opt.SignIn.RequireConfirmedEmail = false;
+            opt.SignIn.RequireConfirmedEmail = true;
             opt.SignIn.RequireConfirmedAccount = false;
             opt.Lockout.AllowedForNewUsers = false;
             opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(10);
@@ -88,7 +88,7 @@ public static class ServiceCollectionExtensions
             opt.Password.RequireLowercase = true;
             opt.Password.RequireNonAlphanumeric = true;
             opt.Password.RequireUppercase = true;
-            opt.User.RequireUniqueEmail = true;
+            opt.User.RequireUniqueEmail = false;
             opt.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
         })
         .AddEntityFrameworkStores<AppDbContext>()
