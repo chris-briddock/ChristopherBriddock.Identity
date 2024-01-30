@@ -30,7 +30,7 @@ public class ResetPasswordEndpointTests : IClassFixture<WebApplicationFactory<Pr
             .AddInMemoryCollection(new Dictionary<string, string?>
             {
                 { "Jwt:Issuer", "https://localhost" },
-                { "Jwt:Secret", "=W0Jqcxsz8] Lq74z*:&gB^zmhx*HsrB6GYj%K}G" },
+                { "Jwt:Secret", "=W0Jqcxsz8] Lq74z*:&gB^zmhx*HsrB6GYj%K}G=W0Jqcxsz8] Lq74z*:&gB^zmhx*HsrB6GYj%K}G" },
                 { "Jwt:Audience", "atesty@testing.com" },
                 { "Jwt:Expires", "5" }
             }).Build();
@@ -99,7 +99,7 @@ public class ResetPasswordEndpointTests : IClassFixture<WebApplicationFactory<Pr
             .AddInMemoryCollection(new Dictionary<string, string?>
             {
                 { "Jwt:Issuer", "https://localhost" },
-                { "Jwt:Secret", "=W0Jqcxsz8] Lq74z*:&gB^zmhx*HsrB6GYj%K}G" },
+                { "Jwt:Secret", "=W0Jqcxsz8] Lq74z*:&gB^zmhx*HsrB6GYj%K}G=W0Jqcxsz8] Lq74z*:&gB^zmhx*HsrB6GYj%K}G" },
                 { "Jwt:Audience", "atesty@testing.com" },
                 { "Jwt:Expires", "5" }
             }).Build();

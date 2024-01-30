@@ -8,7 +8,7 @@ namespace ChristopherBriddock.Service.Identity.Providers
     public interface IJsonWebTokenProvider
     {
         /// <summary>
-        /// Tries to create a JWT (JSON Web Token) asynchronously.
+        /// Tries to create a refresh JWT (JSON Web Token) asynchronously.
         /// </summary>
         /// <param name="email">The email of the token's recipient.</param>
         /// <param name="jwtSecret">The secret key used to sign the JWT.</param>
@@ -24,7 +24,7 @@ namespace ChristopherBriddock.Service.Identity.Providers
                                                    string expires,
                                                    string subject);
         /// <summary>
-        /// Tries to create a new refresh JWT (JSON Web Token) asynchronously.
+        /// Tries to create a new JWT (JSON Web Token) asynchronously.
         /// </summary>
         /// <param name="email"></param>
         /// <param name="jwtSecret"></param>

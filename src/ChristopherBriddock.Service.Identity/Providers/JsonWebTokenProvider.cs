@@ -53,7 +53,7 @@ public class JsonWebTokenProvider : IJsonWebTokenProvider
                 expires: DateTime.UtcNow.AddMinutes(expiryMinutesToAdd),
                 signingCredentials: new SigningCredentials(
                     new SymmetricSecurityKey(key),
-                    SecurityAlgorithms.HmacSha256Signature
+                    SecurityAlgorithms.HmacSha512Signature
                 )
             );
             result.Success = true;
