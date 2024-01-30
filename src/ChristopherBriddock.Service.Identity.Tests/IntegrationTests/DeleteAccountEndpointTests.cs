@@ -68,8 +68,8 @@ public class DeleteAccountEndpointTests : IClassFixture<WebApplicationFactory<Pr
     {
         AuthorizeRequest authorizeRequest = new()
         {
-            EmailAddress = "atesty@testing.com",
-            Password = "7XAl@Dg()[=8rV;[wD[:GY$yw:$ltHAauaf!aUQ`",
+            EmailAddress = "test@euiop.com",
+            Password = "w?M`YBqR6}*X,87):$u+eQ",
             RememberMe = true
         };
 
@@ -100,8 +100,6 @@ public class DeleteAccountEndpointTests : IClassFixture<WebApplicationFactory<Pr
 
         string? accessToken = jsonDocumentRoot.GetProperty("accessToken").GetString()!;
 
-        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
-
         var userManagerMock = new UserManagerMock<ApplicationUser>().Mock();
 
         userManagerMock.Setup(s => s.DeleteAsync(It.IsAny<ApplicationUser>())).ThrowsAsync(new Exception());
@@ -117,10 +115,12 @@ public class DeleteAccountEndpointTests : IClassFixture<WebApplicationFactory<Pr
         {
             AllowAutoRedirect = true
         });
+        clientWithForcedError.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+
         using var sut = await clientWithForcedError.DeleteAsync("/account/delete");
 
         Assert.Equivalent(HttpStatusCode.OK, authorizeResponse.StatusCode);
-        Assert.Equivalent(HttpStatusCode.Unauthorized, sut.StatusCode);
+        Assert.Equivalent(HttpStatusCode.InternalServerError, sut.StatusCode);
     }
 
     [Fact]
