@@ -39,20 +39,11 @@ public class DeleteAccountEndpoint(ILogger<DeleteAccountEndpoint> logger,
         try
         {
             var userManager = ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
-
             string emailAddress = User.FindFirst(ClaimTypes.Email)!.Value;
-
             var user = await userManager.FindByEmailAsync(emailAddress);
-
-            if (user == null)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError);
-            }
-            user.IsDeleted = true;
-            user.DeletedDateTime = DateTime.UtcNow;
-
-            await userManager.UpdateAsync(user);
-
+            user!.IsDeleted = true;
+            user!.DeletedDateTime = DateTime.UtcNow;
+            await userManager.UpdateAsync(user!);
             return NoContent();
         }
         catch (Exception ex)
