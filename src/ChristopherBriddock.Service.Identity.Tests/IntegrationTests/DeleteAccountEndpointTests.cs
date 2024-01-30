@@ -191,7 +191,7 @@ public class DeleteAccountEndpointTests : IClassFixture<WebApplicationFactory<Pr
         using var sut = await clientWithForcedError.DeleteAsync("/account/delete");
 
         Assert.Equivalent(HttpStatusCode.OK, authorizeResponse.StatusCode);
-        Assert.Equivalent(HttpStatusCode.NotFound, sut.StatusCode);
+        Assert.Equivalent(HttpStatusCode.InternalServerError, sut.StatusCode);
     }
 
 }
