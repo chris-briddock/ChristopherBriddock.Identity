@@ -133,4 +133,65 @@ public class DeleteAccountEndpointTests : IClassFixture<WebApplicationFactory<Pr
         Assert.Equivalent(HttpStatusCode.Unauthorized, sut.StatusCode);
 
     }
+
+    [Fact]
+    public async Task DeleteAccountEndpoint_Returns404_WhenUserIsNotFound()
+    {
+        AuthorizeRequest authorizeRequest = new()
+        {
+            EmailAddress = "test@euiop.com",
+            Password = "w?M`YBqR6}*X,87):$u+eQ",
+            RememberMe = true
+        };
+
+        var configurationBuilder = new ConfigurationBuilder()
+            .AddInMemoryCollection(new Dictionary<string, string?>
+            {
+                { "Jwt:Issuer", "https://localhost" },
+                { "Jwt:Secret", "=W0Jqcxsz8] Lq74z*:&gB^zmhx*HsrB6GYj%K}G" },
+                { "Jwt:Audience", "atesty@testing.com" },
+                { "Jwt:Expires", "60" }
+            }).Build();
+
+        using var client = _webApplicationFactory.WithWebHostBuilder(s =>
+        {
+            s.ConfigureTestServices(s =>
+            {
+
+                s.Replace(new ServiceDescriptor(typeof(IConfiguration), configurationBuilder));
+            });
+        }).CreateClient(new WebApplicationFactoryClientOptions()
+        {
+            AllowAutoRedirect = true
+        });
+
+        using var authorizeResponse = await client.PostAsJsonAsync("/authorise", authorizeRequest);
+
+        var jsonDocumentRoot = JsonDocument.Parse(authorizeResponse.Content.ReadAsStream()).RootElement;
+
+        string? accessToken = jsonDocumentRoot.GetProperty("accessToken").GetString()!;
+
+        var userManagerMock = new UserManagerMock<ApplicationUser>().Mock();
+
+        userManagerMock.Setup(s => s.FindByEmailAsync(It.IsAny<string>())).ReturnsAsync(value: null);
+
+        using var clientWithForcedError = _webApplicationFactory.WithWebHostBuilder(s =>
+        {
+            s.ConfigureTestServices(s =>
+            {
+                s.Replace(new ServiceDescriptor(typeof(UserManager<ApplicationUser>), userManagerMock));
+                s.Replace(new ServiceDescriptor(typeof(IConfiguration), configurationBuilder));
+            });
+        }).CreateClient(new WebApplicationFactoryClientOptions()
+        {
+            AllowAutoRedirect = true
+        });
+        clientWithForcedError.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+
+        using var sut = await clientWithForcedError.DeleteAsync("/account/delete");
+
+        Assert.Equivalent(HttpStatusCode.OK, authorizeResponse.StatusCode);
+        Assert.Equivalent(HttpStatusCode.NotFound, sut.StatusCode);
+    }
+
 }

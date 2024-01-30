@@ -8,7 +8,7 @@ namespace ChristopherBriddock.Service.Identity.Providers;
 public class LinkProvider  : ILinkProvider
 {
     /// <summary>
-    /// Gets a built string from <see cref="HttpContext"/> and provided <see cref="RouteValueDictionary"/>
+    /// Builds a string from <see cref="HttpContext"/> and the provided <see cref="RouteValueDictionary"/>
     /// </summary>
     /// <param name="context">The http context</param>
     /// <param name="endpointName">The endpoint to generate this uri for.</param>
