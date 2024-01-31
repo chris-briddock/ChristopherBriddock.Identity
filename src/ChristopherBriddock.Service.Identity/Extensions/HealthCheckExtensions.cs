@@ -62,7 +62,11 @@ public static class HealthCheckExtensions
 
         if (featureManager.IsEnabledAsync(FeatureFlagConstants.Seq).Result)
         {
-            // TODO: Add Seq Health CHecks.
+            services.AddHealthChecks().AddSeqPublisher(opt =>
+            {
+                opt.Endpoint = configuration["Seq:Endpoint"]!;
+                opt.ApiKey = configuration["Seq:ApiKey"];
+            });
         }
 
         if (featureManager.IsEnabledAsync(FeatureFlagConstants.AzApplicationInsights).Result)
@@ -74,7 +78,6 @@ public static class HealthCheckExtensions
         return services;
     }
 }
-
 
 internal static class HealthCheckResponseWriter
 {
