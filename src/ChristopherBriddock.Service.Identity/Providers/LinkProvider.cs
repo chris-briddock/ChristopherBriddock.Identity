@@ -23,12 +23,8 @@ public class LinkProvider  : ILinkProvider
     private string BuildQueryParameters(RouteValueDictionary routeValues)
     {
         StringBuilder sb = new();
-        string queryString;
-        foreach (var parameter in routeValues.Values)
-        {
-            sb.Append(string.Join("&", routeValues.Select(kvp => $"{kvp.Key}={kvp.Value}")));
-        }
-        queryString = sb.ToString();
+            
+        var queryString = sb.Append(string.Join("&", routeValues.Select(kvp => $"{kvp.Key}={kvp.Value}"))).ToString();
         return string.IsNullOrEmpty(queryString) ? string.Empty : $"?{queryString}";
     }
 }

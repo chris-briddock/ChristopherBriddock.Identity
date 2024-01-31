@@ -112,7 +112,8 @@ public static class ServiceCollectionExtensions
             options.DefaultAuthenticateScheme = IdentityConstants.ApplicationScheme;
             options.DefaultChallengeScheme = IdentityConstants.ApplicationScheme;
             options.DefaultSignInScheme = IdentityConstants.ExternalScheme;
-        }).AddCookie(IdentityConstants.ApplicationScheme, o =>
+        })
+        .AddCookie(IdentityConstants.ApplicationScheme, o =>
         {
             o.Cookie.Name = IdentityConstants.ApplicationScheme;
             o.Events = new CookieAuthenticationEvents
@@ -142,9 +143,6 @@ public static class ServiceCollectionExtensions
             };
             o.ExpireTimeSpan = TimeSpan.FromMinutes(5);
         });
-
-
-
 
         return services;
     }
@@ -204,7 +202,6 @@ public static class ServiceCollectionExtensions
             services.AddStackExchangeRedisCache(opt =>
             {
                 opt.Configuration = configuration.GetConnectionString("Redis");
-                opt.InstanceName = configuration.GetConnectionString("RedisInstanceName");
             });
         }
         return services;

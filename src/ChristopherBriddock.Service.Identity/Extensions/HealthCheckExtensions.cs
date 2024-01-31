@@ -71,15 +71,6 @@ public static class HealthCheckExtensions
             services.AddHealthChecks().AddAzureApplicationInsights(key);
         }
 
-        if (featureManager.IsEnabledAsync(FeatureFlagConstants.RabbitMq).Result)
-        {
-
-            services.AddHealthChecks().AddRabbitMQ(null,
-                                                   HealthStatus.Unhealthy,
-                                                   null,
-                                                   TimeSpan.FromMinutes(10));
-        }
-
         return services;
     }
 }
