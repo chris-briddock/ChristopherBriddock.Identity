@@ -34,12 +34,12 @@ public class RefreshEndpointTests : IClassFixture<WebApplicationFactory<Program>
     }
 
     [Fact]
-    public async Task RefreshEndpoint_Returns401_WhenInvalidRefreshTokenIsUsed()
+    public async Task RefreshEndpoint_Returns401_WhenNoRefreshTokenIsUsed()
     {
         AuthorizeRequest authorizeRequest = new()
         {
-            EmailAddress = "atesty@testing.com",
-            Password = "7XAl@Dg()[=8rV;[wD[:GY$yw:$ltHAauaf!aUQ`",
+            EmailAddress = "authenticationtest@test.com",
+            Password = "Lq74z*:&gB^zmhx*HsrB6GYj%K}G=W0Jqcxsz8] Lq74z*:&gB^zmhx*",
             RememberMe = true
         };
 
@@ -47,7 +47,7 @@ public class RefreshEndpointTests : IClassFixture<WebApplicationFactory<Program>
             .AddInMemoryCollection(new Dictionary<string, string?>
             {
                 { "Jwt:Issuer", "https://localhost" },
-                { "Jwt:Secret", "=W0Jqcxsz8] Lq74z*:&gB^zmhx*HsrB6GYj%K}G" },
+                { "Jwt:Secret", "=W0Jqcxsz8] Lq74z*:&gB^zmhx*HsrB6GYj%K}G=W0Jqcxsz8] Lq74z*:&gB^zmhx*HsrB6GYj%K}G" },
                 { "Jwt:Audience", "atesty@testing.com" },
                 { "Jwt:Expires", "60" }
             }).Build();
@@ -64,14 +64,12 @@ public class RefreshEndpointTests : IClassFixture<WebApplicationFactory<Program>
             AllowAutoRedirect = true
         });
 
-        using var authorizeResponse = await client.PostAsJsonAsync("/authorise", authorizeRequest);
+        using var authorizeResponse = await client.PostAsJsonAsync("/authorize", authorizeRequest);
 
         var jsonDocumentRoot = JsonDocument.Parse(authorizeResponse.Content.ReadAsStream()).RootElement;
 
         string? accessToken = jsonDocumentRoot.GetProperty("accessToken").GetString()!;
         string refreshToken = jsonDocumentRoot.GetProperty("refreshToken").GetString()!;
-
-        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
 
         JsonWebTokenProviderMock jsonWebTokenProviderMock = new();
 
@@ -93,6 +91,8 @@ public class RefreshEndpointTests : IClassFixture<WebApplicationFactory<Program>
                 s.Replace(new ServiceDescriptor(typeof(IConfiguration), configurationBuilder));
             });
         }).CreateClient();
+
+        sutClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
         using var sut = await sutClient.PostAsJsonAsync("/refresh", refreshRequest);
 
         Assert.Equivalent(HttpStatusCode.Unauthorized, sut.StatusCode);
@@ -103,8 +103,8 @@ public class RefreshEndpointTests : IClassFixture<WebApplicationFactory<Program>
     {
         AuthorizeRequest authorizeRequest = new()
         {
-            EmailAddress = "atesty@testing.com",
-            Password = "7XAl@Dg()[=8rV;[wD[:GY$yw:$ltHAauaf!aUQ`",
+            EmailAddress = "authenticationtest@test.com",
+            Password = "Lq74z*:&gB^zmhx*HsrB6GYj%K}G=W0Jqcxsz8] Lq74z*:&gB^zmhx*",
             RememberMe = true
         };
 
@@ -112,7 +112,7 @@ public class RefreshEndpointTests : IClassFixture<WebApplicationFactory<Program>
             .AddInMemoryCollection(new Dictionary<string, string?>
             {
                 { "Jwt:Issuer", "https://localhost" },
-                { "Jwt:Secret", "=W0Jqcxsz8] Lq74z*:&gB^zmhx*HsrB6GYj%K}G" },
+                { "Jwt:Secret", "=W0Jqcxsz8] Lq74z*:&gB^zmhx*HsrB6GYj%K}G=W0Jqcxsz8] Lq74z*:&gB^zmhx*HsrB6GYj%K}G" },
                 { "Jwt:Audience", "atesty@testing.com" },
                 { "Jwt:Expires", "60" }
             }).Build();
@@ -129,7 +129,7 @@ public class RefreshEndpointTests : IClassFixture<WebApplicationFactory<Program>
             AllowAutoRedirect = true
         });
 
-        using var authorizeResponse = await client.PostAsJsonAsync("/authorise", authorizeRequest);
+        using var authorizeResponse = await client.PostAsJsonAsync("/authorize", authorizeRequest);
 
         var jsonDocumentRoot = JsonDocument.Parse(authorizeResponse.Content.ReadAsStream()).RootElement;
 
@@ -158,5 +158,68 @@ public class RefreshEndpointTests : IClassFixture<WebApplicationFactory<Program>
         using var sut = await sutClient.PostAsJsonAsync("/refresh", refreshRequest);
 
         Assert.Equivalent(HttpStatusCode.InternalServerError, sut.StatusCode);
+    }
+
+    [Fact]
+    public async Task RefreshEndpoint_Returns302Found_WhenRefreshIsSuccessful()
+    {
+
+        var configurationBuilder = new ConfigurationBuilder()
+            .AddInMemoryCollection(new Dictionary<string, string?>
+            {
+                { "Jwt:Issuer", "https://localhost" },
+                { "Jwt:Secret", "=W0Jqcxsz8] Lq74z*:&gB^zmhx*HsrB6GYj%K}G=W0Jqcxsz8] Lq74z*:&gB^zmhx*HsrB6GYj%K}G" },
+                { "Jwt:Audience", "atesty@testing.com" },
+                { "Jwt:Expires", "5" }
+            }).Build();
+
+        using var client = _webApplicationFactory.WithWebHostBuilder(s =>
+        {
+            s.ConfigureTestServices(s =>
+            {
+
+                s.Replace(new ServiceDescriptor(typeof(IConfiguration), configurationBuilder));
+            });
+        }).CreateClient(new WebApplicationFactoryClientOptions()
+        {
+            AllowAutoRedirect = true
+        });
+
+        AuthorizeRequest authorizeRequest = new()
+        {
+            EmailAddress = "authenticationtest@test.com",
+            Password = "Lq74z*:&gB^zmhx*HsrB6GYj%K}G=W0Jqcxsz8] Lq74z*:&gB^zmhx*",
+            RememberMe = true
+        };
+
+        using var authorizeResponse = await client.PostAsJsonAsync("/authorize", authorizeRequest);
+
+        var jsonDocumentRoot = JsonDocument.Parse(authorizeResponse.Content.ReadAsStream()).RootElement;
+
+        string? accessToken = jsonDocumentRoot.GetProperty("accessToken").GetString()!;
+        string? refreshToken = jsonDocumentRoot.GetProperty("refreshToken").GetString()!;
+
+        RefreshRequest refreshRequest = new() { RefreshToken = refreshToken };
+
+
+        using var refreshClient = _webApplicationFactory.WithWebHostBuilder(s =>
+        {
+            s.ConfigureTestServices(s =>
+            {
+
+                s.Replace(new ServiceDescriptor(typeof(IConfiguration), configurationBuilder));
+            });
+        }).CreateClient(new WebApplicationFactoryClientOptions()
+        {
+            AllowAutoRedirect = false
+        });
+
+        refreshClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+
+        var sut = await refreshClient.PostAsJsonAsync("/refresh", refreshRequest);
+
+        Assert.Equivalent(HttpStatusCode.OK, authorizeResponse.StatusCode);
+
+        Assert.Equivalent(HttpStatusCode.Found, sut.StatusCode);
     }
 }

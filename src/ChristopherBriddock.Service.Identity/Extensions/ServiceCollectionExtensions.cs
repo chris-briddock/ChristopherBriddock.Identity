@@ -6,8 +6,10 @@ using ChristopherBriddock.Service.Identity.Options;
 using ChristopherBriddock.Service.Identity.Providers;
 using ChristopherBriddock.Service.Identity.Publishers;
 using MassTransit;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Options;
 using Microsoft.FeatureManagement;
@@ -74,10 +76,16 @@ public static class ServiceCollectionExtensions
     /// <returns>The modified <see cref="IServiceCollection"/> instance.</returns>
     public static IServiceCollection AddIdentity(this IServiceCollection services)
     {
-        services.AddIdentity<ApplicationUser, ApplicationRole>(opt =>
+        services.AddHttpContextAccessor();
+        services.TryAddScoped<IRoleValidator<ApplicationRole>, RoleValidator<ApplicationRole>>();
+        services.TryAddScoped<IdentityErrorDescriber>();
+        services.TryAddScoped<ISecurityStampValidator, SecurityStampValidator<ApplicationUser>>();
+        services.TryAddScoped<ITwoFactorSecurityStampValidator, TwoFactorSecurityStampValidator<ApplicationUser>>();
+
+        services.AddIdentityCore<ApplicationUser>(opt =>
         {
             opt.SignIn.RequireConfirmedPhoneNumber = false;
-            opt.SignIn.RequireConfirmedEmail = false;
+            opt.SignIn.RequireConfirmedEmail = true;
             opt.SignIn.RequireConfirmedAccount = false;
             opt.Lockout.AllowedForNewUsers = false;
             opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(10);
@@ -88,14 +96,53 @@ public static class ServiceCollectionExtensions
             opt.Password.RequireLowercase = true;
             opt.Password.RequireNonAlphanumeric = true;
             opt.Password.RequireUppercase = true;
-            opt.User.RequireUniqueEmail = true;
+            opt.User.RequireUniqueEmail = false;
             opt.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
         })
         .AddEntityFrameworkStores<AppDbContext>()
         .AddSignInManager<SignInManager<ApplicationUser>>()
         .AddUserManager<UserManager<ApplicationUser>>()
         .AddRoles<ApplicationRole>()
+        .AddRoleStore<RoleStore<ApplicationRole, AppDbContext, Guid>>()
+        .AddUserStore<UserStore<ApplicationUser,ApplicationRole,AppDbContext,Guid>>()
         .AddDefaultTokenProviders();
+
+        services.AddAuthentication(options =>
+        {
+            options.DefaultAuthenticateScheme = IdentityConstants.ApplicationScheme;
+            options.DefaultChallengeScheme = IdentityConstants.ApplicationScheme;
+            options.DefaultSignInScheme = IdentityConstants.ExternalScheme;
+        })
+        .AddCookie(IdentityConstants.ApplicationScheme, o =>
+        {
+            o.Cookie.Name = IdentityConstants.ApplicationScheme;
+            o.Events = new CookieAuthenticationEvents
+            {
+                OnValidatePrincipal = SecurityStampValidator.ValidatePrincipalAsync
+            };
+        })
+        .AddCookie(IdentityConstants.ExternalScheme, o =>
+        {
+            o.Cookie.Name = IdentityConstants.ExternalScheme;
+            o.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+        })
+        .AddCookie(IdentityConstants.TwoFactorRememberMeScheme, o =>
+        {
+            o.Cookie.Name = IdentityConstants.TwoFactorRememberMeScheme;
+            o.Events = new CookieAuthenticationEvents
+            {
+                OnValidatePrincipal = SecurityStampValidator.ValidateAsync<ITwoFactorSecurityStampValidator>
+            };
+        })
+        .AddCookie(IdentityConstants.TwoFactorUserIdScheme, o =>
+        {
+            o.Cookie.Name = IdentityConstants.TwoFactorUserIdScheme;
+            o.Events = new CookieAuthenticationEvents
+            {
+                OnRedirectToReturnUrl = _ => Task.CompletedTask
+            };
+            o.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+        });
 
         return services;
     }
@@ -155,7 +202,6 @@ public static class ServiceCollectionExtensions
             services.AddStackExchangeRedisCache(opt =>
             {
                 opt.Configuration = configuration.GetConnectionString("Redis");
-                opt.InstanceName = configuration.GetConnectionString("RedisInstanceName");
             });
         }
         return services;

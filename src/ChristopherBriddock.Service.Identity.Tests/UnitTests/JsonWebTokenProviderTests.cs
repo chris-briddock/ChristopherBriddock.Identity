@@ -6,7 +6,7 @@ public class JsonWebTokenProviderTests
 {
     private readonly JsonWebTokenProvider _sut;
     private readonly string _email = "christopherbriddock@gmail.com";
-    private readonly string _jwtSecret = "veryStrongKeyUsedForSigningJWTs123456789";
+    private readonly string _jwtSecret = "=W0Jqcxsz8] Lq74z*:&gB^zmhx*HsrB6GYj%K}GLq74z*:&gB^zmhx*HsrB6GYj%K}G";
     private readonly string _issuer = "https://auth.example.com";
     private readonly string _audience = "https://api.example.com";
     private readonly string _expires = 120.ToString();

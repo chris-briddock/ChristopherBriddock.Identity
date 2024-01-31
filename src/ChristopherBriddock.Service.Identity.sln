@@ -29,7 +29,7 @@ Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-co
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChristopherBriddock.WorkerService.Email", "ChristopherBriddock.WorkerService.Email\ChristopherBriddock.WorkerService.Email.csproj", "{749B8DDA-E87C-4B3A-B089-93BC4BC7CF2C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChristopherBriddock.WorkerService.Email.Tests", "ChristopherBriddock.Service.Email.Tests\ChristopherBriddock.WorkerService.Email.Tests.csproj", "{5CE8788E-E652-4D01-9D36-890F0FEEB191}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChristopherBriddock.WorkerService.Email.Tests", "ChristopherBriddock.WorkerService.Email.Tests\ChristopherBriddock.WorkerService.Email.Tests.csproj", "{BB7A0330-C920-4F2D-95FE-D75549D94721}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,17 +57,17 @@ Global
 		{749B8DDA-E87C-4B3A-B089-93BC4BC7CF2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{749B8DDA-E87C-4B3A-B089-93BC4BC7CF2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{749B8DDA-E87C-4B3A-B089-93BC4BC7CF2C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5CE8788E-E652-4D01-9D36-890F0FEEB191}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5CE8788E-E652-4D01-9D36-890F0FEEB191}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5CE8788E-E652-4D01-9D36-890F0FEEB191}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5CE8788E-E652-4D01-9D36-890F0FEEB191}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB7A0330-C920-4F2D-95FE-D75549D94721}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB7A0330-C920-4F2D-95FE-D75549D94721}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB7A0330-C920-4F2D-95FE-D75549D94721}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB7A0330-C920-4F2D-95FE-D75549D94721}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{019FB266-27C6-4BD1-A0E0-D31B0FE8DC93} = {F12FB90F-85BC-4184-BAE6-90A520AA2072}
-		{5CE8788E-E652-4D01-9D36-890F0FEEB191} = {F12FB90F-85BC-4184-BAE6-90A520AA2072}
+		{BB7A0330-C920-4F2D-95FE-D75549D94721} = {F12FB90F-85BC-4184-BAE6-90A520AA2072}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AFC8F73B-E3E7-482B-A804-DBF4F6BFD8DC}

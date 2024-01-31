@@ -70,7 +70,7 @@ public sealed class TwoFactorTokenEmailEndpoint(IServiceProvider services,
                 ["token"] = code,
             };
 
-            string? twoFactorUri = linkGenerator.GetUri(httpContext.HttpContext!, "2fa/authorise", routeValues);
+            string? twoFactorUri = linkGenerator.GetUri(httpContext.HttpContext!, "2fa/authorize", routeValues);
 
             EmailMessage message = new()
             {

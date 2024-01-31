@@ -16,7 +16,7 @@ public class ForgotPasswordEndpointTests : IClassFixture<WebApplicationFactory<P
         _forgotPasswordRequest = default!;
     }
     [Fact]
-    public async Task ForgotPasswordEndpoint_Returns204NoContent_WhenRequestIsValid()
+    public async Task ForgotPasswordEndpoint_Returns200OK_WhenRequestIsValid()
     {
 
         _forgotPasswordRequest = new()
@@ -28,7 +28,7 @@ public class ForgotPasswordEndpointTests : IClassFixture<WebApplicationFactory<P
 
         using var sut = await client.PostAsJsonAsync("/forgotpassword", _forgotPasswordRequest);
 
-        Assert.Equivalent(HttpStatusCode.NoContent, sut.StatusCode);
+        Assert.Equivalent(HttpStatusCode.OK, sut.StatusCode);
 
     }
     [Fact]

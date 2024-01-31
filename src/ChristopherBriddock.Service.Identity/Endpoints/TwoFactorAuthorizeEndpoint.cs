@@ -10,8 +10,8 @@ namespace ChristopherBriddock.Service.Identity.Endpoints;
 /// <summary>
 /// Exposes an endpoint that allows the user to sign in using two factor authentication.
 /// </summary>
-public sealed class TwoFactorAuthoriseEndpoint(IServiceProvider services,
-                                               ILogger<TwoFactorAuthoriseEndpoint> logger) : EndpointBaseAsync
+public sealed class TwoFactorAuthorizeEndpoint(IServiceProvider services,
+                                               ILogger<TwoFactorAuthorizeEndpoint> logger) : EndpointBaseAsync
                                                                                              .WithRequest<TwoFactorSignInRequest>
                                                                                              .WithoutParam
                                                                                              .WithActionResult
@@ -21,7 +21,7 @@ public sealed class TwoFactorAuthoriseEndpoint(IServiceProvider services,
     /// </summary>
     public IServiceProvider Services { get; } = services;
     /// <inheritdoc/>
-    public ILogger<TwoFactorAuthoriseEndpoint> Logger { get; } = logger;
+    public ILogger<TwoFactorAuthorizeEndpoint> Logger { get; } = logger;
 
     /// <summary>
     /// Allows the user to sign in with two factor code.
@@ -29,7 +29,7 @@ public sealed class TwoFactorAuthoriseEndpoint(IServiceProvider services,
     /// <param name="request">The object which encapsulates the request.</param>
     /// <param name="cancellationToken">The cancellation token to cancel the operation.</param>
     /// <returns>A new <see cref="ActionResult"/></returns>
-    [HttpGet("/2fa/authorise")]
+    [HttpGet("/2fa/Authorize")]
     [AllowAnonymous]
     [ProducesResponseType(StatusCodes.Status302Found)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -70,7 +70,7 @@ public sealed class TwoFactorAuthoriseEndpoint(IServiceProvider services,
         }
         catch (Exception ex)
         {
-            Logger.LogError("Error in endpoint: {endpointName} - {methodName} Error details: {ex}", nameof(TwoFactorAuthoriseEndpoint), nameof(HandleAsync), ex);
+            Logger.LogError("Error in endpoint: {endpointName} - {methodName} Error details: {ex}", nameof(TwoFactorAuthorizeEndpoint), nameof(HandleAsync), ex);
             return StatusCode(StatusCodes.Status500InternalServerError);
         }
 

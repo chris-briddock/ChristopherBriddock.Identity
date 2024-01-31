@@ -31,8 +31,8 @@ public class LogoutEndpointTests : IClassFixture<WebApplicationFactory<Program>>
     {
         AuthorizeRequest authorizeRequest = new()
         {
-            EmailAddress = "atesty@testing.com",
-            Password = "7XAl@Dg()[=8rV;[wD[:GY$yw:$ltHAauaf!aUQ`",
+            EmailAddress = "authenticationtest@test.com",
+            Password = "Lq74z*:&gB^zmhx*HsrB6GYj%K}G=W0Jqcxsz8] Lq74z*:&gB^zmhx*",
             RememberMe = true
         };
 
@@ -40,7 +40,7 @@ public class LogoutEndpointTests : IClassFixture<WebApplicationFactory<Program>>
             .AddInMemoryCollection(new Dictionary<string, string?>
             {
                 { "Jwt:Issuer", "https://localhost" },
-                { "Jwt:Secret", "=W0Jqcxsz8] Lq74z*:&gB^zmhx*HsrB6GYj%K}G" },
+                { "Jwt:Secret", "=W0Jqcxsz8] Lq74z*:&gB^zmhx*HsrB6GYj%K}G=W0Jqcxsz8] Lq74z*:&gB^zmhx*HsrB6GYj%K}G" },
                 { "Jwt:Audience", "atesty@testing.com" },
                 { "Jwt:Expires", "60" }
             }).Build();
@@ -57,7 +57,7 @@ public class LogoutEndpointTests : IClassFixture<WebApplicationFactory<Program>>
             AllowAutoRedirect = true
         });
 
-        using var authorizeResponse = await client.PostAsJsonAsync("/authorise", authorizeRequest);
+        using var authorizeResponse = await client.PostAsJsonAsync("/authorize", authorizeRequest);
 
         var jsonDocumentRoot = JsonDocument.Parse(authorizeResponse.Content.ReadAsStream()).RootElement;
 
@@ -76,8 +76,8 @@ public class LogoutEndpointTests : IClassFixture<WebApplicationFactory<Program>>
     {
         AuthorizeRequest authorizeRequest = new()
         {
-            EmailAddress = "atesty@testing.com",
-            Password = "7XAl@Dg()[=8rV;[wD[:GY$yw:$ltHAauaf!aUQ`",
+            EmailAddress = "authenticationtest@test.com",
+            Password = "Lq74z*:&gB^zmhx*HsrB6GYj%K}G=W0Jqcxsz8] Lq74z*:&gB^zmhx*",
             RememberMe = true
         };
 
@@ -85,7 +85,7 @@ public class LogoutEndpointTests : IClassFixture<WebApplicationFactory<Program>>
             .AddInMemoryCollection(new Dictionary<string, string?>
             {
                 { "Jwt:Issuer", "https://localhost" },
-                { "Jwt:Secret", "=W0Jqcxsz8] Lq74z*:&gB^zmhx*HsrB6GYj%K}G" },
+                { "Jwt:Secret", "=W0Jqcxsz8] Lq74z*:&gB^zmhx*HsrB6GYj%K}G=W0Jqcxsz8] Lq74z*:&gB^zmhx*HsrB6GYj%K}G" },
                 { "Jwt:Audience", "atesty@testing.com" },
                 { "Jwt:Expires", "60" }
             }).Build();
@@ -102,13 +102,11 @@ public class LogoutEndpointTests : IClassFixture<WebApplicationFactory<Program>>
             AllowAutoRedirect = true
         });
 
-        using var authorizeResponse = await client.PostAsJsonAsync("/authorise", authorizeRequest);
+        using var authorizeResponse = await client.PostAsJsonAsync("/authorize", authorizeRequest);
 
         var jsonDocumentRoot = JsonDocument.Parse(authorizeResponse.Content.ReadAsStream()).RootElement;
 
         string? accessToken = jsonDocumentRoot.GetProperty("accessToken").GetString()!;
-
-        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
 
         var signInManagerMock = new SignInManagerMock<ApplicationUser>().Mock();
 
@@ -125,10 +123,13 @@ public class LogoutEndpointTests : IClassFixture<WebApplicationFactory<Program>>
         {
             AllowAutoRedirect = true
         });
+        
+        clientWithForcedError.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+
         using var sut = await clientWithForcedError.PostAsync("/logout", null);
 
         Assert.Equivalent(HttpStatusCode.OK, authorizeResponse.StatusCode);
-        Assert.Equivalent(HttpStatusCode.Unauthorized, sut.StatusCode);
+        Assert.Equivalent(HttpStatusCode.InternalServerError, sut.StatusCode);
 
     }
 }

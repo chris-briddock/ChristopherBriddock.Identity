@@ -3,7 +3,7 @@
 namespace ChristopherBriddock.Service.Identity.Services;
 
 /// <summary>
-/// This backround service deletes old user account marked as deleted after five years.
+/// This backround service deletes old user account marked as deleted after seven years.
 /// </summary>
 /// <param name="appDbContext">The application's database context</param>
 public class AccountPurgeBackgroundService(AppDbContext appDbContext) : BackgroundService

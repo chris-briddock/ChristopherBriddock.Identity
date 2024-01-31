@@ -74,25 +74,6 @@ public class ConfirmEmailEndpointTests : IClassFixture<WebApplicationFactory<Pro
     }
 
     [Fact]
-    public async Task ConfirmEmailEndpoint_ReturnsStatus_404WhenUserIsNotFound()
-    {
-        _confirmEmailRequest = new()
-        {
-            EmailAddress = "test@test.com",
-            Code = "CfDJ8OgQt3GRCbpAqpW/lUkYbKcxoL55kAWWuaMIq6/+FPUL4p7KYF6W5u89C2yjXp/NANvDtxLbOggkSvJs24z/cM7PW1iDmiegeS4f9XLHLBQlVzQWKaYZou4rIWKTBxk9O4sFFTC7006koe3sUS0URACV4Iq0Xw3EON2hm+3ji05UgFz+JHLZ7Oou7063fEBmmfDjpbTP9Lk5YobeYEddf6rCkSLC786AYkht+xM0x0g7"
-        };
-
-        using var client = _webApplicationFactory.WithWebHostBuilder(s =>
-        {
-        }).CreateClient();
-
-        using var sut = await client.GetAsync($"/confirmemail?EmailAddress=test%40test.com&Code={_confirmEmailRequest.Code}");
-
-        Assert.Equivalent(HttpStatusCode.NotFound, sut.StatusCode);
-
-    }
-
-    [Fact]
     public async Task ConfirmEmailEndpoint_ReturnsStatus_500WhenUserIsNotFound()
     {
         _confirmEmailRequest = new()

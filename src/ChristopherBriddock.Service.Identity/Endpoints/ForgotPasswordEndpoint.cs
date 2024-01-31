@@ -53,23 +53,21 @@ public sealed class ForgotPasswordEndpoint(IServiceProvider services,
             var emailPublisher = Services.GetService<IEmailPublisher>()!;
             var httpContext = Services.GetService<IHttpContextAccessor>()!;
 
-            if (user is null)
+            if (user is not null )
             {
-                return NotFound("User has not been found.");
+                var code = await userManager.GeneratePasswordResetTokenAsync(user);
+                code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+
+                EmailMessage message = new()
+                {
+                    EmailAddress = user.Email!,
+                    Link = code,
+                    Type = EmailPublisherConstants.ForgotPassword
+                };
+                await emailPublisher.Publish(message, cancellationToken);
             }
-
-            var code = await userManager.GeneratePasswordResetTokenAsync(user);
-            code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-
-            EmailMessage message = new()
-            {
-                EmailAddress = user.Email!,
-                Link = code,
-                Type = EmailPublisherConstants.ForgotPassword
-            };
-            await emailPublisher.Publish(message, cancellationToken);
-
-            return NoContent();
+            
+            return Ok("If a user exists in the database, an email will be sent to that email address.");
         }
         catch (Exception ex)
         {
