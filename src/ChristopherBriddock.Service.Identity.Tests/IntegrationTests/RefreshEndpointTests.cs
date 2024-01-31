@@ -38,8 +38,8 @@ public class RefreshEndpointTests : IClassFixture<WebApplicationFactory<Program>
     {
         AuthorizeRequest authorizeRequest = new()
         {
-            EmailAddress = "testing@tester.com",
-            Password = "7XAl@Dg()[=8rV;[wD[:GY$yw:$ltHA\\uaf!\\UQ`",
+            EmailAddress = "authenticationtest@test.com",
+            Password = "Lq74z*:&gB^zmhx*HsrB6GYj%K}G=W0Jqcxsz8] Lq74z*:&gB^zmhx*",
             RememberMe = true
         };
 
@@ -103,8 +103,8 @@ public class RefreshEndpointTests : IClassFixture<WebApplicationFactory<Program>
     {
         AuthorizeRequest authorizeRequest = new()
         {
-            EmailAddress = "atesty@testing.com",
-            Password = "7XAl@Dg()[=8rV;[wD[:GY$yw:$ltHAauaf!aUQ`",
+            EmailAddress = "authenticationtest@test.com",
+            Password = "Lq74z*:&gB^zmhx*HsrB6GYj%K}G=W0Jqcxsz8] Lq74z*:&gB^zmhx*",
             RememberMe = true
         };
 
@@ -187,8 +187,8 @@ public class RefreshEndpointTests : IClassFixture<WebApplicationFactory<Program>
 
         AuthorizeRequest authorizeRequest = new()
         {
-            EmailAddress = "testing@tester.com",
-            Password = "7XAl@Dg()[=8rV;[wD[:GY$yw:$ltHA\\uaf!\\UQ`",
+            EmailAddress = "authenticationtest@test.com",
+            Password = "Lq74z*:&gB^zmhx*HsrB6GYj%K}G=W0Jqcxsz8] Lq74z*:&gB^zmhx*",
             RememberMe = true
         };
 

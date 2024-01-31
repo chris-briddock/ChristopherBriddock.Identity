@@ -1,7 +1,4 @@
-﻿using ChristopherBriddock.Service.Identity.Tests.Mocks;
-using Microsoft.Extensions.Configuration;
-
-namespace ChristopherBriddock.Service.Identity.Tests.IntegrationTests;
+﻿namespace ChristopherBriddock.Service.Identity.Tests.IntegrationTests;
 
 public class AuthorizeEndpointTests : IClassFixture<WebApplicationFactory<Program>>
 {
@@ -17,7 +14,6 @@ public class AuthorizeEndpointTests : IClassFixture<WebApplicationFactory<Progra
         });
         _authorizeRequest = default!;
     }
-
     [Fact]
     public async Task AuthorizeEndpoint_ReturnsStatus302Found_WhenValidCredentialsAreUsed()
     {

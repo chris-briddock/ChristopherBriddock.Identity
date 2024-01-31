@@ -66,9 +66,9 @@ public class TokenEndpoint(IServiceProvider services,
             if (result.Success && refreshToken.Success)
             {
                 bool isAccessTokenValid = (await jsonWebTokenProvider.TryValidateTokenAsync(result.Token,
-                                                                           secret,
-                                                                           issuer,
-                                                                           audience)).Success;
+                                                                                            secret,
+                                                                                            issuer,
+                                                                                            audience)).Success;
                 bool isRefreshTokenValid = (await jsonWebTokenProvider.TryValidateTokenAsync(refreshToken.Token,
                                                                                              secret,
                                                                                              issuer,
