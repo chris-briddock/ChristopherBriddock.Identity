@@ -1,6 +1,6 @@
+using ChristopherBriddock.Service.Common.Extensions;
 using ChristopherBriddock.WorkerService.Email;
 using Microsoft.FeatureManagement;
-using ChristopherBriddock.Service.Common.Extensions;
 
 var builder = Host.CreateApplicationBuilder(args);
 

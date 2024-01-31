@@ -34,25 +34,25 @@ public class Worker(ILogger<Worker> logger,
     /// <returns>An asyncronous <see cref="Task"/></returns>
     public async Task Consume(ConsumeContext<EmailMessage> context)
     {
-            var smtpServer = Configuration["Email:Server"]!;
-            int smtpPort = Convert.ToInt16(Configuration["Email:Port"]!);
-            var smtpUsername = Configuration["Email:Credentials:EmailAddress"]!;
-            var smtpPassword = Configuration["Email:Credentials:Password"]!;
+        var smtpServer = Configuration["Email:Server"]!;
+        int smtpPort = Convert.ToInt16(Configuration["Email:Port"]!);
+        var smtpUsername = Configuration["Email:Credentials:EmailAddress"]!;
+        var smtpPassword = Configuration["Email:Credentials:Password"]!;
 
-            using var client = new SmtpClient(smtpServer, smtpPort);
-            client.EnableSsl = true;
-            client.Credentials = new NetworkCredential(smtpUsername, smtpPassword);
-            var mailMessage = new MailMessage
-            {
-                From = new MailAddress(smtpUsername),
-                IsBodyHtml = true
-            };
+        using var client = new SmtpClient(smtpServer, smtpPort);
+        client.EnableSsl = true;
+        client.Credentials = new NetworkCredential(smtpUsername, smtpPassword);
+        var mailMessage = new MailMessage
+        {
+            From = new MailAddress(smtpUsername),
+            IsBodyHtml = true
+        };
 
-            switch (context.Message.Type)
-            {
-                case EmailPublisherConstants.Register:
-                    mailMessage.Subject = $"Welcome! Here is your confirmation email.";
-                    mailMessage.Body = $@"<!DOCTYPE html>
+        switch (context.Message.Type)
+        {
+            case EmailPublisherConstants.Register:
+                mailMessage.Subject = $"Welcome! Here is your confirmation email.";
+                mailMessage.Body = $@"<!DOCTYPE html>
 <html lang=""en"">
 <head>
     <meta charset=""UTF-8"">
@@ -73,10 +73,10 @@ public class Worker(ILogger<Worker> logger,
     </div>
 </body>
 </html>";
-                    break;
-                case EmailPublisherConstants.TwoFactorToken:
-                    mailMessage.Subject = $"You requested a two factor code";
-                    mailMessage.Body = $@"<!DOCTYPE html>
+                break;
+            case EmailPublisherConstants.TwoFactorToken:
+                mailMessage.Subject = $"You requested a two factor code";
+                mailMessage.Body = $@"<!DOCTYPE html>
 <html lang=""en"">
 <head>
     <meta charset=""UTF-8"">
@@ -97,10 +97,10 @@ public class Worker(ILogger<Worker> logger,
     </div>
 </body>
 </html>";
-                    break;
-                case EmailPublisherConstants.ForgotPassword:
-                    mailMessage.Subject = $"Oh no! You silly goose, you forgot your password. You can reset it here.";
-                    mailMessage.Body = $@"<!DOCTYPE html>
+                break;
+            case EmailPublisherConstants.ForgotPassword:
+                mailMessage.Subject = $"Oh no! You silly goose, you forgot your password. You can reset it here.";
+                mailMessage.Body = $@"<!DOCTYPE html>
 <html lang=""en"">
 <head>
     <meta charset=""UTF-8"">
@@ -121,12 +121,12 @@ public class Worker(ILogger<Worker> logger,
     </div>
 </body>
 </html>";
-                    break;
-                default:
-                    break;
-            }
-            mailMessage.To.Add(context.Message.EmailAddress);
+                break;
+            default:
+                break;
+        }
+        mailMessage.To.Add(context.Message.EmailAddress);
 
-            await client.SendMailAsync(mailMessage);
+        await client.SendMailAsync(mailMessage);
     }
 }

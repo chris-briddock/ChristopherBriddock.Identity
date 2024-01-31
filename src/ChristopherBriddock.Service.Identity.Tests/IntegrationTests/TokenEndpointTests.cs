@@ -1,7 +1,5 @@
-﻿using Azure.Core;
-using ChristopherBriddock.Service.Identity.Exceptions;
+﻿using ChristopherBriddock.Service.Identity.Exceptions;
 using ChristopherBriddock.Service.Identity.Providers;
-using ChristopherBriddock.Service.Identity.Tests.Mocks;
 using Microsoft.Extensions.Configuration;
 using System.Net.Http.Headers;
 using System.Text.Json;

@@ -54,7 +54,7 @@ public class RefreshEndpoint(IServiceProvider services,
             }
             return LocalRedirect("/token");
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             Logger.LogError("Error in endpoint: {endpointName} - {methodName} Error details: {ex}", nameof(RefreshEndpoint), nameof(HandleAsync), ex);
             return StatusCode(StatusCodes.Status500InternalServerError);

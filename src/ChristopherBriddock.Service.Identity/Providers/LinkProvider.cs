@@ -5,7 +5,7 @@ namespace ChristopherBriddock.Service.Identity.Providers;
 /// <summary>
 /// Gets the URL provided by the <see cref="HttpContext"/>
 /// </summary>
-public class LinkProvider  : ILinkProvider
+public class LinkProvider : ILinkProvider
 {
     /// <inheritdoc/>
     public string GetUri(HttpContext context, string endpointName, RouteValueDictionary routeValues)
@@ -23,7 +23,7 @@ public class LinkProvider  : ILinkProvider
     private string BuildQueryParameters(RouteValueDictionary routeValues)
     {
         StringBuilder sb = new();
-            
+
         var queryString = sb.Append(string.Join("&", routeValues.Select(kvp => $"{kvp.Key}={kvp.Value}"))).ToString();
         return string.IsNullOrEmpty(queryString) ? string.Empty : $"?{queryString}";
     }

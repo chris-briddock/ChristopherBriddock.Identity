@@ -1,7 +1,5 @@
-﻿using Azure.Core;
-using ChristopherBriddock.Service.Identity.Models.Results;
+﻿using ChristopherBriddock.Service.Identity.Models.Results;
 using ChristopherBriddock.Service.Identity.Providers;
-using Microsoft.Azure.Amqp.Framing;
 using Microsoft.Extensions.Configuration;
 using System.Net.Http.Headers;
 using System.Text.Json;

@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.Configuration;
-
-namespace ChristopherBriddock.Service.Identity.Tests.IntegrationTests;
+﻿namespace ChristopherBriddock.Service.Identity.Tests.IntegrationTests;
 
 public class RegisterEndpointTests : IClassFixture<WebApplicationFactory<Program>>
 {

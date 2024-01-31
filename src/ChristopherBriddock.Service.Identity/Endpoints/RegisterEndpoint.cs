@@ -97,7 +97,7 @@ public sealed class RegisterEndpoint(IServiceProvider services,
                 ["Code"] = code
             };
 
-           var link =  linkProvider.GetUri(httpContext.HttpContext!, "confirmemail", routeValues);
+            var link = linkProvider.GetUri(httpContext.HttpContext!, "confirmemail", routeValues);
 
             EmailMessage message = new()
             {

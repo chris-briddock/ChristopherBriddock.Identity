@@ -75,7 +75,7 @@ public sealed class TwoFactorTokenEmailEndpoint(IServiceProvider services,
             EmailMessage message = new()
             {
                 EmailAddress = user.Email!,
-                Link = twoFactorUri ,
+                Link = twoFactorUri,
                 Type = EmailPublisherConstants.TwoFactorToken
             };
             await emailPublisher.Publish(message, cancellationToken);

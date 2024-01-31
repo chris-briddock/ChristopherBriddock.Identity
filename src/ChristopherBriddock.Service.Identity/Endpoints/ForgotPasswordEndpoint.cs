@@ -3,7 +3,6 @@ using ChristopherBriddock.Service.Common.Constants;
 using ChristopherBriddock.Service.Common.Messaging;
 using ChristopherBriddock.Service.Identity.Models;
 using ChristopherBriddock.Service.Identity.Models.Requests;
-using ChristopherBriddock.Service.Identity.Providers;
 using ChristopherBriddock.Service.Identity.Publishers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -53,7 +52,7 @@ public sealed class ForgotPasswordEndpoint(IServiceProvider services,
             var emailPublisher = Services.GetService<IEmailPublisher>()!;
             var httpContext = Services.GetService<IHttpContextAccessor>()!;
 
-            if (user is not null )
+            if (user is not null)
             {
                 var code = await userManager.GeneratePasswordResetTokenAsync(user);
                 code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
@@ -66,7 +65,7 @@ public sealed class ForgotPasswordEndpoint(IServiceProvider services,
                 };
                 await emailPublisher.Publish(message, cancellationToken);
             }
-            
+
             return Ok("If a user exists in the database, an email will be sent to that email address.");
         }
         catch (Exception ex)

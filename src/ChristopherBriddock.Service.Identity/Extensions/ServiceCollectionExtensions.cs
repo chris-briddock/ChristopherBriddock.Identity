@@ -104,7 +104,7 @@ public static class ServiceCollectionExtensions
         .AddUserManager<UserManager<ApplicationUser>>()
         .AddRoles<ApplicationRole>()
         .AddRoleStore<RoleStore<ApplicationRole, AppDbContext, Guid>>()
-        .AddUserStore<UserStore<ApplicationUser,ApplicationRole,AppDbContext,Guid>>()
+        .AddUserStore<UserStore<ApplicationUser, ApplicationRole, AppDbContext, Guid>>()
         .AddDefaultTokenProviders();
 
         services.AddAuthentication(options =>
