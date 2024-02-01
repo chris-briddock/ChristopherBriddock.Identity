@@ -31,7 +31,7 @@ public sealed class Program
         builder.Services.AddCustomSession();
         builder.Services.AddResponseCaching();
         builder.Services.AddAzureAppInsights();
-        builder.Services.AddDbContext<AppDbContext>(ServiceLifetime.Singleton);
+        builder.Services.AddDbContext<AppDbContext>();
         builder.Services.AddCustomHealthChecks();
         builder.Services.AddCrossOriginPolicy();
         builder.Services.AddPublisherMessaging();

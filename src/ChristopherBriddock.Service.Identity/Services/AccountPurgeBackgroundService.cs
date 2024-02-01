@@ -5,13 +5,21 @@ namespace ChristopherBriddock.Service.Identity.Services;
 /// <summary>
 /// This backround service deletes old user account marked as deleted after seven years.
 /// </summary>
-/// <param name="appDbContext">The application's database context</param>
-public class AccountPurgeBackgroundService(AppDbContext appDbContext) : BackgroundService
+public class AccountPurgeBackgroundService : BackgroundService
 {
     /// <summary>
-    /// The application's database context.
+    /// The service scope factory.
     /// </summary>
-    public AppDbContext AppDbContext { get; } = appDbContext;
+    public IServiceScopeFactory ServiceScopeFactory { get; }
+
+    /// <summary>
+    /// Initializes a new instance of <see cref="AccountPurgeBackgroundService"/>
+    /// </summary>
+    /// <param name="serviceScopeFactory">A factory for creating instances of <see cref="IServiceScope"/></param>
+    public AccountPurgeBackgroundService(IServiceScopeFactory serviceScopeFactory)
+    {
+        ServiceScopeFactory = serviceScopeFactory;
+    }
 
     /// <inheritdoc/>
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -19,12 +27,16 @@ public class AccountPurgeBackgroundService(AppDbContext appDbContext) : Backgrou
 
         await Task.Delay(TimeSpan.FromDays(1), stoppingToken);
 
-        var userToBeDeleted = AppDbContext.Users.Where(s => s.IsDeleted)
+        using var scope = ServiceScopeFactory.CreateScope();
+
+        var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+
+        var userToBeDeleted = dbContext.Users.Where(s => s.IsDeleted)
                             .Where(s => s.DeletedDateTime < DateTime.Today.AddYears(-7));
 
 
-        AppDbContext.RemoveRange(userToBeDeleted);
-        await AppDbContext.SaveChangesAsync(stoppingToken);
+        dbContext.RemoveRange(userToBeDeleted);
+        await dbContext.SaveChangesAsync(stoppingToken);
 
     }
 }
