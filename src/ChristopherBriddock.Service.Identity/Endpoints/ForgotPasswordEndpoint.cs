@@ -50,7 +50,6 @@ public sealed class ForgotPasswordEndpoint(IServiceProvider serviceProvider,
             var userManager = ServiceProvider.GetService<UserManager<ApplicationUser>>()!;
             var user = await userManager.FindByEmailAsync(request.EmailAddress);
             var emailPublisher = ServiceProvider.GetService<IEmailPublisher>()!;
-            var httpContext = ServiceProvider.GetService<IHttpContextAccessor>()!;
 
             if (user is not null)
             {

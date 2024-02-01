@@ -3,12 +3,12 @@
 import http from 'k6/http';
 import { check, sleep } from 'k6';
 
-const endpoint = "";
+const endpoint = "register";
 const domainName = "localhost";
 const port = "7078";
-const url = `https://${domainName}:${port}/register`;
+const url = `https://${domainName}:${port}/${endpoints}`;
 
-export let options = {
+export const options = {
     insecureSkipTLSVerify: true,
     noConnectionReuse: false,
     vus: 100,

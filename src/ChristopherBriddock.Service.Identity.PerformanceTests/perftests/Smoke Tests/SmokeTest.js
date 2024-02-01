@@ -5,7 +5,7 @@ const domainName = "localhost";
 const port = "7078";
 const url = `https://${domainName}:${port}/register`;
 
-export let options = {
+export const options = {
     insecureSkipTLSVerify: true,
     noConnectionReuse: false,
     vus: 10,
