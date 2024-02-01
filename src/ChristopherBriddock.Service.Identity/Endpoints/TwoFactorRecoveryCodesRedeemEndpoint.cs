@@ -14,9 +14,9 @@ namespace ChristopherBriddock.Service.Identity.Endpoints;
 /// <remarks>
 /// Initializes a new instance of <see cref="TwoFactorRecoveryCodesRedeemEndpoint"/>
 /// </remarks>
-/// <param name="services">The application service provider.</param>
+/// <param name="serviceProvider">The application service provider.</param>
 /// <param name="logger">Rhe application's logger.</param>
-public class TwoFactorRecoveryCodesRedeemEndpoint(IServiceProvider services,
+public class TwoFactorRecoveryCodesRedeemEndpoint(IServiceProvider serviceProvider,
                                                   ILogger<TwoFactorRecoveryCodesEndpoint> logger) : EndpointBaseAsync
                                                                                                     .WithRequest<TwoFactorRecoveryCodesRedeemRequest>
                                                                                                     .WithoutParam
@@ -25,7 +25,7 @@ public class TwoFactorRecoveryCodesRedeemEndpoint(IServiceProvider services,
     /// <summary>
     /// The application service provider.
     /// </summary>
-    public IServiceProvider Services { get; } = services;
+    public IServiceProvider ServiceProvider { get; } = serviceProvider;
     /// <inheritdoc/>
     public ILogger<TwoFactorRecoveryCodesEndpoint> Logger { get; } = logger;
 
@@ -46,7 +46,7 @@ public class TwoFactorRecoveryCodesRedeemEndpoint(IServiceProvider services,
     {
         try
         {
-            var userManager = Services.GetService<UserManager<ApplicationUser>>()!;
+            var userManager = ServiceProvider.GetService<UserManager<ApplicationUser>>()!;
 
             var email = User.FindFirst(ClaimTypes.Email)!.Value;
 

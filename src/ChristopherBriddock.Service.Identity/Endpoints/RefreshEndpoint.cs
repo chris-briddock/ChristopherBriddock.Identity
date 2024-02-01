@@ -13,9 +13,9 @@ namespace ChristopherBriddock.Service.Identity.Endpoints;
 /// <remarks>
 /// Initializes a new instance of <see cref="RefreshEndpoint"/>
 /// </remarks>
-/// <param name="services">The service provider.</param>
+/// <param name="serviceProvider">The service provider.</param>
 /// <param name="logger">The application's logger.</param>
-public class RefreshEndpoint(IServiceProvider services,
+public class RefreshEndpoint(IServiceProvider serviceProvider,
                              ILogger<RefreshEndpoint> logger) : EndpointBaseAsync
                                                                .WithRequest<RefreshRequest>
                                                                .WithoutParam
@@ -24,7 +24,7 @@ public class RefreshEndpoint(IServiceProvider services,
     /// <summary>
     /// The application service provider.
     /// </summary>
-    private IServiceProvider Services { get; } = services;
+    private IServiceProvider ServiceProvider { get; } = serviceProvider;
     /// <inheritdoc/>
     private ILogger<RefreshEndpoint> Logger { get; } = logger;
 
@@ -41,8 +41,8 @@ public class RefreshEndpoint(IServiceProvider services,
     {
         try
         {
-            var jsonWebTokenProvider = Services.GetService<IJsonWebTokenProvider>()!;
-            var configuration = Services.GetService<IConfiguration>()!;
+            var jsonWebTokenProvider = ServiceProvider.GetService<IJsonWebTokenProvider>()!;
+            var configuration = ServiceProvider.GetService<IConfiguration>()!;
 
             var validationResult = await jsonWebTokenProvider.TryValidateTokenAsync(request.RefreshToken,
                                                                                     configuration["Jwt:Secret"]!,

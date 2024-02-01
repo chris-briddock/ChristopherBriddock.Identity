@@ -17,7 +17,7 @@ public static class HealthCheckExtensions
     /// </summary>
     /// <param name="app">The <see cref="IEndpointRouteBuilder"/> to which the health check mapping is added.</param>
     /// <returns>The <see cref="IEndpointRouteBuilder"/> for further configuration.</returns>
-    public static IEndpointRouteBuilder UseCustomHealthCheckMapping(this IEndpointRouteBuilder app)
+    public static IEndpointRouteBuilder UseHealthCheckMapping(this IEndpointRouteBuilder app)
     {
         app.MapHealthChecks("/health", new HealthCheckOptions
         {

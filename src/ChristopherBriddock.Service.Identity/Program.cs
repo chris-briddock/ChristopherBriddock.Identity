@@ -23,12 +23,12 @@ public sealed class Program
         builder.Services.AddSwagger("ChristopherBriddock.Service.Identity.xml");
         builder.Services.AddFeatureManagement();
         builder.Services.AddSerilogWithConfiguration();
-        builder.Services.AddCustomAuthentication();
-        builder.Services.AddCustomAuthorization();
+        builder.Services.AddJsonWebTokenAuthentication();
+        builder.Services.AddAuthorizationPolicy();
         builder.Services.AddAuthorizationBuilder();
         builder.Services.AddIdentity();
-        builder.Services.AddCache();
-        builder.Services.AddCustomSession();
+        builder.Services.AddSessionCache();
+        builder.Services.AddAppSession();
         builder.Services.AddResponseCaching();
         builder.Services.AddAzureAppInsights();
         builder.Services.AddDbContext<AppDbContext>();
@@ -52,7 +52,7 @@ public sealed class Program
         app.UseAuthentication();
         app.UseAuthorization();
         app.MapControllers();
-        app.UseCustomHealthCheckMapping();
+        app.UseHealthCheckMapping();
         await app.UseDatabaseMigrationsAsync<AppDbContext>();
         await app.RunAsync();
     }

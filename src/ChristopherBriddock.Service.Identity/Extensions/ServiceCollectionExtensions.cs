@@ -114,7 +114,7 @@ public static class ServiceCollectionExtensions
     /// </summary>
     /// <param name="services">The <see cref="IServiceCollection"/> to which services will be added.</param>
     /// <returns>The modified <see cref="IServiceCollection"/> instance.</returns>
-    public static IServiceCollection AddCustomAuthentication(this IServiceCollection services)
+    public static IServiceCollection AddJsonWebTokenAuthentication(this IServiceCollection services)
     {
         services.TryAddSingleton<IJsonWebTokenProvider, JsonWebTokenProvider>();
         services.TryAddSingleton<IConfigureOptions<JwtBearerOptions>, ConfigureJwtBearerOptions>();
@@ -133,7 +133,7 @@ public static class ServiceCollectionExtensions
     /// </summary>
     /// <param name="services">The <see cref="IServiceCollection"/> to which services will be added.</param>
     /// <returns>The modified <see cref="IServiceCollection"/> instance.</returns>
-    public static IServiceCollection AddCustomAuthorization(this IServiceCollection services)
+    public static IServiceCollection AddAuthorizationPolicy(this IServiceCollection services)
     {
         services.AddAuthorizationBuilder()
             .AddPolicy("UserRolePolicy", opt =>
@@ -149,7 +149,7 @@ public static class ServiceCollectionExtensions
     /// </summary>
     /// <param name="services">The <see cref="IServiceCollection"/> to which services will be added.</param>
     /// <returns>The modified <see cref="IServiceCollection"/> instance.</returns>
-    public static IServiceCollection AddCache(this IServiceCollection services)
+    public static IServiceCollection AddSessionCache(this IServiceCollection services)
     {
         IConfiguration configuration = services
                                       .BuildServiceProvider()
@@ -174,7 +174,7 @@ public static class ServiceCollectionExtensions
     /// </summary>
     /// <param name="services">The <see cref="IServiceCollection"/> to which services will be added.</param>
     /// <returns>The modified <see cref="IServiceCollection"/> instance.</returns>
-    public static IServiceCollection AddCustomSession(this IServiceCollection services)
+    public static IServiceCollection AddAppSession(this IServiceCollection services)
     {
         services.AddSession(opt =>
         {

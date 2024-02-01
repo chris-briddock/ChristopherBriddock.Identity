@@ -12,9 +12,9 @@ namespace ChristopherBriddock.Service.Identity.Endpoints;
 /// <remarks>
 /// Initializes a new instance of <see cref="TokenEndpoint"/>
 /// </remarks>
-/// <param name="services">The application's service provider.</param>
+/// <param name="serviceProvider">The application's service provider.</param>
 /// <param name="logger">The application logger.</param>
-public class TokenEndpoint(IServiceProvider services,
+public class TokenEndpoint(IServiceProvider serviceProvider,
                            ILogger<TokenEndpoint> logger) : EndpointBaseAsync
                                                             .WithoutRequest
                                                             .WithActionResult<TokenResponse>
@@ -22,7 +22,7 @@ public class TokenEndpoint(IServiceProvider services,
     /// <summary>
     /// The service provider.
     /// </summary>
-    public IServiceProvider Services { get; } = services;
+    public IServiceProvider ServiceProvider { get; } = serviceProvider;
     /// <inheritdoc/>
     public ILogger<TokenEndpoint> Logger { get; } = logger;
 
@@ -40,9 +40,9 @@ public class TokenEndpoint(IServiceProvider services,
     {
         try
         {
-            var httpContextAccessor = Services.GetService<IHttpContextAccessor>()!;
-            var configuration = Services.GetService<IConfiguration>()!;
-            var jsonWebTokenProvider = Services.GetService<IJsonWebTokenProvider>()!;
+            var httpContextAccessor = ServiceProvider.GetService<IHttpContextAccessor>()!;
+            var configuration = ServiceProvider.GetService<IConfiguration>()!;
+            var jsonWebTokenProvider = ServiceProvider.GetService<IJsonWebTokenProvider>()!;
 
             string email = httpContextAccessor.HttpContext!.User.Identity!.Name ?? string.Empty;
             string issuer = configuration["Jwt:Issuer"]!;

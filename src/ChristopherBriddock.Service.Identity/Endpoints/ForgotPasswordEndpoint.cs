@@ -18,16 +18,16 @@ namespace ChristopherBriddock.Service.Identity.Endpoints;
 /// <remarks>
 /// Initializes a new instance of <see cref="ForgotPasswordEndpoint"/>
 /// </remarks>
-/// <param name="services">The applications service provider.</param>
+/// <param name="serviceProvider">The applications service provider.</param>
 /// <param name="logger">The application logger</param>
-public sealed class ForgotPasswordEndpoint(IServiceProvider services,
+public sealed class ForgotPasswordEndpoint(IServiceProvider serviceProvider,
                                            ILogger<ForgotPasswordEndpoint> logger) : EndpointBaseAsync
                                                                                     .WithRequest<ForgotPasswordRequest>
                                                                                     .WithoutParam
                                                                                     .WithActionResult
 {
     /// <inheritdoc/>
-    private IServiceProvider Services { get; } = services;
+    private IServiceProvider ServiceProvider { get; } = serviceProvider;
     /// <inheritdoc/>
     public ILogger<ForgotPasswordEndpoint> Logger { get; set; } = logger;
 
@@ -47,10 +47,10 @@ public sealed class ForgotPasswordEndpoint(IServiceProvider services,
     {
         try
         {
-            var userManager = Services.GetService<UserManager<ApplicationUser>>()!;
+            var userManager = ServiceProvider.GetService<UserManager<ApplicationUser>>()!;
             var user = await userManager.FindByEmailAsync(request.EmailAddress);
-            var emailPublisher = Services.GetService<IEmailPublisher>()!;
-            var httpContext = Services.GetService<IHttpContextAccessor>()!;
+            var emailPublisher = ServiceProvider.GetService<IEmailPublisher>()!;
+            var httpContext = ServiceProvider.GetService<IHttpContextAccessor>()!;
 
             if (user is not null)
             {
