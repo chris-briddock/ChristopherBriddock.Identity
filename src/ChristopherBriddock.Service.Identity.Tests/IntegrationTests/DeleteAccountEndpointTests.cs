@@ -32,9 +32,9 @@ public class DeleteAccountEndpointTests : IClassFixture<WebApplicationFactory<Pr
             .AddInMemoryCollection(new Dictionary<string, string?>
             {
                 { "Jwt:Issuer", "https://localhost" },
-                { "Jwt:Secret", "=W0Jqcxsz8]Lq74z*:&gB^zmhx*HsrB6GYj%K}G=W0Jqcxsz8]Lq74z*:&gB^zmhx*HsrB6GYj%K}G" },
+                { "Jwt:Secret", "=W0Jqcxsz8] Lq74z*:&gB^zmhx*HsrB6GYj%K}G=W0Jqcxsz8] Lq74z*:&gB^zmhx*HsrB6GYj%K}G" },
                 { "Jwt:Audience", "atesty@testing.com" },
-                { "Jwt:Expires", "60" }
+                { "Jwt:Expires", "5" }
             }).Build();
 
         using var client = _webApplicationFactory.WithWebHostBuilder(s =>
@@ -55,9 +55,20 @@ public class DeleteAccountEndpointTests : IClassFixture<WebApplicationFactory<Pr
 
         string? accessToken = jsonDocumentRoot.GetProperty("accessToken").GetString()!;
 
-        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+        using var deleteClient = _webApplicationFactory.WithWebHostBuilder(s =>
+        {
+            s.ConfigureTestServices(s =>
+            {
+                s.Replace(new ServiceDescriptor(typeof(IConfiguration), configurationBuilder));
+            });
+        }).CreateClient(new WebApplicationFactoryClientOptions()
+        {
+            AllowAutoRedirect = true
+        });
 
-        using var sut = await client.DeleteAsync("/account/delete");
+        deleteClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+
+        var sut = await deleteClient.DeleteAsync("/account/delete");
 
         Assert.Equivalent(HttpStatusCode.OK, authorizeResponse.StatusCode);
         Assert.Equivalent(HttpStatusCode.NoContent, sut.StatusCode);

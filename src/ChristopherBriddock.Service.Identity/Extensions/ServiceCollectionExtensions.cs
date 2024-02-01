@@ -6,7 +6,6 @@ using ChristopherBriddock.Service.Identity.Options;
 using ChristopherBriddock.Service.Identity.Providers;
 using ChristopherBriddock.Service.Identity.Publishers;
 using MassTransit;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -107,43 +106,6 @@ public static class ServiceCollectionExtensions
         .AddUserStore<UserStore<ApplicationUser, ApplicationRole, AppDbContext, Guid>>()
         .AddDefaultTokenProviders();
 
-        services.AddAuthentication(options =>
-        {
-            options.DefaultAuthenticateScheme = IdentityConstants.ApplicationScheme;
-            options.DefaultChallengeScheme = IdentityConstants.ApplicationScheme;
-            options.DefaultSignInScheme = IdentityConstants.ExternalScheme;
-        })
-        .AddCookie(IdentityConstants.ApplicationScheme, o =>
-        {
-            o.Cookie.Name = IdentityConstants.ApplicationScheme;
-            o.Events = new CookieAuthenticationEvents
-            {
-                OnValidatePrincipal = SecurityStampValidator.ValidatePrincipalAsync
-            };
-        })
-        .AddCookie(IdentityConstants.ExternalScheme, o =>
-        {
-            o.Cookie.Name = IdentityConstants.ExternalScheme;
-            o.ExpireTimeSpan = TimeSpan.FromMinutes(5);
-        })
-        .AddCookie(IdentityConstants.TwoFactorRememberMeScheme, o =>
-        {
-            o.Cookie.Name = IdentityConstants.TwoFactorRememberMeScheme;
-            o.Events = new CookieAuthenticationEvents
-            {
-                OnValidatePrincipal = SecurityStampValidator.ValidateAsync<ITwoFactorSecurityStampValidator>
-            };
-        })
-        .AddCookie(IdentityConstants.TwoFactorUserIdScheme, o =>
-        {
-            o.Cookie.Name = IdentityConstants.TwoFactorUserIdScheme;
-            o.Events = new CookieAuthenticationEvents
-            {
-                OnRedirectToReturnUrl = _ => Task.CompletedTask
-            };
-            o.ExpireTimeSpan = TimeSpan.FromMinutes(5);
-        });
-
         return services;
     }
 
@@ -161,7 +123,8 @@ public static class ServiceCollectionExtensions
             opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
             opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
         })
-        .AddJwtBearer();
+        .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme)
+        .AddCookie(IdentityConstants.ApplicationScheme);
 
         return services;
     }
