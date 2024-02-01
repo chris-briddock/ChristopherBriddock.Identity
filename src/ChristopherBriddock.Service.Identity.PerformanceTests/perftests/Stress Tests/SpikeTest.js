@@ -1,5 +1,8 @@
 import http from 'k6/http';
 import { check, sleep } from 'k6';
+import dotenv from 'dotenv';
+
+dotenv.config(); 
 
 const domainName = "localhost";
 const port = "7078";
@@ -20,7 +23,7 @@ export const options = {
 
 const payload = JSON.stringify({
     emailAddress: `test${__VU}@test.com`,
-    password: "kUVCE7Cl1UojsK5e2IbVYdA5eDenbtpsxslvMcPv",
+    password: process.env.TEST_PASSWORD,
     phoneNumber: "01908231911",
 });
 
