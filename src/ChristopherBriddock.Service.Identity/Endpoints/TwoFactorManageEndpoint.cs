@@ -53,17 +53,11 @@ public sealed class TwoFactorManageEndpoint(IServiceProvider serviceProvider,
 
             var user = await userManager.FindByEmailAsync(emailAddress);
 
-            if (user == null)
-                return NotFound("User is not found.");
-
-            if (await userManager.GetTwoFactorEnabledAsync(user))
-                return BadRequest("User already has two factor enabled.");
-
-            var result = await userManager.SetTwoFactorEnabledAsync(user, request.IsEnabled);
+            var result = await userManager.SetTwoFactorEnabledAsync(user!, request.IsEnabled);
 
             if (!result.Succeeded)
             {
-                return BadRequest("Failed to enabled two factor.");
+                return StatusCode(StatusCodes.Status500InternalServerError, "Failed to enable two factor");
             }
 
             return NoContent();
