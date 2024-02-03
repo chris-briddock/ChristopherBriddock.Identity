@@ -57,7 +57,7 @@ public sealed class TwoFactorManageEndpoint(IServiceProvider serviceProvider,
 
             if (!result.Succeeded)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, "Failed to enable two factor");
+                return StatusCode(StatusCodes.Status500InternalServerError, "Failed to enable two factor.");
             }
 
             return NoContent();

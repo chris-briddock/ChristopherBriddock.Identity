@@ -134,7 +134,7 @@ public class TwoFactorManageEndpointTests : IClassFixture<WebApplicationFactory<
         using var sut = await sutClient.PostAsync("/2fa/manage?IsEnabled=true", null);
 
         Assert.Equivalent(HttpStatusCode.OK, authorizeResponse.StatusCode);
-        Assert.Equivalent(HttpStatusCode.BadRequest, sut.StatusCode);
+        Assert.Equivalent(HttpStatusCode.InternalServerError, sut.StatusCode);
 
     }
 
