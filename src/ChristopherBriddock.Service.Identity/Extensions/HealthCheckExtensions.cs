@@ -17,7 +17,7 @@ public static class HealthCheckExtensions
     /// </summary>
     /// <param name="app">The <see cref="IEndpointRouteBuilder"/> to which the health check mapping is added.</param>
     /// <returns>The <see cref="IEndpointRouteBuilder"/> for further configuration.</returns>
-    public static IEndpointRouteBuilder UseCustomHealthCheckMapping(this IEndpointRouteBuilder app)
+    public static IEndpointRouteBuilder UseHealthCheckMapping(this IEndpointRouteBuilder app)
     {
         app.MapHealthChecks("/health", new HealthCheckOptions
         {
@@ -62,7 +62,11 @@ public static class HealthCheckExtensions
 
         if (featureManager.IsEnabledAsync(FeatureFlagConstants.Seq).Result)
         {
-            // TODO: Add Seq Health CHecks.
+            services.AddHealthChecks().AddSeqPublisher(opt =>
+            {
+                opt.Endpoint = configuration["Seq:Endpoint"]!;
+                opt.ApiKey = configuration["Seq:ApiKey"];
+            });
         }
 
         if (featureManager.IsEnabledAsync(FeatureFlagConstants.AzApplicationInsights).Result)
@@ -74,7 +78,6 @@ public static class HealthCheckExtensions
         return services;
     }
 }
-
 
 internal static class HealthCheckResponseWriter
 {

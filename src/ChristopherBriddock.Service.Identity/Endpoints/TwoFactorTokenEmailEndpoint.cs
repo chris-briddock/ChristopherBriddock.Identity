@@ -17,9 +17,9 @@ namespace ChristopherBriddock.Service.Identity.Endpoints;
 /// <remarks>
 /// Initializes a new instance of <see cref="TwoFactorTokenEmailEndpoint"/>
 /// </remarks>
-/// <param name="services">The application service provider.</param>
+/// <param name="serviceProvider">The application service provider.</param>
 /// <param name="logger">The application's logger.</param>
-public sealed class TwoFactorTokenEmailEndpoint(IServiceProvider services,
+public sealed class TwoFactorTokenEmailEndpoint(IServiceProvider serviceProvider,
                                                 ILogger<TwoFactorTokenEmailEndpoint> logger) : EndpointBaseAsync
                                                                                                .WithRequest<TwoFactorTokenEmailRequest>
                                                                                                .WithoutParam
@@ -28,7 +28,7 @@ public sealed class TwoFactorTokenEmailEndpoint(IServiceProvider services,
     /// <summary>
     /// The application service provider.
     /// </summary>
-    public IServiceProvider Services { get; } = services;
+    public IServiceProvider ServiceProvider { get; } = serviceProvider;
     /// <inheritdoc/>
     public ILogger<TwoFactorTokenEmailEndpoint> Logger { get; } = logger;
 
@@ -51,10 +51,10 @@ public sealed class TwoFactorTokenEmailEndpoint(IServiceProvider services,
         {
             ApplicationUser? user;
             var userEmail = request.Email;
-            var userManager = Services.GetService<UserManager<ApplicationUser>>()!;
-            var emailPublisher = Services.GetService<IEmailPublisher>()!;
-            var httpContext = Services.GetService<IHttpContextAccessor>()!;
-            var linkGenerator = Services.GetService<ILinkProvider>()!;
+            var userManager = ServiceProvider.GetService<UserManager<ApplicationUser>>()!;
+            var emailPublisher = ServiceProvider.GetService<IEmailPublisher>()!;
+            var httpContext = ServiceProvider.GetService<IHttpContextAccessor>()!;
+            var linkGenerator = ServiceProvider.GetService<ILinkProvider>()!;
             if (userEmail is null)
                 return BadRequest();
 
@@ -70,12 +70,12 @@ public sealed class TwoFactorTokenEmailEndpoint(IServiceProvider services,
                 ["token"] = code,
             };
 
-            string? twoFactorUri = linkGenerator.GetUri(httpContext.HttpContext!, "2fa/authorize", routeValues);
+            Uri twoFactorUri = linkGenerator.GetUri(HttpContext, "2fa/authorize", routeValues);
 
             EmailMessage message = new()
             {
                 EmailAddress = user.Email!,
-                Link = twoFactorUri ,
+                Link = twoFactorUri.ToString(),
                 Type = EmailPublisherConstants.TwoFactorToken
             };
             await emailPublisher.Publish(message, cancellationToken);

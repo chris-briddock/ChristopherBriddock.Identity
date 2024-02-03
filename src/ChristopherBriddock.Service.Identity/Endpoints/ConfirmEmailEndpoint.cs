@@ -15,19 +15,18 @@ namespace ChristopherBriddock.Service.Identity.Endpoints;
 /// <remarks>
 /// Initializses a new instance of <see cref="ConfirmEmailEndpoint"/>
 /// </remarks>
-/// <param name="services"> The <see cref="IServiceProvider"/> </param>
+/// <param name="serviceProvider"> The <see cref="IServiceProvider"/> </param>
 /// <param name="logger">The logger for this endpoint.</param>
-public sealed class ConfirmEmailEndpoint(IServiceProvider services,
+public sealed class ConfirmEmailEndpoint(IServiceProvider serviceProvider,
                                          ILogger<ConfirmEmailEndpoint> logger) : EndpointBaseAsync
                                                                                  .WithRequest<ConfirmEmailRequest>
                                                                                  .WithoutParam
                                                                                  .WithActionResult
 {
     /// <inheritdoc/>
-    private IServiceProvider Services { get; } = services ?? throw new ArgumentNullException(nameof(services));
+    private IServiceProvider ServiceProvider { get; } = serviceProvider;
     /// <inheritdoc/>
-    private ILogger<ConfirmEmailEndpoint> Logger { get; } = logger ?? throw new ArgumentNullException(nameof(logger));
-
+    private ILogger<ConfirmEmailEndpoint> Logger { get; } = logger;
     /// <summary>
     /// Allows a user to confirm their email address.
     /// </summary>
@@ -47,7 +46,7 @@ public sealed class ConfirmEmailEndpoint(IServiceProvider services,
 
         try
         {
-            var userManager = Services.GetService<UserManager<ApplicationUser>>()!;
+            var userManager = ServiceProvider.GetService<UserManager<ApplicationUser>>()!;
 
             var user = await userManager.FindByEmailAsync(request.EmailAddress);
 

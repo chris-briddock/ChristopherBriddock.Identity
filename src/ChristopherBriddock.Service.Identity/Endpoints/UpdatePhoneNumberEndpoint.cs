@@ -15,9 +15,9 @@ namespace ChristopherBriddock.Service.Identity.Endpoints;
 /// <remarks>
 /// Initializes a new instance of <see cref="UpdatePhoneNumberEndpoint"/>
 /// </remarks>
-/// <param name="services"></param>
-/// <param name="logger"></param>
-public class UpdatePhoneNumberEndpoint(IServiceProvider services,
+/// <param name="serviceProvider">The application service provider.</param>
+/// <param name="logger">The application logger.</param>
+public class UpdatePhoneNumberEndpoint(IServiceProvider serviceProvider,
                                        ILogger<UpdatePhoneNumberEndpoint> logger) : EndpointBaseAsync
                                                                                     .WithRequest<UpdatePhoneNumberRequest>
                                                                                     .WithoutParam
@@ -26,7 +26,7 @@ public class UpdatePhoneNumberEndpoint(IServiceProvider services,
     /// <summary>
     /// The application service provider.
     /// </summary>
-    public IServiceProvider Services { get; } = services;
+    public IServiceProvider ServiceProvider { get; } = serviceProvider;
     /// <summary>
     /// The application logger.
     /// </summary>
@@ -48,7 +48,7 @@ public class UpdatePhoneNumberEndpoint(IServiceProvider services,
     {
         try
         {
-            var userManager = Services.GetService<UserManager<ApplicationUser>>()!;
+            var userManager = ServiceProvider.GetService<UserManager<ApplicationUser>>()!;
             string emailAddress = User.FindFirst(ClaimTypes.Email)!.Value;
 
             var user = await userManager.FindByEmailAsync(emailAddress);

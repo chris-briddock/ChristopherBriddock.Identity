@@ -123,7 +123,7 @@ public class LogoutEndpointTests : IClassFixture<WebApplicationFactory<Program>>
         {
             AllowAutoRedirect = true
         });
-        
+
         clientWithForcedError.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
 
         using var sut = await clientWithForcedError.PostAsync("/logout", null);

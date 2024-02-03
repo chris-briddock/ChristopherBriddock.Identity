@@ -13,9 +13,9 @@ namespace ChristopherBriddock.Service.Identity.Endpoints;
 /// <remarks>
 /// Initializes a new instance of <see cref="AuthorizeEndpoint"/>
 /// </remarks>
-/// <param name="services">The service provider.</param>
+/// <param name="serviceProvider">The service provider.</param>
 /// <param name="logger">The logger for this endpoint.</param>
-public sealed class AuthorizeEndpoint(IServiceProvider services,
+public sealed class AuthorizeEndpoint(IServiceProvider serviceProvider,
                                       ILogger<AuthorizeEndpoint> logger) : EndpointBaseAsync
                                                                           .WithRequest<AuthorizeRequest>
                                                                           .WithoutParam
@@ -24,7 +24,7 @@ public sealed class AuthorizeEndpoint(IServiceProvider services,
     /// <summary>
     /// The service provider.
     /// </summary>
-    private IServiceProvider Services { get; } = services;
+    private IServiceProvider ServiceProvider { get; } = serviceProvider;
     /// <summary>
     /// The logger for this endpoint.
     /// </summary>
@@ -47,9 +47,9 @@ public sealed class AuthorizeEndpoint(IServiceProvider services,
     {
         try
         {
-            var signInManager = Services.GetService<SignInManager<ApplicationUser>>()!;
+            var signInManager = ServiceProvider.GetService<SignInManager<ApplicationUser>>()!;
 
-            var userManager = Services.GetService<UserManager<ApplicationUser>>()!;
+            var userManager = ServiceProvider.GetService<UserManager<ApplicationUser>>()!;
 
             signInManager.AuthenticationScheme = IdentityConstants.ApplicationScheme;
 

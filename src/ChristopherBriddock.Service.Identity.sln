@@ -27,9 +27,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Azure Pipelines", "Azure Pi
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{3E15539C-E6E1-46C5-92F8-C8A6E7B12A77}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChristopherBriddock.WorkerService.Email", "ChristopherBriddock.WorkerService.Email\ChristopherBriddock.WorkerService.Email.csproj", "{749B8DDA-E87C-4B3A-B089-93BC4BC7CF2C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChristopherBriddock.WorkerService.Email", "ChristopherBriddock.WorkerService.Email\ChristopherBriddock.WorkerService.Email.csproj", "{749B8DDA-E87C-4B3A-B089-93BC4BC7CF2C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChristopherBriddock.WorkerService.Email.Tests", "ChristopherBriddock.WorkerService.Email.Tests\ChristopherBriddock.WorkerService.Email.Tests.csproj", "{BB7A0330-C920-4F2D-95FE-D75549D94721}"
+EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "ChristopherBriddock.Service.Identity.PerformanceTests", "ChristopherBriddock.Service.Identity.PerformanceTests\perftests\ChristopherBriddock.Service.Identity.PerformanceTests.esproj", "{ACEE9AA3-3D04-4551-BF7B-3E5511B2BB7B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -61,6 +63,12 @@ Global
 		{BB7A0330-C920-4F2D-95FE-D75549D94721}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BB7A0330-C920-4F2D-95FE-D75549D94721}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BB7A0330-C920-4F2D-95FE-D75549D94721}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ACEE9AA3-3D04-4551-BF7B-3E5511B2BB7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACEE9AA3-3D04-4551-BF7B-3E5511B2BB7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACEE9AA3-3D04-4551-BF7B-3E5511B2BB7B}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{ACEE9AA3-3D04-4551-BF7B-3E5511B2BB7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ACEE9AA3-3D04-4551-BF7B-3E5511B2BB7B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ACEE9AA3-3D04-4551-BF7B-3E5511B2BB7B}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -68,6 +76,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{019FB266-27C6-4BD1-A0E0-D31B0FE8DC93} = {F12FB90F-85BC-4184-BAE6-90A520AA2072}
 		{BB7A0330-C920-4F2D-95FE-D75549D94721} = {F12FB90F-85BC-4184-BAE6-90A520AA2072}
+		{ACEE9AA3-3D04-4551-BF7B-3E5511B2BB7B} = {F12FB90F-85BC-4184-BAE6-90A520AA2072}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AFC8F73B-E3E7-482B-A804-DBF4F6BFD8DC}

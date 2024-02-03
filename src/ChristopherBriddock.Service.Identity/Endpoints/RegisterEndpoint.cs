@@ -20,16 +20,16 @@ namespace ChristopherBriddock.Service.Identity.Endpoints;
 /// <remarks>
 /// Initializes a new instance of <see cref="RegisterEndpoint"/>
 /// </remarks>
-/// <param name="services">The application's service provider.</param>
+/// <param name="serviceProvider">The application's service provider.</param>
 /// <param name="logger">The application's logger.</param>
-public sealed class RegisterEndpoint(IServiceProvider services,
+public sealed class RegisterEndpoint(IServiceProvider serviceProvider,
                                     ILogger<RegisterEndpoint> logger) : EndpointBaseAsync
                                                                         .WithRequest<RegisterRequest>
                                                                         .WithoutParam
                                                                         .WithActionResult
 {
     /// <inheritdoc/>
-    public IServiceProvider Services { get; } = services;
+    public IServiceProvider ServiceProvider { get; } = serviceProvider;
     /// <inheritdoc/>
     public ILogger<RegisterEndpoint> Logger { get; } = logger;
 
@@ -49,11 +49,11 @@ public sealed class RegisterEndpoint(IServiceProvider services,
     {
         try
         {
-            var userManager = Services.GetService<UserManager<ApplicationUser>>()!;
-            var roleManager = Services.GetService<RoleManager<ApplicationRole>>()!;
-            IEmailPublisher emailPublisher = Services.GetService<IEmailPublisher>()!;
-            var linkProvider = Services.GetService<ILinkProvider>()!;
-            var httpContext = Services.GetService<IHttpContextAccessor>()!;
+            var userManager = ServiceProvider.GetService<UserManager<ApplicationUser>>()!;
+            var roleManager = ServiceProvider.GetService<RoleManager<ApplicationRole>>()!;
+            IEmailPublisher emailPublisher = ServiceProvider.GetService<IEmailPublisher>()!;
+            var linkProvider = ServiceProvider.GetService<ILinkProvider>()!;
+            var httpContext = ServiceProvider.GetService<IHttpContextAccessor>()!;
 
             var existingUser = await userManager.FindByEmailAsync(request.EmailAddress);
 
@@ -97,12 +97,12 @@ public sealed class RegisterEndpoint(IServiceProvider services,
                 ["Code"] = code
             };
 
-           var link =  linkProvider.GetUri(httpContext.HttpContext!, "confirmemail", routeValues);
+            Uri link = linkProvider.GetUri(httpContext.HttpContext!, "confirmemail", routeValues);
 
             EmailMessage message = new()
             {
                 EmailAddress = user.Email!,
-                Link = link,
+                Link = link.ToString(),
                 Type = EmailPublisherConstants.Register
             };
             await emailPublisher.Publish(message, cancellationToken);

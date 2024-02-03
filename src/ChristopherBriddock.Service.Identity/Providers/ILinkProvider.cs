@@ -12,5 +12,5 @@ public interface ILinkProvider
     /// <param name="endpointName">The endpoint to generate this uri for.</param>
     /// <param name="routeValues"></param>
     /// <returns>The uri string.</returns>
-    public string GetUri(HttpContext context, string endpointName, RouteValueDictionary routeValues);
+    public Uri GetUri(HttpContext context, string endpointName, RouteValueDictionary routeValues);
 }

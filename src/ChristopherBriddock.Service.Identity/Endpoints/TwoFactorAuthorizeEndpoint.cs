@@ -10,7 +10,7 @@ namespace ChristopherBriddock.Service.Identity.Endpoints;
 /// <summary>
 /// Exposes an endpoint that allows the user to sign in using two factor authentication.
 /// </summary>
-public sealed class TwoFactorAuthorizeEndpoint(IServiceProvider services,
+public sealed class TwoFactorAuthorizeEndpoint(IServiceProvider serviceProvider,
                                                ILogger<TwoFactorAuthorizeEndpoint> logger) : EndpointBaseAsync
                                                                                              .WithRequest<TwoFactorSignInRequest>
                                                                                              .WithoutParam
@@ -19,7 +19,7 @@ public sealed class TwoFactorAuthorizeEndpoint(IServiceProvider services,
     /// <summary>
     /// The service provider.
     /// </summary>
-    public IServiceProvider Services { get; } = services;
+    public IServiceProvider ServiceProvider { get; } = serviceProvider;
     /// <inheritdoc/>
     public ILogger<TwoFactorAuthorizeEndpoint> Logger { get; } = logger;
 
@@ -40,8 +40,8 @@ public sealed class TwoFactorAuthorizeEndpoint(IServiceProvider services,
     {
         try
         {
-            var userManager = Services.GetService<UserManager<ApplicationUser>>()!;
-            var httpContextAccessor = Services.GetService<IHttpContextAccessor>()!;
+            var userManager = ServiceProvider.GetService<UserManager<ApplicationUser>>()!;
+            var httpContextAccessor = ServiceProvider.GetService<IHttpContextAccessor>()!;
 
             var user = await userManager.FindByEmailAsync(httpContextAccessor.HttpContext!.User!.Identity!.Name!);
 

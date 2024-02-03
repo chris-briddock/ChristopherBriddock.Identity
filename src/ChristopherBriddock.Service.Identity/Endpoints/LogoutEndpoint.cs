@@ -13,16 +13,16 @@ namespace ChristopherBriddock.Service.Identity.Endpoints;
 /// <remarks>
 /// Initializes a new instance of <see cref="LogoutEndpoint"/>
 /// </remarks>
-/// <param name="services">The application's service provider.</param>
+/// <param name="serviceProvider">The application's service provider.</param>
 /// <param name="logger">The application's logger.</param>
-public sealed class LogoutEndpoint(IServiceProvider services,
+public sealed class LogoutEndpoint(IServiceProvider serviceProvider,
                                     ILogger<LogoutEndpoint> logger) : EndpointBaseAsync
                                                                       .WithoutRequest
                                                                       .WithActionResult
 {
 
     /// <inheritdoc/>
-    public IServiceProvider Services { get; } = services;
+    public IServiceProvider ServiceProvider { get; } = serviceProvider;
     /// <inheritdoc/>
     public ILogger<LogoutEndpoint> Logger { get; } = logger;
 
@@ -40,7 +40,7 @@ public sealed class LogoutEndpoint(IServiceProvider services,
     {
         try
         {
-            var signInManeger = Services.GetService<SignInManager<ApplicationUser>>()!;
+            var signInManeger = ServiceProvider.GetService<SignInManager<ApplicationUser>>()!;
 
             await signInManeger.SignOutAsync();
 

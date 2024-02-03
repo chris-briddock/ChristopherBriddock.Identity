@@ -14,9 +14,9 @@ namespace ChristopherBriddock.Service.Identity.Endpoints;
 /// <remarks>
 /// Initializes a new instance of <see cref="TwoFactorRecoveryCodesEndpoint"/>
 /// </remarks>
-/// <param name="services">The application service provider.</param>
+/// <param name="serviceProvider">The application service provider.</param>
 /// <param name="logger">The application's logger.</param>
-public class TwoFactorRecoveryCodesEndpoint(IServiceProvider services,
+public class TwoFactorRecoveryCodesEndpoint(IServiceProvider serviceProvider,
                                             ILogger<TwoFactorRecoveryCodesEndpoint> logger) : EndpointBaseAsync
                                                                                               .WithoutRequest
                                                                                               .WithActionResult
@@ -24,7 +24,7 @@ public class TwoFactorRecoveryCodesEndpoint(IServiceProvider services,
     /// <summary>
     /// The application service provider.
     /// </summary>
-    public IServiceProvider Services { get; } = services;
+    public IServiceProvider ServiceProvider { get; } = serviceProvider;
     /// <inheritdoc/>
     public ILogger<TwoFactorRecoveryCodesEndpoint> Logger { get; } = logger;
 
@@ -42,7 +42,7 @@ public class TwoFactorRecoveryCodesEndpoint(IServiceProvider services,
     {
         try
         {
-            var userManager = Services.GetService<UserManager<ApplicationUser>>()!;
+            var userManager = ServiceProvider.GetService<UserManager<ApplicationUser>>()!;
             var email = User.FindFirst(ClaimTypes.Email)!.Value;
             var user = await userManager.FindByEmailAsync(email);
             if (user is null)

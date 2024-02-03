@@ -15,9 +15,9 @@ namespace ChristopherBriddock.Service.Identity.Endpoints;
 /// <remarks>
 /// Initializes a new instance of <see cref="TwoFactorManageEndpoint"/>
 /// </remarks>
-/// <param name="services">The application's service provider.</param>
+/// <param name="serviceProvider">The application's service provider.</param>
 /// <param name="logger">The application's logger.</param>
-public sealed class TwoFactorManageEndpoint(IServiceProvider services,
+public sealed class TwoFactorManageEndpoint(IServiceProvider serviceProvider,
                                             ILogger<TwoFactorManageEndpoint> logger) : EndpointBaseAsync
                                                                                        .WithRequest<TwoFactorManageRequest>
                                                                                        .WithoutParam
@@ -26,7 +26,7 @@ public sealed class TwoFactorManageEndpoint(IServiceProvider services,
     /// <summary>
     /// The service provider for the application.
     /// </summary>
-    public IServiceProvider Services { get; } = services;
+    public IServiceProvider ServiceProvider { get; } = serviceProvider;
     /// <inheritdoc/>
     public ILogger<TwoFactorManageEndpoint> Logger { get; } = logger;
 
@@ -47,23 +47,17 @@ public sealed class TwoFactorManageEndpoint(IServiceProvider services,
     {
         try
         {
-            var userManager = Services.GetService<UserManager<ApplicationUser>>()!;
+            var userManager = ServiceProvider.GetService<UserManager<ApplicationUser>>()!;
 
             string emailAddress = User.FindFirst(ClaimTypes.Email)!.Value;
 
             var user = await userManager.FindByEmailAsync(emailAddress);
 
-            if (user == null)
-                return NotFound("User is not found.");
-
-            if (await userManager.GetTwoFactorEnabledAsync(user))
-                return BadRequest("User already has two factor enabled.");
-
-            var result = await userManager.SetTwoFactorEnabledAsync(user, request.IsEnabled);
+            var result = await userManager.SetTwoFactorEnabledAsync(user!, request.IsEnabled);
 
             if (!result.Succeeded)
             {
-                return BadRequest();
+                return StatusCode(StatusCodes.Status500InternalServerError, "Failed to enable two factor.");
             }
 
             return NoContent();

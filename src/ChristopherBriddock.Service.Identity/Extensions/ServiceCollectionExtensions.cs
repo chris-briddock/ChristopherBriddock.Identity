@@ -6,7 +6,6 @@ using ChristopherBriddock.Service.Identity.Options;
 using ChristopherBriddock.Service.Identity.Providers;
 using ChristopherBriddock.Service.Identity.Publishers;
 using MassTransit;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -104,45 +103,8 @@ public static class ServiceCollectionExtensions
         .AddUserManager<UserManager<ApplicationUser>>()
         .AddRoles<ApplicationRole>()
         .AddRoleStore<RoleStore<ApplicationRole, AppDbContext, Guid>>()
-        .AddUserStore<UserStore<ApplicationUser,ApplicationRole,AppDbContext,Guid>>()
+        .AddUserStore<UserStore<ApplicationUser, ApplicationRole, AppDbContext, Guid>>()
         .AddDefaultTokenProviders();
-
-        services.AddAuthentication(options =>
-        {
-            options.DefaultAuthenticateScheme = IdentityConstants.ApplicationScheme;
-            options.DefaultChallengeScheme = IdentityConstants.ApplicationScheme;
-            options.DefaultSignInScheme = IdentityConstants.ExternalScheme;
-        })
-        .AddCookie(IdentityConstants.ApplicationScheme, o =>
-        {
-            o.Cookie.Name = IdentityConstants.ApplicationScheme;
-            o.Events = new CookieAuthenticationEvents
-            {
-                OnValidatePrincipal = SecurityStampValidator.ValidatePrincipalAsync
-            };
-        })
-        .AddCookie(IdentityConstants.ExternalScheme, o =>
-        {
-            o.Cookie.Name = IdentityConstants.ExternalScheme;
-            o.ExpireTimeSpan = TimeSpan.FromMinutes(5);
-        })
-        .AddCookie(IdentityConstants.TwoFactorRememberMeScheme, o =>
-        {
-            o.Cookie.Name = IdentityConstants.TwoFactorRememberMeScheme;
-            o.Events = new CookieAuthenticationEvents
-            {
-                OnValidatePrincipal = SecurityStampValidator.ValidateAsync<ITwoFactorSecurityStampValidator>
-            };
-        })
-        .AddCookie(IdentityConstants.TwoFactorUserIdScheme, o =>
-        {
-            o.Cookie.Name = IdentityConstants.TwoFactorUserIdScheme;
-            o.Events = new CookieAuthenticationEvents
-            {
-                OnRedirectToReturnUrl = _ => Task.CompletedTask
-            };
-            o.ExpireTimeSpan = TimeSpan.FromMinutes(5);
-        });
 
         return services;
     }
@@ -152,7 +114,7 @@ public static class ServiceCollectionExtensions
     /// </summary>
     /// <param name="services">The <see cref="IServiceCollection"/> to which services will be added.</param>
     /// <returns>The modified <see cref="IServiceCollection"/> instance.</returns>
-    public static IServiceCollection AddCustomAuthentication(this IServiceCollection services)
+    public static IServiceCollection AddJsonWebTokenAuthentication(this IServiceCollection services)
     {
         services.TryAddSingleton<IJsonWebTokenProvider, JsonWebTokenProvider>();
         services.TryAddSingleton<IConfigureOptions<JwtBearerOptions>, ConfigureJwtBearerOptions>();
@@ -161,7 +123,12 @@ public static class ServiceCollectionExtensions
             opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
             opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
         })
-        .AddJwtBearer();
+        .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme)
+        .AddCookie(IdentityConstants.ApplicationScheme, s =>
+        {
+            s.LoginPath = "/";
+            s.LogoutPath = "/";
+        });
 
         return services;
     }
@@ -170,7 +137,7 @@ public static class ServiceCollectionExtensions
     /// </summary>
     /// <param name="services">The <see cref="IServiceCollection"/> to which services will be added.</param>
     /// <returns>The modified <see cref="IServiceCollection"/> instance.</returns>
-    public static IServiceCollection AddCustomAuthorization(this IServiceCollection services)
+    public static IServiceCollection AddAuthorizationPolicy(this IServiceCollection services)
     {
         services.AddAuthorizationBuilder()
             .AddPolicy("UserRolePolicy", opt =>
@@ -186,7 +153,7 @@ public static class ServiceCollectionExtensions
     /// </summary>
     /// <param name="services">The <see cref="IServiceCollection"/> to which services will be added.</param>
     /// <returns>The modified <see cref="IServiceCollection"/> instance.</returns>
-    public static IServiceCollection AddCache(this IServiceCollection services)
+    public static IServiceCollection AddSessionCache(this IServiceCollection services)
     {
         IConfiguration configuration = services
                                       .BuildServiceProvider()
@@ -211,7 +178,7 @@ public static class ServiceCollectionExtensions
     /// </summary>
     /// <param name="services">The <see cref="IServiceCollection"/> to which services will be added.</param>
     /// <returns>The modified <see cref="IServiceCollection"/> instance.</returns>
-    public static IServiceCollection AddCustomSession(this IServiceCollection services)
+    public static IServiceCollection AddAppSession(this IServiceCollection services)
     {
         services.AddSession(opt =>
         {
