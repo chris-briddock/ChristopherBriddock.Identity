@@ -17,10 +17,9 @@ public class TwoFactorAuthorizeEndpointTests : IClassFixture<WebApplicationFacto
     [Fact]
     public async Task TwoFactorAuthorizeEndpoint_ReturnsStatus302Found_WhenValidTokenIsUsed()
     {
-
         var userManagerMock = new UserManagerMock<ApplicationUser>().Mock();
-
         var user = new ApplicationUser();
+
         userManagerMock.Setup(m => m.FindByEmailAsync(It.IsAny<string>())).ReturnsAsync(user);
 
         userManagerMock.Setup(s => s.GetTwoFactorEnabledAsync(user)).ReturnsAsync(true);

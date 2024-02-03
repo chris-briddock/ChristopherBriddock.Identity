@@ -97,12 +97,12 @@ public sealed class RegisterEndpoint(IServiceProvider serviceProvider,
                 ["Code"] = code
             };
 
-            var link = linkProvider.GetUri(httpContext.HttpContext!, "confirmemail", routeValues);
+            Uri link = linkProvider.GetUri(httpContext.HttpContext!, "confirmemail", routeValues);
 
             EmailMessage message = new()
             {
                 EmailAddress = user.Email!,
-                Link = link,
+                Link = link.ToString(),
                 Type = EmailPublisherConstants.Register
             };
             await emailPublisher.Publish(message, cancellationToken);

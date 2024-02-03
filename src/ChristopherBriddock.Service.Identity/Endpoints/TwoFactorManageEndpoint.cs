@@ -63,7 +63,7 @@ public sealed class TwoFactorManageEndpoint(IServiceProvider serviceProvider,
 
             if (!result.Succeeded)
             {
-                return BadRequest();
+                return BadRequest("Failed to enabled two factor.");
             }
 
             return NoContent();

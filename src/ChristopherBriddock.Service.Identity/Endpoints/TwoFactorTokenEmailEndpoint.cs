@@ -70,12 +70,12 @@ public sealed class TwoFactorTokenEmailEndpoint(IServiceProvider serviceProvider
                 ["token"] = code,
             };
 
-            string? twoFactorUri = linkGenerator.GetUri(httpContext.HttpContext!, "2fa/authorize", routeValues);
+            Uri twoFactorUri = linkGenerator.GetUri(HttpContext, "2fa/authorize", routeValues);
 
             EmailMessage message = new()
             {
                 EmailAddress = user.Email!,
-                Link = twoFactorUri,
+                Link = twoFactorUri.ToString(),
                 Type = EmailPublisherConstants.TwoFactorToken
             };
             await emailPublisher.Publish(message, cancellationToken);

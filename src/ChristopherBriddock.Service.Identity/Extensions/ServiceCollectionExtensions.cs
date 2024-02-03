@@ -124,7 +124,11 @@ public static class ServiceCollectionExtensions
             opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
         })
         .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme)
-        .AddCookie(IdentityConstants.ApplicationScheme);
+        .AddCookie(IdentityConstants.ApplicationScheme, s =>
+        {
+            s.LoginPath = "/";
+            s.LogoutPath = "/";
+        });
 
         return services;
     }

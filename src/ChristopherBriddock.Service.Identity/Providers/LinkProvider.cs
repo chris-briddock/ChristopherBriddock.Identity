@@ -5,14 +5,16 @@ namespace ChristopherBriddock.Service.Identity.Providers;
 /// <summary>
 /// Gets the URL provided by the <see cref="HttpContext"/>
 /// </summary>
-public class LinkProvider : ILinkProvider
+public sealed class LinkProvider : ILinkProvider
 {
     /// <inheritdoc/>
-    public string GetUri(HttpContext context, string endpointName, RouteValueDictionary routeValues)
+    public Uri GetUri(HttpContext context,
+                         string endpointName,
+                         RouteValueDictionary routeValues)
     {
         string queryParameters = BuildQueryParameters(routeValues);
 
-        return $"{context.Request.Scheme}://{context.Request.Host}/{endpointName}{queryParameters}";
+        return new Uri($"{context.Request.Scheme}://{context.Request.Host}/{endpointName}{queryParameters}");
     }
 
     /// <summary>
