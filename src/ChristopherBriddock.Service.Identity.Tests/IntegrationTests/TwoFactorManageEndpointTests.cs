@@ -122,8 +122,8 @@ public class TwoFactorManageEndpointTests : IClassFixture<WebApplicationFactory<
         {
             s.ConfigureTestServices(s =>
             {
-                s.Replace(new ServiceDescriptor(typeof(UserManager<ApplicationUser>), userManagerMock.Object));
                 s.Replace(new ServiceDescriptor(typeof(IConfiguration), configurationBuilder));
+                s.Replace(new ServiceDescriptor(typeof(UserManager<ApplicationUser>), userManagerMock.Object));
             });
         }).CreateClient();
 
@@ -181,8 +181,9 @@ public class TwoFactorManageEndpointTests : IClassFixture<WebApplicationFactory<
         {
             s.ConfigureTestServices(s =>
             {
-                s.Replace(new ServiceDescriptor(typeof(UserManager<ApplicationUser>), userManagerMock.Object));
                 s.Replace(new ServiceDescriptor(typeof(IConfiguration), configurationBuilder));
+                s.Replace(new ServiceDescriptor(typeof(UserManager<ApplicationUser>), userManagerMock.Object));
+
             });
         }).CreateClient();
 
