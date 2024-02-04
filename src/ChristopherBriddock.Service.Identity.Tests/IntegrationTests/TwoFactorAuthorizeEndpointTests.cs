@@ -44,7 +44,7 @@ public class TwoFactorAuthorizeEndpointTests : IClassFixture<WebApplicationFacto
             AllowAutoRedirect = false
         });
 
-        var response = await client.GetAsync($"/2fa/authorize?EmailAddress=ssdjck@dmksksa.com&Token=cdcisdci");
+        var response = await client.PostAsync($"/2fa/authorize?EmailAddress=ssdjck@dmksksa.com&Token=cdcisdci", null);
 
         Assert.Equivalent(HttpStatusCode.Found, response.StatusCode);
     }
@@ -78,7 +78,7 @@ public class TwoFactorAuthorizeEndpointTests : IClassFixture<WebApplicationFacto
             AllowAutoRedirect = false
         });
 
-        var response = await client.GetAsync($"/2fa/authorize?EmailAddress=test@test.com&Token=alslsslslsl");
+        using var response = await client.PostAsync($"/2fa/authorize?EmailAddress=test@test.com&Token=alslsslslsl", null);
 
         Assert.Equivalent(HttpStatusCode.Unauthorized, response.StatusCode);
     }
@@ -103,11 +103,14 @@ public class TwoFactorAuthorizeEndpointTests : IClassFixture<WebApplicationFacto
             s.ConfigureTestServices(s =>
             {
                 s.Replace(new ServiceDescriptor(typeof(IServiceProvider), serviceProviderMock.Object));
+                s.Replace(new ServiceDescriptor(typeof(UserManager<ApplicationUser>), userManagerMock.Object));
             });
         }).CreateClient();
 
-        var response = await client.GetAsync("/2fa/authorize?EmailAddress=code@code.com&Token=ndcndjcnasjcnsakcj");
+        var response = await client.PostAsync("/2fa/authorize?EmailAddress=code@code.com&Token=ndcndjcnasjcnsakcj", null);
 
         Assert.Equivalent(HttpStatusCode.InternalServerError, response.StatusCode);
     }
+
+    //public async Task TwoFactorAuthorizeEndpoint_ReturnsStatusUnauthorized_When
 }
