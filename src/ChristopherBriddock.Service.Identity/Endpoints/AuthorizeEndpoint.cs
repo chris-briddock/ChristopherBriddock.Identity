@@ -39,6 +39,7 @@ public sealed class AuthorizeEndpoint(IServiceProvider serviceProvider,
     /// <returns>A new <see cref="ActionResult"/></returns>
     [HttpPost("/authorize")]
     [AllowAnonymous]
+    [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -60,7 +61,7 @@ public sealed class AuthorizeEndpoint(IServiceProvider serviceProvider,
 
             if (signInResult.RequiresTwoFactor)
             {
-                return LocalRedirect("/2fa/email");
+                return LocalRedirect($"/2fa/email?EmailAddress={request.EmailAddress}");
             }
 
             if (!signInResult.Succeeded)

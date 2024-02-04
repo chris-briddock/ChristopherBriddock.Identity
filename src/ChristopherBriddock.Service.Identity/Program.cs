@@ -27,8 +27,8 @@ public sealed class Program
         builder.Services.AddAuthorizationPolicy();
         builder.Services.AddAuthorizationBuilder();
         builder.Services.AddIdentity();
-        builder.Services.AddSessionCache();
         builder.Services.AddAppSession();
+        builder.Services.AddSessionCache();
         builder.Services.AddResponseCaching();
         builder.Services.AddAzureAppInsights();
         builder.Services.AddDbContext<AppDbContext>();

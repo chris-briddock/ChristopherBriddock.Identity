@@ -38,19 +38,19 @@ public sealed class TwoFactorTokenEmailEndpoint(IServiceProvider serviceProvider
     /// <param name="request">The object which encapsulates the request.</param>
     /// <param name="cancellationToken">The cancellation token to cancel the operation.</param>
     /// <returns>A new <see cref="ActionResult"/></returns>
-    [AllowAnonymous]
+    [Authorize(AuthenticationSchemes = "Identity.Application")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    [HttpPost("/2fa/email")]
+    [HttpGet("/2fa/email")]
     public override async Task<ActionResult> HandleAsync([FromQuery] TwoFactorTokenEmailRequest request,
                                                          CancellationToken cancellationToken = default)
     {
         try
         {
             ApplicationUser? user;
-            var userEmail = request.Email;
+            var userEmail = request.EmailAddress;
             var userManager = ServiceProvider.GetService<UserManager<ApplicationUser>>()!;
             var emailPublisher = ServiceProvider.GetService<IEmailPublisher>()!;
             var httpContext = ServiceProvider.GetService<IHttpContextAccessor>()!;

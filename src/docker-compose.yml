@@ -1,17 +1,18 @@
 version: '3.4'
 
 services:
-  christopherbriddock.service.identity:
-    image: ${DOCKER_REGISTRY-}christopherbriddockserviceidentity
-    build:
-      context: .
-      dockerfile: ChristopherBriddock.Service.Identity/Dockerfile
+  
+  # christopherbriddock.service.identity:
+  #   image: ${DOCKER_REGISTRY-}christopherbriddockserviceidentity
+  #   build:
+  #     context: .
+  #     dockerfile: ChristopherBriddock.Service.Identity/Dockerfile
 
-  christopherbriddock.service.email:
-    image: ${DOCKER_REGISTRY-}christopherbriddockserviceemail
-    build:
-      context: .
-      dockerfile: ChristopherBriddock.Service.Email/Dockerfile
+  # christopherbriddock.service.email:
+  #   image: ${DOCKER_REGISTRY-}christopherbriddockserviceemail
+  #   build:
+  #     context: .
+  #     dockerfile: ChristopherBriddock.Service.Email/Dockerfile
   
   seq:
     image: datalust/seq
@@ -19,6 +20,7 @@ services:
     restart: unless-stopped
     environment:
       - ACCEPT_EULA=Y
+      - SEQ_FIRSTRUN_ADMINPASSWORDHASH=QIuBoN9hFritmO5JCL1ElTGUodPFUF4OIn2wM7nQV77x9HxoxCRFK8/lzhRJe+synMKXluA9JsBx5ffKOrDVXoUSCBF4NVqZ4nT89VaBJQP6
     ports:
       - "80:80"
       - "443:443"

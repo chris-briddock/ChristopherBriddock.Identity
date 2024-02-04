@@ -48,9 +48,7 @@ public class TwoFactorRecoveryCodesRedeemEndpoint(IServiceProvider serviceProvid
         {
             var userManager = ServiceProvider.GetService<UserManager<ApplicationUser>>()!;
 
-            var email = User.FindFirst(ClaimTypes.Email)!.Value;
-
-            var user = await userManager.FindByEmailAsync(email);
+            var user = await userManager.FindByEmailAsync(request.EmailAddress);
 
             if (user is null)
             {

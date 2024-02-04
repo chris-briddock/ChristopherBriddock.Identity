@@ -6,7 +6,11 @@
 public sealed record TwoFactorRecoveryCodesRedeemRequest
 {
     /// <summary>
-    /// The two factor recovery code.
+    /// Gets or sets the user email address which the recovery code is used for.
     /// </summary>
-    public string Code { get; set; } = default!;
+    public required string EmailAddress { get; set; } = default!;
+    /// <summary>
+    /// Gets or sets the recovery code.
+    /// </summary>
+    public required string Code { get; set; } = default!;
 }
