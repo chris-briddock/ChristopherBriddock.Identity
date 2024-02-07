@@ -34,7 +34,7 @@ public sealed class TwoFactorAuthorizeEndpoint(IServiceProvider serviceProvider,
     [ProducesResponseType(StatusCodes.Status302Found)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    public override async Task<ActionResult> HandleAsync([FromQuery] TwoFactorSignInRequest request,
+    public override async Task<ActionResult> HandleAsync([FromBody] TwoFactorSignInRequest request,
                                                    CancellationToken cancellationToken = default)
     {
         try
