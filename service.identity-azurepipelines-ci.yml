@@ -23,9 +23,9 @@ jobs:
   - script: |
       dotnet publish src/ChristopherBriddock.Service.Identity/ChristopherBriddock.Service.Identity.csproj -c Release
     displayName: 'Publish'
-  - script: dotnet tool install --global dotnet-reportgenerator-globaltool
+  - script: dotnet tool upgrade --global dotnet-reportgenerator-globaltool
     continueOnError: true
-    enabled: false
+    enabled: true
     displayName: 'Install Code Coverage Tool'
   - script: |
       cd src/ChristopherBriddock.Service.Identity.Tests/TestResults
