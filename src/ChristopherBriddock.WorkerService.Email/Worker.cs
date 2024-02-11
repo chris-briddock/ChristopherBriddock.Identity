@@ -28,7 +28,7 @@ public class Worker(ILogger<Worker> logger,
     /// </summary>
     /// <param name="context">The <see cref="ConsumeContext{T}"/> that allows for message consumption.</param>
     /// <remarks>
-    /// This method is automatically executed, as MassTransit registers consumers and pushliers (producers) 
+    /// This method is automatically executed, as MassTransit registers consumers and publishers (producers) 
     /// as a <see cref="BackgroundService"/> which implements <see cref="IHostedService"/> 
     /// </remarks>
     /// <returns>An asyncronous <see cref="Task"/></returns>
@@ -69,7 +69,7 @@ public class Worker(ILogger<Worker> logger,
         <p class=""text-gray-700"">Your confirmation email link is <a href=""{context.Message.Link}"" class=""text-indigo-600"">here</a></p>
         <p class=""text-gray-700"">If you did not request this or have any concerns, please contact our support team.</p>
         <p class=""mt-4 text-gray-700"">Thank you,<br>Your Company Name</p>
-        <p class=""mt-2 text-gray-600"">© 2024 Your Company. All rights reserved.</p>
+        <p class=""mt-2 text-gray-600"">ï¿½ 2024 Your Company. All rights reserved.</p>
     </div>
 </body>
 </html>";
@@ -93,7 +93,7 @@ public class Worker(ILogger<Worker> logger,
         <p class=""text-gray-700"">Your two factor code is {context.Message.Link}</p>
         <p class=""text-gray-700"">If you did not request this or have any concerns, please contact our support team.</p>
         <p class=""mt-4 text-gray-700"">Thank you,<br>Your Company Name</p>
-        <p class=""mt-2 text-gray-600"">© 2024 Your Company. All rights reserved.</p>
+        <p class=""mt-2 text-gray-600"">ï¿½ 2024 Your Company. All rights reserved.</p>
     </div>
 </body>
 </html>";
@@ -117,7 +117,7 @@ public class Worker(ILogger<Worker> logger,
         <p class=""text-gray-700"">Your password reset link is <a href=""https://REPLACEME.com"" class=""text-indigo-600"">here</a></p>
         <p class=""text-gray-700"">If you did not request this or have any concerns, please contact our support team.</p>
         <p class=""mt-4 text-gray-700"">Thank you,<br>Your Company Name</p>
-        <p class=""mt-2 text-gray-600"">© 2024 Your Company. All rights reserved.</p>
+        <p class=""mt-2 text-gray-600"">ï¿½ 2024 Your Company. All rights reserved.</p>
     </div>
 </body>
 </html>";
