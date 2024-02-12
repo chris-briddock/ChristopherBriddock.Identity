@@ -114,7 +114,7 @@ public class Worker(ILogger<Worker> logger,
         <img src=""your-company-logo.png"" alt=""Your Company Logo"" class=""mx-auto mb-4"">
         <h2 class=""text-2xl font-semibold mb-4 text-gray-800"">Forgotten your password.</h2>
         <p class=""text-gray-700"">Dear <span class=""font-bold text-indigo-800"">{context.Message.EmailAddress}</span>,</p>
-        <p class=""text-gray-700"">Your password reset link is <a href=""https://REPLACEME.com"" class=""text-indigo-600"">here</a></p>
+        <p class=""text-gray-700"">Your password reset code is <span class=""font-bold text-indigo-800"">{context.Message.Link}</span> </p>
         <p class=""text-gray-700"">If you did not request this or have any concerns, please contact our support team.</p>
         <p class=""mt-4 text-gray-700"">Thank you,<br>Your Company Name</p>
         <p class=""mt-2 text-gray-600"">� 2024 Your Company. All rights reserved.</p>
