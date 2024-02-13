@@ -22,7 +22,7 @@ public class DeleteAccountEndpoint(ILogger<DeleteAccountEndpoint> logger,
     /// <summary>
     /// The application's service provider.
     /// </summary>
-    public IServiceProvider ServiceProvider { get; set; } = serviceProvider;
+    public IServiceProvider ServiceProvider { get; } = serviceProvider;
     /// <summary>
     /// The application's logger.
     /// </summary>

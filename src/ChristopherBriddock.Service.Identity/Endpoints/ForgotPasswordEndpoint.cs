@@ -29,7 +29,7 @@ public sealed class ForgotPasswordEndpoint(IServiceProvider serviceProvider,
     /// <inheritdoc/>
     private IServiceProvider ServiceProvider { get; } = serviceProvider;
     /// <inheritdoc/>
-    public ILogger<ForgotPasswordEndpoint> Logger { get; set; } = logger;
+    public ILogger<ForgotPasswordEndpoint> Logger { get; } = logger;
 
     /// <summary>
     /// Allows a user to send a password reset email.

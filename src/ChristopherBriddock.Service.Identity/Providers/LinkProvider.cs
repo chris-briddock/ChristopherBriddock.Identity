@@ -26,6 +26,9 @@ public sealed class LinkProvider : ILinkProvider
     {
         StringBuilder sb = new();
 
+        if (routeValues is null)
+            return string.Empty;
+
         var queryString = sb.Append(string.Join("&", routeValues.Select(kvp => $"{kvp.Key}={kvp.Value}"))).ToString();
         return string.IsNullOrEmpty(queryString) ? string.Empty : $"?{queryString}";
     }
