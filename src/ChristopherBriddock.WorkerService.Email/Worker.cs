@@ -50,8 +50,8 @@ public class Worker(ILogger<Worker> logger,
 
         switch (context.Message.Type)
         {
-            case EmailPublisherConstants.Register:
-                mailMessage.Subject = $"Welcome! Here is your confirmation email.";
+            case EmailPublisherConstants.ConfirmEmail:
+                mailMessage.Subject = $"Please confirm your email address.";
                 mailMessage.Body = $@"<!DOCTYPE html>
 <html lang=""en"">
 <head>

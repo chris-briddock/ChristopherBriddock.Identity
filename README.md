@@ -54,19 +54,19 @@ The Identity Service plays a crucial role in your application's security infrast
 
 ### Endpoints
 
-* **/authorise**: Endpoint for user authorization.
+* **/authorize**: Endpoint for user authorization.
+* **/sendemail**: Endpoint for sending token emails.
 * **/confirmemail**: Endpoint for confirming user email.
 * **/forgotpassword**: Endpoint for handling forgotten passwords.
 * **/logout**: Endpoint for user logout.
 * **/refresh**: Endpoint for refreshing authentication tokens.
 * **/register**: Endpoint for user registration.
 * **/resetpassword**: Endpoint for resetting user passwords.
-* **/token**: Endpoint for token management.
-* **/2fa/authorise**: Endpoint for two-factor authentication authorization.
+* **/token**: Endpoint for token generation.
+* **/2fa/authorize**: Endpoint for two-factor authentication authorization.
 * **/2fa/manage**: Endpoint for managing two-factor authentication settings.
 * **/2fa/codes**: Endpoint for generating and managing two-factor authentication codes.
 * **/2fa/redeem**: Endpoint for reedming two-factor recovery codes.
-* **/2fa/email**: Endpoint for sending two factor code emails.
 * **/account/email**: Endpoint for managing user account email.
 * **/account/phonenumber**: Endpoint for managing user account phone number.
 * **/account/password**: Endpoint for managing user account password.
@@ -79,12 +79,12 @@ To get started with the Identity Service, follow these steps:
 1. Clone the repository: `git clone https://github.com/chris-briddock/ChristopherBriddock.Identity.git`
 2. Open the solution.
 3. Ensure you have added migrations for the Service.Identity project with Entity Framework Core.
-4. Ensure you have an PostgreSQL database and RabbitMQ or Azure Service Bus available at minimum. 
+4. Ensure you have an PostgreSQL database and RabbitMQ or Azure Service Bus available at minimum
 5. Optionally you can also use Seq, Azure Application Insights and Redis.
 6. Please configure all placeholder values in appsettings.json in both services.
 7. Build and run the Web API.
 
 ### License
 
-This project is licensed under the ![GitHub License](https://img.shields.io/github/license/chris-briddock/ChristopherBriddock.Identity) 
+This project is licensed under the ![GitHub License](https://img.shields.io/github/license/chris-briddock/ChristopherBriddock.Identity)
 See the [LICENSE](LICENSE) file for details.

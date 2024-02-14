@@ -14,7 +14,7 @@ public static class EmailPublisherConstants
     /// </summary>
     public const string TwoFactorToken = "TwoFactorToken";
     /// <summary>
-    /// The value for a register message
+    /// The value for a email confirmation  message
     /// </summary>
-    public const string Register = "Register";
+    public const string ConfirmEmail = "ConfirmEmail";
 }
