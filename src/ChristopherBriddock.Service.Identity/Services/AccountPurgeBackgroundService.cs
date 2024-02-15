@@ -26,7 +26,7 @@ public class AccountPurgeBackgroundService(IServiceScopeFactory serviceScopeFact
     /// <inheritdoc/>
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        await Task.Delay(TimeSpan.FromDays(1), stoppingToken);
+        await Task.Delay(TimeSpan.FromMinutes(1), stoppingToken);
 
         try
         {
