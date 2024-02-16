@@ -28,6 +28,19 @@ jobs:
       SourceFolder: '$(System.DefaultWorkingDirectory)'
       Contents: 'src/ChristopherBriddock.WorkerService.Email/bin/Release/net8.0/publish/**'
       TargetFolder: '$(Build.ArtifactStagingDirectory)'
+  - task: DockerInstaller@0
+    inputs:
+      dockerVersion: '17.09.0-ce'
+  - task: Docker@2
+    inputs:
+      containerRegistry: 'docker'
+      command: 'login'
+  - task: Docker@2
+    inputs:
+      containerRegistry: 'docker'
+      repository: 'immerslve/service.email'
+      command: 'buildAndPush'
+      Dockerfile: '**/Dockerfile'
   - task: PublishBuildArtifacts@1
     inputs:
       PathtoPublish: '$(Build.ArtifactStagingDirectory)'
