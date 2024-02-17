@@ -1,7 +1,4 @@
-﻿using ChristopherBriddock.Service.Identity.Endpoints;
-using Microsoft.Extensions.Options;
-
-namespace ChristopherBriddock.Service.Identity.Tests.IntegrationTests;
+﻿namespace ChristopherBriddock.Service.Identity.Tests.IntegrationTests;
 
 public class TwoFactorAuthorizeEndpointTests : IClassFixture<WebApplicationFactory<Program>>
 {
@@ -35,16 +32,11 @@ public class TwoFactorAuthorizeEndpointTests : IClassFixture<WebApplicationFacto
                                                                It.IsAny<string>(),
                                                                It.IsAny<string>())).ReturnsAsync(true);
 
-        var serviceProviderMock = new Mock<IServiceProvider>();
-        serviceProviderMock.Setup(s => s.GetService(typeof(UserManager<ApplicationUser>)))
-                           .Returns(userManagerMock.Object);
-
         using var client = _webApplicationFactory.WithWebHostBuilder(s =>
         {
             s.ConfigureTestServices(s =>
             {
                 s.Replace(new ServiceDescriptor(typeof(UserManager<ApplicationUser>), userManagerMock.Object));
-                s.Replace(new ServiceDescriptor(typeof(IServiceProvider), serviceProviderMock.Object));
             });
         }).CreateClient(new WebApplicationFactoryClientOptions
         {

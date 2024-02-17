@@ -37,6 +37,7 @@ public sealed class Program
         builder.Services.AddPublisherMessaging();
         builder.Services.AddHostedService<AccountPurgeBackgroundService>();
         builder.Services.AddScoped<ILinkProvider, LinkProvider>();
+        builder.Services.AddAppRateLimiting();
 
         WebApplication app = builder.Build();
         if (app.Environment.IsDevelopment())
