@@ -1,8 +1,14 @@
 trigger:
-- main
+- none
 
 pool: 
   name: Docker
+
+resources:
+  pipelines:
+  - pipeline: previous-pipeline-trigger   # Name of the pipeline resource
+    source: ChristopherBriddock.Service.Identity-CI # Name of the pipeline referenced by the pipeline resource
+    trigger: true # enable the trigger
 
 jobs:
 - job: Build
