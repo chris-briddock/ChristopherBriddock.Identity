@@ -1,4 +1,5 @@
 ﻿using ChristopherBriddock.Service.Identity.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace ChristopherBriddock.Service.Identity.Services;
 
@@ -36,11 +37,14 @@ public class AccountPurgeBackgroundService(IServiceScopeFactory serviceScopeFact
 
             var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
 
-            var userToBeDeleted = dbContext.Users.Where(s => s.IsDeleted)
+            var usersToBeDeleted = dbContext.Users.Where(s => s.IsDeleted)
                                 .Where(s => s.DeletedDateTime < DateTime.Today.AddYears(-7));
 
-            dbContext.RemoveRange(userToBeDeleted);
-            await dbContext.SaveChangesAsync(stoppingToken);
+            if (await usersToBeDeleted.AnyAsync(stoppingToken)) 
+            {
+                dbContext.RemoveRange(usersToBeDeleted);
+                await dbContext.SaveChangesAsync(stoppingToken);
+            }
         }
         catch (Exception ex)
         {
