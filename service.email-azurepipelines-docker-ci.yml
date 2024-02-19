@@ -1,0 +1,25 @@
+trigger:
+- main
+
+pool: 
+  name: Docker
+
+jobs:
+- job: Build
+  displayName: 'Build'
+  steps:
+  - checkout: self
+  - task: DockerInstaller@0
+    inputs:
+      dockerVersion: '17.09.0-ce'
+  - task: Docker@2
+    inputs:
+      containerRegistry: 'docker'
+      command: 'login'
+  - task: Docker@2
+    inputs:
+      containerRegistry: 'docker'
+      repository: 'immerslve/workerservice.email'
+      command: 'buildAndPush'
+      Dockerfile: 'src/ChristopherBriddock.WorkerService.Email/Dockerfile'
+  
