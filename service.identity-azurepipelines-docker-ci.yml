@@ -29,4 +29,5 @@ jobs:
       command: 'buildAndPush'
       Dockerfile: '$(System.DefaultWorkingDirectory)/src/ChristopherBriddock.Service.Identity/Dockerfile'
       buildContext: '$(System.DefaultWorkingDirectory)/src'
+      tags: latest
       
