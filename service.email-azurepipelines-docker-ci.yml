@@ -1,8 +1,14 @@
 trigger:
-- main
+- none
 
 pool: 
   name: Docker
+
+resources:
+  pipelines:
+  - pipeline: workerservice-email-ci
+    source: ChristopherBriddock.Service.Identity-CI 
+    trigger: true
 
 jobs:
 - job: Build
@@ -21,5 +27,5 @@ jobs:
       containerRegistry: 'docker'
       repository: 'immerslve/workerservice.email'
       command: 'buildAndPush'
-      Dockerfile: 'src/ChristopherBriddock.WorkerService.Email/Dockerfile'
-  
+      Dockerfile: '$(System.DefaultWorkingDirectory)/src/ChristopherBriddock.WorkerService.Identity/Dockerfile'
+      buildContext: '$(System.DefaultWorkingDirectory)/src'
