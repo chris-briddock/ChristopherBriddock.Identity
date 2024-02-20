@@ -25,11 +25,8 @@ jobs:
   - task: Docker@2
     inputs:
       containerRegistry: 'docker'
-      command: 'build'
+      repository: 'immerslve/service.identity'
+      command: 'buildAndPush'
       Dockerfile: '**/Dockerfile'
       buildContext: '$(System.DefaultWorkingDirectory)/src'
-  - task: Docker@2
-    inputs:
-      containerRegistry: 'docker'
-      repository: 'immerslve/service.identity'
-      command: 'push'
+      
