@@ -1,5 +1,4 @@
 ﻿using ChristopherBriddock.Service.Identity.Data;
-using Microsoft.EntityFrameworkCore;
 
 namespace ChristopherBriddock.Service.Identity.Services;
 
