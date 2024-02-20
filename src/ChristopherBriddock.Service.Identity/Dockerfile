@@ -11,10 +11,10 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:8.0.101-bookworm-slim-amd64 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["ChristopherBriddock.Identity/ChristopherBriddock.Service.Identity.csproj", "ChristopherBriddock.Identity/"]
-RUN dotnet restore "./ChristopherBriddock.Identity/./ChristopherBriddock.Service.Identity.csproj"
+COPY ["ChristopherBriddock.Service.Identity/ChristopherBriddock.Service.Identity.csproj", "ChristopherBriddock.Service.Identity/"]
+RUN dotnet restore "./ChristopherBriddock.Service.Identity/./ChristopherBriddock.Service.Identity.csproj"
 COPY . .
-WORKDIR "/src/ChristopherBriddock.Identity"
+WORKDIR "/src/ChristopherBriddock.Service.Identity"
 RUN dotnet build "./ChristopherBriddock.Service.Identity.csproj" -c %BUILD_CONFIGURATION% -o /app/build
 
 FROM build AS publish
