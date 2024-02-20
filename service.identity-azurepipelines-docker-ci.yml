@@ -6,9 +6,9 @@ pool:
 
 resources:
   pipelines:
-  - pipeline: previous-pipeline-trigger   # Name of the pipeline resource
-    source: ChristopherBriddock.Service.Identity-CI # Name of the pipeline referenced by the pipeline resource
-    trigger: true # enable the trigger
+  - pipeline: service-identity-ci
+    source: ChristopherBriddock.Service.Identity-CI 
+    trigger: true
 
 jobs:
 - job: Build
@@ -25,7 +25,11 @@ jobs:
   - task: Docker@2
     inputs:
       containerRegistry: 'docker'
+      command: 'build'
+      Dockerfile: '$(System.DefaultWorkingDirectory)/src/ChristopherBriddock.Service.Identity/Dockerfile'
+      buildContext: '$(System.DefaultWorkingDirectory)/src'
+  - task: Docker@2
+    inputs:
+      containerRegistry: 'docker'
       repository: 'immerslve/service.identity'
-      command: 'buildAndPush'
-      Dockerfile: 'src/ChristopherBriddock.Service.Identity/Dockerfile'
-      buildContext: '$(System.DefaultWorkingDirectory)/src/'
+      command: 'push'
