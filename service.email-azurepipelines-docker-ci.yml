@@ -7,7 +7,7 @@ pool:
 resources:
   pipelines:
   - pipeline: workerservice-email-ci
-    source: ChristopherBriddock.Service.Identity-CI 
+    source: ChristopherBriddock.WorkerService.Email-CI 
     trigger: true
 
 jobs:
