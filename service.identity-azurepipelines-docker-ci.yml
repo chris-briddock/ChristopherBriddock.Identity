@@ -26,8 +26,8 @@ jobs:
     inputs:
       containerRegistry: 'docker'
       command: 'build'
-      Dockerfile: '$(System.DefaultWorkingDirectory)/src/ChristopherBriddock.Service.Identity/Dockerfile'
-      buildContext: '$(System.DefaultWorkingDirectory)/src'
+      Dockerfile: '**/Dockerfile'
+      buildContext: '$(System.DefaultWorkingDirectory)/src/ChristopherBriddock.Service.Identity'
   - task: Docker@2
     inputs:
       containerRegistry: 'docker'
