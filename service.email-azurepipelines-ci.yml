@@ -1,6 +1,5 @@
 trigger:
 - main
-- dev
 
 pool:
   name: Default
