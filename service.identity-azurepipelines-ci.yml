@@ -52,8 +52,8 @@ stages:
         Contents: |
           **/workerservice-email-k8s.dev.yaml
           **/service-identity-k8s.dev.yaml
-          'src/ChristopherBriddock.Service.Identity/bin/Release/net8.0/publish/**'
-        TargetFolder: $(Build.ArtifactStagingDirectory)'
+          **/src/ChristopherBriddock.Service.Identity/bin/Release/net8.0/publish/**
+        TargetFolder: '$(Build.ArtifactStagingDirectory)'
         OverWrite: true
         flattenFolders: true     
     - task: PublishBuildArtifacts@1
