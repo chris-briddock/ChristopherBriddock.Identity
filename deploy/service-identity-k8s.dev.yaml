@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-identity-deployment
+spec:
+  replicas: 1  # Adjust the number of replicas as needed
+  selector:
+    matchLabels:
+      app: service-identity
+  template:
+    metadata:
+      labels:
+        app: service-identity
+    spec:
+      containers:
+      - name: service-identity
+        image: immerslve/service.identity
+        ports:
+        - containerPort: 8080 
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-identity-svc
+spec:
+  type: NodePort
+  selector:
+    app: service-identity
+  ports:
+  - protocol: TCP
+    port: 8080  # Port on the Service (optional)
+    targetPort: 8080  # Port on the container
