@@ -40,7 +40,7 @@ public class AccountPurgeBackgroundService(IServiceScopeFactory serviceScopeFact
             var usersToBeDeleted = dbContext.Users.Where(s => s.IsDeleted)
                                 .Where(s => s.DeletedDateTime < DateTime.Today.AddYears(-7));
 
-            if (usersToBeDeleted.Count() > 0) 
+            if (usersToBeDeleted.Any()) 
             {
                 dbContext.RemoveRange(usersToBeDeleted);
                 await dbContext.SaveChangesAsync(stoppingToken);
