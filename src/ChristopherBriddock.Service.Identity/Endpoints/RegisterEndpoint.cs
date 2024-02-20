@@ -51,7 +51,6 @@ public sealed class RegisterEndpoint(IServiceProvider serviceProvider,
         {
             var userManager = ServiceProvider.GetService<UserManager<ApplicationUser>>()!;
             var roleManager = ServiceProvider.GetService<RoleManager<ApplicationRole>>()!;
-            var httpContext = ServiceProvider.GetService<IHttpContextAccessor>()!;
 
             var existingUser = await userManager.FindByEmailAsync(request.EmailAddress);
 
