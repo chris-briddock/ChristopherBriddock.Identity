@@ -1,35 +1,37 @@
 trigger:
 - main
-- dev
 
 pool:
   name: Default
 
-jobs:
-- job: Build
-  displayName: 'Build'
-  steps:
-  - checkout: self
-  - task: UseDotNet@2
-    inputs:
-      packageType: 'sdk'
-      version: '8.0.x'
-  - script: |
-      dotnet build --configuration Release src/ChristopherBriddock.WorkerService.Email/ChristopherBriddock.WorkerService.Email.csproj
-    displayName: 'Build & Restore'
-  - script: |
-      dotnet test --collect:"XPlat Code Coverage" src/ChristopherBriddock.WorkerService.Email.Tests/ChristopherBriddock.WorkerService.Email.Tests.csproj
-    displayName: 'Test'
-  - script: |
-      dotnet publish src/ChristopherBriddock.WorkerService.Email/ChristopherBriddock.WorkerService.Email.csproj -c Release
-    displayName: 'Publish'
-  - task: CopyFiles@2
-    inputs:
-      SourceFolder: '$(System.DefaultWorkingDirectory)'
-      Contents: 'src/ChristopherBriddock.WorkerService.Email/bin/Release/net8.0/publish/**'
-      TargetFolder: '$(Build.ArtifactStagingDirectory)'
-  - task: PublishBuildArtifacts@1
-    inputs:
-      PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-      ArtifactName: 'drop'
-      publishLocation: 'Container'
+stages:
+- stage: 'Build'
+  displayName: 'Build Worker Service'
+  jobs:
+  - job: Build
+    displayName: 'Build'
+    steps:
+    - checkout: self
+    - task: UseDotNet@2
+      inputs:
+        packageType: 'sdk'
+        version: '8.0.x'
+    - script: |
+        dotnet build --configuration Release src/ChristopherBriddock.WorkerService.Email/ChristopherBriddock.WorkerService.Email.csproj
+      displayName: 'Build & Restore'
+    - script: |
+        dotnet test --collect:"XPlat Code Coverage" src/ChristopherBriddock.WorkerService.Email.Tests/ChristopherBriddock.WorkerService.Email.Tests.csproj
+      displayName: 'Test'
+    - script: |
+        dotnet publish src/ChristopherBriddock.WorkerService.Email/ChristopherBriddock.WorkerService.Email.csproj -c Release
+      displayName: 'Publish'
+    - task: CopyFiles@2
+      inputs:
+        SourceFolder: '$(System.DefaultWorkingDirectory)'
+        Contents: 'src/ChristopherBriddock.WorkerService.Email/bin/Release/net8.0/publish/**'
+        TargetFolder: '$(Build.ArtifactStagingDirectory)'
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'drop'
+        publishLocation: 'Container'

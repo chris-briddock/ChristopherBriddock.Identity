@@ -54,20 +54,16 @@ public sealed class TwoFactorManageEndpoint(IServiceProvider serviceProvider,
             var user = await userManager.FindByEmailAsync(emailAddress);
 
             var result = await userManager.SetTwoFactorEnabledAsync(user!, request.IsEnabled);
-
             if (!result.Succeeded)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, "Failed to enable two factor.");
             }
-
             return NoContent();
-
         }
         catch (Exception ex)
         {
             Logger.LogError("Error in endpoint: {endpointName} - {methodName} Error details: {ex}", nameof(TwoFactorManageEndpoint), nameof(HandleAsync), ex);
             return StatusCode(StatusCodes.Status500InternalServerError);
         }
-
     }
 }

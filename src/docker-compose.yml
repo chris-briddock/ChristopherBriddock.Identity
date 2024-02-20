@@ -1,33 +1,37 @@
 version: '3.4'
 
 services:
-  christopherbriddock.service.identity:
-    image: ${DOCKER_REGISTRY-}christopherbriddockserviceidentity
-    build:
-      context: .
-      dockerfile: ChristopherBriddock.Service.Identity/Dockerfile
+  
+  # christopherbriddock.service.identity:
+  #   image: ${DOCKER_REGISTRY-}christopherbriddockserviceidentity
+  #   build:
+  #     context: .
+  #     dockerfile: ChristopherBriddock.Service.Identity/Dockerfile
 
   christopherbriddock.service.email:
-    image: ${DOCKER_REGISTRY-}christopherbriddockserviceemail
+    image: ${DOCKER_REGISTRY-}christopherbriddockworkerserviceemail
     build:
       context: .
-      dockerfile: ChristopherBriddock.Service.Email/Dockerfile
+      dockerfile: ChristopherBriddock.WorkerService.Email/Dockerfile
   
   seq:
+    hostname: seq
     image: datalust/seq
     container_name: seq
     restart: unless-stopped
     environment:
       - ACCEPT_EULA=Y
+      - SEQ_FIRSTRUN_ADMINPASSWORDHASH=QIuBoN9hFritmO5JCL1ElTGUodPFUF4OIn2wM7nQV77x9HxoxCRFK8/lzhRJe+synMKXluA9JsBx5ffKOrDVXoUSCBF4NVqZ4nT89VaBJQP6
     ports:
-      - "80:80"
-      - "443:443"
+      - "8080:80"
+      - "8443:443"
       - "5341:5341"
       - "45341:45341"
     volumes:
       - ./seq:/data
 
   rabbitmq:
+    hostname: "rabbitmq"
     container_name: rabbitmq
     restart: unless-stopped
     image: rabbitmq:3.12.12-management
@@ -40,4 +44,14 @@ services:
       interval: 10s
       timeout: 10s
       retries: 5
+  
+  postgres:
+    hostname: postgres
+    container_name: postgres
+    restart: unless-stopped
+    image: postgres:latest
+    ports: 
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: pass123
 

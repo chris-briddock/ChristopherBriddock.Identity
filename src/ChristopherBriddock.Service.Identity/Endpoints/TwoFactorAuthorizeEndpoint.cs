@@ -29,43 +29,37 @@ public sealed class TwoFactorAuthorizeEndpoint(IServiceProvider serviceProvider,
     /// <param name="request">The object which encapsulates the request.</param>
     /// <param name="cancellationToken">The cancellation token to cancel the operation.</param>
     /// <returns>A new <see cref="ActionResult"/></returns>
-    [HttpGet("/2fa/Authorize")]
-    [AllowAnonymous]
+    [HttpPost("/2fa/authorize")]
+    [Authorize(AuthenticationSchemes = "Identity.Application")]
     [ProducesResponseType(StatusCodes.Status302Found)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    public override async Task<ActionResult> HandleAsync([FromQuery] TwoFactorSignInRequest request,
+    public override async Task<ActionResult> HandleAsync([FromBody] TwoFactorSignInRequest request,
                                                    CancellationToken cancellationToken = default)
     {
         try
         {
             var userManager = ServiceProvider.GetService<UserManager<ApplicationUser>>()!;
-            var httpContextAccessor = ServiceProvider.GetService<IHttpContextAccessor>()!;
 
-            var user = await userManager.FindByEmailAsync(httpContextAccessor.HttpContext!.User!.Identity!.Name!);
+            var user = await userManager.FindByEmailAsync(request.EmailAddress);
 
             if (user == null)
             {
                 return NotFound("User not found.");
             }
-
             bool isTwoFactorEnabled = await userManager.GetTwoFactorEnabledAsync(user);
 
             if (!isTwoFactorEnabled)
             {
                 return Unauthorized("User does not have two factor enabled.");
             }
-
             var result = await userManager.VerifyTwoFactorTokenAsync(user,
-                                                                     TokenOptions.DefaultEmailProvider,
+                                                                     TokenOptions.DefaultProvider,
                                                                      request.Token);
-
             if (!result)
             {
                 return Unauthorized("Two factor token could not be verified.");
             }
-
             return LocalRedirect("/token");
         }
         catch (Exception ex)
@@ -73,6 +67,5 @@ public sealed class TwoFactorAuthorizeEndpoint(IServiceProvider serviceProvider,
             Logger.LogError("Error in endpoint: {endpointName} - {methodName} Error details: {ex}", nameof(TwoFactorAuthorizeEndpoint), nameof(HandleAsync), ex);
             return StatusCode(StatusCodes.Status500InternalServerError);
         }
-
     }
 }

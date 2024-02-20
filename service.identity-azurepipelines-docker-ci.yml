@@ -1,0 +1,42 @@
+trigger:
+- none
+
+pool: 
+  name: Docker
+
+resources:
+  pipelines:
+  - pipeline: service-identity-ci
+    source: ChristopherBriddock.Service.Identity-CI 
+    trigger: true
+
+variables:
+- group: Service.Identity
+
+jobs:
+- job: Build
+  displayName: 'Build'
+  steps:
+  - checkout: self
+  
+  - task: Bash@3
+    inputs:
+        filePath: '$(System.DefaultWorkingDirectory)/tokenizer.sh'
+        arguments: '--db-host $(dbHost) --db-port $(dbPort) --db-username $(dbUsername) --db-password $(dbPassword) --db-name $(dbName) --jwt-issuer $(jwtIssuer) --jwt-audience $(jwtAudience) --jwt-secret $(jwtSecret) --jwt-expires $(jwtExpires) --rabbit-host $(rabbitHostname) --rabbit-username $(rabbitUsername) --rabbit-password $(rabbitPassword) --enable-feature "RabbitMq"'
+        workingDirectory: 'src/ChristopherBriddock.Service.Identity/'
+  - task: DockerInstaller@0
+    inputs:
+      dockerVersion: '17.09.0-ce'
+  - task: Docker@2
+    inputs:
+      containerRegistry: 'docker'
+      command: 'login'
+  - task: Docker@2
+    inputs:
+      containerRegistry: 'docker'
+      repository: 'immerslve/service.identity'
+      command: 'buildAndPush'
+      Dockerfile: '$(System.DefaultWorkingDirectory)/src/ChristopherBriddock.Service.Identity/Dockerfile'
+      buildContext: '$(System.DefaultWorkingDirectory)/src'
+      tags: latest
+      

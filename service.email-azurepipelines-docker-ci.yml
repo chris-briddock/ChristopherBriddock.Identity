@@ -1,0 +1,32 @@
+trigger:
+- none
+
+pool: 
+  name: Docker
+
+resources:
+  pipelines:
+  - pipeline: workerservice-email-ci
+    source: ChristopherBriddock.WorkerService.Email-CI 
+    trigger: true
+
+jobs:
+- job: Build
+  displayName: 'Build'
+  steps:
+  - checkout: self
+  - task: DockerInstaller@0
+    inputs:
+      dockerVersion: '17.09.0-ce'
+  - task: Docker@2
+    inputs:
+      containerRegistry: 'docker'
+      command: 'login'
+  - task: Docker@2
+    inputs:
+      containerRegistry: 'docker'
+      repository: 'immerslve/workerservice.email'
+      command: 'buildAndPush'
+      Dockerfile: '$(System.DefaultWorkingDirectory)/src/ChristopherBriddock.WorkerService.Email/Dockerfile'
+      buildContext: '$(System.DefaultWorkingDirectory)/src'
+      tags: latest

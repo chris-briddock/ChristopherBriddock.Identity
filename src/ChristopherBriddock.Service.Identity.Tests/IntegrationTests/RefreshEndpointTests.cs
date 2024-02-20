@@ -1,4 +1,5 @@
-﻿using ChristopherBriddock.Service.Identity.Providers;
+﻿using ChristopherBriddock.Service.Identity.Models.Results;
+using ChristopherBriddock.Service.Identity.Providers;
 using Microsoft.Extensions.Configuration;
 using System.Net.Http.Headers;
 using System.Text.Json;
@@ -148,10 +149,82 @@ public class RefreshEndpointTests : IClassFixture<WebApplicationFactory<Program>
 
         refreshClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
 
-        var sut = await refreshClient.PostAsJsonAsync("/refresh", refreshRequest);
+        using var sut = await refreshClient.PostAsJsonAsync("/refresh", refreshRequest);
 
         Assert.Equivalent(HttpStatusCode.OK, authorizeResponse.StatusCode);
 
         Assert.Equivalent(HttpStatusCode.Found, sut.StatusCode);
+    }
+
+    [Fact]
+    public async Task RefreshEndpoint_Returns401Unauthorized_WhenTokenValidationFails()
+    {
+        var configurationBuilder = new ConfigurationBuilder()
+           .AddInMemoryCollection(new Dictionary<string, string?>
+           {
+                { "Jwt:Issuer", "https://localhost" },
+                { "Jwt:Secret", "=W0Jqcxsz8] Lq74z*:&gB^zmhx*HsrB6GYj%K}G=W0Jqcxsz8] Lq74z*:&gB^zmhx*HsrB6GYj%K}G" },
+                { "Jwt:Audience", "atesty@testing.com" },
+                { "Jwt:Expires", "5" }
+           }).Build();
+
+        using var client = _webApplicationFactory.WithWebHostBuilder(s =>
+        {
+            s.ConfigureTestServices(s =>
+            {
+
+                s.Replace(new ServiceDescriptor(typeof(IConfiguration), configurationBuilder));
+            });
+        }).CreateClient(new WebApplicationFactoryClientOptions()
+        {
+            AllowAutoRedirect = true
+        });
+
+        AuthorizeRequest authorizeRequest = new()
+        {
+            EmailAddress = "authenticationtest@test.com",
+            Password = "Lq74z*:&gB^zmhx*HsrB6GYj%K}G=W0Jqcxsz8] Lq74z*:&gB^zmhx*",
+            RememberMe = true
+        };
+
+        using var authorizeResponse = await client.PostAsJsonAsync("/authorize", authorizeRequest);
+
+        var jsonDocumentRoot = JsonDocument.Parse(authorizeResponse.Content.ReadAsStream()).RootElement;
+
+        string? accessToken = jsonDocumentRoot.GetProperty("accessToken").GetString()!;
+        string? refreshToken = jsonDocumentRoot.GetProperty("refreshToken").GetString()!;
+
+        RefreshRequest refreshRequest = new() { RefreshToken = refreshToken };
+
+        var jsonWebTokenProviderMock = new JsonWebTokenProviderMock().Mock();
+
+        JwtResult jwtResult = new()
+        {
+            Success = false
+        };
+
+        jsonWebTokenProviderMock.Setup(s => s.TryValidateTokenAsync(It.IsAny<string>(),
+                                                                    It.IsAny<string>(),
+                                                                    It.IsAny<string>(),
+                                                                    It.IsAny<string>())).ReturnsAsync(jwtResult);
+
+        using var refreshClient = _webApplicationFactory.WithWebHostBuilder(s =>
+        {
+            s.ConfigureTestServices(s =>
+            {
+                s.Replace(new ServiceDescriptor(typeof(IJsonWebTokenProvider), jsonWebTokenProviderMock.Object));
+                s.Replace(new ServiceDescriptor(typeof(IConfiguration), configurationBuilder));
+            });
+        }).CreateClient(new WebApplicationFactoryClientOptions()
+        {
+            AllowAutoRedirect = false
+        });
+
+        refreshClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+
+        using var sut = await refreshClient.PostAsJsonAsync("/refresh", refreshRequest);
+
+        Assert.Equivalent(HttpStatusCode.OK, authorizeResponse.StatusCode);
+        Assert.Equivalent(HttpStatusCode.Unauthorized, sut.StatusCode);
     }
 }

@@ -1,0 +1,39 @@
+trigger:
+- none
+
+resources:
+  pipelines:
+  - pipeline: service-identity-docker-ci
+    source: ChristopherBriddock.Service.Identity-Docker-CI
+    trigger: true
+
+stages:
+- stage: dev
+  jobs:
+  - deployment: VMDeploy
+    displayName: Deploy to VM
+    environment: 
+      name: Release
+      resourceName: cb-release-01
+      resourceType: virtualMachine
+    strategy:
+      runOnce:
+        deploy:   
+          steps:
+            - task: DownloadBuildArtifacts@1
+              inputs:
+                buildType: 'specific'
+                project: '91f2d938-549b-497e-980d-188da969448a'
+                pipeline: '7'
+                buildVersionToDownload: 'latest'
+                downloadType: 'specific'
+                itemPattern: |
+                  **/service.identity-k8s.*.yaml
+                downloadPath: '$(System.ArtifactsDirectory)'
+
+            - task: Bash@3
+              inputs:
+                targetType: 'inline'
+                script: 'kubectl apply -f $(System.ArtifactsDirectory)/service.identity-k8s.dev.yaml'    
+
+

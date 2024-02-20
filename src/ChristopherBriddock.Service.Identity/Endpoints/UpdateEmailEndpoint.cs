@@ -57,16 +57,18 @@ public class UpdateEmailEndpoint(IServiceProvider serviceProvider,
             {
                 return NotFound();
             }
-            // NOTE: could email this token to the user, to make a change link.
-            var token = await userManager.GenerateChangeEmailTokenAsync(user, request.EmailAddress);
 
+            user.EmailConfirmed = false;
+            await userManager.UpdateAsync(user);
+            await userManager.SetUserNameAsync(user, request.EmailAddress);
+            var token = await userManager.GenerateChangeEmailTokenAsync(user, request.EmailAddress);
             var result = await userManager.ChangeEmailAsync(user, request.EmailAddress, token);
 
             if (!result.Succeeded)
             {
                 return BadRequest();
             }
-
+            // At this point send an email to re-confirm the user's email.
             return NoContent();
         }
         catch (Exception ex)

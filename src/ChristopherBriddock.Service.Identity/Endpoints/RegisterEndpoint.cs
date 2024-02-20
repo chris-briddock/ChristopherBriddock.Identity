@@ -51,9 +51,6 @@ public sealed class RegisterEndpoint(IServiceProvider serviceProvider,
         {
             var userManager = ServiceProvider.GetService<UserManager<ApplicationUser>>()!;
             var roleManager = ServiceProvider.GetService<RoleManager<ApplicationRole>>()!;
-            IEmailPublisher emailPublisher = ServiceProvider.GetService<IEmailPublisher>()!;
-            var linkProvider = ServiceProvider.GetService<ILinkProvider>()!;
-            var httpContext = ServiceProvider.GetService<IHttpContextAccessor>()!;
 
             var existingUser = await userManager.FindByEmailAsync(request.EmailAddress);
 
@@ -87,26 +84,7 @@ public sealed class RegisterEndpoint(IServiceProvider serviceProvider,
             {
                 await userManager.AddToRoleAsync(user, RoleConstants.UserRole);
             }
-
-            var code = await userManager.GenerateEmailConfirmationTokenAsync(user);
-            code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-
-            RouteValueDictionary routeValues = new()
-            {
-                ["EmailAddress"] = user.Email,
-                ["Code"] = code
-            };
-
-            Uri link = linkProvider.GetUri(httpContext.HttpContext!, "confirmemail", routeValues);
-
-            EmailMessage message = new()
-            {
-                EmailAddress = user.Email!,
-                Link = link.ToString(),
-                Type = EmailPublisherConstants.Register
-            };
-            await emailPublisher.Publish(message, cancellationToken);
-
+            // Send confirmation email.
             return StatusCode(StatusCodes.Status201Created);
         }
         catch (Exception ex)

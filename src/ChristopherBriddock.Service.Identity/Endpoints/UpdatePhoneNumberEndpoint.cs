@@ -33,7 +33,7 @@ public class UpdatePhoneNumberEndpoint(IServiceProvider serviceProvider,
     public ILogger<UpdatePhoneNumberEndpoint> Logger { get; } = logger;
 
     /// <summary>
-    /// Allows a user to update their email address.
+    /// Allows a user to update their phone number.
     /// </summary>
     /// <param name="request">The object which encapsulates the request.</param>
     /// <param name="cancellationToken">The cancellation token to cancel the operation.</param>

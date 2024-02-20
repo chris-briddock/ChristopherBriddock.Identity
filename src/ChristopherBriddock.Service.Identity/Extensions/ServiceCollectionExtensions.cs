@@ -1,4 +1,5 @@
-﻿using ChristopherBriddock.Service.Common.Constants;
+﻿using System.Threading.RateLimiting;
+using ChristopherBriddock.Service.Common.Constants;
 using ChristopherBriddock.Service.Identity.Constants;
 using ChristopherBriddock.Service.Identity.Data;
 using ChristopherBriddock.Service.Identity.Models;
@@ -9,6 +10,7 @@ using MassTransit;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Options;
 using Microsoft.FeatureManagement;
@@ -285,6 +287,25 @@ public static class ServiceCollectionExtensions
         {
             services.TryAddTransient<IEmailPublisher, NullEmailPublisher>();
         }
+
+        return services;
+    }
+
+    /// <summary>
+    /// Adds fixed window rate limiting. 
+    /// </summary>
+    /// <param name="services">The <see cref="IServiceCollection"/> to which services will be added.</param>
+    /// <returns>The modified <see cref="IServiceCollection"/> instance.</returns>
+    public static IServiceCollection AddAppRateLimiting(this IServiceCollection services) 
+    {
+        services.AddRateLimiter(_ => _
+        .AddFixedWindowLimiter(policyName: "fixed", options =>
+        {
+            options.PermitLimit = 4;
+            options.Window = TimeSpan.FromSeconds(12);
+            options.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
+            options.QueueLimit = 2;
+        }));
 
         return services;
     }
