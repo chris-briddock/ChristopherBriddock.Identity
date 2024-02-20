@@ -17,6 +17,7 @@ stages:
       inputs:
         packageType: 'sdk'
         version: '8.0.x'
+    
     - script: |
         dotnet build --configuration Release src/ChristopherBriddock.Service.Identity/ChristopherBriddock.Service.Identity.csproj
       displayName: 'Build & Restore'
@@ -42,7 +43,14 @@ stages:
       inputs:
         SourceFolder: '$(System.DefaultWorkingDirectory)'
         Contents: 'src/ChristopherBriddock.Service.Identity/bin/Release/net8.0/publish/**'
-        TargetFolder: '$(Build.ArtifactStagingDirectory)'
+        TargetFolder: 
+    - task: CopyFiles@2
+      inputs:
+        SourceFolder: '$(System.DefaultWorkingDirectory)'
+        Contents: |
+          **/workerservice-email-k8s.dev.yaml
+          **/service-identity-k8s.dev.yaml
+        TargetFolder: '$(Build.ArtifactStagingDirectory)'      
     - task: PublishBuildArtifacts@1
       inputs:
         PathtoPublish: '$(Build.ArtifactStagingDirectory)'
