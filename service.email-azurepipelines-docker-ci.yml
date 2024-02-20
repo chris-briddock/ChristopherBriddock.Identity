@@ -29,3 +29,4 @@ jobs:
       command: 'buildAndPush'
       Dockerfile: '$(System.DefaultWorkingDirectory)/src/ChristopherBriddock.WorkerService.Email/Dockerfile'
       buildContext: '$(System.DefaultWorkingDirectory)/src'
+      tags: latest
