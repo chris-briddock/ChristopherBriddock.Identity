@@ -5,43 +5,46 @@ trigger:
 pool:
   name: Default
 
-jobs:
-- job: Build
-  displayName: 'Build'
-  steps:
-  - checkout: self
-  - task: UseDotNet@2
-    inputs:
-      packageType: 'sdk'
-      version: '8.0.x'
-  - script: |
-      dotnet build --configuration Release src/ChristopherBriddock.Service.Identity/ChristopherBriddock.Service.Identity.csproj
-    displayName: 'Build & Restore'
-  - script: |
-      dotnet test --collect:"XPlat Code Coverage" src/ChristopherBriddock.Service.Identity.Tests/ChristopherBriddock.Service.Identity.Tests.csproj
-    displayName: 'Test'
-  - script: |
-      dotnet publish src/ChristopherBriddock.Service.Identity/ChristopherBriddock.Service.Identity.csproj -c Release
-    displayName: 'Publish'
-  - script: dotnet tool update --global dotnet-reportgenerator-globaltool
-    continueOnError: true
-    enabled: true
-    displayName: 'Install Code Coverage Tool'
-  - script: |
-      cd src/ChristopherBriddock.Service.Identity.Tests/TestResults
-      reportgenerator -reports:"*/coverage.cobertura.xml" -targetdir:"../coveragereport" -reporttypes:Html
-    displayName: 'Code Coverage Report'
-  - task: PublishCodeCoverageResults@2
-    inputs:
-      summaryFileLocation: 'src/ChristopherBriddock.Service.Identity.Tests/TestResults/*/coverage.cobertura.xml'
-      pathToSources: 'src/ChristopherBriddock.Service.Identity/'
-  - task: CopyFiles@2
-    inputs:
-      SourceFolder: '$(System.DefaultWorkingDirectory)'
-      Contents: 'src/ChristopherBriddock.Service.Identity/bin/Release/net8.0/publish/**'
-      TargetFolder: '$(Build.ArtifactStagingDirectory)'
-  - task: PublishBuildArtifacts@1
-    inputs:
-      PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-      ArtifactName: 'drop'
-      publishLocation: 'Container'
+stages:
+- stage: 'Build'
+  displayName: 'Build Worker Service'
+  jobs:
+  - job: Build
+    displayName: 'Build'
+    steps:
+    - checkout: self
+    - task: UseDotNet@2
+      inputs:
+        packageType: 'sdk'
+        version: '8.0.x'
+    - script: |
+        dotnet build --configuration Release src/ChristopherBriddock.Service.Identity/ChristopherBriddock.Service.Identity.csproj
+      displayName: 'Build & Restore'
+    - script: |
+        dotnet test --collect:"XPlat Code Coverage" src/ChristopherBriddock.Service.Identity.Tests/ChristopherBriddock.Service.Identity.Tests.csproj
+      displayName: 'Test'
+    - script: |
+        dotnet publish src/ChristopherBriddock.Service.Identity/ChristopherBriddock.Service.Identity.csproj -c Release
+      displayName: 'Publish'
+    - script: dotnet tool update --global dotnet-reportgenerator-globaltool
+      continueOnError: true
+      enabled: true
+      displayName: 'Install Code Coverage Tool'
+    - script: |
+        cd src/ChristopherBriddock.Service.Identity.Tests/TestResults
+        reportgenerator -reports:"*/coverage.cobertura.xml" -targetdir:"../coveragereport" -reporttypes:Html
+      displayName: 'Code Coverage Report'
+    - task: PublishCodeCoverageResults@2
+      inputs:
+        summaryFileLocation: 'src/ChristopherBriddock.Service.Identity.Tests/TestResults/*/coverage.cobertura.xml'
+        pathToSources: 'src/ChristopherBriddock.Service.Identity/'
+    - task: CopyFiles@2
+      inputs:
+        SourceFolder: '$(System.DefaultWorkingDirectory)'
+        Contents: 'src/ChristopherBriddock.Service.Identity/bin/Release/net8.0/publish/**'
+        TargetFolder: '$(Build.ArtifactStagingDirectory)'
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'drop'
+        publishLocation: 'Container'
