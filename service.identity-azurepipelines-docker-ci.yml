@@ -28,3 +28,4 @@ jobs:
       repository: 'immerslve/service.identity'
       command: 'buildAndPush'
       Dockerfile: 'src/ChristopherBriddock.Service.Identity/Dockerfile'
+      buildContext: '$(System.DefaultWorkingDirectory)/src/'
