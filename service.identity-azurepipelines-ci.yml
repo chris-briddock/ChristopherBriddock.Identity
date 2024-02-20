@@ -43,7 +43,7 @@ stages:
       inputs:
         SourceFolder: '$(System.DefaultWorkingDirectory)'
         Contents: 'src/ChristopherBriddock.Service.Identity/bin/Release/net8.0/publish/**'
-        TargetFolder: 
+        TargetFolder: $(Build.ArtifactStagingDirectory)'
     - task: CopyFiles@2
       inputs:
         SourceFolder: '$(System.DefaultWorkingDirectory)'
