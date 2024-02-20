@@ -156,83 +156,83 @@ done
 
 # Replace placeholder values in the appsettings.json file
 if [ ! -z "$dbHost" ]; then
-    sed -i "s/{dbHost}/$dbHost/g" appsettings.json
+    sed -i "s/{dbHost}/$(echo "$dbHost" | sed 's/[\/&]/\\&/g')/g" appsettings.json
 fi
 
 if [ ! -z "$dbPort" ]; then
-    sed -i "s/{dbPort}/$dbPort/g" appsettings.json
+    sed -i "s/{dbPort}/$(echo "$dbPort" | sed 's/[\/&]/\\&/g')/g" appsettings.json
 fi
 
 if [ ! -z "$dbUsername" ]; then
-    sed -i "s/{dbUsername}/$dbUsername/g" appsettings.json
+    sed -i "s/{dbUsername}/$(echo "$dbUsername" | sed 's/[\/&]/\\&/g')/g" appsettings.json
 fi
 
 if [ ! -z "$dbPassword" ]; then
-    sed -i "s/{dbPassword}/$dbPassword/g" appsettings.json
+    sed -i "s/{dbPassword}/$(echo "$dbPassword" | sed 's/[\/&]/\\&/g')/g" appsettings.json
 fi
 
 if [ ! -z "$dbName" ]; then
-    sed -i "s/{dbName}/$dbName/g" appsettings.json
+    sed -i "s/{dbName}/$(echo "$dbName" | sed 's/[\/&]/\\&/g')/g" appsettings.json
 fi
 
 if [ ! -z "$redisConnectionString" ]; then
-    sed -i "s/{redisConnectionString}/$redisConnectionString/g" appsettings.json
+    sed -i "s/{redisConnectionString}/$(echo "$redisConnectionString" | sed 's/[\/&]/\\&/g')/g" appsettings.json
 fi
 
 if [ ! -z "$redisInstanceName" ]; then
-    sed -i "s/{redisInstanceName}/$redisInstanceName/g" appsettings.json
+    sed -i "s/{redisInstanceName}/$(echo "$redisInstanceName" | sed 's/[\/&]/\\&/g')/g" appsettings.json
 fi
 
 if [ ! -z "$jwtIssuer" ]; then
-    sed -i "s/{jwtIssuer}/$jwtIssuer/g" appsettings.json
+    sed -i "s/{jwtIssuer}/$(echo "$jwtIssuer" | sed 's/[\/&]/\\&/g')/g" appsettings.json
 fi
 
 if [ ! -z "$jwtAudience" ]; then
-    sed -i "s/{jwtAudience}/$jwtAudience/g" appsettings.json
+    sed -i "s/{jwtAudience}/$(echo "$jwtAudience" | sed 's/[\/&]/\\&/g')/g" appsettings.json
 fi
 
 if [ ! -z "$jwtSecret" ]; then
-    sed -i "s/{jwtSecret}/$jwtSecret/g" appsettings.json
+    sed -i "s/{jwtSecret}/$(echo "$jwtSecret" | sed 's/[\/&]/\\&/g')/g" appsettings.json
 fi
 
 if [ ! -z "$jwtExpires" ]; then
-    sed -i "s/{jwtExpires}/$jwtExpires/g" appsettings.json
+    sed -i "s/{jwtExpires}/$(echo "$jwtExpires" | sed 's/[\/&]/\\&/g')/g" appsettings.json
 fi
 
 if [ ! -z "$appInsightInstrumentationKey" ]; then
-    sed -i "s/{appInsightInstrumentationKey}/$appInsightInstrumentationKey/g" appsettings.json
+    sed -i "s/{appInsightInstrumentationKey}/$(echo "$appInsightInstrumentationKey" | sed 's/[\/&]/\\&/g')/g" appsettings.json
 fi
 
 if [ ! -z "$seqEndpointAddress" ]; then
-    sed -i "s/{seqEndpointAddress}/$seqEndpointAddress/g" appsettings.json
+    sed -i "s/{seqEndpointAddress}/$(echo "$seqEndpointAddress" | sed 's/[\/&]/\\&/g')/g" appsettings.json
 fi
 
 if [ ! -z "$seqPort" ]; then
-    sed -i "s/{seqPort}/$seqPort/g" appsettings.json
+    sed -i "s/{seqPort}/$(echo "$seqPort" | sed 's/[\/&]/\\&/g')/g" appsettings.json
 fi
 
 if [ ! -z "$hostname" ]; then
-    sed -i "s/{hostname}/$hostname/g" appsettings.json
+    sed -i "s/{hostname}/$(echo "$hostname" | sed 's/[\/&]/\\&/g')/g" appsettings.json
 fi
 
 if [ ! -z "$rabbitUsername" ]; then
-    sed -i "s/{rabbitUsername}/$rabbitUsername/g" appsettings.json
+    sed -i "s/{rabbitUsername}/$(echo "$rabbitUsername" | sed 's/[\/&]/\\&/g')/g" appsettings.json
 fi
 
 if [ ! -z "$rabbitPassword" ]; then
-    sed -i "s/{rabbitPassword}/$rabbitPassword/g" appsettings.json
+    sed -i "s/{rabbitPassword}/$(echo "$rabbitPassword" | sed 's/[\/&]/\\&/g')/g" appsettings.json
 fi
 
 if [ ! -z "$connectionString" ]; then
-    sed -i "s/{connectionString}/$connectionString/g" appsettings.json
+    sed -i "s/{connectionString}/$(echo "$connectionString" | sed 's/[\/&]/\\&/g')/g" appsettings.json
 fi
 
 if [ ! -z "$seqApiKey" ]; then
-    sed -i "s/{seqApiKey}/$seqApiKey/g" appsettings.json
+    sed -i "s/{seqApiKey}/$(echo "$seqApiKey" | sed 's/[\/&]/\\&/g')/g" appsettings.json
 fi
 
 if [ ! -z "$feature" ]; then
-    sed -i "s/\"$feature\":.*,$/\"$feature\": $featureValue,/g" appsettings.json
+    sed -i "s/\"$feature\": .*,$/\"$feature\": $featureValue,/g" appsettings.json
 fi
 
 echo "Placeholder values replaced in appsettings.json file."
