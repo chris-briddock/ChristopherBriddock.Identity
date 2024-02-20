@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: workerservice-email-deployment
 spec:
-  replicas: 1 
+  replicas: 1
   selector:
     matchLabels:
       app: workerservice-email
@@ -12,12 +12,16 @@ spec:
       labels:
         app: workerservice-email
     spec:
+      automountServiceAccountToken: false  # Disable automounting service account token
       containers:
       - name: workservice-email
         image: immerslve/workerservice.email
         ports:
-        - containerPort: 8080 
-
+        - containerPort: 8080
+        resources:
+          limits:
+            cpu: "1"  # CPU limit for the container
+            memory: "512Mi"  # Memory limit for the container (adjust as needed)
 ---
 apiVersion: v1
 kind: Service
@@ -29,5 +33,5 @@ spec:
     app: workerservice-email
   ports:
   - protocol: TCP
-    port: 8080  # Port on the Service (optional)
-    targetPort: 8080  # Port on the container
+    port: 8080
+    targetPort: 8080
