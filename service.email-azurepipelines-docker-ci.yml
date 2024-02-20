@@ -27,5 +27,5 @@ jobs:
       containerRegistry: 'docker'
       repository: 'immerslve/workerservice.email'
       command: 'buildAndPush'
-      Dockerfile: '$(System.DefaultWorkingDirectory)/src/ChristopherBriddock.WorkerService.Identity/Dockerfile'
+      Dockerfile: '$(System.DefaultWorkingDirectory)/src/ChristopherBriddock.WorkerService.Email/Dockerfile'
       buildContext: '$(System.DefaultWorkingDirectory)/src'
