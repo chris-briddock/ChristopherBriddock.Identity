@@ -27,7 +27,8 @@ stages:
                 pipeline: '7'
                 buildVersionToDownload: 'latest'
                 downloadType: 'specific'
-                itemPattern: '**/service.identity-k8s.*.yaml'
+                itemPattern: |
+                  **/service.identity-k8s.*.yaml
                 downloadPath: '$(System.ArtifactsDirectory)'
 
             - task: Bash@3
