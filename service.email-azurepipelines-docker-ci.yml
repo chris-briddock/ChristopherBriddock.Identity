@@ -8,7 +8,15 @@ resources:
   pipelines:
   - pipeline: workerservice-email-ci
     source: ChristopherBriddock.WorkerService.Email-CI 
-    trigger: true
+    trigger: 
+      branches:
+        include:
+          - main
+        exclude:
+          - '*'
+      tags:
+        include:
+          - '*'
 
 jobs:
 - job: Build

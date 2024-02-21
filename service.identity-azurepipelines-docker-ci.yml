@@ -8,7 +8,15 @@ resources:
   pipelines:
   - pipeline: service-identity-ci
     source: ChristopherBriddock.Service.Identity-CI 
-    trigger: true
+    trigger: 
+      branches:
+        include:
+          - main
+        exclude:
+          - '*'
+      tags:
+        include:
+          - '*'
 
 variables:
 - group: Service.Identity
