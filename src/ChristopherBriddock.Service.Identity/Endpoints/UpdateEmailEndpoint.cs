@@ -42,9 +42,8 @@ public class UpdateEmailEndpoint(IServiceProvider serviceProvider,
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    public override async Task<ActionResult> HandleAsync([FromQuery] UpdateEmailRequest request, CancellationToken cancellationToken = default)
+    public override async Task<ActionResult> HandleAsync([FromBody] UpdateEmailRequest request, CancellationToken cancellationToken = default)
     {
         try
         {
@@ -53,12 +52,7 @@ public class UpdateEmailEndpoint(IServiceProvider serviceProvider,
 
             var user = await userManager.FindByEmailAsync(emailAddress);
 
-            if (user is null)
-            {
-                return NotFound();
-            }
-
-            user.EmailConfirmed = false;
+            user!.EmailConfirmed = false;
             await userManager.UpdateAsync(user);
             await userManager.SetUserNameAsync(user, request.EmailAddress);
             var token = await userManager.GenerateChangeEmailTokenAsync(user, request.EmailAddress);

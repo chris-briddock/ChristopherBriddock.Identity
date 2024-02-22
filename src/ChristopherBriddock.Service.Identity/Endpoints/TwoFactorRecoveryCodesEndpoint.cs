@@ -36,7 +36,6 @@ public class TwoFactorRecoveryCodesEndpoint(IServiceProvider serviceProvider,
     [HttpGet("/2fa/codes")]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public override async Task<ActionResult> HandleAsync(CancellationToken cancellationToken = default)
     {
@@ -45,11 +44,7 @@ public class TwoFactorRecoveryCodesEndpoint(IServiceProvider serviceProvider,
             var userManager = ServiceProvider.GetService<UserManager<ApplicationUser>>()!;
             var email = User.FindFirst(ClaimTypes.Email)!.Value;
             var user = await userManager.FindByEmailAsync(email);
-            if (user is null)
-            {
-                return NotFound();
-            }
-            var codes = await userManager.GenerateNewTwoFactorRecoveryCodesAsync(user, 10);
+            var codes = await userManager.GenerateNewTwoFactorRecoveryCodesAsync(user!, 10);
             return Ok(codes);
         }
         catch (Exception ex)

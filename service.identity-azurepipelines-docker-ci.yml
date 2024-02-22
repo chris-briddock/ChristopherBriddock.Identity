@@ -4,12 +4,6 @@ trigger:
 pool: 
   name: Docker
 
-resources:
-  pipelines:
-  - pipeline: service-identity-ci
-    source: ChristopherBriddock.Service.Identity-CI 
-    trigger: true
-
 variables:
 - group: Service.Identity
 

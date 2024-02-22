@@ -41,9 +41,8 @@ public class UpdatePhoneNumberEndpoint(IServiceProvider serviceProvider,
     [HttpPost("/account/phonenumber")]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    public override async Task<ActionResult> HandleAsync(UpdatePhoneNumberRequest request,
+    public override async Task<ActionResult> HandleAsync([FromBody] UpdatePhoneNumberRequest request,
                                                          CancellationToken cancellationToken = default)
     {
         try
@@ -53,12 +52,7 @@ public class UpdatePhoneNumberEndpoint(IServiceProvider serviceProvider,
 
             var user = await userManager.FindByEmailAsync(emailAddress);
 
-            if (user is null)
-            {
-                return NotFound();
-            }
-
-            var token = await userManager.GenerateChangePhoneNumberTokenAsync(user, user.PhoneNumber!);
+            var token = await userManager.GenerateChangePhoneNumberTokenAsync(user!, user!.PhoneNumber!);
 
             var result = await userManager.ChangePhoneNumberAsync(user, request.PhoneNumber, token);
 

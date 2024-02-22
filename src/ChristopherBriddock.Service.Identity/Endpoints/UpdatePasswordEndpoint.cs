@@ -40,7 +40,10 @@ public class UpdatePasswordEndpoint(IServiceProvider serviceProvider,
     /// <returns>A new <see cref="ActionResult"/></returns>
     [HttpPost("/account/password")]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-    public override async Task<ActionResult> HandleAsync(UpdatePasswordRequest request,
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    public override async Task<ActionResult> HandleAsync([FromBody] UpdatePasswordRequest request,
                                                          CancellationToken cancellationToken = default)
     {
         try
@@ -50,11 +53,7 @@ public class UpdatePasswordEndpoint(IServiceProvider serviceProvider,
 
             var user = await userManager.FindByEmailAsync(emailAddress);
 
-            if (user is null)
-            {
-                return NotFound();
-            }
-            var result = await userManager.ChangePasswordAsync(user,
+            var result = await userManager.ChangePasswordAsync(user!,
                                                                request.CurrentPassword,
                                                                request.NewPassword);
 

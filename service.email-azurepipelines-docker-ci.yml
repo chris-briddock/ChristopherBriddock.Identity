@@ -4,12 +4,6 @@ trigger:
 pool: 
   name: Docker
 
-resources:
-  pipelines:
-  - pipeline: workerservice-email-ci
-    source: ChristopherBriddock.WorkerService.Email-CI 
-    trigger: true
-
 jobs:
 - job: Build
   displayName: 'Build'
