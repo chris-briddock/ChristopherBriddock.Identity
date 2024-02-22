@@ -1,4 +1,5 @@
 ﻿using ChristopherBriddock.Service.Identity.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace ChristopherBriddock.Service.Identity.Services;
 
@@ -36,14 +37,19 @@ public class AccountPurgeBackgroundService(IServiceScopeFactory serviceScopeFact
 
             var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
 
-            var usersToBeDeleted = dbContext.Users.Where(s => s.IsDeleted)
-                                .Where(s => s.DeletedDateTime < DateTime.Today.AddYears(-7));
+            var usersToBeDeleted = await dbContext.Users.Where(s => s.IsDeleted)
+                                .Where(s => s.DeletedDateTime < DateTime.Today.AddYears(-7)).ToListAsync(stoppingToken);
 
-            if (usersToBeDeleted.Count() > 0) 
+            if (usersToBeDeleted.Count > 0)
             {
                 dbContext.RemoveRange(usersToBeDeleted);
+                await Task.Delay(TimeSpan.FromSeconds(120), stoppingToken);
                 await dbContext.SaveChangesAsync(stoppingToken);
             }
+        }
+        catch (DbUpdateConcurrencyException ex) 
+        {
+            Logger.LogWarning("Warning in background service - {methodName}, exception details: {exceptionDetails}", nameof(AccountPurgeBackgroundService), ex);
         }
         catch (Exception ex)
         {

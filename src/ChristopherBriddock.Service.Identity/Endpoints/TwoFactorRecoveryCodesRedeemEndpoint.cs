@@ -38,9 +38,8 @@ public class TwoFactorRecoveryCodesRedeemEndpoint(IServiceProvider serviceProvid
     [AllowAnonymous]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    public override async Task<ActionResult> HandleAsync([FromQuery] TwoFactorRecoveryCodesRedeemRequest request,
+    public override async Task<ActionResult> HandleAsync([FromBody] TwoFactorRecoveryCodesRedeemRequest request,
                                                          CancellationToken cancellationToken = default)
     {
         try
@@ -49,12 +48,7 @@ public class TwoFactorRecoveryCodesRedeemEndpoint(IServiceProvider serviceProvid
 
             var user = await userManager.FindByEmailAsync(request.EmailAddress);
 
-            if (user is null)
-            {
-                return NotFound();
-            }
-
-            var result = await userManager.RedeemTwoFactorRecoveryCodeAsync(user, request.Code);
+            var result = await userManager.RedeemTwoFactorRecoveryCodeAsync(user!, request.Code);
 
             if (!result.Succeeded)
             {
