@@ -28,16 +28,18 @@ The Identity Service plays a crucial role in your application's security infrast
 
 |  Features   |
 | ----------- |
-|  Register |
-|  Authorise   |
-| Delete Current User |
-|  Update Current User Password |
-| Reset Current User Password |
-| Update Current User Email Address |
-|  Account Lockout on 3 retries, for 10 minutes. |
-| Two Step Verification |
+|  Authorize   |
+|  Confirm Email |
+| Delete Account |
+|  Logout |
 | Refresh Bearer Token |
+| Register |
+|  Update Password |
+| Reset Password |
+| Update Email Address |
+| Two Step Verification |
 | Two Factor Recovery Codes |
+|  Account Lockout on 3 retries, for 10 minutes. |
 
 ### Technical Functionality
 
@@ -48,7 +50,7 @@ The Identity Service plays a crucial role in your application's security infrast
 | Secure JWT Bearer Authentication |
 | Azure Application Insights Monitoring |
 | Logging using Serilog (To Console Or To External Logging Server) e.g Seq or ElasticSearch |
-| Resilliant SQL Server connections using Entity Framework Core |
+| Resilliant Postgres connections using Entity Framework Core |
 | Encrypted User Passwords |
 | Uses HTTP/3 and fallsback to HTTP/2 or HTTP/1.1 |
 
@@ -83,6 +85,45 @@ To get started with the Identity Service, follow these steps:
 5. Optionally you can also use Seq, Azure Application Insights and Redis.
 6. Please configure all placeholder values in appsettings.json in both services.
 7. Build and run the Web API.
+
+### Infrastructure as Code
+
+The project includes infrastructure as code (IaC) configurations for provisioning a Kubernetes cluster in three major cloud platforms - Azure, AWS, and Google Cloud.
+
+Below are the detailed instructions on how to provision infrastructure on each cloud provider.
+
+#### Azure
+
+The Azure cloud configuration can be found in the 'azure' directory. This uses Pulumi to define and provision Azure resources. To deploy a Kubernetes cluster in Azure:
+  
+1. Navigate to the 'azure' directory.
+2. Install the necessary dependencies, you need to have Pulumi CLI and Node.js installed.
+3. Run `pulumi stack init` to create a new Pulumi stacking environment.
+4. Run `pulumi config set azure:location <AzureRegion>` to set your desired Azure region.
+5. Run `pulumi up` to provision the resources.
+
+#### AWS
+
+Amazon Web Services (AWS) configuration is located in the 'aws' directory. Follow the steps below:
+
+1. Navigate to the 'aws' directory.
+2. Make sure all the dependencies are installed and AWS credentials are properly set in your environment.
+3. Run `pulumi stack init` to create a new Pulumi stacking environment.
+4. Run `pulumi up` to start the provisioning of resources.
+
+#### Google Cloud
+
+The Google Cloud configuration can be found in the 'googlecloud' directory. Follow the steps below:
+
+1. Navigate to the 'googlecloud' directory.
+2. Run `npm i` to install dependencies.
+3. Run `pulumi stack init` to create a new Pulumi stacking environment.
+4. Run `pulumi config set gcp:project <GoogleCloudProjectId>` and `pulumi config set gcp:region <GoogleCloudRegion>` to set your Google Cloud project id and desired Google Cloud region.
+5. Install the Google Cloud CLI.
+6. Log in to Google Cloud.
+7. Run `pulumi up` to start the provisioning of resources.
+
+After executing these steps on your desired cloud platform, a Kubernetes cluster will be provisioned and ready-to-use.
 
 ### License
 
