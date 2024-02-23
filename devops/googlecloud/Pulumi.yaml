@@ -1,0 +1,7 @@
+name: googlecloud
+runtime: nodejs
+description: kubernetes on google cloud
+config:
+  pulumi:tags:
+    value:
+      pulumi:template: https://www.pulumi.com/ai/api/project/e48702e6-b188-48fe-baa2-cee5ec37c3fc.zip

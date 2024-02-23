@@ -1,0 +1,34 @@
+trigger:
+  branches:
+    include:
+      - main
+
+pool:
+  name: Default
+
+steps:
+- script: curl -fsSL https://get.pulumi.com | sh
+  displayName: 'Install Pulumi'
+
+- task: NodeTool@0
+  inputs:
+    versionSpec: '14.x'
+  displayName: 'Install Node.js'
+
+- script: npm install @pulumi/gcp
+  displayName: 'Install Pulumi GCP Provider'
+
+- script: pulumi stack select dev
+  displayName: 'Select Pulumi Stack'
+
+- script: pulumi config googlecloud:project $(ProjectName)
+  displayName: 'Set Google Cloud Project'
+
+- script: pulumi config googlecloud:region $(Region)
+  displayName: 'Set Google Cloud Region'
+
+- script: export GOOGLE_APPLICATION_CREDENTIALS=$(System.DefaultWorkingDirectory)/keyfile.json
+  displayName: 'Read Google Cloud Service Account Credentials'
+
+- script: pulumi up --yes
+  displayName: 'Deploy Infrastructure'

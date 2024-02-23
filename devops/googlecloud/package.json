@@ -1,0 +1,14 @@
+{
+  "name": "googlecloud",
+  "description": "kubernetes on google cloud",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "dependencies": {
+    "@pulumi/pulumi": "^3.0.0",
+    "@pulumi/gcp": "7.8.0",
+    "@pulumi/kubernetes": "4.4.0"
+  }
+}
