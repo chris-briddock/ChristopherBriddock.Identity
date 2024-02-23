@@ -1,12 +1,6 @@
 trigger:
 - none
 
-resources:
-  pipelines:
-  - pipeline: service-identity-docker-ci
-    source: ChristopherBriddock.Service.Identity-Docker-CI
-    trigger: true
-
 stages:
 - stage: dev
   jobs:
@@ -28,12 +22,12 @@ stages:
                 buildVersionToDownload: 'latest'
                 downloadType: 'specific'
                 itemPattern: |
-                  **/service.identity-k8s.*.yaml
+                  **/service.identity-k8s.yaml
                 downloadPath: '$(System.ArtifactsDirectory)'
 
             - task: Bash@3
               inputs:
                 targetType: 'inline'
-                script: 'kubectl apply -f $(System.ArtifactsDirectory)/service.identity-k8s.dev.yaml'    
+                script: 'kubectl apply -f $(System.ArtifactsDirectory)/service.identity-k8s.yaml'    
 
 
