@@ -22,7 +22,7 @@ stages:
     - task: Bash@3
       inputs:
         filePath: '$(System.DefaultWorkingDirectory)/tokenizer.sh'
-        arguments: '--db-host $(dbHost) --db-port $(dbPort) --db-username $(dbUsername) --db-password $(dbPassword) --db-name $(dbName) --jwt-issuer $(jwtIssuer) --jwt-audience $(jwtAudience) --jwt-secret $(jwtSecret) --jwt-expires $(jwtExpires) --rabbit-host $(rabbitHostname) --rabbit-username $(rabbitUsername) --rabbit-password $(rabbitPassword) --enable-feature "RabbitMq"'
+        arguments: '--db-host $(dbHost) --db-port $(dbPort) --db-username $(dbUsername) --db-password "$(dbPassword)" --db-name $(dbName) --jwt-issuer $(jwtIssuer) --jwt-audience $(jwtAudience) --jwt-secret $(jwtSecret) --jwt-expires $(jwtExpires) --rabbit-host $(rabbitHostname) --rabbit-username $(rabbitUsername) --rabbit-password $(rabbitPassword) --enable-feature "RabbitMq"'
         workingDirectory: 'src/ChristopherBriddock.Service.Identity/'
     - script: |
         dotnet build --configuration Release src/ChristopherBriddock.Service.Identity/ChristopherBriddock.Service.Identity.csproj

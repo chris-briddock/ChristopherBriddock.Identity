@@ -1,5 +1,5 @@
 Param(
-    $generateReports = $false,
+    $generateReports = $true,
     $runTests = $true
 )
 

@@ -22,16 +22,3 @@ spec:
           limits:
             cpu: "1"  # CPU limit for the container
             memory: "512Mi"  # Memory limit for the container (adjust as needed)
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: workerservice-email-svc
-spec:
-  type: NodePort
-  selector:
-    app: workerservice-email
-  ports:
-  - protocol: TCP
-    port: 8080
-    targetPort: 8080
