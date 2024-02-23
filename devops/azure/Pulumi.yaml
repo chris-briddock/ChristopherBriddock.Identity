@@ -1,0 +1,7 @@
+name: azure
+runtime: nodejs
+description: aks
+config:
+  pulumi:tags:
+    value:
+      pulumi:template: https://www.pulumi.com/ai/api/project/259950bb-f47d-4866-9b56-de4601c3dbc6.zip

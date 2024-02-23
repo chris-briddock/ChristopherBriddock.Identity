@@ -1,0 +1,13 @@
+{
+  "name": "azure",
+  "description": "aks",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "dependencies": {
+    "@pulumi/pulumi": "^3.0.0",
+    "@pulumi/azure-native": "2.11.0"
+  }
+}
