@@ -1,0 +1,15 @@
+{
+  "name": "aws",
+  "description": "EKS",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "dependencies": {
+    "@pulumi/aws": "6.13.3",
+    "@pulumi/awsx": "^2.5.0",
+    "@pulumi/eks": "^2.2.1",
+    "@pulumi/pulumi": "^3.0.0"
+  }
+}

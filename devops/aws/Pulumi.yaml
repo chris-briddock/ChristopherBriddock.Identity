@@ -1,0 +1,7 @@
+name: aws
+runtime: nodejs
+description: EKS
+config:
+  pulumi:tags:
+    value:
+      pulumi:template: https://www.pulumi.com/ai/api/project/bcae35e8-86cd-45f5-b376-1160ef4607ac.zip
