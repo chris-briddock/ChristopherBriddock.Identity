@@ -24,6 +24,8 @@ usage() {
     echo "  --rabbit-password PASSWORD     RabbitMQ password"
     echo "  --service-bus-conn STRING      Azure Service Bus connection string"
     echo "  --seq-api-key KEY              Seq API key"
+    echo "  --email-address ADDRESS        Email address"
+    echo "  --email-password PASSWORD      Email password"
     echo "  --enable-feature FEATURE       Enable feature flag (true/false)"
     echo "  --disable-feature FEATURE      Disable feature flag (true/false)"
     exit 1
@@ -135,6 +137,16 @@ while [[ $# -gt 0 ]]; do
             shift
             shift
             ;;
+        --email-address)
+            emailAddress="$2"
+            shift
+            shift
+            ;;
+        --email-password)
+            emailPassword="$2"
+            shift
+            shift
+            ;;
         --enable-feature)
             feature="$2"
             featureValue="true"
@@ -233,6 +245,14 @@ fi
 
 if [ ! -z "$feature" ]; then
     sed -i "s/\"$feature\": .*,$/\"$feature\": $featureValue,/g" appsettings.json
+fi
+
+if [ ! -z "$emailAddress" ]; then
+    sed -i "s/{emailAddress}/$(echo "$emailAddress" | sed 's/[\/&]/\\&/g')/g" appsettings.json
+fi
+
+if [ ! -z "$emailPassword" ]; then
+    sed -i "s/{emailPassword}/$(echo "$emailPassword" | sed 's/[\/&]/\\&/g')/g" appsettings.json
 fi
 
 echo "Placeholder values replaced in appsettings.json file."
