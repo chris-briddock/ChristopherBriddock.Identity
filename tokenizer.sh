@@ -224,7 +224,7 @@ if [ ! -z "$seqPort" ]; then
 fi
 
 if [ ! -z "$hostname" ]; then
-    sed -i "s/{hostname}/$(echo "$hostname" | sed 's/[\/&]/\\&/g')/g" appsettings.json
+    sed -i "s/{rabbitHostname}/$(echo "$hostname" | sed 's/[\/&]/\\&/g')/g" appsettings.json
 fi
 
 if [ ! -z "$rabbitUsername" ]; then
