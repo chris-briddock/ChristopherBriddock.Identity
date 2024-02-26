@@ -18,7 +18,7 @@ stages:
     - task: Bash@3
       inputs:
         filePath: '$(System.DefaultWorkingDirectory)/tokenizer.sh'
-        arguments: '--rabbit-host $(rabbitHostname) --rabbit-username $(rabbitUsername) --rabbit-password $(rabbitPassword) --enable-feature "RabbitMq" --seq-endpoint $(seqEndpointAddress) --seq-port $(seqPort) --email-address $(emailAddress) --email-password $(emailPassword)'
+        arguments: '--rabbit-host $(rabbitHostname) --rabbit-username $(rabbitUsername) --rabbit-password $(rabbitPassword) --enable-feature "RabbitMq" --seq-endpoint $(seqEndpointAddress) --seq-port $(seqPort) --email-address $(emailAddress) --email-password "$(emailPassword)"'
         workingDirectory: 'src/ChristopherBriddock.WorkerService.Email/'
     - task: UseDotNet@2
       inputs:
