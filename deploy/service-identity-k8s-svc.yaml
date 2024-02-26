@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: service-identity-svc
 spec:
-  type: NodePort
+  type: LoadBalancer
   selector:
     app: service-identity
   ports:

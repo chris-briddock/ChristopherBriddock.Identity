@@ -1,5 +1,10 @@
 trigger:
-- none
+  branches:
+    exclude:
+      - '*'
+  paths:
+    exclude:
+      - '*'
 
 pool: 
   name: Docker

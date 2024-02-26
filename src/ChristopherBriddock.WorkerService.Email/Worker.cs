@@ -7,8 +7,11 @@ using System.Net.Mail;
 namespace ChristopherBriddock.WorkerService.Email;
 
 /// <summary>
-/// Initializes a new instance of <see cref="Worker"/>
+/// Consume the message from the message queue, and sends an email.
 /// </summary>
+/// <remarks>
+/// Initializes a new instance of <see cref="Worker"/> 
+/// </remarks>
 /// <param name="logger">The application logger.</param>
 /// <param name="configuration">The configuration of the application. </param> 
 public class Worker(ILogger<Worker> logger,
@@ -63,13 +66,12 @@ public class Worker(ILogger<Worker> logger,
 </head>
 <body class=""font-sans bg-gray-100"">
     <div class=""max-w-screen-md mx-auto p-8 bg-white shadow-md rounded-md"">
-        <img src=""your-company-logo.png"" alt=""Your Company Logo"" class=""mx-auto mb-4"">
         <h2 class=""text-2xl font-semibold mb-4 text-gray-800"">Confirm your email</h2>
         <p class=""text-gray-700"">Dear <span class=""font-bold text-indigo-800"">{context.Message.EmailAddress}</span>,</p>
         <p class=""text-gray-700"">Your confirmation email link is <a href=""{context.Message.Link}"" class=""text-indigo-600"">here</a></p>
         <p class=""text-gray-700"">If you did not request this or have any concerns, please contact our support team.</p>
-        <p class=""mt-4 text-gray-700"">Thank you,<br>Your Company Name</p>
-        <p class=""mt-2 text-gray-600"">� 2024 Your Company. All rights reserved.</p>
+        <p class=""mt-4 text-gray-700"">Thank you</p>
+        <p class=""mt-2 text-gray-600"">� 2024 All rights reserved.</p>
     </div>
 </body>
 </html>";
@@ -87,13 +89,12 @@ public class Worker(ILogger<Worker> logger,
 </head>
 <body class=""font-sans bg-gray-100"">
     <div class=""max-w-screen-md mx-auto p-8 bg-white shadow-md rounded-md"">
-        <img src=""your-company-logo.png"" alt=""Your Company Logo"" class=""mx-auto mb-4"">
         <h2 class=""text-2xl font-semibold mb-4 text-gray-800"">Two-Factor Verification Code</h2>
         <p class=""text-gray-700"">Dear <span class=""font-bold text-indigo-800"">{context.Message.EmailAddress}</span>,</p>
         <p class=""text-gray-700"">Your two factor code is {context.Message.Link}</p>
         <p class=""text-gray-700"">If you did not request this or have any concerns, please contact our support team.</p>
         <p class=""mt-4 text-gray-700"">Thank you,<br>Your Company Name</p>
-        <p class=""mt-2 text-gray-600"">� 2024 Your Company. All rights reserved.</p>
+        <p class=""mt-2 text-gray-600"">� 2024 All rights reserved.</p>
     </div>
 </body>
 </html>";
@@ -111,13 +112,12 @@ public class Worker(ILogger<Worker> logger,
 </head>
 <body class=""font-sans bg-gray-100"">
     <div class=""max-w-screen-md mx-auto p-8 bg-white shadow-md rounded-md"">
-        <img src=""your-company-logo.png"" alt=""Your Company Logo"" class=""mx-auto mb-4"">
         <h2 class=""text-2xl font-semibold mb-4 text-gray-800"">Forgotten your password.</h2>
         <p class=""text-gray-700"">Dear <span class=""font-bold text-indigo-800"">{context.Message.EmailAddress}</span>,</p>
         <p class=""text-gray-700"">Your password reset code is <span class=""font-bold text-indigo-800"">{context.Message.Link}</span> </p>
         <p class=""text-gray-700"">If you did not request this or have any concerns, please contact our support team.</p>
         <p class=""mt-4 text-gray-700"">Thank you,<br>Your Company Name</p>
-        <p class=""mt-2 text-gray-600"">� 2024 Your Company. All rights reserved.</p>
+        <p class=""mt-2 text-gray-600"">� 2024 All rights reserved.</p>
     </div>
 </body>
 </html>";

@@ -4,6 +4,9 @@ trigger:
 pool:
   name: Default
 
+variables:
+- group: Service.Identity
+
 stages:
 - stage: 'Build'
   displayName: 'Build Worker Service'
@@ -12,6 +15,11 @@ stages:
     displayName: 'Build'
     steps:
     - checkout: self
+    - task: Bash@3
+      inputs:
+        filePath: '$(System.DefaultWorkingDirectory)/tokenizer.sh'
+        arguments: '--rabbit-host $(rabbitHostname) --rabbit-username $(rabbitUsername) --rabbit-password $(rabbitPassword) --enable-feature "RabbitMq" --seq-endpoint $(seqEndpointAddress) --seq-port $(seqPort) --email-address $(emailAddress) --email-password $(emailPassword)'
+        workingDirectory: 'src/ChristopherBriddock.Service.Identity/'
     - task: UseDotNet@2
       inputs:
         packageType: 'sdk'

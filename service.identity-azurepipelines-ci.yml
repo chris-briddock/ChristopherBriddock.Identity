@@ -34,8 +34,6 @@ stages:
         dotnet publish src/ChristopherBriddock.Service.Identity/ChristopherBriddock.Service.Identity.csproj -c Release
       displayName: 'Publish'
     - script: dotnet tool update --global dotnet-reportgenerator-globaltool
-      continueOnError: true
-      enabled: true
       displayName: 'Install Code Coverage Tool'
     - script: |
         cd src/ChristopherBriddock.Service.Identity.Tests/TestResults

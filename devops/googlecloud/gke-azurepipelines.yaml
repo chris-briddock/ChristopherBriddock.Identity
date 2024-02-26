@@ -27,8 +27,11 @@ steps:
 - script: pulumi config googlecloud:region $(Region)
   displayName: 'Set Google Cloud Region'
 
+- script: pulumi config googlecloud:clusterName $(ClusterName)
+  displayName: 'Set Google Cloud Region'
+
 - script: export GOOGLE_APPLICATION_CREDENTIALS=$(System.DefaultWorkingDirectory)/keyfile.json
-  displayName: 'Read Google Cloud Service Account Credentials'
+  displayName: 'Set Google Cloud Service Account Credentials'
 
 - script: pulumi up --yes
   displayName: 'Deploy Infrastructure'

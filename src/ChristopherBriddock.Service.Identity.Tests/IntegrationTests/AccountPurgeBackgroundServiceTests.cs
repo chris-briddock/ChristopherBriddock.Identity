@@ -1,6 +1,7 @@
 using ChristopherBriddock.Service.Identity.Data;
 using ChristopherBriddock.Service.Identity.Services;
 using Microsoft.Extensions.Logging;
+using NUnit.Framework;
 
 namespace ChristopherBriddock.Service.Identity.Tests.IntegrationTests;
 
@@ -18,31 +19,31 @@ public class AccountPurgeBackgroundServiceExposeProtected : AccountPurgeBackgrou
     }
 }
 
-public class AccountPurgeBackgroundServiceTests : IClassFixture<WebApplicationFactory<Program>>
+public class AccountPurgeBackgroundServiceTests
 {
-    private readonly WebApplicationFactory<Program> _webApplicationFactory;
     private readonly Mock<ILogger<AccountPurgeBackgroundService>> _mockLogger;
 
-    public AccountPurgeBackgroundServiceTests(WebApplicationFactory<Program> webApplicationFactory)
+    public AccountPurgeBackgroundServiceTests()
     {
-        _webApplicationFactory = webApplicationFactory.WithWebHostBuilder(s =>
-        {
-            s.UseEnvironment("Test");
-        });
         _mockLogger = new Mock<ILogger<AccountPurgeBackgroundService>>();
     }
 
-    [Fact]
+    [Test]
     public async Task ExecuteAsync_DeletesOldUserAccountsAfterSevenYears()
     {
         // Arrange
-        var client = _webApplicationFactory.CreateClient();
+        var webApplicationFactory = new WebApplicationFactory<Program>().WithWebHostBuilder(builder =>
+        {
+            builder.UseEnvironment("Test");
+        });
 
-        var scopeFactory = _webApplicationFactory.Services.GetService<IServiceScopeFactory>()!;
+        var client = webApplicationFactory.CreateClient();
+
+        var scopeFactory = webApplicationFactory.Services.GetService<IServiceScopeFactory>()!;
 
         using var scope = scopeFactory.CreateScope();
         var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-        
+
         dbContext.Users.Add(new ApplicationUser
         {
             Id = Guid.NewGuid(),
@@ -68,6 +69,6 @@ public class AccountPurgeBackgroundServiceTests : IClassFixture<WebApplicationFa
         await service.ExecuteTaskAsync(CancellationToken.None);
 
         // Assert
-        Assert.DoesNotContain(dbContext.Users, u => u.IsDeleted && u.DeletedDateTime < DateTime.Today.AddYears(-7));
+        Xunit.Assert.DoesNotContain(dbContext.Users, u => u.IsDeleted && u.DeletedDateTime < DateTime.Today.AddYears(-7));
     }
 }
