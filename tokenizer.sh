@@ -256,3 +256,5 @@ if [ ! -z "$emailPassword" ]; then
 fi
 
 echo "Placeholder values replaced in appsettings.json file."
+
+cat appsettings.json

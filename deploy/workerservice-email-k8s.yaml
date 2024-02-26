@@ -16,8 +16,6 @@ spec:
       containers:
       - name: workservice-email
         image: immerslve/workerservice.email
-        ports:
-        - containerPort: 8080
         resources:
           limits:
             cpu: "1"  # CPU limit for the container

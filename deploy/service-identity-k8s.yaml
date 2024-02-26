@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: service-identity-deployment
+  name: service-identity
 spec:
   replicas: 1
   selector:
@@ -17,7 +17,7 @@ spec:
       - name: service-identity
         image: immerslve/service.identity
         ports:
-        - containerPort: 8080
+        - containerPort: 8081
         resources:
           limits:
             cpu: "1"  # CPU limit for the container
