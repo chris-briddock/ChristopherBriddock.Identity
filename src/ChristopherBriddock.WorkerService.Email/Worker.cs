@@ -91,7 +91,7 @@ public class Worker(ILogger<Worker> logger,
     <div class=""max-w-screen-md mx-auto p-8 bg-white shadow-md rounded-md"">
         <h2 class=""text-2xl font-semibold mb-4 text-gray-800"">Two-Factor Verification Code</h2>
         <p class=""text-gray-700"">Dear <span class=""font-bold text-indigo-800"">{context.Message.EmailAddress}</span>,</p>
-        <p class=""text-gray-700"">Your two factor code is {context.Message.Link}</p>
+        <p class=""text-gray-700"">Your two factor code is {context.Message.Code}</p>
         <p class=""text-gray-700"">If you did not request this or have any concerns, please contact our support team.</p>
         <p class=""mt-4 text-gray-700"">Thank you,<br>Your Company Name</p>
         <p class=""mt-2 text-gray-600"">� 2024 All rights reserved.</p>
@@ -114,7 +114,7 @@ public class Worker(ILogger<Worker> logger,
     <div class=""max-w-screen-md mx-auto p-8 bg-white shadow-md rounded-md"">
         <h2 class=""text-2xl font-semibold mb-4 text-gray-800"">Forgotten your password.</h2>
         <p class=""text-gray-700"">Dear <span class=""font-bold text-indigo-800"">{context.Message.EmailAddress}</span>,</p>
-        <p class=""text-gray-700"">Your password reset code is <span class=""font-bold text-indigo-800"">{context.Message.Link}</span> </p>
+        <p class=""text-gray-700"">Your password reset code is <span class=""font-bold text-indigo-800"">{context.Message.Code}</span> </p>
         <p class=""text-gray-700"">If you did not request this or have any concerns, please contact our support team.</p>
         <p class=""mt-4 text-gray-700"">Thank you,<br>Your Company Name</p>
         <p class=""mt-2 text-gray-600"">� 2024 All rights reserved.</p>
