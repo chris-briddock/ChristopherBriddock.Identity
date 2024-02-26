@@ -1,5 +1,4 @@
-﻿using System.Text;
-using ChristopherBriddock.ApiEndpoints;
+﻿using ChristopherBriddock.ApiEndpoints;
 using ChristopherBriddock.Service.Common.Constants;
 using ChristopherBriddock.Service.Common.Messaging;
 using ChristopherBriddock.Service.Identity.Models;
@@ -9,7 +8,6 @@ using ChristopherBriddock.Service.Identity.Publishers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.WebUtilities;
 
 namespace ChristopherBriddock.Service.Identity.Endpoints;
 
@@ -62,17 +60,11 @@ public sealed class SendTokenEmailEndpoint(IServiceProvider serviceProvider,
             if (request.TokenType == EmailPublisherConstants.TwoFactorToken)
             {
                 var code = await userManager.GenerateTwoFactorTokenAsync(user, TokenOptions.DefaultProvider);
-                var routeValues = new RouteValueDictionary()
-                {
-                    ["token"] = code,
-                };
-
-                Uri twoFactorUri = linkProvider.GetUri(HttpContext, "2fa/authorize", routeValues);
 
                 message = new()
                 {
                     EmailAddress = user.Email!,
-                    Link = twoFactorUri.ToString(),
+                    Code = code,
                     Type = EmailPublisherConstants.TwoFactorToken
                 };
             }
@@ -104,7 +96,7 @@ public sealed class SendTokenEmailEndpoint(IServiceProvider serviceProvider,
                 message = new()
                 {
                     EmailAddress = user.Email!,
-                    Link = code,
+                    Code = code,
                     Type = EmailPublisherConstants.ForgotPassword
                 };
             }   
