@@ -4,7 +4,7 @@ metadata:
   name: postgres
 spec:
   serviceName: postgres
-  replicas:  3
+  replicas: 2
   selector:
     matchLabels:
       app: postgres
@@ -15,9 +15,19 @@ spec:
       labels:
         app: postgres
     spec:
+      automountServiceAccountToken: false
       containers:
       - name: postgres
         image: postgres:latest
+        resources:
+          requests:
+            memory: "4096Mi"
+            cpu: "250m"
+            ephemeral-storage: "1Gi"
+          limits:
+            memory: "12288Mi"
+            cpu: "500m"
+            ephemeral-storage: "2Gi"
         envFrom:
         - secretRef:
             name: postgres-secrets

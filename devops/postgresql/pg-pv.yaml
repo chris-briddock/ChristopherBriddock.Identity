@@ -4,11 +4,11 @@ metadata:
   name: postgres-pv
 spec:
   capacity:
-    storage:  100Gi
+    storage: 1Ti
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: pd-standard
-  gcePersistentDisk:
-    pdName: postgres-disk
-    fsType: ext4
+  storageClassName: standard
+  nfs:
+    server: 10.215.201.58
+    path: "/vol1"
