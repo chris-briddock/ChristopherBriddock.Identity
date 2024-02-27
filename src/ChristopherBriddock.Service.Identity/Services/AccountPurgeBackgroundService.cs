@@ -38,7 +38,8 @@ public class AccountPurgeBackgroundService(IServiceScopeFactory serviceScopeFact
             var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
 
             var usersToBeDeleted = await dbContext.Users.Where(s => s.IsDeleted)
-                                .Where(s => s.DeletedDateTime < DateTime.Today.AddYears(-7)).ToListAsync(stoppingToken);
+                                .Where(s => s.DeletedDateTime < DateTimeOffset.UtcNow.AddYears(-7).DateTime).ToListAsync(stoppingToken);
+
 
             if (usersToBeDeleted.Count > 0)
             {
