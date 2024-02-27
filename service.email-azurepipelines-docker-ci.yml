@@ -6,6 +6,8 @@ trigger:
     exclude:
       - '*'
 
+variables:
+- group: Service.Identity
 
 pool: 
   name: Docker
