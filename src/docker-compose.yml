@@ -2,11 +2,11 @@ version: '3.4'
 
 services:
   
-  # christopherbriddock.service.identity:
-  #   image: ${DOCKER_REGISTRY-}christopherbriddockserviceidentity
-  #   build:
-  #     context: .
-  #     dockerfile: ChristopherBriddock.Service.Identity/Dockerfile
+  christopherbriddock.service.identity:
+    image: ${DOCKER_REGISTRY-}christopherbriddockserviceidentity
+    build:
+      context: .
+      dockerfile: ChristopherBriddock.Service.Identity/Dockerfile
 
   christopherbriddock.service.email:
     image: ${DOCKER_REGISTRY-}christopherbriddockworkerserviceemail
@@ -35,6 +35,9 @@ services:
     container_name: rabbitmq
     restart: unless-stopped
     image: rabbitmq:3.12.12-management
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
     ports:
       - "5671:5671"
       - "5672:5672"
