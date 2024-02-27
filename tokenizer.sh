@@ -26,10 +26,14 @@ usage() {
     echo "  --seq-api-key KEY              Seq API key"
     echo "  --email-address ADDRESS        Email address"
     echo "  --email-password PASSWORD      Email password"
-    echo "  --enable-feature FEATURE       Enable feature flag (true/false)"
-    echo "  --disable-feature FEATURE      Disable feature flag (true/false)"
+    echo "  --enable-feature FEATURE,...   Enable feature flags (comma-separated list)"
+    echo "  --disable-feature FEATURE,...  Disable feature flags (comma-separated list)"
     exit 1
 }
+
+# Initialize variables
+enableFeatures=()
+disableFeatures=()
 
 # Parse command-line arguments
 if [ "$#" -eq 0 ]; then
@@ -148,14 +152,12 @@ while [[ $# -gt 0 ]]; do
             shift
             ;;
         --enable-feature)
-            feature="$2"
-            featureValue="true"
+            IFS=',' read -ra enableFeatures <<< "$2"
             shift
             shift
             ;;
         --disable-feature)
-            feature="$2"
-            featureValue="false"
+            IFS=',' read -ra disableFeatures <<< "$2"
             shift
             shift
             ;;
@@ -243,9 +245,22 @@ if [ ! -z "$seqApiKey" ]; then
     sed -i "s/{seqApiKey}/$(echo "$seqApiKey" | sed 's/[\/&]/\\&/g')/g" appsettings.json
 fi
 
-if [ ! -z "$feature" ]; then
-    sed -i "s/\"$feature\": .*,$/\"$feature\": $featureValue,/g" appsettings.json
-fi
+# Set feature values based on the presence of enable or disable flags
+for feature in "${enableFeatures[@]}"; do
+    featureValue="true"
+    # Replace feature flag value in appsettings.json file
+    if [ ! -z "$featureValue" ]; then
+        sed -i "s/\"$feature\": .*,$/\"$feature\": $featureValue,/g" appsettings.json
+    fi
+done
+
+for feature in "${disableFeatures[@]}"; do
+    featureValue="false"
+    # Replace feature flag value in appsettings.json file
+    if [ ! -z "$featureValue" ]; then
+        sed -i "s/\"$feature\": .*,$/\"$feature\": $featureValue,/g" appsettings.json
+    fi
+done
 
 if [ ! -z "$emailAddress" ]; then
     sed -i "s/{emailAddress}/$(echo "$emailAddress" | sed 's/[\/&]/\\&/g')/g" appsettings.json
