@@ -9,7 +9,7 @@ const url = `https://${domainName}:${port}/${endpoint}`;
 export const options = {
     insecureSkipTLSVerify: true,
     noConnectionReuse: false,
-    vus: 100,
+    vus: 100000000,
     duration: '5s'
 };
 
