@@ -29,9 +29,8 @@ export const options = {
     }
 };
 
-const domainName = "localhost";
-const port = "7078";
-const url = `https://${domainName}:${port}/register`;
+const domainName = "id.cdjb.uk";
+const url = `https://${domainName}/register`;
 
 export default function () {
     const payloads = [

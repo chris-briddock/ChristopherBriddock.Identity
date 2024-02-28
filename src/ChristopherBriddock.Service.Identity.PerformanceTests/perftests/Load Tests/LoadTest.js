@@ -2,14 +2,13 @@ import http from 'k6/http';
 import { check, sleep } from 'k6';   
 
 const endpoint = "register";
-const domainName = "localhost";
-const port = "7078";
-const url = `https://${domainName}:${port}/${endpoint}`;
+const domainName = "id.cdjb.uk";
+const url = `https://${domainName}/${endpoint}`;
 
 export const options = {
     insecureSkipTLSVerify: true,
     noConnectionReuse: false,
-    vus: 100,
+    vus: 100000000,
     duration: '5s'
 };
 
