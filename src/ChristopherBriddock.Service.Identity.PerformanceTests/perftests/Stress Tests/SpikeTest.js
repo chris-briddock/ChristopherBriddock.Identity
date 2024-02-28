@@ -9,7 +9,7 @@ export const options = {
     vus: 10,
     stages: [
         { duration: '30s', target: 50 },  
-        { duration: '1m', target: 2000 },  
+        { duration: '5m', target: 10000000 },  
         { duration: '30s', target: 0 },
     ],
     headers: {

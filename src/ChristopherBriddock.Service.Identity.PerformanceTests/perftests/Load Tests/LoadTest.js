@@ -8,7 +8,7 @@ const url = `https://${domainName}/${endpoint}`;
 export const options = {
     insecureSkipTLSVerify: true,
     noConnectionReuse: false,
-    vus: 100000000,
+    vus: 5000000,
     duration: '5s'
 };
 
