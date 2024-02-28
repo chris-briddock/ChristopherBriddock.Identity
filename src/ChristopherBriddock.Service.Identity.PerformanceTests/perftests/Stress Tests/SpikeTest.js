@@ -2,9 +2,8 @@ import http from 'k6/http';
 import { check, sleep } from 'k6';
 
 
-const domainName = "localhost";
-const port = "7078";
-const url = `https://${domainName}:${port}/register`;
+const domainName = "id.cdjb.uk";
+const url = `https://${domainName}/register`;
 
 export const options = {
     vus: 10,
