@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: rabbit-lb
+  namespace: default
+spec:
+  selector:
+    app: identity-rabbit-cluster
+  ports:
+    - protocol: TCP
+      port: 15672
+      targetPort: 15672
+  type: LoadBalancer
