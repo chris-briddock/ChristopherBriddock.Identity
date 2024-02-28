@@ -61,7 +61,7 @@ public sealed class AuthorizeEndpoint(IServiceProvider serviceProvider,
 
             if (signInResult.RequiresTwoFactor)
             {
-                return LocalRedirect($"/2fa/email?EmailAddress={request.EmailAddress}");
+                return LocalRedirect($"/sendemail?EmailAddress={request.EmailAddress}&TokenType=TwoFactorToken");
             }
 
             if (!signInResult.Succeeded)

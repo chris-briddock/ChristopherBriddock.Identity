@@ -12,13 +12,19 @@ public static class WebApplicationExtensions
     /// </summary>
     /// <typeparam name="TDbContext"></typeparam>
     /// <param name="app"></param>
+    /// <param name="environment"></param>
     /// <returns>The modified <see cref="WebApplication"/> instance.</returns>
-    public static async Task<IApplicationBuilder> UseDatabaseMigrationsAsync<TDbContext>(this WebApplication app) where TDbContext : DbContext
+    public static async Task<IApplicationBuilder> UseDatabaseMigrationsAsync<TDbContext>(this WebApplication app, IWebHostEnvironment environment) where TDbContext : DbContext
     {
         ArgumentNullException.ThrowIfNull(app, nameof(app));
         using AsyncServiceScope scope = app.Services.CreateAsyncScope();
         var service = scope.ServiceProvider.GetService<TDbContext>()!.Database;
-        await service.MigrateAsync();
+        
+        if (!environment.IsEnvironment("Test")) 
+        {
+            await service.MigrateAsync();
+        }
+        
         return app;
     }
 

@@ -2,7 +2,7 @@ FROM mcr.microsoft.com/dotnet/aspnet:8.0.1-bookworm-slim-amd64 AS base
 USER app
 WORKDIR /app
 
-EXPOSE 443
+EXPOSE 8080
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0.101-bookworm-slim-amd64 AS build
 ARG BUILD_CONFIGURATION=Release
