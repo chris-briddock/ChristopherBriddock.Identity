@@ -9,7 +9,7 @@ metadata:
 spec:
   tls:
   - hosts:
-    - 'seq.cdjb.uk'
+    - '*.cdjb.uk'
     secretName: wildcard-tls
   rules:
   - host: 'seq.cdjb.uk'
