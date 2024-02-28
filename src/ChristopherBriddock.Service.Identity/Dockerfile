@@ -4,10 +4,6 @@ WORKDIR /app
 
 EXPOSE 8080
 
-# Install EF Core tools
-RUN dotnet tool update --global dotnet-ef
-RUN dotnet ef migrations add Intial
-
 FROM mcr.microsoft.com/dotnet/sdk:8.0.101-bookworm-slim-amd64 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
