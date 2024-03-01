@@ -9,7 +9,7 @@ The Identity Service is a robust authentication and authorization component for 
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=chris-briddock_ChristopherBriddock.Identity&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=chris-briddock_ChristopherBriddock.Identity)
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=chris-briddock_ChristopherBriddock.Identity&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=chris-briddock_ChristopherBriddock.Identity)
 
-Technical documentation generated with DocFX is [here](https://chris-briddock.github.io/ChristopherBriddock.Identity/api/ChristopherBriddock.Service.Common.Constants.html)
+Technical documentation generated with DocFX is [here](https://docs.cdjb.uk/api/ChristopherBriddock.Service.Common.Constants.html)
 
 ## Table of Contents
 
