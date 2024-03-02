@@ -420,6 +420,7 @@ spec:
         app.kubernetes.io/part-of: ingress-nginx
         app.kubernetes.io/version: 1.9.6
     spec:
+      automountServiceAccountToken: false
       containers:
       - args:
         - /nginx-ingress-controller
@@ -484,6 +485,9 @@ spec:
           requests:
             cpu: 100m
             memory: 90Mi
+          limits:
+            cpu: 200m
+            memory: 512Mi
         securityContext:
           allowPrivilegeEscalation: false
           capabilities:
@@ -532,6 +536,7 @@ spec:
         app.kubernetes.io/version: 1.9.6
       name: ingress-nginx-admission-create
     spec:
+      automountServiceAccountToken: false
       containers:
       - args:
         - create
@@ -556,6 +561,13 @@ spec:
           runAsUser: 65532
           seccompProfile:
             type: RuntimeDefault
+        resources:
+          limits:
+            cpu: "500m"
+            memory: "256Mi"
+          requests:
+            cpu: "100m"
+            memory: "64Mi"
       nodeSelector:
         kubernetes.io/os: linux
       restartPolicy: OnFailure
@@ -583,6 +595,7 @@ spec:
         app.kubernetes.io/version: 1.9.6
       name: ingress-nginx-admission-patch
     spec:
+      automountServiceAccountToken: false
       containers:
       - args:
         - patch
@@ -609,6 +622,13 @@ spec:
           runAsUser: 65532
           seccompProfile:
             type: RuntimeDefault
+        resources:
+          limits:
+            cpu: "500m"
+            memory: "256Mi"
+          requests:
+            cpu: "100m"
+            memory: "64Mi"
       nodeSelector:
         kubernetes.io/os: linux
       restartPolicy: OnFailure
