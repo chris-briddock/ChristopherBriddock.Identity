@@ -17,7 +17,7 @@ spec:
       - name: service-identity
         image: immerslve/service.identity
         ports:
-        - containerPort: 8081
+        - containerPort: 8080
         resources:
           limits:
             cpu: "1"  # CPU limit for the container

@@ -1,0 +1,137 @@
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: postgres-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: StatefulSet
+    name: postgres
+  minReplicas: 1
+  maxReplicas: 4
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 50
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgresql-config
+data:
+  patroni.yaml: |
+    bootstrap:
+      dcs:
+        ttl: 30
+        loop_wait: 10
+        retry_timeout: 10
+        maximum_lag_on_failover: 1048576
+        postgresql:
+          use_pg_rewind: true
+          parameters:
+            archive_mode: "on"
+            archive_command: "cd ."
+            max_wal_senders: 10
+            max_connections: 100
+            wal_level: hot_standby
+            max_wal_size: 10GB
+            min_wal_size: 1GB
+            checkpoint_timeout: 30s
+            checkpoint_completion_target: 0.9
+            archive_timeout: 60
+    scope: patroni
+    restapi:
+      listen: 0.0.0.0:8008
+      connect_address: '{{ POD_IP }}:8008'
+    postgresql:
+      listen: 0.0.0.0:5432
+      connect_address: '{{ POD_IP }}:5432'
+      data_dir: /var/lib/postgresql/data
+
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: postgres-pv
+spec:
+  capacity:
+    storage: 1Ti
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: standard
+  nfs:
+    server: 10.215.201.58
+    path: "/vol1"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgres-pvc
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage:  1Ti
+  storageClassName: standard
+
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: postgres
+spec:
+  serviceName: postgres
+  replicas: 2
+  selector:
+    matchLabels:
+      app: postgres
+  updateStrategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      automountServiceAccountToken: false
+      containers:
+      - name: postgres
+        image: postgres:latest
+        resources:
+          requests:
+            memory: "4096Mi"
+            cpu: "250m"
+            ephemeral-storage: "1Gi"
+          limits:
+            memory: "12288Mi"
+            cpu: "500m"
+            ephemeral-storage: "2Gi"
+        envFrom:
+        - secretRef:
+            name: postgres-secrets
+        volumeMounts:
+        - mountPath: /var/lib/postgresql/storage
+          name: postgredb
+      volumes:
+      - name: postgredb
+        persistentVolumeClaim:
+          claimName: postgres-pvc
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgresql
+spec:
+  selector:
+    app: postgresql
+  ports:
+    - protocol: TCP
+      port: 5432
+      targetPort: 5432
+  type: ClusterIP

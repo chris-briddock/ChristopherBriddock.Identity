@@ -19,4 +19,4 @@ spec:
         resources:
           limits:
             cpu: "1"  # CPU limit for the container
-            memory: "512Mi"  # Memory limit for the container (adjust as needed)
+            memory: "2048Mi"  # Memory limit for the container (adjust as needed)

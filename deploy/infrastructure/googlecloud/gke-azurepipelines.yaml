@@ -6,6 +6,9 @@ trigger:
 pool:
   name: Default
 
+variables:
+- group: Service.Identity
+
 steps:
 - script: curl -fsSL https://get.pulumi.com | sh
   displayName: 'Install Pulumi'
@@ -18,7 +21,7 @@ steps:
 - script: npm install @pulumi/gcp
   displayName: 'Install Pulumi GCP Provider'
 
-- script: pulumi stack select dev
+- script: pulumi stack select prod
   displayName: 'Select Pulumi Stack'
 
 - script: pulumi config googlecloud:project $(ProjectName)
