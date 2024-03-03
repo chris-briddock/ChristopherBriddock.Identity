@@ -42,7 +42,7 @@ stages:
       inputs:
         SourceFolder: '$(System.DefaultWorkingDirectory)'
         Contents: |
-          **/*k8s.yaml
+          deploy/**/*.yaml
           **/src/ChristopherBriddock.Service.Identity/bin/Release/net8.0/publish/**
         TargetFolder: '$(Build.ArtifactStagingDirectory)'
         OverWrite: true
