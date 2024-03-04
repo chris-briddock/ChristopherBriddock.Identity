@@ -26,5 +26,5 @@ const cluster = new azureNative.containerservice.ManagedCluster(clusterName, {
     identity: {
         type: "SystemAssigned",
     },
-    kubernetesVersion: "1.21.2",
+    kubernetesVersion: "1.29.1",
 });
