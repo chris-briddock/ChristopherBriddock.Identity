@@ -20,7 +20,7 @@ namespace ChristopherBriddock.Service.Identity.Endpoints;
 public class UpdatePhoneNumberEndpoint(IServiceProvider serviceProvider,
                                        ILogger<UpdatePhoneNumberEndpoint> logger) : EndpointBaseAsync
                                                                                     .WithRequest<UpdatePhoneNumberRequest>
-                                                                                    .WithoutParam
+                                                                                    .WithoutQuery
                                                                                     .WithActionResult
 {
     /// <summary>
@@ -47,12 +47,13 @@ public class UpdatePhoneNumberEndpoint(IServiceProvider serviceProvider,
     {
         try
         {
-            var userManager = ServiceProvider.GetService<UserManager<ApplicationUser>>()!;
+            var userManager = ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+            
             string emailAddress = User.FindFirst(ClaimTypes.Email)!.Value;
 
-            var user = await userManager.FindByEmailAsync(emailAddress);
+            var user = await userManager.FindByEmailAsync(emailAddress) ?? null!;
 
-            var token = await userManager.GenerateChangePhoneNumberTokenAsync(user!, user!.PhoneNumber!);
+            var token = await userManager.GenerateChangePhoneNumberTokenAsync(user, user.PhoneNumber!);
 
             var result = await userManager.ChangePhoneNumberAsync(user, request.PhoneNumber, token);
 

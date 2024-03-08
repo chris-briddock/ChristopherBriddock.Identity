@@ -2,11 +2,11 @@ version: '3.4'
 
 services:
   
-  christopherbriddock.service.identity:
-    image: ${DOCKER_REGISTRY-}christopherbriddockserviceidentity
-    build:
-      context: .
-      dockerfile: ChristopherBriddock.Service.Identity/Dockerfile
+  # christopherbriddock.service.identity:
+  #   image: ${DOCKER_REGISTRY-}christopherbriddockserviceidentity
+  #   build:
+  #     context: .
+  #     dockerfile: ChristopherBriddock.Service.Identity/Dockerfile
 
   christopherbriddock.service.email:
     image: ${DOCKER_REGISTRY-}christopherbriddockworkerserviceemail
@@ -42,11 +42,6 @@ services:
       - "5671:5671"
       - "5672:5672"
       - "15672:15672"
-    healthcheck:
-      test: [ "CMD", "nc", "-z", "localhost", "5672" ]
-      interval: 10s
-      timeout: 10s
-      retries: 5
   
   postgres:
     hostname: postgres
@@ -57,4 +52,15 @@ services:
       - "5432:5432"
     environment:
       POSTGRES_PASSWORD: pass123
+
+  pgadmin4:
+    hostname: pgadmin4
+    container_name: pgadmin4
+    restart: unless-stopped
+    image: dpage/pgadmin4
+    ports: 
+      - "8082:80"
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@admin.com
+      - PGADMIN_DEFAULT_PASSWORD=pass123
 

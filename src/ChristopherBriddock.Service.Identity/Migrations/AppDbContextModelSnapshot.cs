@@ -24,6 +24,36 @@ namespace ChristopherBriddock.Service.Identity.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("ChristopherBriddock.Service.Identity.Models.Application", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("ClientId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("ClientSecret")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("RedirectUri")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Website")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AspNetApplications");
+                });
+
             modelBuilder.Entity("ChristopherBriddock.Service.Identity.Models.ApplicationRole", b =>
                 {
                     b.Property<Guid>("Id")

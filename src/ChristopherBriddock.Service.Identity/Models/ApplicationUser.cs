@@ -18,5 +18,5 @@ public sealed class ApplicationUser : IdentityUser<Guid>
     /// <summary>
     /// Gets or sets the deleted date of the account.
     /// </summary>
-    public DateTime DeletedDateTime { get; set; }
+    public DateTimeOffset DeletedDateTime { get; set; }
 }

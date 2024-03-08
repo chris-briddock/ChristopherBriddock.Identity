@@ -11,7 +11,7 @@ namespace ChristopherBriddock.Service.Identity.Providers;
 /// Represents a service for managing JSON Web Tokens.
 /// This includes creating, refreshing and validating JSON Web Tokens.
 /// </summary>
-public class JsonWebTokenProvider : IJsonWebTokenProvider
+public sealed class JsonWebTokenProvider : IJsonWebTokenProvider
 {
     /// <summary>
     /// Tries to create a JWT (JSON Web Token) asynchronously.

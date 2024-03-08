@@ -15,9 +15,9 @@ namespace ChristopherBriddock.Service.Identity.Endpoints;
 /// <param name="logger">The logger.</param>
 public sealed class ResetPasswordEndpoint(IServiceProvider serviceProvider,
                                           ILogger<ResetPasswordEndpoint> logger) : EndpointBaseAsync
-                                                                                  .WithRequest<ResetPasswordRequest>
-                                                                                  .WithoutParam
-                                                                                  .WithActionResult
+                                                                                   .WithRequest<ResetPasswordRequest>
+                                                                                   .WithoutQuery
+                                                                                   .WithActionResult
 {
     /// <summary>
     /// The application service provier.
@@ -43,12 +43,12 @@ public sealed class ResetPasswordEndpoint(IServiceProvider serviceProvider,
     {
         try
         {
-            var userManager = ServiceProvider.GetService<UserManager<ApplicationUser>>()!;
+            var userManager = ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
 
             ApplicationUser? user = await userManager.FindByEmailAsync(request.Email);
 
-            var decodedBytes = WebEncoders.Base64UrlDecode(request.ResetCode);
-            var code = Encoding.UTF8.GetString(decodedBytes);
+            var decodedBytes = WebEncoders.Base64UrlDecode(request.ResetCode);        
+            string? code = Encoding.UTF8.GetString(decodedBytes);
             await userManager.ResetPasswordAsync(user!, code, request.NewPassword);
             return NoContent();
         }

@@ -35,4 +35,9 @@ public sealed class AppDbContext(IConfiguration configuration,
 
         base.OnConfiguring(optionsBuilder);
     }
+
+    /// <summary>
+    /// The list of applications registered.
+    /// </summary>
+    public DbSet<Application> AspNetApplications { get; set; }
 }

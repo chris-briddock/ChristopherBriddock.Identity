@@ -13,7 +13,7 @@ namespace ChristopherBriddock.Service.Identity.Endpoints;
 public sealed class TwoFactorAuthorizeEndpoint(IServiceProvider serviceProvider,
                                                ILogger<TwoFactorAuthorizeEndpoint> logger) : EndpointBaseAsync
                                                                                              .WithRequest<TwoFactorSignInRequest>
-                                                                                             .WithoutParam
+                                                                                             .WithoutQuery
                                                                                              .WithActionResult
 {
     /// <summary>
@@ -39,14 +39,14 @@ public sealed class TwoFactorAuthorizeEndpoint(IServiceProvider serviceProvider,
     {
         try
         {
-            var userManager = ServiceProvider.GetService<UserManager<ApplicationUser>>()!;
+            var userManager = ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
 
             var user = await userManager.FindByEmailAsync(request.EmailAddress);
 
-            if (user == null)
+            if (user is null)
             {
                 return NotFound("User not found.");
-            }
+            }       
             bool isTwoFactorEnabled = await userManager.GetTwoFactorEnabledAsync(user);
 
             if (!isTwoFactorEnabled)

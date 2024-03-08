@@ -20,7 +20,7 @@ namespace ChristopherBriddock.Service.Identity.Endpoints;
 public sealed class ConfirmEmailEndpoint(IServiceProvider serviceProvider,
                                          ILogger<ConfirmEmailEndpoint> logger) : EndpointBaseAsync
                                                                                  .WithRequest<ConfirmEmailRequest>
-                                                                                 .WithoutParam
+                                                                                 .WithoutQuery
                                                                                  .WithActionResult
 {
     /// <inheritdoc/>
@@ -46,13 +46,12 @@ public sealed class ConfirmEmailEndpoint(IServiceProvider serviceProvider,
 
         try
         {
-            var userManager = ServiceProvider.GetService<UserManager<ApplicationUser>>()!;
+            var userManager = ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
 
             var user = await userManager.FindByEmailAsync(request.EmailAddress);
 
-
             // NOTE: This code should have been emailed to the user.
-            var decodedBytes = WebEncoders.Base64UrlDecode(request.Code);
+            var decodedBytes = WebEncoders.Base64UrlDecode(request.Code);     
             code = Encoding.UTF8.GetString(decodedBytes);
 
             result = await userManager.ConfirmEmailAsync(user!, code);

@@ -4,6 +4,7 @@ using ChristopherBriddock.Service.Identity.Data;
 using ChristopherBriddock.Service.Identity.Extensions;
 using ChristopherBriddock.Service.Identity.Providers;
 using ChristopherBriddock.Service.Identity.Services;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.FeatureManagement;
 
 namespace ChristopherBriddock.Service.Identity;
@@ -36,7 +37,8 @@ public sealed class Program
         builder.Services.AddCrossOriginPolicy();
         builder.Services.AddPublisherMessaging();
         builder.Services.AddHostedService<AccountPurgeBackgroundService>();
-        builder.Services.AddScoped<ILinkProvider, LinkProvider>();
+        builder.Services.TryAddScoped<ILinkProvider, LinkProvider>();
+        builder.Services.TryAddSingleton<ICodeProvider, CodeProvider>();
         builder.Services.AddAppRateLimiting();
 
         WebApplication app = builder.Build();

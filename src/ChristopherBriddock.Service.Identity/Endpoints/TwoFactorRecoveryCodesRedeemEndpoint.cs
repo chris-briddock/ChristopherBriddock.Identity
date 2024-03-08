@@ -18,7 +18,7 @@ namespace ChristopherBriddock.Service.Identity.Endpoints;
 public class TwoFactorRecoveryCodesRedeemEndpoint(IServiceProvider serviceProvider,
                                                   ILogger<TwoFactorRecoveryCodesEndpoint> logger) : EndpointBaseAsync
                                                                                                     .WithRequest<TwoFactorRecoveryCodesRedeemRequest>
-                                                                                                    .WithoutParam
+                                                                                                    .WithoutQuery
                                                                                                     .WithActionResult
 {
     /// <summary>
@@ -44,11 +44,11 @@ public class TwoFactorRecoveryCodesRedeemEndpoint(IServiceProvider serviceProvid
     {
         try
         {
-            var userManager = ServiceProvider.GetService<UserManager<ApplicationUser>>()!;
+            var userManager = ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
 
-            var user = await userManager.FindByEmailAsync(request.EmailAddress);
+            var user = await userManager.FindByEmailAsync(request.EmailAddress) ?? null!;
 
-            var result = await userManager.RedeemTwoFactorRecoveryCodeAsync(user!, request.Code);
+            var result = await userManager.RedeemTwoFactorRecoveryCodeAsync(user, request.Code);
 
             if (!result.Succeeded)
             {

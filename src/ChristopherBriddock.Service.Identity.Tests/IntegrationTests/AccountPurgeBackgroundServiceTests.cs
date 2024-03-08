@@ -5,12 +5,9 @@ using NUnit.Framework;
 
 namespace ChristopherBriddock.Service.Identity.Tests.IntegrationTests;
 
-public class AccountPurgeBackgroundServiceExposeProtected : AccountPurgeBackgroundService
+public class AccountPurgeBackgroundServiceExposeProtected(IServiceScopeFactory serviceScopeFactory,
+                                       ILogger<AccountPurgeBackgroundService> logger) : AccountPurgeBackgroundService(serviceScopeFactory, logger)
 {
-    public AccountPurgeBackgroundServiceExposeProtected(IServiceScopeFactory serviceScopeFactory,
-                                           ILogger<AccountPurgeBackgroundService> logger)
-        : base(serviceScopeFactory, logger)
-    { }
 
     // Expose ExecuteAsync
     public Task ExecuteTaskAsync(CancellationToken cancellationToken)
@@ -41,8 +38,8 @@ public class AccountPurgeBackgroundServiceTests
 
         var scopeFactory = webApplicationFactory.Services.GetService<IServiceScopeFactory>()!;
 
-        using var scope = scopeFactory.CreateScope();
-        var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+        using var scope = scopeFactory.CreateScope();      
+        using var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
 
         dbContext.Users.Add(new ApplicationUser
         {

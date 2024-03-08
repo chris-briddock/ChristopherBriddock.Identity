@@ -20,7 +20,7 @@ namespace ChristopherBriddock.Service.Identity.Endpoints;
 public sealed class TwoFactorManageEndpoint(IServiceProvider serviceProvider,
                                             ILogger<TwoFactorManageEndpoint> logger) : EndpointBaseAsync
                                                                                        .WithRequest<TwoFactorManageRequest>
-                                                                                       .WithoutParam
+                                                                                       .WithoutQuery
                                                                                        .WithActionResult
 {
     /// <summary>
@@ -47,13 +47,13 @@ public sealed class TwoFactorManageEndpoint(IServiceProvider serviceProvider,
     {
         try
         {
-            var userManager = ServiceProvider.GetService<UserManager<ApplicationUser>>()!;
+            var userManager = ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
 
             string emailAddress = User.FindFirst(ClaimTypes.Email)!.Value;
 
-            var user = await userManager.FindByEmailAsync(emailAddress);
-
-            var result = await userManager.SetTwoFactorEnabledAsync(user!, request.IsEnabled);
+            var user = await userManager.FindByEmailAsync(emailAddress) ?? null!;
+            var result = await userManager.SetTwoFactorEnabledAsync(user, request.IsEnabled);
+            
             if (!result.Succeeded)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, "Failed to enable two factor.");

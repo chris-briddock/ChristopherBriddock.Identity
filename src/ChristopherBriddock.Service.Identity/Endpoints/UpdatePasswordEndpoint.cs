@@ -19,9 +19,9 @@ namespace ChristopherBriddock.Service.Identity.Endpoints;
 /// <param name="logger">The logger.</param>
 public class UpdatePasswordEndpoint(IServiceProvider serviceProvider,
                                     ILogger<UpdatePasswordEndpoint> logger) : EndpointBaseAsync
-                                                                             .WithRequest<UpdatePasswordRequest>
-                                                                             .WithoutParam
-                                                                             .WithActionResult
+                                                                              .WithRequest<UpdatePasswordRequest>
+                                                                              .WithoutQuery
+                                                                              .WithActionResult
 {
     /// <summary>
     /// The application service provider.
@@ -48,12 +48,13 @@ public class UpdatePasswordEndpoint(IServiceProvider serviceProvider,
     {
         try
         {
-            var userManager = ServiceProvider.GetService<UserManager<ApplicationUser>>()!;
+            var userManager = ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+            
             string emailAddress = User.FindFirst(ClaimTypes.Email)!.Value;
 
-            var user = await userManager.FindByEmailAsync(emailAddress);
+            var user = await userManager.FindByEmailAsync(emailAddress) ?? null!;
 
-            var result = await userManager.ChangePasswordAsync(user!,
+            var result = await userManager.ChangePasswordAsync(user,
                                                                request.CurrentPassword,
                                                                request.NewPassword);
 

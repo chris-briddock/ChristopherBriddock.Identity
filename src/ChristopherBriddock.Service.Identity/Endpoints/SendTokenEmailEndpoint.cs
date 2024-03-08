@@ -21,9 +21,9 @@ namespace ChristopherBriddock.Service.Identity.Endpoints;
 /// <param name="logger">The application's logger.</param>
 public sealed class SendTokenEmailEndpoint(IServiceProvider serviceProvider,
                                                 ILogger<SendTokenEmailEndpoint> logger) : EndpointBaseAsync
-                                                                                               .WithRequest<TokenEmailRequest>
-                                                                                               .WithoutParam
-                                                                                               .WithActionResult
+                                                                                          .WithRequest<TokenEmailRequest>
+                                                                                          .WithoutQuery
+                                                                                          .WithActionResult
 {
     /// <summary>
     /// The application service provider.
@@ -49,11 +49,11 @@ public sealed class SendTokenEmailEndpoint(IServiceProvider serviceProvider,
     {
         try
         {
-            ApplicationUser? user;
-            EmailMessage message = new();
-            var userManager = ServiceProvider.GetService<UserManager<ApplicationUser>>()!;
-            var emailPublisher = ServiceProvider.GetService<IEmailPublisher>()!;
-            var linkProvider = ServiceProvider.GetService<ILinkProvider>()!;
+            ApplicationUser? user;     
+            EmailMessage message = new();         
+            var userManager = ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();     
+            var emailPublisher = ServiceProvider.GetRequiredService<IEmailPublisher>();
+            var linkProvider = ServiceProvider.GetRequiredService<ILinkProvider>();
             user = await userManager.FindByEmailAsync(request.EmailAddress);
             if (user is null)
                 return NotFound();
@@ -99,8 +99,8 @@ public sealed class SendTokenEmailEndpoint(IServiceProvider serviceProvider,
                     Code = code,
                     Type = EmailPublisherConstants.ForgotPassword
                 };
-            }   
-            await emailPublisher.Publish(message, cancellationToken);
+            } 
+            await emailPublisher.Publish(message, cancellationToken);           
             return Ok("If a user exists in the database, an email will be sent to that email address.");
         }
         catch (Exception ex)

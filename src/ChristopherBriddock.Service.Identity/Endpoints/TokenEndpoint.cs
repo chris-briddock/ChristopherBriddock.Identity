@@ -40,9 +40,9 @@ public class TokenEndpoint(IServiceProvider serviceProvider,
     {
         try
         {
-            var httpContextAccessor = ServiceProvider.GetService<IHttpContextAccessor>()!;
-            var configuration = ServiceProvider.GetService<IConfiguration>()!;
-            var jsonWebTokenProvider = ServiceProvider.GetService<IJsonWebTokenProvider>()!;
+            var httpContextAccessor = ServiceProvider.GetRequiredService<IHttpContextAccessor>();
+            var configuration = ServiceProvider.GetRequiredService<IConfiguration>();
+            var jsonWebTokenProvider = ServiceProvider.GetRequiredService<IJsonWebTokenProvider>();
 
             string email = httpContextAccessor.HttpContext!.User.Identity!.Name ?? string.Empty;
             string issuer = configuration["Jwt:Issuer"]!;
@@ -77,8 +77,6 @@ public class TokenEndpoint(IServiceProvider serviceProvider,
                 {
                     return Unauthorized();
                 }
-
-
             }
             TokenResponse response = new()
             {

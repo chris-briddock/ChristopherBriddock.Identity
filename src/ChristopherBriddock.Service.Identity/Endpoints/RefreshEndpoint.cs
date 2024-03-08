@@ -17,9 +17,9 @@ namespace ChristopherBriddock.Service.Identity.Endpoints;
 /// <param name="logger">The application's logger.</param>
 public class RefreshEndpoint(IServiceProvider serviceProvider,
                              ILogger<RefreshEndpoint> logger) : EndpointBaseAsync
-                                                               .WithRequest<RefreshRequest>
-                                                               .WithoutParam
-                                                               .WithActionResult
+                                                                .WithRequest<RefreshRequest>
+                                                                .WithoutQuery
+                                                                .WithActionResult
 {
     /// <summary>
     /// The application service provider.
@@ -41,8 +41,8 @@ public class RefreshEndpoint(IServiceProvider serviceProvider,
     {
         try
         {
-            var jsonWebTokenProvider = ServiceProvider.GetService<IJsonWebTokenProvider>()!;
-            var configuration = ServiceProvider.GetService<IConfiguration>()!;
+            var jsonWebTokenProvider = ServiceProvider.GetRequiredService<IJsonWebTokenProvider>();
+            var configuration = ServiceProvider.GetRequiredService<IConfiguration>();
 
             var validationResult = await jsonWebTokenProvider.TryValidateTokenAsync(request.RefreshToken,
                                                                                     configuration["Jwt:Secret"]!,
@@ -51,7 +51,7 @@ public class RefreshEndpoint(IServiceProvider serviceProvider,
             if (!validationResult.Success)
             {
                 return Unauthorized();
-            }
+            }           
             return LocalRedirect("/token");
         }
         catch (Exception ex)

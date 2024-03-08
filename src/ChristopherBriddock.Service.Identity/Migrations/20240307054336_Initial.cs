@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics.CodeAnalysis;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +10,24 @@ namespace ChristopherBriddock.Service.Identity.Migrations
     public partial class Initial : Migration
     {
         /// <inheritdoc />
-        [ExcludeFromCodeCoverage]
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "AspNetApplications",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    Website = table.Column<string>(type: "text", nullable: false),
+                    RedirectUri = table.Column<string>(type: "text", nullable: false),
+                    ClientId = table.Column<Guid>(type: "uuid", nullable: false),
+                    ClientSecret = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetApplications", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
@@ -202,6 +216,9 @@ namespace ChristopherBriddock.Service.Identity.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "AspNetApplications");
+
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 

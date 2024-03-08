@@ -9,7 +9,7 @@ namespace ChristopherBriddock.Service.Identity.Publishers;
 /// two factor authentication and forgot password, but this is only when the Feature Flag for RabbitMq or 
 /// Azure Service Bus is disabled.
 /// </summary>
-public class NullEmailPublisher : IEmailPublisher
+public sealed class NullEmailPublisher : IEmailPublisher
 {
     /// <inheritdoc/>
     public async Task Publish(EmailMessage emailMessage, CancellationToken cancellationToken)

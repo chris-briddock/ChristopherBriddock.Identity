@@ -41,10 +41,10 @@ public class TwoFactorRecoveryCodesEndpoint(IServiceProvider serviceProvider,
     {
         try
         {
-            var userManager = ServiceProvider.GetService<UserManager<ApplicationUser>>()!;
+            var userManager = ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
             var email = User.FindFirst(ClaimTypes.Email)!.Value;
-            var user = await userManager.FindByEmailAsync(email);
-            var codes = await userManager.GenerateNewTwoFactorRecoveryCodesAsync(user!, 10);
+            var user = await userManager.FindByEmailAsync(email) ?? null!;
+            var codes = await userManager.GenerateNewTwoFactorRecoveryCodesAsync(user, 10);
             return Ok(codes);
         }
         catch (Exception ex)

@@ -25,7 +25,7 @@ namespace ChristopherBriddock.Service.Identity.Endpoints;
 public sealed class RegisterEndpoint(IServiceProvider serviceProvider,
                                     ILogger<RegisterEndpoint> logger) : EndpointBaseAsync
                                                                         .WithRequest<RegisterRequest>
-                                                                        .WithoutParam
+                                                                        .WithoutQuery
                                                                         .WithActionResult
 {
     /// <inheritdoc/>
@@ -49,8 +49,8 @@ public sealed class RegisterEndpoint(IServiceProvider serviceProvider,
     {
         try
         {
-            var userManager = ServiceProvider.GetService<UserManager<ApplicationUser>>()!;
-            var roleManager = ServiceProvider.GetService<RoleManager<ApplicationRole>>()!;
+            var userManager = ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();     
+            var roleManager = ServiceProvider.GetRequiredService<RoleManager<ApplicationRole>>();
 
             var existingUser = await userManager.FindByEmailAsync(request.EmailAddress);
 
@@ -64,7 +64,7 @@ public sealed class RegisterEndpoint(IServiceProvider serviceProvider,
                 Email = request.EmailAddress,
                 PhoneNumber = request.PhoneNumber
             };
-            user.PasswordHash = userManager.PasswordHasher.HashPassword(user, $"""{request.Password}""");
+            user.PasswordHash = userManager.PasswordHasher.HashPassword(user, $"""{request.Password}""");           
             await userManager.SetUserNameAsync(user, user.Email);
             await userManager.SetEmailAsync(user, user.Email);
             await userManager.SetPhoneNumberAsync(user, user.PhoneNumber);
@@ -79,7 +79,7 @@ public sealed class RegisterEndpoint(IServiceProvider serviceProvider,
             if (!await roleManager.RoleExistsAsync(applicationRole.Name))
             {
                 await roleManager.CreateAsync(applicationRole);
-            }
+            }      
             if (!await userManager.IsInRoleAsync(user, RoleConstants.UserRole))
             {
                 await userManager.AddToRoleAsync(user, RoleConstants.UserRole);

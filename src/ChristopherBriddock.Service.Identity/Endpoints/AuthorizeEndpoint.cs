@@ -1,6 +1,8 @@
 ﻿using ChristopherBriddock.ApiEndpoints;
+using ChristopherBriddock.Service.Identity.Data;
 using ChristopherBriddock.Service.Identity.Models;
 using ChristopherBriddock.Service.Identity.Models.Requests;
+using ChristopherBriddock.Service.Identity.Providers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -17,9 +19,9 @@ namespace ChristopherBriddock.Service.Identity.Endpoints;
 /// <param name="logger">The logger for this endpoint.</param>
 public sealed class AuthorizeEndpoint(IServiceProvider serviceProvider,
                                       ILogger<AuthorizeEndpoint> logger) : EndpointBaseAsync
-                                                                          .WithRequest<AuthorizeRequest>
-                                                                          .WithoutParam
-                                                                          .WithActionResult
+                                                                           .WithRequest<AuthorizeRequest>
+                                                                           .WithQuery<AuthorizeRequestQuery>
+                                                                           .WithActionResult
 {
     /// <summary>
     /// The service provider.
@@ -35,6 +37,7 @@ public sealed class AuthorizeEndpoint(IServiceProvider serviceProvider,
     /// Allows a user to be authorized.
     /// </summary>
     /// <param name="request">The object which encapsulates the request body.</param>
+    /// <param name="query">The object which encapsulates the request query.</param>
     /// <param name="cancellationToken">The cancellation token to cancel the operation.</param>
     /// <returns>A new <see cref="ActionResult"/></returns>
     [HttpPost("/authorize")]
@@ -44,13 +47,30 @@ public sealed class AuthorizeEndpoint(IServiceProvider serviceProvider,
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public override async Task<ActionResult> HandleAsync([FromBody] AuthorizeRequest request,
+                                                         AuthorizeRequestQuery query,
                                                          CancellationToken cancellationToken = default)
     {
         try
         {
-            var signInManager = ServiceProvider.GetService<SignInManager<ApplicationUser>>()!;
 
-            var userManager = ServiceProvider.GetService<UserManager<ApplicationUser>>()!;
+            if (query.ResponseType == "Code")
+            {
+                AppDbContext context = ServiceProvider.GetRequiredService<AppDbContext>();
+
+                var clientId = context.AspNetApplications.Where(s => s.ClientId == query.ClientId);
+
+                if (clientId is null)
+                {
+                    return Unauthorized();
+                }
+                ICodeProvider codeProvider = ServiceProvider.GetRequiredService<ICodeProvider>();
+                string code = codeProvider.Create();
+                return Redirect($"{query.RedirectUri!}?Code={code}");
+            }
+
+            var signInManager = ServiceProvider.GetRequiredService<SignInManager<ApplicationUser>>();
+
+            var userManager = ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
 
             signInManager.AuthenticationScheme = IdentityConstants.ApplicationScheme;
 
