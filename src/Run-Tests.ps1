@@ -3,7 +3,8 @@ Param(
     $runTests = $true
 )
 
-Function Start-Tests() {
+Function Start-Tests() 
+{
     if ($runTests) 
     {
         Set-Location "ChristopherBriddock.Service.Identity.Tests\"
