@@ -1,18 +1,15 @@
 ﻿namespace ChristopherBriddock.Service.Identity.Tests.IntegrationTests;
 
-public class AuthorizeEndpointTests : IClassFixture<WebApplicationFactory<Program>>
+public class AuthorizeEndpointTests : IClassFixture<WebApplicationFactoryCustom>
 {
-    private readonly WebApplicationFactory<Program> _webApplicationFactory;
+    private readonly WebApplicationFactoryCustom _webApplicationFactory;
 
     private AuthorizeRequest _authorizeRequest;
 
-    public AuthorizeEndpointTests(WebApplicationFactory<Program> webApplicationFactory)
+    public AuthorizeEndpointTests(WebApplicationFactoryCustom webApplicationFactory)
     {
-        _webApplicationFactory = webApplicationFactory.WithWebHostBuilder(s =>
-        {
-            s.UseEnvironment("Test");
-        });
         _authorizeRequest = default!;
+        _webApplicationFactory = webApplicationFactory;
     }
     [Fact]
     public async Task AuthorizeEndpoint_ReturnsStatus302Found_WhenValidCredentialsAreUsed()

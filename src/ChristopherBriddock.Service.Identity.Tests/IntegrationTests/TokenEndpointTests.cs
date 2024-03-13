@@ -6,18 +6,15 @@ using System.Text.Json;
 
 namespace ChristopherBriddock.Service.Identity.Tests.IntegrationTests;
 
-public class TokenEndpointTests : IClassFixture<WebApplicationFactory<Program>>
+public class TokenEndpointTests : IClassFixture<WebApplicationFactoryCustom>
 {
-    private readonly WebApplicationFactory<Program> _webApplicationFactory;
+    private readonly WebApplicationFactoryCustom _webApplicationFactory;
 
     private AuthorizeRequest _authorizeRequest;
 
-    public TokenEndpointTests(WebApplicationFactory<Program> webApplicationFactory)
+    public TokenEndpointTests(WebApplicationFactoryCustom webApplicationFactory)
     {
-        _webApplicationFactory = webApplicationFactory.WithWebHostBuilder(s =>
-        {
-            s.UseEnvironment("Test");
-        });
+        _webApplicationFactory = webApplicationFactory;
         _authorizeRequest = default!;
     }
 

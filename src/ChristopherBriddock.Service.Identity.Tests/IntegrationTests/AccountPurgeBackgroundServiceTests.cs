@@ -32,7 +32,7 @@ public class AccountPurgeBackgroundServiceTests
     public async Task ExecuteAsync_DeletesOldUserAccountsAfterSevenYears()
     {
         // Arrange
-        var webApplicationFactory = new WebApplicationFactory<Program>().WithWebHostBuilder(builder =>
+        var webApplicationFactory = new WebApplicationFactoryCustom().WithWebHostBuilder(builder =>
         {
             builder.UseEnvironment("Test");
         });

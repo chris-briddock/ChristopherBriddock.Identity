@@ -4,16 +4,13 @@ using Microsoft.Extensions.Configuration;
 
 namespace ChristopherBriddock.Service.Identity.Tests.IntegrationTests;
 
-public class TwoFactorRecoveryCodesRedeemEndpointTests : IClassFixture<WebApplicationFactory<Program>> 
+public class TwoFactorRecoveryCodesRedeemEndpointTests : IClassFixture<WebApplicationFactoryCustom> 
 {
-    private readonly WebApplicationFactory<Program> _webApplicationFactory;
+    private readonly WebApplicationFactoryCustom _webApplicationFactory;
 
-    public TwoFactorRecoveryCodesRedeemEndpointTests(WebApplicationFactory<Program> webApplicationFactory)
+    public TwoFactorRecoveryCodesRedeemEndpointTests(WebApplicationFactoryCustom webApplicationFactory)
     {
-        _webApplicationFactory = webApplicationFactory.WithWebHostBuilder(s =>
-        {
-            s.UseEnvironment("Test");
-        });
+        _webApplicationFactory = webApplicationFactory;
     }
 
     [Fact]

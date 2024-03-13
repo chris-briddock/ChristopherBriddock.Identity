@@ -4,16 +4,13 @@ using System.Text.Json;
 
 namespace ChristopherBriddock.Service.Identity.Tests.IntegrationTests;
 
-public class TwoFactorManageEndpointTests : IClassFixture<WebApplicationFactory<Program>>
+public class TwoFactorManageEndpointTests : IClassFixture<WebApplicationFactoryCustom>
 {
-    private readonly WebApplicationFactory<Program> _webApplicationFactory;
+    private readonly WebApplicationFactoryCustom _webApplicationFactory;
 
-    public TwoFactorManageEndpointTests(WebApplicationFactory<Program> webApplicationFactory)
+    public TwoFactorManageEndpointTests(WebApplicationFactoryCustom webApplicationFactory)
     {
-        _webApplicationFactory = webApplicationFactory.WithWebHostBuilder(s =>
-        {
-            s.UseEnvironment("Test");
-        });
+        _webApplicationFactory = webApplicationFactory;
     }
 
     [Fact]

@@ -12,8 +12,9 @@
 
 .pnpm-store/
 .vscode/
-
+.mono/
 .vs/
+core
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 

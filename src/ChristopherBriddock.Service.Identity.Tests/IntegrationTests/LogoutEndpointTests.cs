@@ -4,16 +4,13 @@ using System.Text.Json;
 
 namespace ChristopherBriddock.Service.Identity.Tests.IntegrationTests;
 
-public class LogoutEndpointTests : IClassFixture<WebApplicationFactory<Program>>
+public class LogoutEndpointTests : IClassFixture<WebApplicationFactoryCustom>
 {
-    private readonly WebApplicationFactory<Program> _webApplicationFactory;
+    private readonly WebApplicationFactoryCustom _webApplicationFactory;
 
-    public LogoutEndpointTests(WebApplicationFactory<Program> webApplicationFactory)
+    public LogoutEndpointTests(WebApplicationFactoryCustom webApplicationFactory)
     {
-        _webApplicationFactory = webApplicationFactory.WithWebHostBuilder(s =>
-        {
-            s.UseEnvironment("Test");
-        });
+        _webApplicationFactory = webApplicationFactory;
     }
 
     [Fact]
