@@ -1,18 +1,15 @@
 ﻿namespace ChristopherBriddock.Service.Identity.Tests.IntegrationTests;
 
-public class ConfirmEmailEndpointTests : IClassFixture<WebApplicationFactory<Program>>
+public class ConfirmEmailEndpointTests : IClassFixture<WebApplicationFactoryCustom>
 {
-    private readonly WebApplicationFactory<Program> _webApplicationFactory;
+    private readonly WebApplicationFactoryCustom _webApplicationFactory;
 
     private ConfirmEmailRequest _confirmEmailRequest;
 
-    public ConfirmEmailEndpointTests(WebApplicationFactory<Program> webApplicationFactory)
+    public ConfirmEmailEndpointTests(WebApplicationFactoryCustom webApplicationFactory)
     {
-        _webApplicationFactory = webApplicationFactory.WithWebHostBuilder(s =>
-        {
-            s.UseEnvironment("Test");
-        });
         _confirmEmailRequest = default!;
+        _webApplicationFactory = webApplicationFactory;
     }
 
     [Fact]

@@ -6,16 +6,13 @@ using AuthorizeRequest = ChristopherBriddock.Service.Identity.Models.Requests.Au
 namespace ChristopherBriddock.Service.Identity.Tests.IntegrationTests;
 
 
-public class DeleteAccountEndpointTests : IClassFixture<WebApplicationFactory<Program>>
+public class DeleteAccountEndpointTests : IClassFixture<WebApplicationFactoryCustom>
 {
-    private readonly WebApplicationFactory<Program> _webApplicationFactory;
+    private readonly WebApplicationFactoryCustom _webApplicationFactory;
 
-    public DeleteAccountEndpointTests(WebApplicationFactory<Program> webApplicationFactory)
+    public DeleteAccountEndpointTests(WebApplicationFactoryCustom webApplicationFactory)
     {
-        _webApplicationFactory = webApplicationFactory.WithWebHostBuilder(s =>
-        {
-            s.UseEnvironment("Test");
-        });
+        _webApplicationFactory = webApplicationFactory;
     }
 
     [Fact]

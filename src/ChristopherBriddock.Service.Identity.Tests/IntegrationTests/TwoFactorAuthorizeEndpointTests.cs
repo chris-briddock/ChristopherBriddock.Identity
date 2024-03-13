@@ -1,15 +1,12 @@
 ﻿namespace ChristopherBriddock.Service.Identity.Tests.IntegrationTests;
 
-public class TwoFactorAuthorizeEndpointTests : IClassFixture<WebApplicationFactory<Program>>
+public class TwoFactorAuthorizeEndpointTests : IClassFixture<WebApplicationFactoryCustom>
 {
-    private readonly WebApplicationFactory<Program> _webApplicationFactory;
+    private readonly WebApplicationFactoryCustom _webApplicationFactory;
 
-    public TwoFactorAuthorizeEndpointTests(WebApplicationFactory<Program> webApplicationFactory)
+    public TwoFactorAuthorizeEndpointTests(WebApplicationFactoryCustom webApplicationFactory)
     {
-        _webApplicationFactory = webApplicationFactory.WithWebHostBuilder(s =>
-        {
-            s.UseEnvironment("Test");
-        });
+        _webApplicationFactory = webApplicationFactory;
     }
 
     [Fact]

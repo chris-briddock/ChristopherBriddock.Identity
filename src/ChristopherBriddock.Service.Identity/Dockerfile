@@ -1,10 +1,10 @@
-FROM mcr.microsoft.com/dotnet/aspnet:8.0.1-bookworm-slim-amd64 AS base
+FROM mcr.microsoft.com/dotnet/aspnet:8.0.3ookworm-slim-amd64 AS base
 USER app
 WORKDIR /app
 
 EXPOSE 8080
 
-FROM mcr.microsoft.com/dotnet/sdk:8.0.101-bookworm-slim-amd64 AS build
+FROM mcr.microsoft.com/dotnet/sdk:8.0.202-bookworm-slim-amd64 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["ChristopherBriddock.Service.Identity/ChristopherBriddock.Service.Identity.csproj", "ChristopherBriddock.Service.Identity/"]
