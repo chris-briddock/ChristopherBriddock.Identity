@@ -1,23 +1,24 @@
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { LoginResponse } from '../../models/LoginResponse';
-import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from '../../services/auth.service';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [HttpClientModule, FormsModule],
+  imports: [FormsModule, HttpClientModule],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  constructor() { }
   email: string = '';
   password: string = '';
 
-  onSubmit(authService: AuthService): void {
-    authService.login(this.email, this.password).subscribe({
+  constructor(private authService: AuthService) { }
+
+  onSubmit(): void {
+    this.authService.login(this.email, this.password).subscribe({
       next: (response: LoginResponse) => {
         console.log('Access Token:', response.accessToken);
         console.log('Refresh Token:', response.refreshToken);
