@@ -86,7 +86,7 @@ public class AuthorizeEndpointTests : IClassFixture<WebApplicationFactory<Progra
     }
 
     [Fact]
-    public async Task AuthorizeEndpoint_ReturnsStatus302Found_WhenTwoFactorIsEnabled()
+    public async Task AuthorizeEndpoint_ReturnsStatus200OK_WhenTwoFactorIsEnabled()
     {
         _authorizeRequest = new()
         {
@@ -102,7 +102,7 @@ public class AuthorizeEndpointTests : IClassFixture<WebApplicationFactory<Progra
 
 
         using var sut = await client.PostAsJsonAsync("/authorize", _authorizeRequest);
-        Assert.Equivalent(HttpStatusCode.Found, sut.StatusCode);
+        Assert.Equivalent(HttpStatusCode.OK, sut.StatusCode);
 
     }
 

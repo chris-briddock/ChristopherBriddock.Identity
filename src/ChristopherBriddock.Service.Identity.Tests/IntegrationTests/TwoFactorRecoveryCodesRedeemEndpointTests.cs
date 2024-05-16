@@ -1,19 +1,12 @@
-using System.Net.Http.Headers;
-using System.Text.Json;
-using Microsoft.Extensions.Configuration;
-
 namespace ChristopherBriddock.Service.Identity.Tests.IntegrationTests;
 
-public class TwoFactorRecoveryCodesRedeemEndpointTests : IClassFixture<WebApplicationFactory<Program>> 
+public class TwoFactorRecoveryCodesRedeemEndpointTests : IClassFixture<CustomWebApplicationFactory<Program>>
 {
-    private readonly WebApplicationFactory<Program> _webApplicationFactory;
+    private readonly CustomWebApplicationFactory<Program> _webApplicationFactory;
 
-    public TwoFactorRecoveryCodesRedeemEndpointTests(WebApplicationFactory<Program> webApplicationFactory)
+    public TwoFactorRecoveryCodesRedeemEndpointTests(CustomWebApplicationFactory<Program> webApplicationFactory)
     {
-        _webApplicationFactory = webApplicationFactory.WithWebHostBuilder(s =>
-        {
-            s.UseEnvironment("Test");
-        });
+        _webApplicationFactory = webApplicationFactory;
     }
 
     [Fact]
@@ -27,9 +20,9 @@ public class TwoFactorRecoveryCodesRedeemEndpointTests : IClassFixture<WebApplic
 
          var sutClient = _webApplicationFactory.WithWebHostBuilder(s =>
         {
-            s.ConfigureTestServices(s =>
+            s.ConfigureTestServices(x =>
             {
-                s.Replace(new ServiceDescriptor(typeof(UserManager<ApplicationUser>), userManagerMock.Object));
+                x.Replace(new ServiceDescriptor(typeof(UserManager<ApplicationUser>), userManagerMock.Object));
             });
         }).CreateClient();
 
@@ -39,7 +32,7 @@ public class TwoFactorRecoveryCodesRedeemEndpointTests : IClassFixture<WebApplic
             Code = "sdkdmdkmksm"
         };
 
-        var sut = await sutClient.PostAsJsonAsync("/2fa/redeem", redeemRequest);
+        using var sut = await sutClient.PostAsJsonAsync("/2fa/redeem", redeemRequest);
 
         Assert.Equivalent(HttpStatusCode.OK, sut.StatusCode);
     }

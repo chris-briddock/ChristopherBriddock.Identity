@@ -20,7 +20,7 @@ namespace ChristopherBriddock.Service.Identity.Endpoints;
 public class UpdatePasswordEndpoint(IServiceProvider serviceProvider,
                                     ILogger<UpdatePasswordEndpoint> logger) : EndpointBaseAsync
                                                                              .WithRequest<UpdatePasswordRequest>
-                                                                             .WithoutParam
+                                                                             .WithoutQuery
                                                                              .WithActionResult
 {
     /// <summary>

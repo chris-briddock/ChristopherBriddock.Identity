@@ -18,7 +18,7 @@ namespace ChristopherBriddock.Service.Identity.Endpoints;
 public class TwoFactorRecoveryCodesRedeemEndpoint(IServiceProvider serviceProvider,
                                                   ILogger<TwoFactorRecoveryCodesEndpoint> logger) : EndpointBaseAsync
                                                                                                     .WithRequest<TwoFactorRecoveryCodesRedeemRequest>
-                                                                                                    .WithoutParam
+                                                                                                    .WithoutQuery
                                                                                                     .WithActionResult
 {
     /// <summary>

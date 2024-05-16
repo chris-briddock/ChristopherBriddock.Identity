@@ -20,7 +20,7 @@ namespace ChristopherBriddock.Service.Identity.Endpoints;
 public class UpdateEmailEndpoint(IServiceProvider serviceProvider,
                                  ILogger<UpdateEmailEndpoint> logger) : EndpointBaseAsync
                                                                         .WithRequest<UpdateEmailRequest>
-                                                                        .WithoutParam
+                                                                        .WithoutQuery
                                                                         .WithActionResult
 {
     /// <summary>

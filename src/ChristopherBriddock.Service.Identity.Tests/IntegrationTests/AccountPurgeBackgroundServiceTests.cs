@@ -19,6 +19,9 @@ public class AccountPurgeBackgroundServiceExposeProtected : AccountPurgeBackgrou
     }
 }
 
+/// <summary>
+/// This test uses NUnit due to a concurrency issue with XUnit.
+/// </summary>
 public class AccountPurgeBackgroundServiceTests
 {
     private readonly Mock<ILogger<AccountPurgeBackgroundService>> _mockLogger;

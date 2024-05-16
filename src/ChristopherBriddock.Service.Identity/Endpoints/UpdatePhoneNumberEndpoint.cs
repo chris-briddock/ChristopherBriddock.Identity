@@ -20,7 +20,7 @@ namespace ChristopherBriddock.Service.Identity.Endpoints;
 public class UpdatePhoneNumberEndpoint(IServiceProvider serviceProvider,
                                        ILogger<UpdatePhoneNumberEndpoint> logger) : EndpointBaseAsync
                                                                                     .WithRequest<UpdatePhoneNumberRequest>
-                                                                                    .WithoutParam
+                                                                                    .WithoutQuery
                                                                                     .WithActionResult
 {
     /// <summary>

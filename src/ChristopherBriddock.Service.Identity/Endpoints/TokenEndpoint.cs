@@ -86,6 +86,7 @@ public class TokenEndpoint(IServiceProvider serviceProvider,
                 RefreshToken = refreshToken.Token,
                 Expires = expires
             };
+            
             return Ok(response);
         }
         catch (Exception ex)

@@ -13,7 +13,7 @@ namespace ChristopherBriddock.Service.Identity.Endpoints;
 public sealed class TwoFactorAuthorizeEndpoint(IServiceProvider serviceProvider,
                                                ILogger<TwoFactorAuthorizeEndpoint> logger) : EndpointBaseAsync
                                                                                              .WithRequest<TwoFactorSignInRequest>
-                                                                                             .WithoutParam
+                                                                                             .WithoutQuery
                                                                                              .WithActionResult
 {
     /// <summary>

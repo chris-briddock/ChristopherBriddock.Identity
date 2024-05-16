@@ -20,7 +20,7 @@ namespace ChristopherBriddock.Service.Identity.Endpoints;
 public sealed class TwoFactorManageEndpoint(IServiceProvider serviceProvider,
                                             ILogger<TwoFactorManageEndpoint> logger) : EndpointBaseAsync
                                                                                        .WithRequest<TwoFactorManageRequest>
-                                                                                       .WithoutParam
+                                                                                       .WithoutQuery
                                                                                        .WithActionResult
 {
     /// <summary>
@@ -49,9 +49,10 @@ public sealed class TwoFactorManageEndpoint(IServiceProvider serviceProvider,
         {
             var userManager = ServiceProvider.GetService<UserManager<ApplicationUser>>()!;
 
-            string emailAddress = User.FindFirst(ClaimTypes.Email)!.Value;
+            IHttpContextAccessor httpContextAccessor = ServiceProvider.GetRequiredService<IHttpContextAccessor>();
+            Claim? emailClaim = httpContextAccessor.HttpContext!.User.FindFirst(ClaimTypes.Email)!;
 
-            var user = await userManager.FindByEmailAsync(emailAddress);
+            var user = await userManager.FindByEmailAsync(emailClaim.Value);
 
             var result = await userManager.SetTwoFactorEnabledAsync(user!, request.IsEnabled);
             if (!result.Succeeded)

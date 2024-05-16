@@ -20,7 +20,7 @@ namespace ChristopherBriddock.Service.Identity.Endpoints;
 public sealed class ConfirmEmailEndpoint(IServiceProvider serviceProvider,
                                          ILogger<ConfirmEmailEndpoint> logger) : EndpointBaseAsync
                                                                                  .WithRequest<ConfirmEmailRequest>
-                                                                                 .WithoutParam
+                                                                                 .WithoutQuery
                                                                                  .WithActionResult
 {
     /// <inheritdoc/>

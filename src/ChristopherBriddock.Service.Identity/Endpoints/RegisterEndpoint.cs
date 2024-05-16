@@ -1,16 +1,10 @@
 ﻿using ChristopherBriddock.ApiEndpoints;
-using ChristopherBriddock.Service.Common.Constants;
-using ChristopherBriddock.Service.Common.Messaging;
 using ChristopherBriddock.Service.Identity.Constants;
 using ChristopherBriddock.Service.Identity.Models;
 using ChristopherBriddock.Service.Identity.Models.Requests;
-using ChristopherBriddock.Service.Identity.Providers;
-using ChristopherBriddock.Service.Identity.Publishers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.WebUtilities;
-using System.Text;
 
 namespace ChristopherBriddock.Service.Identity.Endpoints;
 
@@ -25,7 +19,7 @@ namespace ChristopherBriddock.Service.Identity.Endpoints;
 public sealed class RegisterEndpoint(IServiceProvider serviceProvider,
                                     ILogger<RegisterEndpoint> logger) : EndpointBaseAsync
                                                                         .WithRequest<RegisterRequest>
-                                                                        .WithoutParam
+                                                                        .WithoutQuery
                                                                         .WithActionResult
 {
     /// <inheritdoc/>

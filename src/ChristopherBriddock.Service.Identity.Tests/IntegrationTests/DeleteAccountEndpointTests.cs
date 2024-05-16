@@ -44,10 +44,7 @@ public class DeleteAccountEndpointTests : IClassFixture<WebApplicationFactory<Pr
 
                 s.Replace(new ServiceDescriptor(typeof(IConfiguration), configurationBuilder));
             });
-        }).CreateClient(new WebApplicationFactoryClientOptions()
-        {
-            AllowAutoRedirect = true
-        });
+        }).CreateClient();
 
         using var authorizeResponse = await client.PostAsJsonAsync("/authorize", authorizeRequest);
 

@@ -21,9 +21,9 @@ namespace ChristopherBriddock.Service.Identity.Endpoints;
 /// <param name="logger">The application's logger.</param>
 public sealed class SendTokenEmailEndpoint(IServiceProvider serviceProvider,
                                                 ILogger<SendTokenEmailEndpoint> logger) : EndpointBaseAsync
-                                                                                               .WithRequest<TokenEmailRequest>
-                                                                                               .WithoutParam
-                                                                                               .WithActionResult
+                                                                                          .WithRequest<TokenEmailRequest>
+                                                                                          .WithoutQuery
+                                                                                          .WithActionResult
 {
     /// <summary>
     /// The application service provider.

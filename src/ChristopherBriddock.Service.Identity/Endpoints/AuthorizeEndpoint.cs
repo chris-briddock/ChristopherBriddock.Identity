@@ -18,7 +18,7 @@ namespace ChristopherBriddock.Service.Identity.Endpoints;
 public sealed class AuthorizeEndpoint(IServiceProvider serviceProvider,
                                       ILogger<AuthorizeEndpoint> logger) : EndpointBaseAsync
                                                                           .WithRequest<AuthorizeRequest>
-                                                                          .WithoutParam
+                                                                          .WithoutQuery
                                                                           .WithActionResult
 {
     /// <summary>
@@ -61,7 +61,9 @@ public sealed class AuthorizeEndpoint(IServiceProvider serviceProvider,
 
             if (signInResult.RequiresTwoFactor)
             {
-                return LocalRedirect($"/sendemail?EmailAddress={request.EmailAddress}&TokenType=TwoFactorToken");
+                return Ok();
+                // Remember to call the /sendemail endpoint for the user.
+                // then once email is confirmed, call the /2fa/authorize endpoint.
             }
 
             if (!signInResult.Succeeded)

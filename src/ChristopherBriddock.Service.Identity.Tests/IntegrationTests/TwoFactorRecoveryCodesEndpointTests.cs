@@ -1,137 +1,97 @@
-using System.Net.Http.Headers;
-using System.Text.Json;
-using Microsoft.Extensions.Configuration;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Http;
 
 namespace ChristopherBriddock.Service.Identity.Tests.IntegrationTests;
 
-public class TwoFactorRecoveryCodesEndpointTests : IClassFixture<WebApplicationFactory<Program>> 
+public class TwoFactorRecoveryCodesEndpointTests : IClassFixture<CustomWebApplicationFactory<Program>>
 {
-    private readonly WebApplicationFactory<Program> _webApplicationFactory;
+    private readonly CustomWebApplicationFactory<Program> _webApplicationFactory;
 
-    public TwoFactorRecoveryCodesEndpointTests(WebApplicationFactory<Program> webApplicationFactory)
+    public TwoFactorRecoveryCodesEndpointTests(CustomWebApplicationFactory<Program> webApplicationFactory)
     {
-        _webApplicationFactory = webApplicationFactory.WithWebHostBuilder(s =>
-        {
-            s.UseEnvironment("Test");
-        });
+        _webApplicationFactory = webApplicationFactory;
     }
 
     [Fact]
-    public async Task TwoFactorRecoveryCodesEndpoint_Returns200OK_WhenRecoveryCodesAreRequested() 
+    public async Task TwoFactorRecoveryCodesEndpoint_Returns200OK_WhenRecoveryCodesAreRequested()
     {
-        AuthorizeRequest authorizeRequest = new()
-        {
-            EmailAddress = "authenticationtest@test.com",
-            Password = "Lq74z*:&gB^zmhx*HsrB6GYj%K}G=W0Jqcxsz8] Lq74z*:&gB^zmhx*",
-            RememberMe = true
-        };
+        // Arrange
 
-        var configurationBuilder = new ConfigurationBuilder()
-            .AddInMemoryCollection(new Dictionary<string, string?>
-            {
-                { "Jwt:Issuer", "https://localhost" },
-                { "Jwt:Secret", "=W0Jqcxsz8] Lq74z*:&gB^zmhx*HsrB6GYj%K}G=W0Jqcxsz8] Lq74z*:&gB^zmhx*HsrB6GYj%K}G" },
-                { "Jwt:Audience", "authenticationtest@test.com" },
-                { "Jwt:Expires", "60" }
-            }).Build();
-
-        using var client = _webApplicationFactory.WithWebHostBuilder(s =>
-        {
-            s.ConfigureTestServices(s =>
-            {
-                s.Replace(new ServiceDescriptor(typeof(IConfiguration), configurationBuilder));
-            });
-        }).CreateClient(new WebApplicationFactoryClientOptions
-        {
-            AllowAutoRedirect = true
-        });
-
-        using var authorizeResponse = await client.PostAsJsonAsync("/authorize", authorizeRequest);
-
-        var jsonDocumentRoot = JsonDocument.Parse(authorizeResponse.Content.ReadAsStream()).RootElement;
-
-        string? accessToken = jsonDocumentRoot.GetProperty("accessToken").GetString()!;
-
-        var userManagerMock = new UserManagerMock<ApplicationUser>().Mock();
-
+        // Create a new instance of ApplicationUser with desired properties
         var user = new ApplicationUser();
 
-        userManagerMock.Setup(s => s.FindByEmailAsync(It.IsAny<string>())).ReturnsAsync(user);
+        // Create a mock instance of UserManager<ApplicationUser>
+        var userManagerMock = new UserManagerMock<ApplicationUser>().Mock();
 
-        userManagerMock.Setup(s => s.GenerateNewTwoFactorRecoveryCodesAsync(user, 10));
+        // Set up mock behavior for FindByEmailAsync and GenerateNewTwoFactorRecoveryCodesAsync methods
+        userManagerMock.Setup(s => s.FindByEmailAsync("test@test.com")).ReturnsAsync(user);
+        userManagerMock.Setup(s => s.GenerateNewTwoFactorRecoveryCodesAsync(user, 10)).ReturnsAsync(new[] { "code1", "code2" });
 
-        using var sutClient = _webApplicationFactory.WithWebHostBuilder(s =>
+        // Create a mock instance of ClaimsPrincipal and set up behavior for FindFirst method
+        var claimsPrincipalMock = new ClaimsPrincipalMock();
+        claimsPrincipalMock.Setup(u => u.FindFirst(ClaimTypes.Email))
+            .Returns(new Claim(ClaimTypes.Email, "test@test.com"));
+
+        // Create a mock instance of HttpContext and set up the User property
+        var httpContextMock = new HttpContextMock();
+        httpContextMock.Setup(x => x.User).Returns(claimsPrincipalMock.Object);
+
+        // Create a mock instance of IHttpContextAccessor
+        var httpContextAccessorMock = new IHttpContextAccessorMock();
+        httpContextAccessorMock.Setup(x => x.HttpContext).Returns(httpContextMock.Object);
+
+        // Create an instance of HttpClient with the necessary services configured
+        var client = _webApplicationFactory.WithWebHostBuilder(builder =>
         {
-            s.ConfigureTestServices(s =>
+            builder.ConfigureTestServices(services =>
             {
-                s.Replace(new ServiceDescriptor(typeof(UserManager<ApplicationUser>), userManagerMock.Object));
-                s.Replace(new ServiceDescriptor(typeof(IConfiguration), configurationBuilder));
+                services.Replace(new ServiceDescriptor(typeof(UserManager<ApplicationUser>), userManagerMock.Object));
+                services.Replace(new ServiceDescriptor(typeof(IHttpContextAccessor), httpContextAccessorMock.Object));
             });
-        }).CreateClient();
+        }).CreateClient(new WebApplicationFactoryClientOptions());
 
-        sutClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
-
-        using var sut = await sutClient.GetAsync("/2fa/codes");
-
-        Assert.Equivalent(HttpStatusCode.OK, authorizeResponse.StatusCode);
-        Assert.Equivalent(HttpStatusCode.OK, sut.StatusCode);
+        // Act
+        var sut = await client.GetAsync("/2fa/codes");
+        // Assert
+        sut.EnsureSuccessStatusCode();
+        Assert.Equal(HttpStatusCode.OK, sut.StatusCode);
     }
 
-     [Fact]
-    public async Task TwoFactorRecoveryCodesEndpoint_Returns500InternalServerError_WhenExceptionIsThrown() {
-        AuthorizeRequest authorizeRequest = new()
-        {
-            EmailAddress = "authenticationtest@test.com",
-            Password = "Lq74z*:&gB^zmhx*HsrB6GYj%K}G=W0Jqcxsz8] Lq74z*:&gB^zmhx*",
-            RememberMe = true
-        };
 
-        var configurationBuilder = new ConfigurationBuilder()
-            .AddInMemoryCollection(new Dictionary<string, string?>
-            {
-                { "Jwt:Issuer", "https://localhost" },
-                { "Jwt:Secret", "=W0Jqcxsz8] Lq74z*:&gB^zmhx*HsrB6GYj%K}G=W0Jqcxsz8] Lq74z*:&gB^zmhx*HsrB6GYj%K}G" },
-                { "Jwt:Audience", "authenticationtest@test.com" },
-                { "Jwt:Expires", "60" }
-            }).Build();
-
-        using var client = _webApplicationFactory.WithWebHostBuilder(s =>
-        {
-            s.ConfigureTestServices(s =>
-            {
-                s.Replace(new ServiceDescriptor(typeof(IConfiguration), configurationBuilder));
-            });
-        }).CreateClient(new WebApplicationFactoryClientOptions
-        {
-            AllowAutoRedirect = true
-        });
-
-        using var authorizeResponse = await client.PostAsJsonAsync("/authorize", authorizeRequest);
-
-        var jsonDocumentRoot = JsonDocument.Parse(authorizeResponse.Content.ReadAsStream()).RootElement;
-
-        string? accessToken = jsonDocumentRoot.GetProperty("accessToken").GetString()!;
-
-        var userManagerMock = new UserManagerMock<ApplicationUser>().Mock();
-
+    [Fact]
+    public async Task TwoFactorRecoveryCodesEndpoint_Returns500InternalServerError_WhenExceptionIsThrown()
+    {
+        // Create a new instance of ApplicationUser with desired properties
         var user = new ApplicationUser();
+
+        // Create a mock instance of UserManager<ApplicationUser>
+        var userManagerMock = new UserManagerMock<ApplicationUser>().Mock();
 
         userManagerMock.Setup(s => s.FindByEmailAsync(It.IsAny<string>())).ThrowsAsync(new Exception());
 
-        using var sutClient = _webApplicationFactory.WithWebHostBuilder(s =>
-        {
-            s.ConfigureTestServices(s =>
-            {
-                s.Replace(new ServiceDescriptor(typeof(UserManager<ApplicationUser>), userManagerMock.Object));
-                s.Replace(new ServiceDescriptor(typeof(IConfiguration), configurationBuilder));
-            });
-        }).CreateClient();
+        // Create a mock instance of ClaimsPrincipal and set up behavior for FindFirst method
+        var claimsPrincipalMock = new Mock<ClaimsPrincipal>();
+        claimsPrincipalMock.Setup(u => u.FindFirst(ClaimTypes.Email))
+            .Returns(new Claim(ClaimTypes.Email, "test@test.com"));
 
-        sutClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+        // Create a mock instance of HttpContext and set up the User property
+        var httpContextMock = new HttpContextMock();
+        httpContextMock.Setup(x => x.User).Returns(claimsPrincipalMock.Object);
+
+        // Create a mock instance of IHttpContextAccessor
+        var httpContextAccessorMock = new IHttpContextAccessorMock();
+        httpContextAccessorMock.Setup(x => x.HttpContext).Returns(httpContextMock.Object);
+
+        var sutClient = _webApplicationFactory.WithWebHostBuilder(builder =>
+        {
+            builder.ConfigureTestServices(services =>
+            {
+                services.Replace(new ServiceDescriptor(typeof(UserManager<ApplicationUser>), userManagerMock.Object));
+                services.Replace(new ServiceDescriptor(typeof(IHttpContextAccessor), httpContextAccessorMock.Object));
+            });
+        }).CreateClient(new WebApplicationFactoryClientOptions());
 
         using var sut = await sutClient.GetAsync("/2fa/codes");
-
-        Assert.Equivalent(HttpStatusCode.OK, authorizeResponse.StatusCode);
         Assert.Equivalent(HttpStatusCode.InternalServerError, sut.StatusCode);
 
     }
