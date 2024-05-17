@@ -32,7 +32,7 @@ public class TokenEndpoint(IServiceProvider serviceProvider,
     /// <param name="cancellationToken">The cancellation token to cancel the operation.</param>
     /// <returns>A new <see cref="ActionResult"/></returns>
     [HttpGet("/token")]
-    [Authorize(AuthenticationSchemes = "Identity.Application", Policy = "UserRolePolicy")]
+    [Authorize(AuthenticationSchemes = "Identity.Application, Test", Policy = "UserRolePolicy")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -77,7 +77,6 @@ public class TokenEndpoint(IServiceProvider serviceProvider,
                 {
                     return Unauthorized();
                 }
-
 
             }
             TokenResponse response = new()

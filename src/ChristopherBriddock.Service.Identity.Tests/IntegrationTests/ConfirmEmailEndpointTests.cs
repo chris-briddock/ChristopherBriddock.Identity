@@ -1,18 +1,12 @@
 ﻿namespace ChristopherBriddock.Service.Identity.Tests.IntegrationTests;
 
-public class ConfirmEmailEndpointTests : IClassFixture<WebApplicationFactory<Program>>
+public class ConfirmEmailEndpointTests : IClassFixture<CustomWebApplicationFactory<Program>>
 {
-    private readonly WebApplicationFactory<Program> _webApplicationFactory;
+    private readonly CustomWebApplicationFactory<Program> _webApplicationFactory;
 
-    private ConfirmEmailRequest _confirmEmailRequest;
-
-    public ConfirmEmailEndpointTests(WebApplicationFactory<Program> webApplicationFactory)
+    public ConfirmEmailEndpointTests(CustomWebApplicationFactory<Program> webApplicationFactory)
     {
-        _webApplicationFactory = webApplicationFactory.WithWebHostBuilder(s =>
-        {
-            s.UseEnvironment("Test");
-        });
-        _confirmEmailRequest = default!;
+        _webApplicationFactory = webApplicationFactory;
     }
 
     [Fact]
@@ -33,13 +27,13 @@ public class ConfirmEmailEndpointTests : IClassFixture<WebApplicationFactory<Pro
             });
         }).CreateClient();
 
-        _confirmEmailRequest = new()
+        ConfirmEmailRequest confirmEmailRequest = new()
         {
             EmailAddress = "test@test.com",
             Code = "CfDJ8OgQt3GRCbpAqpW/lUkYbKcxoL55kAWWuaMIq6/+FPUL4p7KYF6W5u89C2yjXp/NANvDtxLbOggkSvJs24z/cM7PW1iDmiegeS4f9XLHLBQlVzQWKaYZou4rIWKTBxk9O4sFFTC7006koe3sUS0URACV4Iq0Xw3EON2hm+3ji05UgFz+JHLZ7Oou7063fEBmmfDjpbTP9Lk5YobeYEddf6rCkSLC786AYkht+xM0x0g7"
         };
 
-        using var sut = await client.GetAsync($"/confirmemail?EmailAddress=test%40test.com&Code={_confirmEmailRequest.Code}");
+        using var sut = await client.PostAsync($"/confirmemail?EmailAddress=test%40test.com&Code={confirmEmailRequest.Code}", null);
 
         Assert.Equivalent(HttpStatusCode.InternalServerError, sut.StatusCode);
     }
@@ -47,7 +41,7 @@ public class ConfirmEmailEndpointTests : IClassFixture<WebApplicationFactory<Pro
     [Fact]
     public async Task ConfirmEmailEndpoint_ReturnsStatus_200OKWithValidRequest()
     {
-        _confirmEmailRequest = new()
+        ConfirmEmailRequest confirmEmailRequest = new()
         {
             EmailAddress = "test@test.com",
             Code = "CfDJ8OgQt3GRCbpAqpW/lUkYbKcxoL55kAWWuaMIq6/+FPUL4p7KYF6W5u89C2yjXp/NANvDtxLbOggkSvJs24z/cM7PW1iDmiegeS4f9XLHLBQlVzQWKaYZou4rIWKTBxk9O4sFFTC7006koe3sUS0URACV4Iq0Xw3EON2hm+3ji05UgFz+JHLZ7Oou7063fEBmmfDjpbTP9Lk5YobeYEddf6rCkSLC786AYkht+xM0x0g7"
@@ -68,7 +62,7 @@ public class ConfirmEmailEndpointTests : IClassFixture<WebApplicationFactory<Pro
             });
         }).CreateClient();
 
-        using var sut = await client.GetAsync($"/confirmemail?EmailAddress=test%40test.com&Code={_confirmEmailRequest.Code}");
+        using var sut = await client.PostAsync($"/confirmemail?EmailAddress=test%40test.com&Code={confirmEmailRequest.Code}", null);
 
         Assert.Equivalent(HttpStatusCode.OK, sut.StatusCode);
     }
@@ -76,7 +70,7 @@ public class ConfirmEmailEndpointTests : IClassFixture<WebApplicationFactory<Pro
     [Fact]
     public async Task ConfirmEmailEndpoint_ReturnsStatus_500WhenUserIsNotFound()
     {
-        _confirmEmailRequest = new()
+        ConfirmEmailRequest confirmEmailRequest = new()
         {
             EmailAddress = "test@asdf.com",
             Code = "CfDJ8OgQt3GRCbpAqpW/lUkYbKcxoL55kAWWuaMIq6/+FPUL4p7KYF6W5u89C2yjXp/NANvDtxLbOggkSvJs24z/cM7PW1iDmiegeS4f9XLHLBQlVzQWKaYZou4rIWKTBxk9O4sFFTC7006koe3sUS0URACV4Iq0Xw3EON2hm+3ji05UgFz+JHLZ7Oou7063fEBmmfDjpbTP9Lk5YobeYEddf6rCkSLC786AYkht+xM0x0g7"
@@ -86,7 +80,7 @@ public class ConfirmEmailEndpointTests : IClassFixture<WebApplicationFactory<Pro
         {
         }).CreateClient();
 
-        using var sut = await client.GetAsync($"/confirmemail?EmailAddress={_confirmEmailRequest.EmailAddress}&Code={_confirmEmailRequest.Code}");
+        using var sut = await client.PostAsync($"/confirmemail?EmailAddress={confirmEmailRequest.EmailAddress}&Code={confirmEmailRequest.Code}", null);
 
         Assert.Equivalent(HttpStatusCode.InternalServerError, sut.StatusCode);
 

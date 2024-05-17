@@ -1,6 +1,5 @@
 using System.Net.Http.Headers;
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Options;
 
 namespace ChristopherBriddock.Service.Identity.Tests.IntegrationTests;
@@ -11,30 +10,15 @@ public class CustomWebApplicationFactory<TProgram> : WebApplicationFactory<TProg
     {
         builder.UseEnvironment("Development");
 
-        builder.ConfigureTestServices(services =>
-        {
-           var descriptors = services
-            .Where(d =>
-                d.ServiceType == typeof(IConfigureOptions<AuthenticationOptions>)).ToList();
+        builder.ConfigureServices(s => {
+            // Remove the existing Identity.Application authentication scheme
+            var identitySchemeDescriptors = s
+                .Where(d => d.ServiceType == typeof(IConfigureOptions<AuthenticationOptions>)).ToList();
 
-            for (int i = 1; i < descriptors.Count; i++)
-            {
-                services.Remove(descriptors[i]);
-            }
-
-            // Add the test-specific authentication scheme
-            services.AddAuthentication(options =>
-            {
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
-            // Add custom auth handler for the re-added Identity.Application scheme
-            .AddScheme<AuthenticationSchemeOptions, TestAuthHandler>("Identity.Application", options => { });
-
-            // Configure the authorization policy
-            services.AddAuthorizationBuilder()
-                    .AddPolicy("UserRolePolicy", policy => policy.RequireRole("User"));
-        });
+            // Add the custom test-specific authentication scheme
+            s.AddAuthentication()
+            .AddScheme<AuthenticationSchemeOptions, TestAuthHandler>("Test", options => { });
+        });        
     }
 
     protected override void ConfigureClient(HttpClient client)

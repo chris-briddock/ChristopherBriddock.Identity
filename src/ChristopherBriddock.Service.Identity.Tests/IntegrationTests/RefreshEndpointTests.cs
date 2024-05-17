@@ -1,8 +1,6 @@
 ﻿using ChristopherBriddock.Service.Identity.Models.Results;
 using ChristopherBriddock.Service.Identity.Providers;
-using Microsoft.Extensions.Configuration;
 using System.Net.Http.Headers;
-using System.Text.Json;
 
 namespace ChristopherBriddock.Service.Identity.Tests.IntegrationTests;
 
@@ -57,14 +55,6 @@ public class RefreshEndpointTests : IClassFixture<CustomWebApplicationFactory<Pr
     public async Task RefreshEndpoint_Returns302Found_WhenRefreshIsSuccessful()
     {
         var jsonWebTokenProviderMock = new JsonWebTokenProviderMock();
-        var configurationBuilder = new ConfigurationBuilder()
-            .AddInMemoryCollection(new Dictionary<string, string?>
-            {
-                { "Jwt:Issuer", "https://localhost" },
-                { "Jwt:Secret", "=W0Jqcxsz8] Lq74z*:&gB^zmhx*HsrB6GYj%K}G=W0Jqcxsz8] Lq74z*:&gB^zmhx*HsrB6GYj%K}G" },
-                { "Jwt:Audience", "atesty@testing.com" },
-                { "Jwt:Expires", "5" }
-            }).Build();
 
         RefreshRequest refreshRequest = new() { RefreshToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImNocmlzIiwic3ViIjoiY2hyaXMiLCJqdGkiOiJmYTAxNGFmZSIsImF1ZCI6WyJodHRwOi8vbG9jYWxob3N0OjI0NTMzIiwiaHR0cHM6Ly9sb2NhbGhvc3Q6NDQzODMiLCJodHRwczovL2xvY2FsaG9zdDo3MDc4IiwiaHR0cDovL2xvY2FsaG9zdDo1MTc0Il0sIm5iZiI6MTcxNTg3MjQ2OCwiZXhwIjoxNzIzODIxMjY4LCJpYXQiOjE3MTU4NzI0NjksImlzcyI6ImRvdG5ldC11c2VyLWp3dHMifQ.-xKTBzDGb1dDMDsYWn_W3ARhK0MEon_6aO63LBs_2Xs" };
 
@@ -81,17 +71,13 @@ public class RefreshEndpointTests : IClassFixture<CustomWebApplicationFactory<Pr
             s.ConfigureTestServices(s =>
             {
                 s.Replace(new ServiceDescriptor(typeof(IJsonWebTokenProvider), jsonWebTokenProviderMock.Object));
-                s.Replace(new ServiceDescriptor(typeof(IConfiguration), configurationBuilder));
             });
         }).CreateClient(new WebApplicationFactoryClientOptions()
         {
             AllowAutoRedirect = false
         });
 
-        using var sut = await refreshClient.PostAsJsonAsync("/refresh", refreshRequest);
-        
-
-        var responseContent = await sut.Content.ReadAsStringAsync();
+        using var sut = await refreshClient.PostAsJsonAsync("/refresh", refreshRequest); 
 
         Assert.Equivalent(HttpStatusCode.Found, sut.StatusCode);
     }
@@ -99,42 +85,7 @@ public class RefreshEndpointTests : IClassFixture<CustomWebApplicationFactory<Pr
     [Fact]
     public async Task RefreshEndpoint_Returns401Unauthorized_WhenTokenValidationFails()
     {
-        var configurationBuilder = new ConfigurationBuilder()
-           .AddInMemoryCollection(new Dictionary<string, string?>
-           {
-                { "Jwt:Issuer", "https://localhost" },
-                { "Jwt:Secret", "=W0Jqcxsz8] Lq74z*:&gB^zmhx*HsrB6GYj%K}G=W0Jqcxsz8] Lq74z*:&gB^zmhx*HsrB6GYj%K}G" },
-                { "Jwt:Audience", "atesty@testing.com" },
-                { "Jwt:Expires", "5" }
-           }).Build();
-
-        using var client = _webApplicationFactory.WithWebHostBuilder(s =>
-        {
-            s.ConfigureTestServices(s =>
-            {
-
-                s.Replace(new ServiceDescriptor(typeof(IConfiguration), configurationBuilder));
-            });
-        }).CreateClient(new WebApplicationFactoryClientOptions()
-        {
-            AllowAutoRedirect = true
-        });
-
-        AuthorizeRequest authorizeRequest = new()
-        {
-            EmailAddress = "authenticationtest@test.com",
-            Password = "Lq74z*:&gB^zmhx*HsrB6GYj%K}G=W0Jqcxsz8] Lq74z*:&gB^zmhx*",
-            RememberMe = true
-        };
-
-        using var authorizeResponse = await client.PostAsJsonAsync("/authorize", authorizeRequest);
-
-        var jsonDocumentRoot = JsonDocument.Parse(authorizeResponse.Content.ReadAsStream()).RootElement;
-
-        string? accessToken = jsonDocumentRoot.GetProperty("accessToken").GetString()!;
-        string? refreshToken = jsonDocumentRoot.GetProperty("refreshToken").GetString()!;
-
-        RefreshRequest refreshRequest = new() { RefreshToken = refreshToken };
+        RefreshRequest refreshRequest = new() { RefreshToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImNocmlzIiwic3ViIjoiY2hyaXMiLCJqdGkiOiJmYTAxNGFmZSIsImF1ZCI6WyJodHRwOi8vbG9jYWxob3N0OjI0NTMzIiwiaHR0cHM6Ly9sb2NhbGhvc3Q6NDQzODMiLCJodHRwczovL2xvY2FsaG9zdDo3MDc4IiwiaHR0cDovL2xvY2FsaG9zdDo1MTc0Il0sIm5iZiI6MTcxNTg3MjQ2OCwiZXhwIjoxNzIzODIxMjY4LCJpYXQiOjE3MTU4NzI0NjksImlzcyI6ImRvdG5ldC11c2VyLWp3dHMifQ.-xKTBzDGb1dDMDsYWn_W3ARhK0MEon_6aO63LBs_2Xs" };
 
         var jsonWebTokenProviderMock = new JsonWebTokenProviderMock().Mock();
 
@@ -153,18 +104,14 @@ public class RefreshEndpointTests : IClassFixture<CustomWebApplicationFactory<Pr
             s.ConfigureTestServices(s =>
             {
                 s.Replace(new ServiceDescriptor(typeof(IJsonWebTokenProvider), jsonWebTokenProviderMock.Object));
-                s.Replace(new ServiceDescriptor(typeof(IConfiguration), configurationBuilder));
             });
         }).CreateClient(new WebApplicationFactoryClientOptions()
         {
             AllowAutoRedirect = false
         });
 
-        refreshClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
-
         using var sut = await refreshClient.PostAsJsonAsync("/refresh", refreshRequest);
 
-        Assert.Equivalent(HttpStatusCode.OK, authorizeResponse.StatusCode);
         Assert.Equivalent(HttpStatusCode.Unauthorized, sut.StatusCode);
     }
 }

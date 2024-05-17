@@ -40,8 +40,8 @@ public class TwoFactorAuthorizeEndpointTests : IClassFixture<CustomWebApplicatio
             AllowAutoRedirect = false
         });
 
-        var response = await client.PostAsJsonAsync($"/2fa/authorize", request);
+        var sut = await client.PostAsJsonAsync($"/2fa/authorize", request);
 
-        Assert.Equivalent(HttpStatusCode.Found, response.StatusCode);
+        Assert.Equivalent(HttpStatusCode.Found, sut.StatusCode);
     }
 }

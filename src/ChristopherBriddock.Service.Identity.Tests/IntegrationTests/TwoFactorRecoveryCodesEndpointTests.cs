@@ -54,7 +54,7 @@ public class TwoFactorRecoveryCodesEndpointTests : IClassFixture<CustomWebApplic
         var sut = await client.GetAsync("/2fa/codes");
         // Assert
         sut.EnsureSuccessStatusCode();
-        Assert.Equal(HttpStatusCode.OK, sut.StatusCode);
+        Assert.Equivalent(HttpStatusCode.OK, sut.StatusCode);
     }
 
 

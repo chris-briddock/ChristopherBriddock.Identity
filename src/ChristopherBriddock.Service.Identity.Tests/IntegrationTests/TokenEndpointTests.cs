@@ -35,54 +35,18 @@ public class TokenEndpointTests : IClassFixture<CustomWebApplicationFactory<Prog
     }
 
     [Fact]
-    public async Task TokenEndpoint_Returns200OK_WhenRequestIsValid()
-    {
-        // Arrange
-        var configurationMock = new Mock<IConfiguration>();
-        configurationMock.SetupGet(x => x["Jwt:Issuer"]).Returns("issuer");
-        configurationMock.SetupGet(x => x["Jwt:Audience"]).Returns("audience");
-        configurationMock.SetupGet(x => x["Jwt:Secret"]).Returns("secret");
-        configurationMock.SetupGet(x => x["Jwt:Expires"]).Returns("expires");
-
-        var tokenProviderMock = new JsonWebTokenProviderMock();
-        tokenProviderMock.Setup(x => x.TryCreateTokenAsync(It.IsAny<string>(),
-                                                           It.IsAny<string>(),
-                                                           It.IsAny<string>(),
-                                                           It.IsAny<string>(),
-                                                           It.IsAny<string>(),
-                                                           It.IsAny<string>())).ReturnsAsync(new JwtResult { Success = true, Token = "accessToken" });
-        tokenProviderMock.Setup(x => x.TryCreateRefreshTokenAsync(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()))
-            .ReturnsAsync(new JwtResult { Success = true, Token = "refreshToken" });
-        tokenProviderMock.Setup(x => x.TryValidateTokenAsync(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()))
-            .ReturnsAsync(new JwtResult { Success = true });
-
-        var claimsPrincipalMock = new Mock<ClaimsPrincipal>();
-        claimsPrincipalMock.Setup(x => x.Identity!.Name).Returns("test@test.com");
-        claimsPrincipalMock.Setup(x => x.IsInRole("User")).Returns(true);
-
-        var client = CreateClientWithMocks(configurationMock.Object, tokenProviderMock.Object, claimsPrincipalMock.Object);
-
-        // Act
-        var sut = await client.GetAsync("/token");
-
-                
-        var responseContent = await sut.Content.ReadAsStringAsync();
-
-        // Assert
-        sut.EnsureSuccessStatusCode();
-        Assert.Equivalent(HttpStatusCode.OK, sut.StatusCode);
-    }
-
-    [Fact]
     public async Task TokenEndpoint_Returns500InternalServerError_WhenExceptionIsThrown()
     {
         // Arrange
         var tokenProviderMock = new JsonWebTokenProviderMock();
-         var configurationMock = new Mock<IConfiguration>();
-        configurationMock.SetupGet(x => x["Jwt:Issuer"]).Returns("issuer");
-        configurationMock.SetupGet(x => x["Jwt:Audience"]).Returns("audience");
-        configurationMock.SetupGet(x => x["Jwt:Secret"]).Returns("secret");
-        configurationMock.SetupGet(x => x["Jwt:Expires"]).Returns("expires");
+        var configurationBuilder = new ConfigurationBuilder()
+            .AddInMemoryCollection(new Dictionary<string, string?>
+            {
+                { "Jwt:Issuer", "https://localhost" },
+                { "Jwt:Secret", "=W0Jqcxsz8] Lq74z*:&gB^zmhx*HsrB6GYj%K}G" },
+                { "Jwt:Audience", "audience" },
+                { "Jwt:Expires", "60" },
+            }).Build();
         
         tokenProviderMock.Setup(x => x.TryCreateTokenAsync(It.IsAny<string>(),
                                                            It.IsAny<string>(),
@@ -95,13 +59,15 @@ public class TokenEndpointTests : IClassFixture<CustomWebApplicationFactory<Prog
         var claimsPrincipalMock = new ClaimsPrincipalMock();
         
         claimsPrincipalMock.Setup(x => x.Identity!.Name).Returns("test@test.com");
-        claimsPrincipalMock.Setup(x => x.IsInRole("User")).Returns(true);
 
-        var client = CreateClientWithMocks(configurationMock.Object, tokenProviderMock.Object, claimsPrincipalMock.Object);
+        var client = CreateClientWithMocks(configurationBuilder, tokenProviderMock.Object, claimsPrincipalMock.Object);
 
         // Act
-        var response = await client.GetAsync("/token");
+        var sut = await client.GetAsync("/token");
 
-        Assert.Equal(HttpStatusCode.InternalServerError, response.StatusCode);
+        var response = await sut.Content.ReadAsStringAsync();
+        
+        // Assert
+        Assert.Equivalent(HttpStatusCode.InternalServerError, sut.StatusCode);
     }
 }

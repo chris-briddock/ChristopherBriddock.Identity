@@ -2,14 +2,14 @@ using ChristopherBriddock.Service.Common.Constants;
 
 namespace ChristopherBriddock.Service.Identity.Tests.IntegrationTests;
 
-public class SendTokenEmailEndpointTests : IClassFixture<WebApplicationFactory<Program>>
+public class SendTokenEmailEndpointTests : IClassFixture<CustomWebApplicationFactory<Program>>
 {
-    private readonly WebApplicationFactory<Program> _webApplicationFactory;
+    private readonly CustomWebApplicationFactory<Program> _webApplicationFactory;
     private TokenEmailRequest _sendTokenEmailRequest;
 
-    public SendTokenEmailEndpointTests(WebApplicationFactory<Program> webApplicationFactory)
+    public SendTokenEmailEndpointTests(CustomWebApplicationFactory<Program> webApplicationFactory)
     {
-        _webApplicationFactory = webApplicationFactory.WithWebHostBuilder(builder => builder.UseEnvironment("Test"));
+        _webApplicationFactory = webApplicationFactory;
         _sendTokenEmailRequest = default!;
     }
 

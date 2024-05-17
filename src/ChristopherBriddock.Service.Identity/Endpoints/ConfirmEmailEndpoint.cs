@@ -33,7 +33,7 @@ public sealed class ConfirmEmailEndpoint(IServiceProvider serviceProvider,
     /// <param name="request">The object which encapsulates the request.</param>
     /// <param name="cancellationToken">The cancellation token to cancel the operation.</param>
     /// <returns>A new <see cref="ActionResult"/></returns>
-    [HttpGet("/confirmemail")]
+    [HttpPost("/confirmemail")]
     [AllowAnonymous]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -49,7 +49,6 @@ public sealed class ConfirmEmailEndpoint(IServiceProvider serviceProvider,
             var userManager = ServiceProvider.GetService<UserManager<ApplicationUser>>()!;
 
             var user = await userManager.FindByEmailAsync(request.EmailAddress);
-
 
             // NOTE: This code should have been emailed to the user.
             var decodedBytes = WebEncoders.Base64UrlDecode(request.Code);

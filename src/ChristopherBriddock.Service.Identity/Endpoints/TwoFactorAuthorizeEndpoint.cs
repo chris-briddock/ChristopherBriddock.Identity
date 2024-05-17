@@ -30,7 +30,7 @@ public sealed class TwoFactorAuthorizeEndpoint(IServiceProvider serviceProvider,
     /// <param name="cancellationToken">The cancellation token to cancel the operation.</param>
     /// <returns>A new <see cref="ActionResult"/></returns>
     [HttpPost("/2fa/authorize")]
-    [Authorize(AuthenticationSchemes = "Identity.Application")]
+    [Authorize(AuthenticationSchemes = "Identity.Application", Policy = "UserRolePolicy")]
     [ProducesResponseType(StatusCodes.Status302Found)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]

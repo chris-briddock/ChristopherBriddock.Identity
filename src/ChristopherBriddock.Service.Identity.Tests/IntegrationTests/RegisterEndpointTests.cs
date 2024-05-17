@@ -1,16 +1,13 @@
 ﻿namespace ChristopherBriddock.Service.Identity.Tests.IntegrationTests;
 
-public class RegisterEndpointTests : IClassFixture<WebApplicationFactory<Program>>
+public class RegisterEndpointTests : IClassFixture<CustomWebApplicationFactory<Program>>
 {
 
-    private readonly WebApplicationFactory<Program> _webApplicationFactory;
+    private readonly CustomWebApplicationFactory<Program> _webApplicationFactory;
 
-    public RegisterEndpointTests(WebApplicationFactory<Program> webApplicationFactory)
+    public RegisterEndpointTests(CustomWebApplicationFactory<Program> webApplicationFactory)
     {
-        _webApplicationFactory = webApplicationFactory.WithWebHostBuilder(s =>
-        {
-            s.UseEnvironment("Test");
-        });
+        _webApplicationFactory = webApplicationFactory;
     }
 
     [Fact]
