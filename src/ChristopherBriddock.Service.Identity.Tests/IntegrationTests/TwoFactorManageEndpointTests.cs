@@ -48,8 +48,6 @@ public class TwoFactorManageEndpointTests : IClassFixture<CustomWebApplicationFa
 
         using var sut = await sutClient.PostAsync("/2fa/manage?IsEnabled=true", null);
 
-        var responseContent = await sut.Content.ReadAsStringAsync();
-
         Assert.Equivalent(HttpStatusCode.NoContent, sut.StatusCode);
 
     }
