@@ -19,8 +19,6 @@ jobs:
         dotnet-version: 8.0.x
     - name: Install Dependencies
       run: sudo apt-get install jq
-    - name: Install dotnet-user-jwts Tool
-      run: dotnet tool install -g dotnet-user-jwts
     - name: Generate JWT Token
       run: |
         export PATH="$PATH:~/.dotnet/tools"

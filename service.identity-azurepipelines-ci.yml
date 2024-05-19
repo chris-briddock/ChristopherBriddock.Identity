@@ -23,7 +23,6 @@ stages:
         dotnet build --configuration Release src/ChristopherBriddock.Service.Identity/ChristopherBriddock.Service.Identity.csproj
       displayName: 'Build & Restore'
     - script: |
-        dotnet tool install --global dotnet-user-jwts
         export PATH="$PATH:/root/.dotnet/tools"
         JWT=$(dotnet user-jwts create --output json | jq -r .token)
         echo "JWT=$JWT" | tee -a $(Agent.TempDirectory)/jwt.env
