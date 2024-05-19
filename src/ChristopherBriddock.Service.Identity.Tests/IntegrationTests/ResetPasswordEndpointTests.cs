@@ -2,16 +2,25 @@
 
 namespace ChristopherBriddock.Service.Identity.Tests.IntegrationTests;
 
-public class ResetPasswordEndpointTests : IClassFixture<CustomWebApplicationFactory<Program>>
+[TestFixture]
+public class ResetPasswordEndpointTests
 {
-    private readonly CustomWebApplicationFactory<Program> _webApplicationFactory;
+    private TestFixture<Program> _fixture;
 
-    public ResetPasswordEndpointTests(CustomWebApplicationFactory<Program> webApplicationFactory)
+    [OneTimeSetUp]
+    public void OneTimeSetUp()
     {
-        _webApplicationFactory = webApplicationFactory;
+        _fixture = new TestFixture<Program>();
+        _fixture.OneTimeSetUp();
     }
 
-    [Fact]
+    [OneTimeTearDown]
+    public void OneTimeTearDown()
+    {
+        _fixture.OneTimeTearDown();
+    }
+
+    [Test]
     public async Task ResetEndpoint_ReturnsStatus204_WhenResetIsSuccessful()
     {
         ResetPasswordRequest resetPasswordRequest = new()
@@ -28,7 +37,7 @@ public class ResetPasswordEndpointTests : IClassFixture<CustomWebApplicationFact
         userManagerMock.Setup(s => s.ResetPasswordAsync(It.IsAny<ApplicationUser>(), It.IsAny<string>(), It.IsAny<string>()));
 
 
-        using var resetClient = _webApplicationFactory.WithWebHostBuilder(s =>
+        using var resetClient = _fixture.WebApplicationFactory.WithWebHostBuilder(s =>
         {
             s.ConfigureTestServices(s =>
             {
@@ -41,10 +50,10 @@ public class ResetPasswordEndpointTests : IClassFixture<CustomWebApplicationFact
 
         using var sut = await resetClient.PostAsJsonAsync("/resetpassword", resetPasswordRequest);
 
-        Assert.Equivalent(HttpStatusCode.NoContent, sut.StatusCode);
+        Assert.That(sut.StatusCode, Is.EqualTo(HttpStatusCode.NoContent));
     }
 
-    [Fact]
+    [Test]
     public async Task ResetEndpoint_ReturnsStatus500_WhenExceptionIsThrown()
     {
         ResetPasswordRequest resetPasswordRequest = new()
@@ -62,7 +71,7 @@ public class ResetPasswordEndpointTests : IClassFixture<CustomWebApplicationFact
                                                         It.IsAny<string>())).ThrowsAsync(new Exception());
 
 
-        using var resetClient = _webApplicationFactory.WithWebHostBuilder(s =>
+        using var resetClient = _fixture.WebApplicationFactory.WithWebHostBuilder(s =>
         {
             s.ConfigureTestServices(s =>
             {
@@ -72,6 +81,6 @@ public class ResetPasswordEndpointTests : IClassFixture<CustomWebApplicationFact
 
         using var sut = await resetClient.PostAsJsonAsync("/resetpassword", resetPasswordRequest);
 
-        Assert.Equivalent(HttpStatusCode.InternalServerError, sut.StatusCode);
+        Assert.That(sut.StatusCode, Is.EqualTo(HttpStatusCode.InternalServerError));
     }
 }

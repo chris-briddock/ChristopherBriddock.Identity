@@ -3,16 +3,25 @@ using System.Security.Claims;
 
 namespace ChristopherBriddock.Service.Identity.Tests.IntegrationTests;
 
-public class TwoFactorManageEndpointTests : IClassFixture<CustomWebApplicationFactory<Program>>
+public class TwoFactorManageEndpointTests
 {
-    private readonly CustomWebApplicationFactory<Program> _webApplicationFactory;
+    private TestFixture<Program> _fixture;
 
-    public TwoFactorManageEndpointTests(CustomWebApplicationFactory<Program> webApplicationFactory)
+    [OneTimeSetUp]
+    public void OneTimeSetUp()
     {
-        _webApplicationFactory = webApplicationFactory;
+        _fixture = new TestFixture<Program>();
+        _fixture.OneTimeSetUp();
     }
 
-    [Fact]
+    [OneTimeTearDown]
+    public void OneTimeTearDown()
+    {
+        _fixture.OneTimeTearDown();
+    }
+
+
+    [Test]
     public async Task TwoFactorManageEndpoint_Returns204NoContent_WhenTwoFactorIsEnabled()
     {
 
@@ -37,7 +46,7 @@ public class TwoFactorManageEndpointTests : IClassFixture<CustomWebApplicationFa
         var httpContextAccessorMock = new IHttpContextAccessorMock();
         httpContextAccessorMock.Setup(x => x.HttpContext).Returns(httpContextMock.Object);
 
-        using var sutClient = _webApplicationFactory.WithWebHostBuilder(s =>
+        using var sutClient = _fixture.WebApplicationFactory.WithWebHostBuilder(s =>
         {
             s.ConfigureTestServices(s =>
             {
@@ -48,11 +57,11 @@ public class TwoFactorManageEndpointTests : IClassFixture<CustomWebApplicationFa
 
         using var sut = await sutClient.PostAsync("/2fa/manage?IsEnabled=true", null);
 
-        Assert.Equivalent(HttpStatusCode.NoContent, sut.StatusCode);
+        Assert.That(sut.StatusCode, Is.EqualTo(HttpStatusCode.NoContent));
 
     }
 
-    [Fact]
+    [Test]
     public async Task TwoFactorManageEndpoint_Returns400BadRequest_WhenTwoFactorFailsToEnable()
     {
         var userManagerMock = new UserManagerMock<ApplicationUser>().Mock();
@@ -74,7 +83,7 @@ public class TwoFactorManageEndpointTests : IClassFixture<CustomWebApplicationFa
         var httpContextAccessorMock = new IHttpContextAccessorMock();
         httpContextAccessorMock.Setup(x => x.HttpContext).Returns(httpContextMock.Object);
         
-        using var sutClient = _webApplicationFactory.WithWebHostBuilder(s =>
+        using var sutClient = _fixture.WebApplicationFactory.WithWebHostBuilder(s =>
         {
             s.ConfigureTestServices(s =>
             {
@@ -85,11 +94,11 @@ public class TwoFactorManageEndpointTests : IClassFixture<CustomWebApplicationFa
 
         using var sut = await sutClient.PostAsync("/2fa/manage?IsEnabled=true", null);
 
-        Assert.Equivalent(HttpStatusCode.InternalServerError, sut.StatusCode);
+        Assert.That(sut.StatusCode, Is.EqualTo(HttpStatusCode.InternalServerError));
 
     }
 
-    [Fact]
+    [Test]
     public async Task TwoFactorManageEndpoint_Returns500InternalServerError_WhenAnExceptionIsThrown()
     {
         var userManagerMock = new UserManagerMock<ApplicationUser>().Mock();
@@ -111,7 +120,7 @@ public class TwoFactorManageEndpointTests : IClassFixture<CustomWebApplicationFa
         var httpContextAccessorMock = new IHttpContextAccessorMock();
         httpContextAccessorMock.Setup(x => x.HttpContext).Returns(httpContextMock.Object);
 
-        using var sutClient = _webApplicationFactory.WithWebHostBuilder(s =>
+        using var sutClient = _fixture.WebApplicationFactory.WithWebHostBuilder(s =>
         {
             s.ConfigureTestServices(s =>
             {
@@ -122,7 +131,7 @@ public class TwoFactorManageEndpointTests : IClassFixture<CustomWebApplicationFa
 
         using var sut = await sutClient.PostAsync("/2fa/manage?IsEnabled=true", null);
 
-        Assert.Equivalent(HttpStatusCode.InternalServerError, sut.StatusCode);
+        Assert.That(sut.StatusCode, Is.EqualTo(HttpStatusCode.InternalServerError));
 
     }
 }

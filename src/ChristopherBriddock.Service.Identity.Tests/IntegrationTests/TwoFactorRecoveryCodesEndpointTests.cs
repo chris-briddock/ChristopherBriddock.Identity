@@ -3,16 +3,24 @@ using Microsoft.AspNetCore.Http;
 
 namespace ChristopherBriddock.Service.Identity.Tests.IntegrationTests;
 
-public class TwoFactorRecoveryCodesEndpointTests : IClassFixture<CustomWebApplicationFactory<Program>>
+public class TwoFactorRecoveryCodesEndpointTests
 {
-    private readonly CustomWebApplicationFactory<Program> _webApplicationFactory;
+    private TestFixture<Program> _fixture;
 
-    public TwoFactorRecoveryCodesEndpointTests(CustomWebApplicationFactory<Program> webApplicationFactory)
-    {
-        _webApplicationFactory = webApplicationFactory;
-    }
+        [OneTimeSetUp]
+        public void OneTimeSetUp()
+        {
+            _fixture = new TestFixture<Program>();
+            _fixture.OneTimeSetUp();
+        }
 
-    [Fact]
+        [OneTimeTearDown]
+        public void OneTimeTearDown()
+        {
+            _fixture.OneTimeTearDown();
+        }
+
+    [Test]
     public async Task TwoFactorRecoveryCodesEndpoint_Returns200OK_WhenRecoveryCodesAreRequested()
     {
         // Arrange
@@ -41,7 +49,7 @@ public class TwoFactorRecoveryCodesEndpointTests : IClassFixture<CustomWebApplic
         httpContextAccessorMock.Setup(x => x.HttpContext).Returns(httpContextMock.Object);
 
         // Create an instance of HttpClient with the necessary services configured
-        var client = _webApplicationFactory.WithWebHostBuilder(builder =>
+        var client = _fixture.WebApplicationFactory.WithWebHostBuilder(builder =>
         {
             builder.ConfigureTestServices(services =>
             {
@@ -54,11 +62,11 @@ public class TwoFactorRecoveryCodesEndpointTests : IClassFixture<CustomWebApplic
         var sut = await client.GetAsync("/2fa/codes");
         // Assert
         sut.EnsureSuccessStatusCode();
-        Assert.Equivalent(HttpStatusCode.OK, sut.StatusCode);
+        Assert.That(sut.StatusCode, Is.EqualTo(HttpStatusCode.OK));
     }
 
 
-    [Fact]
+    [Test]
     public async Task TwoFactorRecoveryCodesEndpoint_Returns500InternalServerError_WhenExceptionIsThrown()
     {
         // Create a new instance of ApplicationUser with desired properties
@@ -82,7 +90,7 @@ public class TwoFactorRecoveryCodesEndpointTests : IClassFixture<CustomWebApplic
         var httpContextAccessorMock = new IHttpContextAccessorMock();
         httpContextAccessorMock.Setup(x => x.HttpContext).Returns(httpContextMock.Object);
 
-        var sutClient = _webApplicationFactory.WithWebHostBuilder(builder =>
+        var sutClient = _fixture.WebApplicationFactory.WithWebHostBuilder(builder =>
         {
             builder.ConfigureTestServices(services =>
             {
@@ -92,7 +100,7 @@ public class TwoFactorRecoveryCodesEndpointTests : IClassFixture<CustomWebApplic
         }).CreateClient(new WebApplicationFactoryClientOptions());
 
         using var sut = await sutClient.GetAsync("/2fa/codes");
-        Assert.Equivalent(HttpStatusCode.InternalServerError, sut.StatusCode);
+        Assert.That(sut.StatusCode, Is.EqualTo(HttpStatusCode.InternalServerError));
 
     }
 }

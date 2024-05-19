@@ -27,7 +27,7 @@ public class AccountPurgeBackgroundService(IServiceScopeFactory serviceScopeFact
     /// <inheritdoc/>
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        await Task.Delay(TimeSpan.FromMinutes(1), stoppingToken);
+        await Task.Delay(TimeSpan.FromMinutes(0.1), stoppingToken);
 
         try
         {
@@ -37,8 +37,12 @@ public class AccountPurgeBackgroundService(IServiceScopeFactory serviceScopeFact
 
             var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
 
-            var usersToBeDeleted = await dbContext.Users.Where(s => s.IsDeleted)
-                                .Where(s => s.DeletedDateTime < DateTimeOffset.UtcNow.AddYears(-7).DateTime).ToListAsync(stoppingToken);
+            var sevenYearsAgo = DateTime.UtcNow.AddYears(-7).Date;
+
+            var usersToBeDeleted = await dbContext.Users
+            .Where(s => s.IsDeleted)
+            .Where(u => u.DeletedDateTime.Date < sevenYearsAgo)
+            .ToListAsync(stoppingToken);
 
 
             if (usersToBeDeleted.Count > 0)

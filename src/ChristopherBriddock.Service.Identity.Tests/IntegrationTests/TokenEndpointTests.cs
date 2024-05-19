@@ -1,20 +1,28 @@
 ﻿using System.Security.Claims;
-using ChristopherBriddock.Service.Identity.Models.Results;
 using ChristopherBriddock.Service.Identity.Providers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 
 namespace ChristopherBriddock.Service.Identity.Tests.IntegrationTests;
 
-public class TokenEndpointTests : IClassFixture<CustomWebApplicationFactory<Program>>
+[TestFixture]
+public class TokenEndpointTests 
 {
-    private readonly CustomWebApplicationFactory<Program> _factory;
 
-    public TokenEndpointTests(CustomWebApplicationFactory<Program> factory)
+    private TestFixture<Program> _fixture;
+
+    [OneTimeSetUp]
+    public void OneTimeSetUp()
     {
-        _factory = factory;
+        _fixture = new TestFixture<Program>();
+        _fixture.OneTimeSetUp();
     }
 
+    [OneTimeTearDown]
+    public void OneTimeTearDown()
+    {
+        _fixture.OneTimeTearDown();
+    }
     private HttpClient CreateClientWithMocks(IConfiguration configuration, IJsonWebTokenProvider tokenProvider, ClaimsPrincipal user)
     {
         var httpContextAccessorMock = new Mock<IHttpContextAccessor>();
@@ -23,7 +31,7 @@ public class TokenEndpointTests : IClassFixture<CustomWebApplicationFactory<Prog
         httpContextMock.Setup(x => x.User).Returns(user);
         httpContextAccessorMock.Setup(x => x.HttpContext).Returns(httpContextMock.Object);
 
-        return _factory.WithWebHostBuilder(builder =>
+        return _fixture.WebApplicationFactory.WithWebHostBuilder(builder =>
         {
             builder.ConfigureTestServices(services =>
             {
@@ -34,7 +42,7 @@ public class TokenEndpointTests : IClassFixture<CustomWebApplicationFactory<Prog
         }).CreateClient(new WebApplicationFactoryClientOptions());
     }
 
-    [Fact]
+    [Test]
     public async Task TokenEndpoint_Returns500InternalServerError_WhenExceptionIsThrown()
     {
         // Arrange
@@ -64,10 +72,8 @@ public class TokenEndpointTests : IClassFixture<CustomWebApplicationFactory<Prog
 
         // Act
         var sut = await client.GetAsync("/token");
-
-        var response = await sut.Content.ReadAsStringAsync();
         
         // Assert
-        Assert.Equivalent(HttpStatusCode.InternalServerError, sut.StatusCode);
+        Assert.That(sut.StatusCode, Is.EqualTo(HttpStatusCode.InternalServerError));
     }
 }

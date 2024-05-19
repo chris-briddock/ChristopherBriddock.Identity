@@ -1,15 +1,24 @@
 ﻿namespace ChristopherBriddock.Service.Identity.Tests.IntegrationTests;
 
-public class TwoFactorAuthorizeEndpointTests : IClassFixture<CustomWebApplicationFactory<Program>>
+[TestFixture]
+public class TwoFactorAuthorizeEndpointTests 
 {
-    private readonly CustomWebApplicationFactory<Program> _webApplicationFactory;
+    private TestFixture<Program> _fixture;
 
-    public TwoFactorAuthorizeEndpointTests(CustomWebApplicationFactory<Program> webApplicationFactory)
+    [OneTimeSetUp]
+    public void OneTimeSetUp()
     {
-        _webApplicationFactory = webApplicationFactory;
+        _fixture = new TestFixture<Program>();
+        _fixture.OneTimeSetUp();
     }
 
-    [Fact]
+    [OneTimeTearDown]
+    public void OneTimeTearDown()
+    {
+        _fixture.OneTimeTearDown();
+    }
+
+    [Test]
     public async Task TwoFactorAuthorizeEndpoint_ReturnsStatus302Found_WhenValidTokenIsUsed()
     {
         TwoFactorSignInRequest request = new()
@@ -29,7 +38,7 @@ public class TwoFactorAuthorizeEndpointTests : IClassFixture<CustomWebApplicatio
                                                                It.IsAny<string>(),
                                                                It.IsAny<string>())).ReturnsAsync(true);
 
-        using var client = _webApplicationFactory.WithWebHostBuilder(s =>
+        using var client = _fixture.WebApplicationFactory.WithWebHostBuilder(s =>
         {
             s.ConfigureTestServices(s =>
             {
@@ -42,6 +51,6 @@ public class TwoFactorAuthorizeEndpointTests : IClassFixture<CustomWebApplicatio
 
         var sut = await client.PostAsJsonAsync($"/2fa/authorize", request);
 
-        Assert.Equivalent(HttpStatusCode.Found, sut.StatusCode);
+        Assert.That(sut.StatusCode, Is.EqualTo(HttpStatusCode.Found));
     }
 }

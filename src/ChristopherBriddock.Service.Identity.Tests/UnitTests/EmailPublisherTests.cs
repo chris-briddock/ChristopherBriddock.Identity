@@ -5,9 +5,10 @@ using Microsoft.FeatureManagement;
 
 namespace ChristopherBriddock.Service.Identity.Tests.UnitTests;
 
+[TestFixture]
 public class EmailPublisherTests
 {
-    [Fact]
+    [Test]
     public async Task PublishIsSuccessfulWithCorrectMessage()
     {
         // Arrange

@@ -1,16 +1,24 @@
 ﻿namespace ChristopherBriddock.Service.Identity.Tests.IntegrationTests;
 
-public class RegisterEndpointTests : IClassFixture<CustomWebApplicationFactory<Program>>
+[TestFixture]
+public class RegisterEndpointTests
 {
+    private TestFixture<Program> _fixture;
 
-    private readonly CustomWebApplicationFactory<Program> _webApplicationFactory;
-
-    public RegisterEndpointTests(CustomWebApplicationFactory<Program> webApplicationFactory)
+    [OneTimeSetUp]
+    public void OneTimeSetUp()
     {
-        _webApplicationFactory = webApplicationFactory;
+        _fixture = new TestFixture<Program>();
+        _fixture.OneTimeSetUp();
     }
 
-    [Fact]
+    [OneTimeTearDown]
+    public void OneTimeTearDown()
+    {
+        _fixture.OneTimeTearDown();
+    }
+
+    [Test]
     public async Task RegisterEndpoint_Returns201Created_WhenUserIsCreated()
     {
         RegisterRequest registerRequest = new()
@@ -20,17 +28,17 @@ public class RegisterEndpointTests : IClassFixture<CustomWebApplicationFactory<P
             PhoneNumber = "1234567890"
         };
 
-        using var client = _webApplicationFactory.CreateClient(new WebApplicationFactoryClientOptions()
+        using var client = _fixture.WebApplicationFactory.CreateClient(new WebApplicationFactoryClientOptions()
         {
             AllowAutoRedirect = true
         });
 
         using var sut = await client.PostAsJsonAsync("/register", registerRequest);
 
-        Assert.Equivalent(HttpStatusCode.Created, sut.StatusCode);
+        Assert.That(sut.StatusCode, Is.EqualTo(HttpStatusCode.Created));
     }
 
-    [Fact]
+    [Test]
     public async Task RegisterEndpoint_Returns409Conflict_WhenUserAlreadyExists()
     {
         RegisterRequest registerRequest = new()
@@ -40,17 +48,17 @@ public class RegisterEndpointTests : IClassFixture<CustomWebApplicationFactory<P
             PhoneNumber = "1234567890"
         };
 
-        using var client = _webApplicationFactory.CreateClient(new WebApplicationFactoryClientOptions()
+        using var client = _fixture.WebApplicationFactory.CreateClient(new WebApplicationFactoryClientOptions()
         {
             AllowAutoRedirect = true
         });
 
         using var sut = await client.PostAsJsonAsync("/register", registerRequest);
 
-        Assert.Equivalent(HttpStatusCode.Conflict, sut.StatusCode);
+        Assert.That(sut.StatusCode, Is.EqualTo(HttpStatusCode.Conflict));
     }
 
-    [Fact]
+    [Test]
     public async Task RegisterEndpoint_Returns500InternalServerError_WhenExceptionIsThrown()
     {
         RegisterRequest registerRequest = new()
@@ -65,7 +73,7 @@ public class RegisterEndpointTests : IClassFixture<CustomWebApplicationFactory<P
         userManagerMock.Setup(s => s.SetUserNameAsync(It.IsAny<ApplicationUser>(),
                                                       It.IsAny<string>())).ThrowsAsync(new Exception());
 
-        using var client = _webApplicationFactory.WithWebHostBuilder(s =>
+        using var client = _fixture.WebApplicationFactory.WithWebHostBuilder(s =>
         {
             s.ConfigureTestServices(s =>
             {
@@ -79,6 +87,6 @@ public class RegisterEndpointTests : IClassFixture<CustomWebApplicationFactory<P
 
         using var sut = await client.PostAsJsonAsync("/register", registerRequest);
 
-        Assert.Equivalent(HttpStatusCode.InternalServerError, sut.StatusCode);
+        Assert.That(sut.StatusCode, Is.EqualTo(HttpStatusCode.InternalServerError));
     }
 }

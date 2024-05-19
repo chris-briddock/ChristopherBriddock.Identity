@@ -1,15 +1,23 @@
 namespace ChristopherBriddock.Service.Identity.Tests.IntegrationTests;
 
-public class TwoFactorRecoveryCodesRedeemEndpointTests : IClassFixture<CustomWebApplicationFactory<Program>>
+public class TwoFactorRecoveryCodesRedeemEndpointTests
 {
-    private readonly CustomWebApplicationFactory<Program> _webApplicationFactory;
+    private TestFixture<Program> _fixture;
 
-    public TwoFactorRecoveryCodesRedeemEndpointTests(CustomWebApplicationFactory<Program> webApplicationFactory)
+    [OneTimeSetUp]
+    public void OneTimeSetUp()
     {
-        _webApplicationFactory = webApplicationFactory;
+        _fixture = new TestFixture<Program>();
+        _fixture.OneTimeSetUp();
     }
 
-    [Fact]
+    [OneTimeTearDown]
+    public void OneTimeTearDown()
+    {
+        _fixture.OneTimeTearDown();
+    }
+
+    [Test]
     public async Task TwoFactorRecoveryCodesRedeemEndpoint_Returns200OK_WhenOperationIsSuccessful()
     {
         var userManagerMock = new UserManagerMock<ApplicationUser>().Mock();
@@ -18,7 +26,7 @@ public class TwoFactorRecoveryCodesRedeemEndpointTests : IClassFixture<CustomWeb
 
         userManagerMock.Setup(s => s.RedeemTwoFactorRecoveryCodeAsync(It.IsAny<ApplicationUser>(), It.IsAny<string>())).ReturnsAsync(IdentityResult.Success);
 
-         var sutClient = _webApplicationFactory.WithWebHostBuilder(s =>
+         var sutClient = _fixture.WebApplicationFactory.WithWebHostBuilder(s =>
         {
             s.ConfigureTestServices(x =>
             {
@@ -34,10 +42,10 @@ public class TwoFactorRecoveryCodesRedeemEndpointTests : IClassFixture<CustomWeb
 
         using var sut = await sutClient.PostAsJsonAsync("/2fa/redeem", redeemRequest);
 
-        Assert.Equivalent(HttpStatusCode.OK, sut.StatusCode);
+        Assert.That(sut.StatusCode, Is.EqualTo(HttpStatusCode.OK));
     }
 
-    [Fact]
+    [Test]
     public async Task TwoFactorRecoveryCodesRedeemEndpoint_Returns400BadRequest_WhenOperationIsNotSuccessful()
     {
         var userManagerMock = new UserManagerMock<ApplicationUser>().Mock();
@@ -48,7 +56,7 @@ public class TwoFactorRecoveryCodesRedeemEndpointTests : IClassFixture<CustomWeb
 
         userManagerMock.Setup(s => s.RedeemTwoFactorRecoveryCodeAsync(It.IsAny<ApplicationUser>(), It.IsAny<string>())).ReturnsAsync(IdentityResult.Failed());
 
-         using var sutClient = _webApplicationFactory.WithWebHostBuilder(s =>
+         using var sutClient = _fixture.WebApplicationFactory.WithWebHostBuilder(s =>
         {
             s.ConfigureTestServices(s =>
             {
@@ -64,10 +72,10 @@ public class TwoFactorRecoveryCodesRedeemEndpointTests : IClassFixture<CustomWeb
         
         using var sut = await sutClient.PostAsJsonAsync("/2fa/redeem", redeemRequest);
 
-        Assert.Equivalent(HttpStatusCode.BadRequest, sut.StatusCode);
+        Assert.That(sut.StatusCode, Is.EqualTo(HttpStatusCode.BadRequest));
     }
 
-    [Fact]
+    [Test]
     public async Task TwoFactorRecoveryCodesRedeemEndpoint_Returns500InternalServerError_WhenExceptionIsThrown()
     {
         var userManagerMock = new UserManagerMock<ApplicationUser>().Mock();
@@ -78,7 +86,7 @@ public class TwoFactorRecoveryCodesRedeemEndpointTests : IClassFixture<CustomWeb
 
         userManagerMock.Setup(s => s.RedeemTwoFactorRecoveryCodeAsync(It.IsAny<ApplicationUser>(), It.IsAny<string>())).ReturnsAsync(IdentityResult.Failed());
 
-         using var sutClient = _webApplicationFactory.WithWebHostBuilder(s =>
+         using var sutClient = _fixture.WebApplicationFactory.WithWebHostBuilder(s =>
         {
             s.ConfigureTestServices(s =>
             {
@@ -94,6 +102,6 @@ public class TwoFactorRecoveryCodesRedeemEndpointTests : IClassFixture<CustomWeb
         
         using var sut = await sutClient.PostAsJsonAsync("/2fa/redeem", redeemRequest);
 
-        Assert.Equivalent(HttpStatusCode.InternalServerError, sut.StatusCode);
+        Assert.That(sut.StatusCode, Is.EqualTo(HttpStatusCode.InternalServerError));
     }
 }

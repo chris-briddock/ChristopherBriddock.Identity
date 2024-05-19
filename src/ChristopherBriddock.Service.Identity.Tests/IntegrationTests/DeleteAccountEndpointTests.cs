@@ -4,18 +4,26 @@ using System.Security.Claims;
 
 namespace ChristopherBriddock.Service.Identity.Tests.IntegrationTests;
 
-
-public class DeleteAccountEndpointTests : IClassFixture<CustomWebApplicationFactory<Program>>
+[TestFixture]
+public class DeleteAccountEndpointTests
 {
-    private readonly CustomWebApplicationFactory<Program> _webApplicationFactory;
+    private TestFixture<Program> _fixture;
 
-    public DeleteAccountEndpointTests(CustomWebApplicationFactory<Program> webApplicationFactory)
+    [OneTimeSetUp]
+    public void OneTimeSetUp()
     {
-        _webApplicationFactory = webApplicationFactory;
+        _fixture = new TestFixture<Program>();
+        _fixture.OneTimeSetUp();
     }
 
-    [Fact]
-    public async Task DeleteAccountEndpoint_Returns204_WhenAccountIsDeleted()
+    [OneTimeTearDown]
+    public void OneTimeTearDown()
+    {
+        _fixture.OneTimeTearDown();
+    }
+
+    [Test]
+    public async Task DeleteAccountEndpoint_Returns204NoContent_WhenAccountIsDeleted()
     {
 
         // Create user manager mock
@@ -35,8 +43,8 @@ public class DeleteAccountEndpointTests : IClassFixture<CustomWebApplicationFact
         // Create a mock instance of IHttpContextAccessor
         var httpContextAccessorMock = new IHttpContextAccessorMock();
         httpContextAccessorMock.Setup(x => x.HttpContext).Returns(httpContextMock.Object);
-        
-        using var sutClient = _webApplicationFactory.WithWebHostBuilder(s =>
+
+        using var sutClient = _fixture.WebApplicationFactory.WithWebHostBuilder(s =>
         {
             s.ConfigureTestServices(s =>
             {
@@ -50,17 +58,17 @@ public class DeleteAccountEndpointTests : IClassFixture<CustomWebApplicationFact
 
         using var sut = await sutClient.DeleteAsync("/account/delete");
 
-        Assert.Equivalent(HttpStatusCode.NoContent, sut.StatusCode);
+        Assert.That(sut.StatusCode, Is.EqualTo(HttpStatusCode.NoContent));
     }
 
-    [Fact]
+    [Test]
     public async Task DeleteAccountEndpoint_Returns500_WhenExceptionIsThrown()
     {
         var userManagerMock = new UserManagerMock<ApplicationUser>().Mock();
 
         userManagerMock.Setup(s => s.DeleteAsync(It.IsAny<ApplicationUser>())).ThrowsAsync(new Exception());
 
-        using var clientWithForcedError = _webApplicationFactory.WithWebHostBuilder(s =>
+        using var clientWithForcedError = _fixture.WebApplicationFactory.WithWebHostBuilder(s =>
         {
             s.ConfigureTestServices(s =>
             {
@@ -73,29 +81,29 @@ public class DeleteAccountEndpointTests : IClassFixture<CustomWebApplicationFact
 
         using var sut = await clientWithForcedError.DeleteAsync("/account/delete");
 
-        Assert.Equivalent(HttpStatusCode.InternalServerError, sut.StatusCode);
+        Assert.That(sut.StatusCode, Is.EqualTo(HttpStatusCode.InternalServerError));
     }
 
-    [Fact]
+    [Test]
     public async Task DeleteAccountEndpoint_Returns401_WhenUserIsUnauthorized()
     {
-        using var client = _webApplicationFactory.CreateClient();
+        using var client = _fixture.WebApplicationFactory.CreateClient();
 
         client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", "invalidToken");
 
         using var sut = await client.DeleteAsync("/account/delete");
 
-        Assert.Equivalent(HttpStatusCode.Unauthorized, sut.StatusCode);
+        Assert.That(sut.StatusCode, Is.EqualTo(HttpStatusCode.Unauthorized));
     }
 
-    [Fact]
+    [Test]
     public async Task DeleteAccountEndpoint_Returns500_WhenUserIsNotFound()
     {
         var userManagerMock = new UserManagerMock<ApplicationUser>().Mock();
 
         userManagerMock.Setup(s => s.FindByEmailAsync(It.IsAny<string>())).ReturnsAsync(value: null);
 
-        using var clientWithForcedError = _webApplicationFactory.WithWebHostBuilder(s =>
+        using var clientWithForcedError = _fixture.WebApplicationFactory.WithWebHostBuilder(s =>
         {
             s.ConfigureTestServices(s =>
             {
@@ -108,7 +116,7 @@ public class DeleteAccountEndpointTests : IClassFixture<CustomWebApplicationFact
 
         using var sut = await clientWithForcedError.DeleteAsync("/account/delete");
 
-        Assert.Equivalent(HttpStatusCode.InternalServerError, sut.StatusCode);
+        Assert.That(sut.StatusCode, Is.EqualTo(HttpStatusCode.InternalServerError));
     }
 
 }

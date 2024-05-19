@@ -1,14 +1,13 @@
 using ChristopherBriddock.Service.Identity.Data;
 using ChristopherBriddock.Service.Identity.Services;
 using Microsoft.Extensions.Logging;
-using NUnit.Framework;
 
 namespace ChristopherBriddock.Service.Identity.Tests.IntegrationTests;
 
 public class AccountPurgeBackgroundServiceExposeProtected : AccountPurgeBackgroundService
 {
     public AccountPurgeBackgroundServiceExposeProtected(IServiceScopeFactory serviceScopeFactory,
-                                           ILogger<AccountPurgeBackgroundService> logger)
+                                                    ILogger<AccountPurgeBackgroundService> logger)
         : base(serviceScopeFactory, logger)
     { }
 
@@ -19,59 +18,69 @@ public class AccountPurgeBackgroundServiceExposeProtected : AccountPurgeBackgrou
     }
 }
 
-/// <summary>
-/// This test uses NUnit due to a concurrency issue with XUnit.
-/// </summary>
+[TestFixture]
 public class AccountPurgeBackgroundServiceTests
 {
-    private readonly Mock<ILogger<AccountPurgeBackgroundService>> _mockLogger;
+    private TestFixture<Program> _fixture;
 
     public AccountPurgeBackgroundServiceTests()
     {
-        _mockLogger = new Mock<ILogger<AccountPurgeBackgroundService>>();
+        _fixture = new TestFixture<Program>();
+        _fixture.OneTimeSetUp();
+    }
+
+    [OneTimeTearDown]
+    public void OneTimeTearDown()
+    {
+        _fixture.OneTimeTearDown();
     }
 
     [Test]
     public async Task ExecuteAsync_DeletesOldUserAccountsAfterSevenYears()
     {
         // Arrange
-        var webApplicationFactory = new WebApplicationFactory<Program>().WithWebHostBuilder(builder =>
-        {
-            builder.UseEnvironment("Test");
-        });
-
-        var client = webApplicationFactory.CreateClient();
-
-        var scopeFactory = webApplicationFactory.Services.GetService<IServiceScopeFactory>()!;
+        var mockLogger = new LoggerMock<AccountPurgeBackgroundService>();
+        var client = _fixture.WebApplicationFactory.CreateClient();
+        var scopeFactory = _fixture.WebApplicationFactory.Services.GetService<IServiceScopeFactory>()!;
 
         using var scope = scopeFactory.CreateScope();
         var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
 
-        dbContext.Users.Add(new ApplicationUser
+        var oldDeletedUser = new ApplicationUser
         {
             Id = Guid.NewGuid(),
-            UserName = "User1",
-            Email = "user1@test.com",
+            UserName = "OldDeletedUser",
+            Email = "olddeleted@test.com",
             IsDeleted = true,
             DeletedDateTime = DateTime.Now.AddYears(-8)
-        });
+        };
 
-        dbContext.Users.Add(new ApplicationUser
+        var recentDeletedUser = new ApplicationUser
         {
             Id = Guid.NewGuid(),
-            UserName = "User2",
-            Email = "user2@test.com",
+            UserName = "RecentDeletedUser",
+            Email = "recentdeleted@test.com",
             IsDeleted = true,
             DeletedDateTime = DateTime.Now
-        });
+        };
+
+        dbContext.Users.Add(oldDeletedUser);
+        dbContext.Users.Add(recentDeletedUser);
+
         await dbContext.SaveChangesAsync();
 
-        var service = new AccountPurgeBackgroundServiceExposeProtected(scopeFactory, _mockLogger.Object);
+        var service = new AccountPurgeBackgroundServiceExposeProtected(scopeFactory, mockLogger.Object);
 
         // Act
         await service.ExecuteTaskAsync(CancellationToken.None);
 
         // Assert
-        Xunit.Assert.DoesNotContain(dbContext.Users, u => u.IsDeleted && u.DeletedDateTime < DateTime.Today.AddYears(-7));
+        Assert.Multiple(() =>
+        {
+            // Assert
+            Assert.That(dbContext.Users.FirstOrDefault(u => u.Id == oldDeletedUser.Id), Is.Null);
+            Assert.That(dbContext.Users.Any(u => u.Id == recentDeletedUser.Id), Is.True);
+        });
     }
+
 }

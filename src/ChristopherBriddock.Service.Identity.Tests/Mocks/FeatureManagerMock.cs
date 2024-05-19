@@ -2,7 +2,7 @@
 
 namespace ChristopherBriddock.Service.Identity.Tests.Mocks;
 
-internal class FeatureManagerMock : Mock<IFeatureManager>, IMockBase<FeatureManagerMock>
+public class FeatureManagerMock : Mock<IFeatureManager>, IMockBase<FeatureManagerMock>
 {
     public FeatureManagerMock Mock()
     {
