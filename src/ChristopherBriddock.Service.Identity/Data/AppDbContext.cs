@@ -23,7 +23,7 @@ public sealed class AppDbContext(IConfiguration configuration,
     /// <inheritdoc/>
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        if (WebHostEnvironment.IsEnvironment("Development"))
+        if (WebHostEnvironment.IsEnvironment("Test"))
         {
             optionsBuilder.UseSqlite("Data Source=LocalDatabase.db");
         }

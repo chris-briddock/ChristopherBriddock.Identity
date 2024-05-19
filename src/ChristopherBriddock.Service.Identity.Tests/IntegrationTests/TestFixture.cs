@@ -17,8 +17,8 @@ public class TestFixture<TProgram> : IDisposable where TProgram : class
     }
 
     public void Dispose()
-    {
-        
+    { 
         WebApplicationFactory.Dispose();
+        GC.SuppressFinalize(this);
     }
 }
