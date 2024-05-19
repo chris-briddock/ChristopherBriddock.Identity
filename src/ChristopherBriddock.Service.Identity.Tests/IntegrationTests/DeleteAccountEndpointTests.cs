@@ -51,10 +51,7 @@ public class DeleteAccountEndpointTests
                 s.Replace(new ServiceDescriptor(typeof(UserManager<ApplicationUser>), userManagerMock.Object));
                 s.Replace(new ServiceDescriptor(typeof(IHttpContextAccessor), httpContextAccessorMock.Object));
             });
-        }).CreateClient(new WebApplicationFactoryClientOptions()
-        {
-            AllowAutoRedirect = true
-        });
+        }).CreateClient();
 
         using var sut = await sutClient.DeleteAsync("/account/delete");
 
