@@ -18,6 +18,8 @@ public class ResetPasswordEndpointTests
     public void OneTimeTearDown()
     {
         _fixture.OneTimeTearDown();
+        _fixture.Dispose();
+        _fixture = null!;
     }
 
     [Test]

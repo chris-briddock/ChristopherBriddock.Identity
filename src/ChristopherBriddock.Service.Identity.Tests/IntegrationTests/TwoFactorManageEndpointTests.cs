@@ -18,6 +18,8 @@ public class TwoFactorManageEndpointTests
     public void OneTimeTearDown()
     {
         _fixture.OneTimeTearDown();
+        _fixture.Dispose();
+        _fixture = null!;
     }
 
 

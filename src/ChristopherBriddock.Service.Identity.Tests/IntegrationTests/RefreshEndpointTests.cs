@@ -17,10 +17,12 @@ namespace ChristopherBriddock.Service.Identity.Tests.IntegrationTests
         }
 
         [OneTimeTearDown]
-        public void OneTimeTearDown()
-        {
-            _fixture.OneTimeTearDown();
-        }
+    public void OneTimeTearDown()
+    {
+        _fixture.OneTimeTearDown();
+        _fixture.Dispose();
+        _fixture = null!;
+    }
 
         [Test]
         public async Task RefreshEndpoint_Returns401_WhenInvalidTokenIsUsed()
