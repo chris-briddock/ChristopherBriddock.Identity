@@ -15,10 +15,12 @@ public class TwoFactorRecoveryCodesEndpointTests
         }
 
         [OneTimeTearDown]
-        public void OneTimeTearDown()
-        {
-            _fixture.OneTimeTearDown();
-        }
+    public void OneTimeTearDown()
+    {
+        _fixture.OneTimeTearDown();
+        _fixture.Dispose();
+        _fixture = null!;
+    }
 
     [Test]
     public async Task TwoFactorRecoveryCodesEndpoint_Returns200OK_WhenRecoveryCodesAreRequested()

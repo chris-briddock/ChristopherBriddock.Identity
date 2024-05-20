@@ -22,6 +22,8 @@ public class TokenEndpointTests
     public void OneTimeTearDown()
     {
         _fixture.OneTimeTearDown();
+        _fixture.Dispose();
+        _fixture = null!;
     }
     private HttpClient CreateClientWithMocks(IConfiguration configuration, IJsonWebTokenProvider tokenProvider, ClaimsPrincipal user)
     {

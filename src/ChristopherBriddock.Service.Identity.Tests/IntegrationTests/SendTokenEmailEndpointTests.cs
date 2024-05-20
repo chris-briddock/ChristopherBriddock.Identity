@@ -18,6 +18,8 @@ public class SendTokenEmailEndpointTests
     public void OneTimeTearDown()
     {
         _fixture.OneTimeTearDown();
+        _fixture.Dispose();
+        _fixture = null!;
     }
 
     public static IEnumerable<object[]> GetTokenType()
