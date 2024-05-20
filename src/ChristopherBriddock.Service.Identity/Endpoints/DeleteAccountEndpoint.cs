@@ -39,8 +39,9 @@ public class DeleteAccountEndpoint(ILogger<DeleteAccountEndpoint> logger,
         try
         {
             var userManager = ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
-            string emailAddress = User.FindFirst(ClaimTypes.Email)!.Value;
-            var user = await userManager.FindByEmailAsync(emailAddress);
+            var httpContextAccessor = ServiceProvider.GetRequiredService<IHttpContextAccessor>();
+            var userClaimsPrincipal = httpContextAccessor.HttpContext!.User.FindFirst(ClaimTypes.Email)!;
+            var user = await userManager.FindByEmailAsync(userClaimsPrincipal.Value);
             user!.IsDeleted = true;
             user!.DeletedDateTime = DateTime.UtcNow;
             await userManager.UpdateAsync(user!);

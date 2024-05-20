@@ -46,8 +46,8 @@ internal static class ServiceCollectionExtensions
 
                 config.Host(configuration["Messaging:RabbitMQ:Hostname"], "/", r =>
                 {
-                    r.Username(configuration["Messaging:RabbitMQ:Username"]);
-                    r.Password(configuration["Messaging:RabbitMQ:Password"]);
+                    r.Username(configuration["Messaging:RabbitMQ:Username"]!);
+                    r.Password(configuration["Messaging:RabbitMQ:Password"]!);
                 });
                 config.ConfigureEndpoints(context);
             });

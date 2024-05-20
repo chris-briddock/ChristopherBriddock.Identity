@@ -20,7 +20,7 @@ public static class WebApplicationExtensions
         using AsyncServiceScope scope = app.Services.CreateAsyncScope();
         var service = scope.ServiceProvider.GetService<TDbContext>()!.Database;
         
-        if (!environment.IsEnvironment("Test")) 
+        if (!environment.IsEnvironment("Development")) 
         {
             await service.MigrateAsync();
         }

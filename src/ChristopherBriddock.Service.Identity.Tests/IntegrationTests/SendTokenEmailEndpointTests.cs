@@ -2,15 +2,22 @@ using ChristopherBriddock.Service.Common.Constants;
 
 namespace ChristopherBriddock.Service.Identity.Tests.IntegrationTests;
 
-public class SendTokenEmailEndpointTests : IClassFixture<WebApplicationFactory<Program>>
+[TestFixture]
+public class SendTokenEmailEndpointTests
 {
-    private readonly WebApplicationFactory<Program> _webApplicationFactory;
-    private TokenEmailRequest _sendTokenEmailRequest;
+    private TestFixture<Program> _fixture;
 
-    public SendTokenEmailEndpointTests(WebApplicationFactory<Program> webApplicationFactory)
+    [OneTimeSetUp]
+    public void OneTimeSetUp()
     {
-        _webApplicationFactory = webApplicationFactory.WithWebHostBuilder(builder => builder.UseEnvironment("Test"));
-        _sendTokenEmailRequest = default!;
+        _fixture = new TestFixture<Program>();
+        _fixture.OneTimeSetUp();
+    }
+
+    [OneTimeTearDown]
+    public void OneTimeTearDown()
+    {
+        _fixture.OneTimeTearDown();
     }
 
     public static IEnumerable<object[]> GetTokenType()
@@ -20,12 +27,12 @@ public class SendTokenEmailEndpointTests : IClassFixture<WebApplicationFactory<P
         yield return new object[] { EmailPublisherConstants.ForgotPassword };
     }
 
-    [Theory]
-    [MemberData(nameof(GetTokenType))]
+    [Test]
+    [TestCaseSource(nameof(GetTokenType))]
     public async Task SendTokenEmailEndpoint_ReturnsStatus200OK_WhenRequestIsValid(string tokenType)
     {
         var userManagerMock = new UserManagerMock<ApplicationUser>().Mock();
-        _sendTokenEmailRequest = new TokenEmailRequest
+        TokenEmailRequest request = new()
         {
             EmailAddress = "test@test.com",
             TokenType = tokenType
@@ -33,63 +40,66 @@ public class SendTokenEmailEndpointTests : IClassFixture<WebApplicationFactory<P
 
         userManagerMock.Setup(s => s.FindByEmailAsync(It.IsAny<string>())).ReturnsAsync(new ApplicationUser());
 
-        using var client = _webApplicationFactory.WithWebHostBuilder(s =>
+         using var client = _fixture.WebApplicationFactory.WithWebHostBuilder(s =>
         {
             s.ConfigureTestServices(s =>
             {
                 s.Replace(new ServiceDescriptor(typeof(UserManager<ApplicationUser>), userManagerMock.Object));
             });
         }).CreateClient();
-        
 
-        var response = await client.PostAsJsonAsync("/sendemail", _sendTokenEmailRequest);
-        Assert.Equivalent(HttpStatusCode.OK, response.StatusCode);
+        var sut = await client.PostAsJsonAsync("/sendemail", request);
+        Assert.That(sut.StatusCode, Is.EqualTo(HttpStatusCode.OK));
     }
 
-    [Fact]
+    [Test]
     public async Task SendTokenEmailEndpoint_ReturnsStatus400BadRequest_WhenNoEmailAddressPassed()
     {
         var userManagerMock = new UserManagerMock<ApplicationUser>().Mock();
-        using var client = _webApplicationFactory.WithWebHostBuilder(s =>
+         using var client = _fixture.WebApplicationFactory.WithWebHostBuilder(s =>
         {
             s.ConfigureTestServices(s =>
             {
                 s.Replace(new ServiceDescriptor(typeof(UserManager<ApplicationUser>), userManagerMock.Object));
             });
         }).CreateClient();
-        _sendTokenEmailRequest = new TokenEmailRequest 
+
+        TokenEmailRequest request = new()
         {
             EmailAddress = null!,
-            TokenType = EmailPublisherConstants.ConfirmEmail 
+            TokenType = EmailPublisherConstants.ConfirmEmail
         };
- 
-        var response = await client.PostAsJsonAsync("/sendemail", _sendTokenEmailRequest);
-        Assert.Equivalent(HttpStatusCode.BadRequest, response.StatusCode);
+
+        var sut = await client.PostAsJsonAsync("/sendemail", request);
+        Assert.That(sut.StatusCode, Is.EqualTo(HttpStatusCode.BadRequest));
     }
 
-    [Fact]
+    [Test]
     public async Task SendTokenEmailEndpoint_ReturnsStatus404NotFound_WhenEmailAddressIsInvalid()
     {
         var userManagerMock = new UserManagerMock<ApplicationUser>().Mock();
-        using var client = _webApplicationFactory.WithWebHostBuilder(s =>
+        
+        using var client = _fixture.WebApplicationFactory.WithWebHostBuilder(s =>
         {
             s.ConfigureTestServices(s =>
             {
                 s.Replace(new ServiceDescriptor(typeof(UserManager<ApplicationUser>), userManagerMock.Object));
             });
         }).CreateClient();
-        _sendTokenEmailRequest = new TokenEmailRequest { EmailAddress = "test@invalid.com", TokenType = EmailPublisherConstants.TwoFactorToken };
 
-        var response = await client.PostAsJsonAsync("/sendemail", _sendTokenEmailRequest);
-        Assert.Equivalent(HttpStatusCode.NotFound, response.StatusCode);
+        TokenEmailRequest request = new() { EmailAddress = "test@invalid.com", TokenType = EmailPublisherConstants.TwoFactorToken };
+
+        var sut = await client.PostAsJsonAsync("/sendemail", request);
+        Assert.That(sut.StatusCode, Is.EqualTo(HttpStatusCode.NotFound));
     }
-    [Fact]
+
+    [Test]
     public async Task SendTokenEmailEndpoint_ReturnsStatus500InternalServerError_WhenAnExceptionIsThrown()
     {
         var userManagerMock = new UserManagerMock<ApplicationUser>().Mock();
-
         userManagerMock.Setup(s => s.FindByEmailAsync(It.IsAny<string>())).ThrowsAsync(new Exception());
-        using var client = _webApplicationFactory.WithWebHostBuilder(s =>
+
+         using var client = _fixture.WebApplicationFactory.WithWebHostBuilder(s =>
         {
             s.ConfigureTestServices(s =>
             {
@@ -97,10 +107,9 @@ public class SendTokenEmailEndpointTests : IClassFixture<WebApplicationFactory<P
             });
         }).CreateClient();
 
-        _sendTokenEmailRequest = new TokenEmailRequest { EmailAddress = "test@invalid.com", TokenType = EmailPublisherConstants.TwoFactorToken };
+        TokenEmailRequest request = new() { EmailAddress = "test@invalid.com", TokenType = EmailPublisherConstants.TwoFactorToken };
 
-        var response = await client.PostAsJsonAsync("/sendemail", _sendTokenEmailRequest);
-
-        Assert.Equivalent(HttpStatusCode.InternalServerError, response.StatusCode);
+        var sut = await client.PostAsJsonAsync("/sendemail", request);
+        Assert.That(sut.StatusCode, Is.EqualTo(HttpStatusCode.InternalServerError));
     }
 }

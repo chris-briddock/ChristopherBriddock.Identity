@@ -3,7 +3,7 @@ using Microsoft.Extensions.Options;
 
 namespace ChristopherBriddock.Service.Identity.Tests.Mocks;
 
-internal class UserManagerMock<TUser> : IMockBase<Mock<UserManager<TUser>>> where TUser : class
+public class UserManagerMock<TUser> : IMockBase<Mock<UserManager<TUser>>> where TUser : class
 {
     public Mock<UserManager<TUser>> Mock()
     {

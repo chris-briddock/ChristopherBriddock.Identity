@@ -5,7 +5,7 @@ using Microsoft.Extensions.Options;
 
 namespace ChristopherBriddock.Service.Identity.Tests.Mocks;
 
-internal class SignInManagerMock<TUser> : IMockBase<Mock<SignInManager<TUser>>> where TUser : IdentityUser<Guid>
+public class SignInManagerMock<TUser> : IMockBase<Mock<SignInManager<TUser>>> where TUser : IdentityUser<Guid>
 {
     public Mock<SignInManager<TUser>> Mock()
     {

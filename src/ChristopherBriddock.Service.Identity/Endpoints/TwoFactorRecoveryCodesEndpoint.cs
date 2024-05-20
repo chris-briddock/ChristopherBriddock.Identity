@@ -41,9 +41,10 @@ public class TwoFactorRecoveryCodesEndpoint(IServiceProvider serviceProvider,
     {
         try
         {
-            var userManager = ServiceProvider.GetService<UserManager<ApplicationUser>>()!;
-            var email = User.FindFirst(ClaimTypes.Email)!.Value;
-            var user = await userManager.FindByEmailAsync(email);
+            UserManager<ApplicationUser> userManager = ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+            IHttpContextAccessor httpContextAccessor = ServiceProvider.GetRequiredService<IHttpContextAccessor>();
+            Claim? emailClaim = httpContextAccessor.HttpContext!.User.FindFirst(ClaimTypes.Email)!;
+            ApplicationUser? user = await userManager.FindByEmailAsync(emailClaim.Value);
             var codes = await userManager.GenerateNewTwoFactorRecoveryCodesAsync(user!, 10);
             return Ok(codes);
         }

@@ -18,7 +18,7 @@ namespace ChristopherBriddock.Service.Identity.Endpoints;
 public class RefreshEndpoint(IServiceProvider serviceProvider,
                              ILogger<RefreshEndpoint> logger) : EndpointBaseAsync
                                                                .WithRequest<RefreshRequest>
-                                                               .WithoutParam
+                                                               .WithoutQuery
                                                                .WithActionResult
 {
     /// <summary>

@@ -2,7 +2,7 @@
 
 namespace ChristopherBriddock.Service.Identity.Tests.Mocks;
 
-internal class LoggerMock<T> : Mock<ILogger<T>>, IMockBase<LoggerMock<T>> where T : class
+public class LoggerMock<T> : Mock<ILogger<T>>, IMockBase<LoggerMock<T>> where T : class
 {
     public LoggerMock<T> Mock()
     {

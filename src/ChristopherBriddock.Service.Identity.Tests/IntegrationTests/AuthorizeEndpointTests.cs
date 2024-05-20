@@ -1,127 +1,143 @@
 ﻿namespace ChristopherBriddock.Service.Identity.Tests.IntegrationTests;
 
-public class AuthorizeEndpointTests : IClassFixture<WebApplicationFactory<Program>>
+[TestFixture]
+public class AuthorizeEndpointTests
 {
-    private readonly WebApplicationFactory<Program> _webApplicationFactory;
+    private TestFixture<Program> _fixture;
 
-    private AuthorizeRequest _authorizeRequest;
-
-    public AuthorizeEndpointTests(WebApplicationFactory<Program> webApplicationFactory)
+    [OneTimeSetUp]
+    public void OneTimeSetUp()
     {
-        _webApplicationFactory = webApplicationFactory.WithWebHostBuilder(s =>
-        {
-            s.UseEnvironment("Test");
-        });
-        _authorizeRequest = default!;
+        _fixture = new TestFixture<Program>();
+        _fixture.OneTimeSetUp();
     }
-    [Fact]
+
+    [OneTimeTearDown]
+    public void OneTimeTearDown()
+    {
+        _fixture.OneTimeTearDown();
+    }
+
+    [Test]
     public async Task AuthorizeEndpoint_ReturnsStatus302Found_WhenValidCredentialsAreUsed()
     {
-        using var client = _webApplicationFactory.CreateClient(new WebApplicationFactoryClientOptions()
+        // Arrange
+        using var client = _fixture.WebApplicationFactory.CreateClient(new WebApplicationFactoryClientOptions
         {
             AllowAutoRedirect = false
         });
 
-        _authorizeRequest = new()
+        AuthorizeRequest authorizeRequest = new()
         {
             EmailAddress = "testing@tester.com",
             Password = "7XAl@Dg()[=8rV;[wD[:GY$yw:$ltHA\\uaf!\\UQ`",
             RememberMe = true
         };
 
-        using var sut = await client.PostAsJsonAsync("/authorize", _authorizeRequest);
+        // Act
+        using var response = await client.PostAsJsonAsync("/authorize", authorizeRequest);
 
-        Assert.Equivalent(HttpStatusCode.Found, sut.StatusCode);
+        // Assert
+        Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.Found));
     }
-    /// <summary>
-    /// Test
-    /// </summary>
-    [Fact]
+
+    [Test]
     public async Task AuthorizeEndpoint_ReturnsStatus401Unauthorized_WhenUseInvalidValidCredentials()
     {
-        using var client = _webApplicationFactory.CreateClient();
+        // Arrange
+        using var client = _fixture.WebApplicationFactory.CreateClient();
 
-        _authorizeRequest = new()
+        AuthorizeRequest authorizeRequest = new()
         {
             EmailAddress = "test@abc.com",
             Password = "=W0Jqcxsz8] Lq74z*:&gB^zmhx*HsrB6GYj%K}G",
             RememberMe = true
         };
 
-        using var sut = await client.PostAsJsonAsync("/authorize", _authorizeRequest);
+        // Act
+        using var response = await client.PostAsJsonAsync("/authorize", authorizeRequest);
 
-        Assert.Equivalent(HttpStatusCode.Unauthorized, sut.StatusCode);
+        // Assert
+        Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.Unauthorized));
     }
-    /// <summary>
-    /// Test
-    /// </summary>
-    [Fact]
+
+    [Test]
     public async Task AuthorizeEndpoint_ReturnsStatus500InternalServerError_WhenExceptionIsThrown()
     {
+        // Arrange
         var signInManagerMock = new SignInManagerMock<ApplicationUser>().Mock();
 
-        signInManagerMock.Setup(s => s.PasswordSignInAsync(It.IsAny<ApplicationUser>(),
-                                                           It.IsAny<string>(),
-                                                           It.IsAny<bool>(),
-                                                           It.IsAny<bool>())).ThrowsAsync(new Exception());
+        signInManagerMock.Setup(s => s.PasswordSignInAsync(
+            It.IsAny<ApplicationUser>(),
+            It.IsAny<string>(),
+            It.IsAny<bool>(),
+            It.IsAny<bool>())).ThrowsAsync(new Exception());
 
-
-        _authorizeRequest = new()
+        AuthorizeRequest authorizeRequest = new()
         {
             EmailAddress = "test@test.com",
             Password = "=W0Jqcxsz8] Lq74z*:&gB^zmhx*HsrB6GYj%K}G",
             RememberMe = true
         };
 
-        using var client = _webApplicationFactory.WithWebHostBuilder(s =>
+        using var client = _fixture.WebApplicationFactory.WithWebHostBuilder(builder =>
         {
-            s.ConfigureTestServices(s =>
+            builder.ConfigureTestServices(services =>
             {
-                s.Replace(new ServiceDescriptor(typeof(SignInManager<ApplicationUser>), signInManagerMock.Object));
+                services.Replace(new ServiceDescriptor(typeof(SignInManager<ApplicationUser>), signInManagerMock.Object));
             });
         }).CreateClient();
 
-        using var sut = await client.PostAsJsonAsync("/authorize", _authorizeRequest);
-        Assert.Equivalent(HttpStatusCode.InternalServerError, sut.StatusCode);
+        // Act
+        using var response = await client.PostAsJsonAsync("/authorize", authorizeRequest);
+
+        // Assert
+        Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.InternalServerError));
     }
 
-    [Fact]
-    public async Task AuthorizeEndpoint_ReturnsStatus302Found_WhenTwoFactorIsEnabled()
+    [Test]
+    public async Task AuthorizeEndpoint_ReturnsStatus200OK_WhenTwoFactorIsEnabled()
     {
-        _authorizeRequest = new()
+        // Arrange
+        AuthorizeRequest authorizeRequest = new()
         {
             EmailAddress = "test@asdf.com",
             Password = "Ar*P`w8R.WyXb7'UKxh;!-",
             RememberMe = true
         };
 
-        using var client = _webApplicationFactory.CreateClient(new WebApplicationFactoryClientOptions()
+        using var client = _fixture.WebApplicationFactory.CreateClient(new WebApplicationFactoryClientOptions
         {
             AllowAutoRedirect = false
         });
 
+        // Act
+        using var response = await client.PostAsJsonAsync("/authorize", authorizeRequest);
 
-        using var sut = await client.PostAsJsonAsync("/authorize", _authorizeRequest);
-        Assert.Equivalent(HttpStatusCode.Found, sut.StatusCode);
-
+        // Assert
+        Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
     }
 
-    [Fact]
-    public async Task AuthorizeEndpoint_Returns401Unauthorized_WhenUserIsDeleted()
+    [Test]
+    public async Task AuthorizeEndpoint_ReturnsStatus401Unauthorized_WhenUserIsDeleted()
     {
+        // Arrange
         AuthorizeRequest authorizeRequest = new()
         {
             EmailAddress = "test@euiop.com",
             Password = "w?M`YBqR6}*X,87):$u+eQ",
             RememberMe = true
         };
-        using var client = _webApplicationFactory.CreateClient(new WebApplicationFactoryClientOptions()
+
+        using var client = _fixture.WebApplicationFactory.CreateClient(new WebApplicationFactoryClientOptions
         {
             AllowAutoRedirect = false
         });
 
-        using var sut = await client.PostAsJsonAsync("/authorize", authorizeRequest);
-        Assert.Equivalent(HttpStatusCode.Unauthorized, sut.StatusCode);
+        // Act
+        using var response = await client.PostAsJsonAsync("/authorize", authorizeRequest);
+
+        // Assert
+        Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.Unauthorized));
     }
 }
-

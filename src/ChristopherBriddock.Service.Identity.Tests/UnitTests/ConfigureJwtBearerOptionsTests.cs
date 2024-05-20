@@ -6,14 +6,18 @@ using System.Text;
 
 namespace ChristopherBriddock.Service.Identity.Tests.UnitTests;
 
+[TestFixture]
 public class ConfigureJwtBearerOptionsTests
 {
-    public JwtBearerOptions _sut;
-    public ConfigureJwtBearerOptionsTests()
+    private JwtBearerOptions _sut;
+
+    [SetUp]
+    public void SetUp()
     {
         _sut = new JwtBearerOptions();
     }
-    [Fact]
+
+    [Test]
     public void Configure_Should_Set_Issuer_Correctly()
     {
         var configurationBuilder = new ConfigurationBuilder()
@@ -27,10 +31,11 @@ public class ConfigureJwtBearerOptionsTests
 
         jwtOptionsConfigurer.Configure(_sut);
 
-        Assert.True(_sut.TokenValidationParameters.ValidateIssuer);
-        Assert.Equal("https://localhost", _sut.TokenValidationParameters.ValidIssuer);
+        Assert.That(_sut.TokenValidationParameters.ValidateIssuer, Is.True);
+        Assert.That(_sut.TokenValidationParameters.ValidIssuer, Is.EqualTo("https://localhost"));
     }
-    [Fact]
+
+    [Test]
     public void Configure_Should_Set_Secret_Correctly()
     {
         var configurationBuilder = new ConfigurationBuilder()
@@ -45,11 +50,11 @@ public class ConfigureJwtBearerOptionsTests
         jwtOptionsConfigurer.Configure(_sut);
         var symmetricKey = (SymmetricSecurityKey)_sut.TokenValidationParameters.IssuerSigningKey;
 
-        Assert.NotNull(_sut.TokenValidationParameters.IssuerSigningKey);
-
-        Assert.Equal(configurationBuilder.GetSection("Jwt:Secret").Value, Encoding.UTF8.GetString(symmetricKey.Key));
+        Assert.That(_sut.TokenValidationParameters.IssuerSigningKey, Is.Not.Null);
+        Assert.That(Encoding.UTF8.GetString(symmetricKey.Key), Is.EqualTo(configurationBuilder.GetSection("Jwt:Secret").Value));
     }
-    [Fact]
+
+    [Test]
     public void Configure_Should_Set_Audience_Correctly()
     {
         var configurationBuilder = new ConfigurationBuilder()
@@ -63,9 +68,8 @@ public class ConfigureJwtBearerOptionsTests
         var jwtOptionsConfigurer = new ConfigureJwtBearerOptions(configurationBuilder);
 
         jwtOptionsConfigurer.Configure(_sut);
-        Assert.NotNull(_sut.TokenValidationParameters.ValidAudience);
-        Assert.Equal(configurationBuilder.GetSection("Jwt:Audience").Value, _sut.TokenValidationParameters.ValidAudience);
+
+        Assert.That(_sut.TokenValidationParameters.ValidAudience, Is.Not.Null);
+        Assert.That(_sut.TokenValidationParameters.ValidAudience, Is.EqualTo(configurationBuilder.GetSection("Jwt:Audience").Value));
     }
-
-
 }

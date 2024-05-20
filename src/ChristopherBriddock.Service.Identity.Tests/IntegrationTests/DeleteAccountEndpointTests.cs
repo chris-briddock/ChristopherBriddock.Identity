@@ -1,206 +1,119 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.AspNetCore.Http;
 using System.Net.Http.Headers;
-using System.Text.Json;
-using AuthorizeRequest = ChristopherBriddock.Service.Identity.Models.Requests.AuthorizeRequest;
+using System.Security.Claims;
 
 namespace ChristopherBriddock.Service.Identity.Tests.IntegrationTests;
 
-
-public class DeleteAccountEndpointTests : IClassFixture<WebApplicationFactory<Program>>
+[TestFixture]
+public class DeleteAccountEndpointTests
 {
-    private readonly WebApplicationFactory<Program> _webApplicationFactory;
+    private TestFixture<Program> _fixture;
 
-    public DeleteAccountEndpointTests(WebApplicationFactory<Program> webApplicationFactory)
+    [OneTimeSetUp]
+    public void OneTimeSetUp()
     {
-        _webApplicationFactory = webApplicationFactory.WithWebHostBuilder(s =>
-        {
-            s.UseEnvironment("Test");
-        });
+        _fixture = new TestFixture<Program>();
+        _fixture.OneTimeSetUp();
     }
 
-    [Fact]
-    public async Task DeleteAccountEndpoint_Returns204_WhenAccountIsDeleted()
+    [OneTimeTearDown]
+    public void OneTimeTearDown()
     {
-        AuthorizeRequest authorizeRequest = new()
-        {
-            EmailAddress = "authenticationtest@test.com",
-            Password = "Lq74z*:&gB^zmhx*HsrB6GYj%K}G=W0Jqcxsz8] Lq74z*:&gB^zmhx*",
-            RememberMe = true
-        };
+        _fixture.OneTimeTearDown();
+    }
 
-        var configurationBuilder = new ConfigurationBuilder()
-            .AddInMemoryCollection(new Dictionary<string, string?>
-            {
-                { "Jwt:Issuer", "https://localhost" },
-                { "Jwt:Secret", "=W0Jqcxsz8] Lq74z*:&gB^zmhx*HsrB6GYj%K}G=W0Jqcxsz8] Lq74z*:&gB^zmhx*HsrB6GYj%K}G" },
-                { "Jwt:Audience", "atesty@testing.com" },
-                { "Jwt:Expires", "5" }
-            }).Build();
+    [Test]
+    public async Task DeleteAccountEndpoint_Returns204NoContent_WhenAccountIsDeleted()
+    {
 
-        using var client = _webApplicationFactory.WithWebHostBuilder(s =>
+        // Create user manager mock
+        var userManagerMock = new UserManagerMock<ApplicationUser>().Mock();
+        // Setup user manager mock behaviour
+        userManagerMock.Setup(s => s.FindByEmailAsync(It.IsAny<string>())).ReturnsAsync(new ApplicationUser());
+
+        // Create a mock instance of ClaimsPrincipal and set up behavior for FindFirst method
+        var claimsPrincipalMock = new ClaimsPrincipalMock();
+        claimsPrincipalMock.Setup(u => u.FindFirst(ClaimTypes.Email))
+            .Returns(new Claim(ClaimTypes.Email, "test@test.com"));
+
+        // Create a mock instance of HttpContext and set up the User property
+        var httpContextMock = new HttpContextMock();
+        httpContextMock.Setup(x => x.User).Returns(claimsPrincipalMock.Object);
+
+        // Create a mock instance of IHttpContextAccessor
+        var httpContextAccessorMock = new IHttpContextAccessorMock();
+        httpContextAccessorMock.Setup(x => x.HttpContext).Returns(httpContextMock.Object);
+
+        using var sutClient = _fixture.WebApplicationFactory.WithWebHostBuilder(s =>
         {
             s.ConfigureTestServices(s =>
             {
-
-                s.Replace(new ServiceDescriptor(typeof(IConfiguration), configurationBuilder));
+                s.Replace(new ServiceDescriptor(typeof(UserManager<ApplicationUser>), userManagerMock.Object));
+                s.Replace(new ServiceDescriptor(typeof(IHttpContextAccessor), httpContextAccessorMock.Object));
             });
-        }).CreateClient(new WebApplicationFactoryClientOptions()
-        {
-            AllowAutoRedirect = true
-        });
+        }).CreateClient();
 
-        using var authorizeResponse = await client.PostAsJsonAsync("/authorize", authorizeRequest);
+        using var sut = await sutClient.DeleteAsync("/account/delete");
 
-        var jsonDocumentRoot = JsonDocument.Parse(authorizeResponse.Content.ReadAsStream()).RootElement;
-
-        string? accessToken = jsonDocumentRoot.GetProperty("accessToken").GetString()!;
-
-        using var deleteClient = _webApplicationFactory.WithWebHostBuilder(s =>
-        {
-            s.ConfigureTestServices(s =>
-            {
-                s.Replace(new ServiceDescriptor(typeof(IConfiguration), configurationBuilder));
-            });
-        }).CreateClient(new WebApplicationFactoryClientOptions()
-        {
-            AllowAutoRedirect = true
-        });
-
-        deleteClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
-
-        var sut = await deleteClient.DeleteAsync("/account/delete");
-
-        Assert.Equivalent(HttpStatusCode.OK, authorizeResponse.StatusCode);
-        Assert.Equivalent(HttpStatusCode.NoContent, sut.StatusCode);
+        Assert.That(sut.StatusCode, Is.EqualTo(HttpStatusCode.NoContent));
     }
 
-    [Fact]
+    [Test]
     public async Task DeleteAccountEndpoint_Returns500_WhenExceptionIsThrown()
     {
-        AuthorizeRequest authorizeRequest = new()
-        {
-            EmailAddress = "authenticationtest@test.com",
-            Password = "Lq74z*:&gB^zmhx*HsrB6GYj%K}G=W0Jqcxsz8] Lq74z*:&gB^zmhx*",
-            RememberMe = true
-        };
-
-        var configurationBuilder = new ConfigurationBuilder()
-            .AddInMemoryCollection(new Dictionary<string, string?>
-            {
-                { "Jwt:Issuer", "https://localhost" },
-                { "Jwt:Secret", "=W0Jqcxsz8] Lq74z*:&gB^zmhx*HsrB6GYj%K}G=W0Jqcxsz8] Lq74z*:&gB^zmhx*HsrB6GYj%K}G" },
-                { "Jwt:Audience", "test@euiop.com" },
-                { "Jwt:Expires", "60" }
-            }).Build();
-
-        using var client = _webApplicationFactory.WithWebHostBuilder(s =>
-        {
-            s.ConfigureTestServices(s =>
-            {
-                s.Replace(new ServiceDescriptor(typeof(IConfiguration), configurationBuilder));
-            });
-        }).CreateClient(new WebApplicationFactoryClientOptions()
-        {
-            AllowAutoRedirect = true
-        });
-
-        using var authorizeResponse = await client.PostAsJsonAsync("/authorize", authorizeRequest);
-
-        var jsonDocumentRoot = JsonDocument.Parse(authorizeResponse.Content.ReadAsStream()).RootElement;
-
-        string? accessToken = jsonDocumentRoot.GetProperty("accessToken").GetString()!;
-
         var userManagerMock = new UserManagerMock<ApplicationUser>().Mock();
 
         userManagerMock.Setup(s => s.DeleteAsync(It.IsAny<ApplicationUser>())).ThrowsAsync(new Exception());
 
-        using var clientWithForcedError = _webApplicationFactory.WithWebHostBuilder(s =>
+        using var clientWithForcedError = _fixture.WebApplicationFactory.WithWebHostBuilder(s =>
         {
             s.ConfigureTestServices(s =>
             {
-                s.Replace(new ServiceDescriptor(typeof(UserManager<ApplicationUser>), userManagerMock));
-                s.Replace(new ServiceDescriptor(typeof(IConfiguration), configurationBuilder));
+                s.Replace(new ServiceDescriptor(typeof(UserManager<ApplicationUser>), userManagerMock.Object));
             });
         }).CreateClient(new WebApplicationFactoryClientOptions()
         {
             AllowAutoRedirect = true
         });
-        clientWithForcedError.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
 
         using var sut = await clientWithForcedError.DeleteAsync("/account/delete");
 
-        Assert.Equivalent(HttpStatusCode.OK, authorizeResponse.StatusCode);
-        Assert.Equivalent(HttpStatusCode.InternalServerError, sut.StatusCode);
+        Assert.That(sut.StatusCode, Is.EqualTo(HttpStatusCode.InternalServerError));
     }
 
-    [Fact]
+    [Test]
     public async Task DeleteAccountEndpoint_Returns401_WhenUserIsUnauthorized()
     {
-        using var client = _webApplicationFactory.CreateClient();
+        using var client = _fixture.WebApplicationFactory.CreateClient();
+
+        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", "invalidToken");
 
         using var sut = await client.DeleteAsync("/account/delete");
 
-        Assert.Equivalent(HttpStatusCode.Unauthorized, sut.StatusCode);
-
+        Assert.That(sut.StatusCode, Is.EqualTo(HttpStatusCode.Unauthorized));
     }
 
-    [Fact]
+    [Test]
     public async Task DeleteAccountEndpoint_Returns500_WhenUserIsNotFound()
     {
-        AuthorizeRequest authorizeRequest = new()
-        {
-            EmailAddress = "authenticationtest@test.com",
-            Password = "Lq74z*:&gB^zmhx*HsrB6GYj%K}G=W0Jqcxsz8] Lq74z*:&gB^zmhx*",
-            RememberMe = true
-        };
-
-        var configurationBuilder = new ConfigurationBuilder()
-            .AddInMemoryCollection(new Dictionary<string, string?>
-            {
-                { "Jwt:Issuer", "https://localhost" },
-                { "Jwt:Secret", "=W0Jqcxsz8] Lq74z*:&gB^zmhx*HsrB6GYj%K}G=W0Jqcxsz8] Lq74z*:&gB^zmhx*HsrB6GYj%K}G" },
-                { "Jwt:Audience", "atesty@testing.com" },
-                { "Jwt:Expires", "60" }
-            }).Build();
-
-        using var client = _webApplicationFactory.WithWebHostBuilder(s =>
-        {
-            s.ConfigureTestServices(s =>
-            {
-                s.Replace(new ServiceDescriptor(typeof(IConfiguration), configurationBuilder));
-            });
-        }).CreateClient(new WebApplicationFactoryClientOptions()
-        {
-            AllowAutoRedirect = true
-        });
-
-        using var authorizeResponse = await client.PostAsJsonAsync("/authorize", authorizeRequest);
-
-        var jsonDocumentRoot = JsonDocument.Parse(authorizeResponse.Content.ReadAsStream()).RootElement;
-
-        string? accessToken = jsonDocumentRoot.GetProperty("accessToken").GetString()!;
-
         var userManagerMock = new UserManagerMock<ApplicationUser>().Mock();
 
         userManagerMock.Setup(s => s.FindByEmailAsync(It.IsAny<string>())).ReturnsAsync(value: null);
 
-        using var clientWithForcedError = _webApplicationFactory.WithWebHostBuilder(s =>
+        using var clientWithForcedError = _fixture.WebApplicationFactory.WithWebHostBuilder(s =>
         {
             s.ConfigureTestServices(s =>
             {
-                s.Replace(new ServiceDescriptor(typeof(UserManager<ApplicationUser>), userManagerMock));
-                s.Replace(new ServiceDescriptor(typeof(IConfiguration), configurationBuilder));
+                s.Replace(new ServiceDescriptor(typeof(UserManager<ApplicationUser>), userManagerMock.Object));
             });
         }).CreateClient(new WebApplicationFactoryClientOptions()
         {
             AllowAutoRedirect = true
         });
-        clientWithForcedError.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
 
         using var sut = await clientWithForcedError.DeleteAsync("/account/delete");
 
-        Assert.Equivalent(HttpStatusCode.OK, authorizeResponse.StatusCode);
-        Assert.Equivalent(HttpStatusCode.InternalServerError, sut.StatusCode);
+        Assert.That(sut.StatusCode, Is.EqualTo(HttpStatusCode.InternalServerError));
     }
 
 }

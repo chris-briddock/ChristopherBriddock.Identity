@@ -73,6 +73,12 @@ public static class ServiceCollectionExtensions
     /// <summary>
     /// Adds the ASP.NET Identity configuration.
     /// </summary>
+    /// <remarks> 
+    /// This method uses AddIdentityCore due to AddIdentity adding an authentication scheme <see cref="IdentityConstants.ApplicationScheme"/>
+    /// The authentication scheme causes the application to throw an error "System.InvalidOperationException : Scheme already exists: Identity.Application"
+    /// I have manually added the authentication scheme in the extension method <see cref="AddJsonWebTokenAuthentication"/> due to this incorrectly redirecting users
+    /// to /Account/Login, which causes a 404 error.
+    /// </remarks>
     /// <param name="services">The <see cref="IServiceCollection"/> instance.</param>
     /// <returns>The modified <see cref="IServiceCollection"/> instance.</returns>
     public static IServiceCollection AddIdentity(this IServiceCollection services)
@@ -271,8 +277,8 @@ public static class ServiceCollectionExtensions
 
                     config.Host(configuration["Messaging:RabbitMQ:Hostname"], "/", r =>
                     {
-                        r.Username(configuration["Messaging:RabbitMQ:Username"]);
-                        r.Password(configuration["Messaging:RabbitMQ:Password"]);
+                        r.Username(configuration["Messaging:RabbitMQ:Username"]!);
+                        r.Password(configuration["Messaging:RabbitMQ:Password"]!);
                     });
                     config.ConfigureEndpoints(context);
                 });

@@ -10,4 +10,4 @@ global using Microsoft.Extensions.DependencyInjection.Extensions;
 global using Moq;
 global using System.Net;
 global using System.Net.Http.Json;
-global using Xunit;
+global using NUnit.Framework;

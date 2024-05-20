@@ -1,10 +1,11 @@
-namespace ChristopherBriddock.Service.Email.Tests;
+namespace ChristopherBriddock.WorkerService.Email.Tests;
 
-public class UnitTest1
+public class Tests
 {
-    [Fact]
+
+    [Test]
     public void Test1()
     {
-        Assert.True(true);
+        Assert.Pass();
     }
 }

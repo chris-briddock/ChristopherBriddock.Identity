@@ -16,7 +16,7 @@ namespace ChristopherBriddock.Service.Identity.Endpoints;
 public sealed class ResetPasswordEndpoint(IServiceProvider serviceProvider,
                                           ILogger<ResetPasswordEndpoint> logger) : EndpointBaseAsync
                                                                                   .WithRequest<ResetPasswordRequest>
-                                                                                  .WithoutParam
+                                                                                  .WithoutQuery
                                                                                   .WithActionResult
 {
     /// <summary>
