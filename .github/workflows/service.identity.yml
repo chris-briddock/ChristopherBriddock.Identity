@@ -19,11 +19,6 @@ jobs:
         dotnet-version: 8.0.x
     - name: Install Dependencies
       run: sudo apt-get install jq
-    - name: Generate JWT Token
-      run: |
-        export PATH="$PATH:~/.dotnet/tools"
-        JWT=$(dotnet user-jwts create --output json | jq -r .token)
-        echo "JWT=$JWT" >> $GITHUB_ENV
     - name: Build & Restore
       run: dotnet build --configuration Release src/ChristopherBriddock.Service.Identity/ChristopherBriddock.Service.Identity.csproj
     - name: Test

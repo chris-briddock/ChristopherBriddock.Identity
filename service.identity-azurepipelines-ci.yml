@@ -23,15 +23,8 @@ stages:
         dotnet build --configuration Release src/ChristopherBriddock.Service.Identity/ChristopherBriddock.Service.Identity.csproj
       displayName: 'Build & Restore'
     - script: |
-        export PATH="$PATH:/root/.dotnet/tools"
-        JWT=$(dotnet user-jwts create --output json | jq -r .token)
-        echo "JWT=$JWT" | tee -a $(Agent.TempDirectory)/jwt.env
-      displayName: 'Generate JWT Token'
-    - script: |
         dotnet test --collect:"XPlat Code Coverage" src/ChristopherBriddock.Service.Identity.Tests/ChristopherBriddock.Service.Identity.Tests.csproj
       displayName: 'Test'
-      env:
-        JWT: $(Agent.TempDirectory)/jwt.env
     - script: |
         dotnet publish src/ChristopherBriddock.Service.Identity/ChristopherBriddock.Service.Identity.csproj -c Release
       displayName: 'Publish'
