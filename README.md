@@ -2,7 +2,7 @@
 
 The Identity Service is a robust authentication and authorization component for your application, developed using ASP.NET 8 and integrating various libraries to ensure secure identity management.
 
-![Azure DevOps builds](https://img.shields.io/azure-devops/build/chris1997/91f2d938-549b-497e-980d-188da969448a/7)
+![Azure DevOps build](https://img.shields.io/azure-devops/build/chris1997/91f2d938-549b-497e-980d-188da969448a/7)
 ![Azure DevOps coverage](https://img.shields.io/azure-devops/coverage/chris1997/91f2d938-549b-497e-980d-188da969448a/7)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=chris-briddock_ChristopherBriddock.Identity&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=chris-briddock_ChristopherBriddock.Identity)
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=chris-briddock_ChristopherBriddock.Identity&metric=bugs)](https://sonarcloud.io/summary/new_code?id=chris-briddock_ChristopherBriddock.Identity)
@@ -16,6 +16,7 @@ Technical documentation generated with DocFX is [here](https://docs.cdjb.uk/api/
 ## Table of Contents
 
 * [Introduction](#introduction)
+* [Planned Improvments](#planned-improvements)
 * [User Functionality](#user-functionality)
 * [Technical Functionality](#technical-functionality)
 * [Endpoints](#endpoints)
@@ -25,6 +26,17 @@ Technical documentation generated with DocFX is [here](https://docs.cdjb.uk/api/
 ### Introduction
 
 The Identity Service plays a crucial role in your application's security infrastructure, providing essential features for user authentication, authorization, and identity management. This README provides an overview of the service, libraries used, available endpoints, and instructions on getting started.
+
+### Planned Improvements
+* **Multiple Tenants**
+* **Multiple Client Applications**
+* **FIDO2 Support**
+* **Application based 2FA Codes**
+
+Authorization Flows:
+* **Authorization Code Flow (with PKCE)**
+* **Client Credentials Flow**
+*  **Device Authorization Flow (Device Grant)**
 
 ### User Functionality
 
