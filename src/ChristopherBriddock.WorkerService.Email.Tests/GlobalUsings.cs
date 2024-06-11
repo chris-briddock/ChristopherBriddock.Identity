@@ -1,1 +1,10 @@
 global using NUnit.Framework;
+global using ChristopherBriddock.Service.Common.Constants;
+global using ChristopherBriddock.Service.Common.Messaging;
+global using MassTransit;
+global using Microsoft.Extensions.Configuration;
+global using Microsoft.Extensions.Logging;
+global using Moq;
+global using System.Net;
+global using System.Net.Mail;
+global using System.Threading.Tasks;
