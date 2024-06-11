@@ -11,17 +11,6 @@ public class CustomWebApplicationFactory<TProgram> : WebApplicationFactory<TProg
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
         builder.UseEnvironment("Development");
-
-        builder.ConfigureTestServices(s =>
-        {
-            // Remove the existing Identity.Application authentication scheme
-            var identitySchemeDescriptors = s
-                .Where(d => d.ServiceType == typeof(IConfigureOptions<AuthenticationOptions>)).ToList();
-
-            // Add the custom test-specific authentication scheme
-            s.AddAuthentication()
-            .AddScheme<AuthenticationSchemeOptions, TestAuthHandler>("Test", options => { });
-        });
     }
 
     protected override void ConfigureClient(HttpClient client)

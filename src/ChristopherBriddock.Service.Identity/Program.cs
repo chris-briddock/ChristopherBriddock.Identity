@@ -32,7 +32,10 @@ public sealed class Program
         builder.Services.AddResponseCaching();
         builder.Services.AddAzureAppInsights();
         builder.Services.AddDbContext<AppDbContext>(ServiceLifetime.Singleton);
-        builder.Services.AddCustomHealthChecks();
+        builder.Services.AddDatabaseHealthChecks();
+        builder.Services.AddAzureApplicationInsightsHealthChecks();
+        builder.Services.AddSeqHealthCheckPublisher();
+        builder.Services.AddRedisHealthChecks();
         builder.Services.AddCrossOriginPolicy();
         builder.Services.AddPublisherMessaging();
         builder.Services.AddHostedService<AccountPurgeBackgroundService>();
@@ -47,6 +50,7 @@ public sealed class Program
             app.UseCors(CorsConstants.PolicyName);
         }
         app.UseHsts();
+        app.UseResponseCaching();
         app.UseHttpsRedirection();
         app.UseRouting();
         app.UseSession();

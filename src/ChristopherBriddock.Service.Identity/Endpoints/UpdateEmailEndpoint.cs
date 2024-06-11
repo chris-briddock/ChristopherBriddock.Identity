@@ -38,7 +38,7 @@ public class UpdateEmailEndpoint(IServiceProvider serviceProvider,
     /// <param name="request">The object which encapsulates the request.</param>
     /// <param name="cancellationToken">The cancellation token to cancel the operation.</param>
     /// <returns>A new <see cref="ActionResult"/></returns>
-    [HttpPost("/account/email")]
+    [HttpPut("/account/email")]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -48,9 +48,9 @@ public class UpdateEmailEndpoint(IServiceProvider serviceProvider,
         try
         {
             var userManager = ServiceProvider.GetService<UserManager<ApplicationUser>>()!;
-            string emailAddress = User.FindFirst(ClaimTypes.Email)!.Value;
-
-            var user = await userManager.FindByEmailAsync(emailAddress);
+            var httpContextAccessor = ServiceProvider.GetRequiredService<IHttpContextAccessor>();
+            var userClaimsPrincipal = httpContextAccessor.HttpContext!.User.FindFirst(ClaimTypes.Email)!;
+            var user = await userManager.FindByEmailAsync(userClaimsPrincipal.Value);
 
             user!.EmailConfirmed = false;
             await userManager.UpdateAsync(user);

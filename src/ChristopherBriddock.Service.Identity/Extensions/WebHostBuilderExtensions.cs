@@ -14,9 +14,6 @@ public static class WebHostBuilderExtensions
     /// <param name="portNumber"></param>
     public static void AddKestrelConfiguration(this IWebHostBuilder webHostBuilder, int portNumber)
     {
-        ArgumentException.ThrowIfNullOrWhiteSpace(nameof(webHostBuilder));
-        ArgumentException.ThrowIfNullOrWhiteSpace(nameof(portNumber));
-
         webHostBuilder.ConfigureKestrel((context, options) =>
         {
             options.ListenAnyIP(portNumber, listenOptions =>

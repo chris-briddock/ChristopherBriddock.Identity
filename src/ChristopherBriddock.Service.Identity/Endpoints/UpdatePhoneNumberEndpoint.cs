@@ -38,7 +38,7 @@ public class UpdatePhoneNumberEndpoint(IServiceProvider serviceProvider,
     /// <param name="request">The object which encapsulates the request.</param>
     /// <param name="cancellationToken">The cancellation token to cancel the operation.</param>
     /// <returns>A new <see cref="ActionResult"/></returns>
-    [HttpPost("/account/phonenumber")]
+    [HttpPut("/account/phonenumber")]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -47,10 +47,10 @@ public class UpdatePhoneNumberEndpoint(IServiceProvider serviceProvider,
     {
         try
         {
-            var userManager = ServiceProvider.GetService<UserManager<ApplicationUser>>()!;
-            string emailAddress = User.FindFirst(ClaimTypes.Email)!.Value;
-
-            var user = await userManager.FindByEmailAsync(emailAddress);
+            var userManager = ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+            var httpContextAccessor = ServiceProvider.GetRequiredService<IHttpContextAccessor>();
+            var userClaimsPrincipal = httpContextAccessor.HttpContext!.User.FindFirst(ClaimTypes.Email)!;
+            var user = await userManager.FindByEmailAsync(userClaimsPrincipal.Value);
 
             var token = await userManager.GenerateChangePhoneNumberTokenAsync(user!, user!.PhoneNumber!);
 

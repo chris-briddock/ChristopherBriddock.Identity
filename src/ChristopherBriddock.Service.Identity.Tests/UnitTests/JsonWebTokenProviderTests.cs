@@ -1,5 +1,4 @@
-﻿using ChristopherBriddock.Service.Identity.Providers;
-using ChristopherBriddock.Service.Identity.Models.Results;
+﻿using ChristopherBriddock.Service.Identity.Models.Results;
 
 namespace ChristopherBriddock.Service.Identity.Tests.UnitTests;
 

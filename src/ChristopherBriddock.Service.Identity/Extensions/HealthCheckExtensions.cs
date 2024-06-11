@@ -35,23 +35,59 @@ public static class HealthCheckExtensions
     }
 
     /// <summary>
-    /// Adds health checks for vital infrastructure such as Databases, Caches and Logging.
+    /// Adds health check publishing to Seq.
     /// </summary>
-    /// <param name="services">The <see cref="IServiceCollection"/> to which authentication services will be added.</param>
+    /// <param name="services">The <see cref="IServiceCollection"/> to health checks will be added.</param>
     /// <returns>The modified <see cref="IServiceCollection"/> instance.</returns>
-    public static IServiceCollection AddCustomHealthChecks(this IServiceCollection services)
+    public static IServiceCollection AddSeqHealthCheckPublisher(this IServiceCollection services) 
     {
         var featureManager = services.BuildServiceProvider()
-                                     .GetService<IFeatureManager>()!;
+                                     .GetRequiredService<IFeatureManager>();
+        
+        var configuration = services.BuildServiceProvider()
+                                    .GetRequiredService<IConfiguration>();
+        
+        if (featureManager.IsEnabledAsync(FeatureFlagConstants.Seq).Result)
+        {
+            services.AddHealthChecks().AddSeqPublisher(opt =>
+            {
+                opt.Endpoint = configuration.GetRequiredValueOrThrow("Seq:Endpoint")!;
+                opt.ApiKey = configuration.GetRequiredValueOrThrow("Seq:ApiKey");
+            });
+        }
 
+        return services;
+
+    }
+    /// <summary>
+    /// Adds postgres database health checks.
+    /// </summary>
+    /// <param name="services">The <see cref="IServiceCollection"/> to health checks will be added.</param>
+    /// <returns>The modified <see cref="IServiceCollection"/> instance.</returns>
+    public static IServiceCollection AddDatabaseHealthChecks(this IServiceCollection services) 
+    {
         var configuration = services.BuildServiceProvider()
                                     .GetService<IConfiguration>()!;
 
         services.AddHealthChecks()
-                .AddNpgSql(configuration.GetConnectionString("Default")!);
+                .AddNpgSql(configuration.GetRequiredValueOrThrow("ConnectionStrings:Default"));
 
+        return services;
+    }
+    /// <summary>
+    /// Adds redis cache health checks.
+    /// </summary>
+    /// <param name="services">The <see cref="IServiceCollection"/> to health checks will be added.</param>
+    /// <returns>The modified <see cref="IServiceCollection"/> instance.</returns>
+    public static IServiceCollection AddRedisHealthChecks(this IServiceCollection services)
+    {
+        var featureManager = services.BuildServiceProvider()
+                                     .GetRequiredService<IFeatureManager>();
 
-        if (featureManager.IsEnabledAsync(FeatureFlagConstants.Redis).Result)
+        var configuration = services.BuildServiceProvider()
+                                    .GetRequiredService<IConfiguration>();
+
+       if (featureManager.IsEnabledAsync(FeatureFlagConstants.Redis).Result)
         {
             services.AddHealthChecks().AddRedis(configuration["ConnectionStrings:Redis"]!,
                                                 null,
@@ -60,14 +96,20 @@ public static class HealthCheckExtensions
                                                 TimeSpan.FromMinutes(10));
         }
 
-        if (featureManager.IsEnabledAsync(FeatureFlagConstants.Seq).Result)
-        {
-            services.AddHealthChecks().AddSeqPublisher(opt =>
-            {
-                opt.Endpoint = configuration["Seq:Endpoint"]!;
-                opt.ApiKey = configuration["Seq:ApiKey"];
-            });
-        }
+        return services;
+    }
+    /// <summary>
+    /// Adds health checks for vital infrastructure such as Databases, Caches and Logging.
+    /// </summary>
+    /// <param name="services">The <see cref="IServiceCollection"/> to healh checks will be added.</param>
+    /// <returns>The modified <see cref="IServiceCollection"/> instance.</returns>
+    public static IServiceCollection AddAzureApplicationInsightsHealthChecks(this IServiceCollection services)
+    {
+        var featureManager = services.BuildServiceProvider()
+                                     .GetRequiredService<IFeatureManager>();
+
+        var configuration = services.BuildServiceProvider()
+                                    .GetRequiredService<IConfiguration>();
 
         if (featureManager.IsEnabledAsync(FeatureFlagConstants.AzApplicationInsights).Result)
         {
