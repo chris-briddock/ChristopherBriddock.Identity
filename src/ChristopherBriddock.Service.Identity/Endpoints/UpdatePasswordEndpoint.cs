@@ -38,7 +38,7 @@ public class UpdatePasswordEndpoint(IServiceProvider serviceProvider,
     /// <param name="request">The object which encapsulates the request.</param>
     /// <param name="cancellationToken">The cancellation token to cancel the operation.</param>
     /// <returns>A new <see cref="ActionResult"/></returns>
-    [HttpPost("/account/password")]
+    [HttpPut("/account/password")]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -48,19 +48,18 @@ public class UpdatePasswordEndpoint(IServiceProvider serviceProvider,
     {
         try
         {
-            var userManager = ServiceProvider.GetService<UserManager<ApplicationUser>>()!;
-            string emailAddress = User.FindFirst(ClaimTypes.Email)!.Value;
+            var userManager = ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+            var httpContextAccessor = ServiceProvider.GetRequiredService<IHttpContextAccessor>();
+            var userClaimsPrincipal = httpContextAccessor.HttpContext!.User.FindFirst(ClaimTypes.Email)!;
 
-            var user = await userManager.FindByEmailAsync(emailAddress);
+            var user = await userManager.FindByEmailAsync(userClaimsPrincipal.Value);
 
             var result = await userManager.ChangePasswordAsync(user!,
                                                                request.CurrentPassword,
                                                                request.NewPassword);
 
             if (!result.Succeeded)
-            {
                 return BadRequest();
-            }
 
             return NoContent();
         }

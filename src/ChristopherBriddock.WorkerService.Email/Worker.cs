@@ -15,16 +15,18 @@ namespace ChristopherBriddock.WorkerService.Email;
 /// <param name="logger">The application logger.</param>
 /// <param name="configuration">The configuration of the application. </param> 
 public class Worker(ILogger<Worker> logger,
-                           IConfiguration configuration) : IConsumer<EmailMessage>
+                    IServiceProvider serviceProvider) : IConsumer<EmailMessage>
 {
     /// <summary>
     /// The application logger.
     /// </summary>
     public ILogger<Worker> Logger { get; } = logger;
+
     /// <summary>
-    /// The application configuration.
+    /// The service provider.
     /// </summary>
-    public IConfiguration Configuration { get; } = configuration;
+    /// <value></value>
+    public IServiceProvider ServiceProvider { get; } = serviceProvider;
 
     /// <summary>
     /// Consumes a message from the message queue.
@@ -37,25 +39,20 @@ public class Worker(ILogger<Worker> logger,
     /// <returns>An asyncronous <see cref="Task"/></returns>
     public async Task Consume(ConsumeContext<EmailMessage> context)
     {
-        var smtpServer = Configuration["Email:Server"]!;
-        int smtpPort = Convert.ToInt16(Configuration["Email:Port"]!);
-        var smtpUsername = Configuration["Email:Credentials:EmailAddress"]!;
-        var smtpPassword = Configuration["Email:Credentials:Password"]!;
-
-        using var client = new SmtpClient(smtpServer, smtpPort);
-        client.EnableSsl = true;
-        client.Credentials = new NetworkCredential(smtpUsername, smtpPassword);
-        var mailMessage = new MailMessage
+        var configuration = ServiceProvider.GetService<IConfiguration>()!;
+        var from = configuration["Email:Credentials:EmailAddress"]!;
+        var to = context.Message.EmailAddress;
+        var message = new MailMessage(from, to) 
         {
-            From = new MailAddress(smtpUsername),
-            IsBodyHtml = true
+            IsBodyHtml = true 
         };
+        var client = ServiceProvider.GetService<ISmtpClient>()!;
 
         switch (context.Message.Type)
         {
             case EmailPublisherConstants.ConfirmEmail:
-                mailMessage.Subject = $"Please confirm your email address.";
-                mailMessage.Body = $@"<!DOCTYPE html>
+                message.Subject = $"Please confirm your email address.";
+                message.Body = $@"<!DOCTYPE html>
 <html lang=""en"">
 <head>
     <meta charset=""UTF-8"">
@@ -77,8 +74,8 @@ public class Worker(ILogger<Worker> logger,
 </html>";
                 break;
             case EmailPublisherConstants.TwoFactorToken:
-                mailMessage.Subject = $"You requested a two factor code";
-                mailMessage.Body = $@"<!DOCTYPE html>
+                message.Subject = $"You requested a two factor code";
+                message.Body = $@"<!DOCTYPE html>
 <html lang=""en"">
 <head>
     <meta charset=""UTF-8"">
@@ -100,8 +97,8 @@ public class Worker(ILogger<Worker> logger,
 </html>";
                 break;
             case EmailPublisherConstants.ForgotPassword:
-                mailMessage.Subject = $"Oh no! You silly goose, you forgot your password. You can reset it here.";
-                mailMessage.Body = $@"<!DOCTYPE html>
+                message.Subject = $"Oh no! You silly goose, you forgot your password. You can reset it here.";
+                message.Body = $@"<!DOCTYPE html>
 <html lang=""en"">
 <head>
     <meta charset=""UTF-8"">
@@ -125,8 +122,7 @@ public class Worker(ILogger<Worker> logger,
             default:
                 break;
         }
-        mailMessage.To.Add(context.Message.EmailAddress);
 
-        await client.SendMailAsync(mailMessage);
+        await client.SendMailAsync(message);
     }
 }
