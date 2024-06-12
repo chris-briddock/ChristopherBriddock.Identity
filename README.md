@@ -9,9 +9,11 @@ The Identity Service is a robust authentication and authorization component for 
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=chris-briddock_ChristopherBriddock.Identity&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=chris-briddock_ChristopherBriddock.Identity)
 
 ChristopherBriddock.Service.Identity Code Coverage:
+
 ![Azure DevOps coverage](https://img.shields.io/azure-devops/coverage/chris1997/ChristopherBriddock.Identity/7)
 
 ChristopherBriddock.WorkerService.Email Code Coverage:
+
 ![Azure DevOps coverage](https://img.shields.io/azure-devops/coverage/chris1997/ChristopherBriddock.Identity/8)
 
 
