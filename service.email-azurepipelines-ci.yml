@@ -36,8 +36,8 @@ stages:
       displayName: 'Code Coverage Report'
     - task: PublishCodeCoverageResults@2
       inputs:
-        summaryFileLocation: 'src/ChristopherBriddock.Service.Identity.Tests/TestResults/*/coverage.cobertura.xml'
-        pathToSources: 'src/ChristopherBriddock.Service.Identity/'
+        summaryFileLocation: 'src/ChristopherBriddock.WorkerService.Email.Tests/TestResults/*/coverage.cobertura.xml'
+        pathToSources: 'src/ChristopherBriddock.WorkerService.Email/'
     - task: CopyFiles@2
       inputs:
         SourceFolder: '$(System.DefaultWorkingDirectory)'
