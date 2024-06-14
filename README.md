@@ -1,6 +1,6 @@
 # ChristopherBriddock.Service.Identity
 
-The Identity Service is a robust authentication and authorization component for your application, developed using ASP.NET 8 and integrating various libraries to ensure secure identity management.
+Secure your app with our ASP.NET 8 Identity Service, featuring the OAuth 2.0 Resource Owner Password Credentials flow for robust and flexible identity management.
 
 ![Azure DevOps build](https://img.shields.io/azure-devops/build/chris1997/91f2d938-549b-497e-980d-188da969448a/7)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=chris-briddock_ChristopherBriddock.Identity&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=chris-briddock_ChristopherBriddock.Identity)
