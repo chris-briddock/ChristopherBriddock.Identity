@@ -80,7 +80,7 @@ public class TwoFactorRecoveryCodesEndpointTests
         userManagerMock.Setup(s => s.FindByEmailAsync(It.IsAny<string>())).ThrowsAsync(new Exception());
 
         // Create a mock instance of ClaimsPrincipal and set up behavior for FindFirst method
-        var claimsPrincipalMock = new Mock<ClaimsPrincipal>();
+        var claimsPrincipalMock = new ClaimsPrincipalMock();
         claimsPrincipalMock.Setup(u => u.FindFirst(ClaimTypes.Email))
             .Returns(new Claim(ClaimTypes.Email, "test@test.com"));
 

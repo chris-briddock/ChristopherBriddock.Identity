@@ -32,8 +32,8 @@ public class TokenEndpointTests
 
     private HttpClient CreateClientWithMocks(IConfiguration configuration, IJsonWebTokenProvider tokenProvider, ClaimsPrincipal user)
     {
-        var httpContextAccessorMock = new Mock<IHttpContextAccessor>();
-        var httpContextMock = new Mock<HttpContext>();
+        var httpContextAccessorMock = new IHttpContextAccessorMock();
+        var httpContextMock = new HttpContextMock();
 
         httpContextMock.Setup(x => x.User).Returns(user);
         httpContextAccessorMock.Setup(x => x.HttpContext).Returns(httpContextMock.Object);
@@ -61,7 +61,7 @@ public class TokenEndpointTests
     public async Task TokenEndpoint_Returns500InternalServerError_WhenExceptionIsThrown()
     {
         // Arrange
-        var tokenProviderMock = new Mock<IJsonWebTokenProvider>();
+        var tokenProviderMock = new JsonWebTokenProviderMock();
         var configurationBuilder = new ConfigurationBuilder()
             .AddInMemoryCollection(new Dictionary<string, string?>
             {
@@ -79,7 +79,7 @@ public class TokenEndpointTests
                                                            It.IsAny<string>()))
             .ThrowsAsync(new Exception("Test exception"));
 
-        var claimsPrincipalMock = new Mock<ClaimsPrincipal>();
+        var claimsPrincipalMock = new ClaimsPrincipalMock();
         claimsPrincipalMock.Setup(x => x.Identity!.Name).Returns("test@test.com");
 
         var client = CreateClientWithMocks(configurationBuilder, tokenProviderMock.Object, claimsPrincipalMock.Object);
@@ -95,7 +95,7 @@ public class TokenEndpointTests
     public async Task TokenEndpoint_Returns200OK_WithTokenResponse()
     {
         // Arrange
-        var tokenProviderMock = new Mock<IJsonWebTokenProvider>();
+        var tokenProviderMock = new JsonWebTokenProviderMock();
         var configurationBuilder = new ConfigurationBuilder()
             .AddInMemoryCollection(new Dictionary<string, string?>
             {
@@ -114,7 +114,7 @@ public class TokenEndpointTests
         tokenProviderMock.Setup(p => p.TryValidateTokenAsync(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()))
                 .ReturnsAsync(new JwtResult { Success = true, Token = "mockRefreshToken", Error = null });
 
-        var claimsPrincipalMock = new Mock<ClaimsPrincipal>();
+        var claimsPrincipalMock = new ClaimsPrincipalMock();
         claimsPrincipalMock.Setup(x => x.Identity!.Name).Returns("test@test.com");
 
         var client = CreateClientWithMocks(configurationBuilder, tokenProviderMock.Object, claimsPrincipalMock.Object);

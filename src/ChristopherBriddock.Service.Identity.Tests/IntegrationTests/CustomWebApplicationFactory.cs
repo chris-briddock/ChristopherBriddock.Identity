@@ -1,7 +1,5 @@
 using System.Diagnostics;
 using System.Net.Http.Headers;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.Extensions.Options;
 using Newtonsoft.Json.Linq;
 
 namespace ChristopherBriddock.Service.Identity.Tests.IntegrationTests;
