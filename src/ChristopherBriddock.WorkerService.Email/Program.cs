@@ -1,4 +1,4 @@
-using ChristopherBriddock.Service.Common.Extensions;
+using ChristopherBriddock.AspNetCore.Extensions;
 using ChristopherBriddock.WorkerService.Email;
 using Microsoft.FeatureManagement;
 

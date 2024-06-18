@@ -1,9 +1,12 @@
-﻿namespace ChristopherBriddock.Service.Identity.Exceptions;
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace ChristopherBriddock.Service.Identity.Exceptions;
 
 
 /// <summary>
 /// Exception class for errors related to creating JSON Web Tokens (JWT).
 /// </summary>
+[ExcludeFromCodeCoverage]
 public class CreateJwtException : Exception
 {
     /// <summary>

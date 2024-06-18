@@ -48,9 +48,9 @@ public sealed class AuthorizeEndpoint(IServiceProvider serviceProvider,
     {
         try
         {
-            var signInManager = ServiceProvider.GetService<SignInManager<ApplicationUser>>()!;
+            var signInManager = ServiceProvider.GetRequiredService<SignInManager<ApplicationUser>>();
 
-            var userManager = ServiceProvider.GetService<UserManager<ApplicationUser>>()!;
+            var userManager = ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
 
             signInManager.AuthenticationScheme = IdentityConstants.ApplicationScheme;
 

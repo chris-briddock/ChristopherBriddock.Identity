@@ -39,7 +39,7 @@ public sealed class TwoFactorAuthorizeEndpoint(IServiceProvider serviceProvider,
     {
         try
         {
-            var userManager = ServiceProvider.GetService<UserManager<ApplicationUser>>()!;
+            var userManager = ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
 
             var user = await userManager.FindByEmailAsync(request.EmailAddress);
 

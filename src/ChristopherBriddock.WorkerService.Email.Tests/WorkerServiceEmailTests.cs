@@ -39,7 +39,7 @@ public class WorkerTests
         {
             Type = EmailPublisherConstants.ConfirmEmail,
             EmailAddress = "recipient@example.com",
-            Link = "https://example.com/confirm"
+            Code = "https://example.com/confirm"
         };
 
         var consumeContextMock = new Mock<ConsumeContext<EmailMessage>>();

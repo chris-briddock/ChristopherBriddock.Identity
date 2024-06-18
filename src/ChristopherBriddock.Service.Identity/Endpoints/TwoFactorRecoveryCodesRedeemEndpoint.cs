@@ -44,7 +44,7 @@ public class TwoFactorRecoveryCodesRedeemEndpoint(IServiceProvider serviceProvid
     {
         try
         {
-            var userManager = ServiceProvider.GetService<UserManager<ApplicationUser>>()!;
+            var userManager = ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
 
             var user = await userManager.FindByEmailAsync(request.EmailAddress);
 
