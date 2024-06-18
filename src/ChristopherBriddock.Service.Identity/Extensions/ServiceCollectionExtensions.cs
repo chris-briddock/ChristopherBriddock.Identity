@@ -177,12 +177,11 @@ public static class ServiceCollectionExtensions
     /// <returns>The modified <see cref="IServiceCollection"/> instance.</returns>
     public static IServiceCollection AddCorsPolicy(this IServiceCollection services)
     {
-        var configuration = services.BuildServiceProvider().GetRequiredService<IConfiguration>();
         services.AddCors(opt =>
         {
             opt.AddPolicy(CorsConstants.PolicyName, opt =>
             {
-                opt.WithOrigins([ "http://localhost:3000", "http://localhost:4000", "http://localhost:4200" ]);
+                opt.WithOrigins("http://localhost:3000", "http://localhost:4000", "http://localhost:4200");
                 opt.AllowAnyHeader();
                 opt.AllowAnyMethod();
                 opt.AllowCredentials();
