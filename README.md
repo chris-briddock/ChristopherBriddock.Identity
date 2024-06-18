@@ -9,8 +9,6 @@ Secure your app with our ASP.NET 8 Identity Service, featuring the OAuth 2.0 Res
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=chris-briddock_ChristopherBriddock.Identity&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=chris-briddock_ChristopherBriddock.Identity)
 ![Azure DevOps coverage](https://img.shields.io/azure-devops/coverage/chris1997/ChristopherBriddock.Identity/7)
 
-If you have used this project and want to support my open source projects consider [buying me a coffee](https://www.buymeacoffee.com/chrisbriddock)
-
 ## Table of Contents
 
 * [Introduction](#introduction)
