@@ -39,7 +39,7 @@ public class WorkerTests
         {
             Type = EmailPublisherConstants.ConfirmEmail,
             EmailAddress = "recipient@example.com",
-            Link = "https://example.com/confirm"
+            Code = "https://example.com/confirm"
         };
 
         var consumeContextMock = new Mock<ConsumeContext<EmailMessage>>();
@@ -53,7 +53,7 @@ public class WorkerTests
             smtp => smtp.SendMailAsync(It.Is<MailMessage>(msg =>
                 msg.To.Contains(new MailAddress("recipient@example.com")) &&
                 msg.Subject == "Please confirm your email address." &&
-                msg.Body.Contains("Your confirmation email link is <a href=\"https://example.com/confirm\"")
+                msg.Body.Contains($"https://example.com/confirm")
             )),
             Times.Once);
     }

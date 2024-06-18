@@ -1,8 +1,11 @@
-﻿namespace ChristopherBriddock.Service.Identity.Exceptions;
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace ChristopherBriddock.Service.Identity.Exceptions;
 
 /// <summary>
 /// Exception class for errors related to the JWT secret being null or empty.
 /// </summary>
+[ExcludeFromCodeCoverage]
 public class JwtSecretNullOrEmptyException : Exception
 {
     /// <summary>

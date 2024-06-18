@@ -15,10 +15,6 @@ public sealed class EmailMessage
     /// The type of email to be sent to the message queue. <see cref="EmailPublisherConstants"/> 
     /// </summary>
     public string Type { get; set; } = default!;
-    /// <summary>
-    /// The link for two factor, forgotpassword, and registration.
-    /// </summary>
-    public string? Link { get; set; } = default!;
 
     /// <summary>
     /// The code for the user to enter sent via email.

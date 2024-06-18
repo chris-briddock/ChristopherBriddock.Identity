@@ -47,7 +47,7 @@ public class UpdateEmailEndpoint(IServiceProvider serviceProvider,
     {
         try
         {
-            var userManager = ServiceProvider.GetService<UserManager<ApplicationUser>>()!;
+            var userManager = ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
             var httpContextAccessor = ServiceProvider.GetRequiredService<IHttpContextAccessor>();
             var userClaimsPrincipal = httpContextAccessor.HttpContext!.User.FindFirst(ClaimTypes.Email)!;
             var user = await userManager.FindByEmailAsync(userClaimsPrincipal.Value);

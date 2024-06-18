@@ -1,6 +1,5 @@
 using System.Net;
 using System.Net.Mail;
-using Microsoft.Extensions.Configuration;
 
 namespace ChristopherBriddock.WorkerService.Email
 {
@@ -51,6 +50,7 @@ namespace ChristopherBriddock.WorkerService.Email
         public void Dispose()
         {
             _smtpClient.Dispose();
+            GC.SuppressFinalize(this);
         }
     }
 }

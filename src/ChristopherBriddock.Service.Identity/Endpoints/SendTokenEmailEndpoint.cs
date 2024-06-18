@@ -50,13 +50,17 @@ public sealed class SendTokenEmailEndpoint(IServiceProvider serviceProvider,
         try
         {
             ApplicationUser? user;
+            
             EmailMessage message = new();
-            var userManager = ServiceProvider.GetService<UserManager<ApplicationUser>>()!;
-            var emailPublisher = ServiceProvider.GetService<IEmailPublisher>()!;
-            var linkProvider = ServiceProvider.GetService<ILinkProvider>()!;
+            var userManager = ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+            
+            var emailPublisher = ServiceProvider.GetRequiredService<IEmailPublisher>();
+            
             user = await userManager.FindByEmailAsync(request.EmailAddress);
+            
             if (user is null)
                 return NotFound();
+            
             if (request.TokenType == EmailPublisherConstants.TwoFactorToken)
             {
                 var code = await userManager.GenerateTwoFactorTokenAsync(user, TokenOptions.DefaultProvider);
@@ -73,18 +77,10 @@ public sealed class SendTokenEmailEndpoint(IServiceProvider serviceProvider,
             {
                 var code = await userManager.GenerateEmailConfirmationTokenAsync(user);
 
-                RouteValueDictionary routeValues = new()
-                {
-                    ["EmailAddress"] = user.Email,
-                    ["Code"] = code
-                };
-
-                Uri link = linkProvider.GetUri(HttpContext, "confirmemail", routeValues);
-
                 message = new()
                 {
                     EmailAddress = user.Email!,
-                    Link = link.ToString(),
+                    Code = code,
                     Type = EmailPublisherConstants.ConfirmEmail
                 };
 

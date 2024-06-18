@@ -14,7 +14,6 @@ using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Options;
 using Microsoft.FeatureManagement;
-using Microsoft.OpenApi.Models;
 
 namespace ChristopherBriddock.Service.Identity.Extensions;
 
@@ -24,59 +23,12 @@ namespace ChristopherBriddock.Service.Identity.Extensions;
 public static class ServiceCollectionExtensions
 {
     /// <summary>
-    /// Adds Swagger with custom configuration.
-    /// </summary>
-    /// <param name="services">The IServiceCollection instance.</param>
-    /// <param name="xmlFile"></param>
-    /// <returns>The modified <see cref="IServiceCollection"/> instance.</returns>
-    public static IServiceCollection AddSwagger(this IServiceCollection services, string xmlFile)
-    {
-        services.AddSwaggerGen(opt =>
-        {
-            var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-
-            opt.IncludeXmlComments(xmlPath);
-            opt.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-            {
-                Description = @"JWT Authorization header using the Bearer scheme.
-                      Enter 'Bearer' [space] and then your token in the text input below.",
-                Name = "Authorization",
-                In = ParameterLocation.Header,
-                Type = SecuritySchemeType.ApiKey,
-                Scheme = "Bearer"
-            });
-
-            opt.AddSecurityRequirement(new OpenApiSecurityRequirement()
-            {
-                    {
-                        new OpenApiSecurityScheme
-                        {
-                            Reference = new OpenApiReference
-                            {
-                                Type = ReferenceType.SecurityScheme,
-                                Id = "Bearer"
-                            },
-                            Scheme = "oauth2",
-                            Name = "Bearer",
-                            In = ParameterLocation.Header,
-
-                        },
-                        new List<string>()
-                    }
-            });
-            opt.UseApiEndpoints();
-        });
-
-        return services;
-    }
-
-    /// <summary>
     /// Adds the ASP.NET Identity configuration.
     /// </summary>
     /// <remarks> 
     /// This method uses AddIdentityCore due to AddIdentity adding an authentication scheme <see cref="IdentityConstants.ApplicationScheme"/>
     /// The authentication scheme causes the application to throw an error "System.InvalidOperationException : Scheme already exists: Identity.Application"
-    /// I have manually added the authentication scheme in the extension method <see cref="AddJsonWebTokenAuthentication"/> due to this incorrectly redirecting users
+    /// I have manually added the authentication scheme in the extension method <see cref="AddBearerAuthentication"/> due to this incorrectly redirecting users
     /// to /Account/Login, which causes a 404 error.
     /// </remarks>
     /// <param name="services">The <see cref="IServiceCollection"/> instance.</param>
@@ -122,7 +74,7 @@ public static class ServiceCollectionExtensions
     /// </summary>
     /// <param name="services">The <see cref="IServiceCollection"/> to which services will be added.</param>
     /// <returns>The modified <see cref="IServiceCollection"/> instance.</returns>
-    public static IServiceCollection AddJsonWebTokenAuthentication(this IServiceCollection services)
+    public static IServiceCollection AddBearerAuthentication(this IServiceCollection services)
     {
         services.TryAddSingleton<IJsonWebTokenProvider, JsonWebTokenProvider>();
         services.TryAddSingleton<IConfigureOptions<JwtBearerOptions>, ConfigureJwtBearerOptions>();
@@ -223,15 +175,16 @@ public static class ServiceCollectionExtensions
     /// </remarks>
     /// <param name="services">The <see cref="IServiceCollection"/> to which services will be added.</param>
     /// <returns>The modified <see cref="IServiceCollection"/> instance.</returns>
-    public static IServiceCollection AddCrossOriginPolicy(this IServiceCollection services)
+    public static IServiceCollection AddCorsPolicy(this IServiceCollection services)
     {
         services.AddCors(opt =>
         {
             opt.AddPolicy(CorsConstants.PolicyName, opt =>
             {
-                opt.AllowAnyOrigin();
+                opt.WithOrigins("http://localhost:3000", "http://localhost:4000", "http://localhost:4200");
                 opt.AllowAnyHeader();
                 opt.AllowAnyMethod();
+                opt.AllowCredentials();
             });
         });
 

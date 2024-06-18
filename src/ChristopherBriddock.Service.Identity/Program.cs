@@ -1,8 +1,8 @@
+using ChristopherBriddock.AspNetCore.Extensions;
+using ChristopherBriddock.AspNetCore.HealthChecks;
 using ChristopherBriddock.Service.Common.Constants;
-using ChristopherBriddock.Service.Common.Extensions;
 using ChristopherBriddock.Service.Identity.Data;
 using ChristopherBriddock.Service.Identity.Extensions;
-using ChristopherBriddock.Service.Identity.Providers;
 using ChristopherBriddock.Service.Identity.Services;
 using Microsoft.FeatureManagement;
 
@@ -23,7 +23,7 @@ public sealed class Program
         builder.Services.AddSwagger("ChristopherBriddock.Service.Identity.xml");
         builder.Services.AddFeatureManagement();
         builder.Services.AddSerilogWithConfiguration();
-        builder.Services.AddJsonWebTokenAuthentication();
+        builder.Services.AddBearerAuthentication();
         builder.Services.AddAuthorizationPolicy();
         builder.Services.AddAuthorizationBuilder();
         builder.Services.AddIdentity();
@@ -35,11 +35,10 @@ public sealed class Program
         builder.Services.AddDatabaseHealthChecks();
         builder.Services.AddAzureApplicationInsightsHealthChecks();
         builder.Services.AddSeqHealthCheckPublisher();
-        builder.Services.AddRedisHealthChecks();
-        builder.Services.AddCrossOriginPolicy();
+        builder.Services.AddRedisHealthChecks(builder.Configuration["ConnectionStrings:Redis"]!);
+        builder.Services.AddCorsPolicy();
         builder.Services.AddPublisherMessaging();
         builder.Services.AddHostedService<AccountPurgeBackgroundService>();
-        builder.Services.AddScoped<ILinkProvider, LinkProvider>();
         builder.Services.AddAppRateLimiting();
 
         WebApplication app = builder.Build();
@@ -57,7 +56,7 @@ public sealed class Program
         app.UseAuthentication();
         app.UseAuthorization();
         app.MapControllers();
-        app.UseHealthCheckMapping();
+        app.UseCustomHealthCheckMapping();
         await app.UseDatabaseMigrationsAsync<AppDbContext>(app.Environment);
         await app.RunAsync();
     }
