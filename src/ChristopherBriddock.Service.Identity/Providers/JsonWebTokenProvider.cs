@@ -41,7 +41,6 @@ public class JsonWebTokenProvider : IJsonWebTokenProvider
             [
                 new(JwtRegisteredClaimNames.Sub, subject),
                 new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                new(JwtRegisteredClaimNames.Iat, DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString()),
                 new(JwtRegisteredClaimNames.Email, email)
 
             ];

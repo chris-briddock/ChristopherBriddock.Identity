@@ -1,4 +1,5 @@
-﻿using ChristopherBriddock.Service.Identity.Models;
+﻿using ChristopherBriddock.AspNetCore.Extensions;
+using ChristopherBriddock.Service.Identity.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,32 +8,30 @@ namespace ChristopherBriddock.Service.Identity.Data;
 /// <summary>
 /// Represents a session with the database and can be used to query and save instances of your entities.
 /// </summary>
-/// <param name="configuration"> The application's configuration.</param>
-/// <param name="webHostEnvironment">Provides information about the web host environment.</param>
-public sealed class AppDbContext(IConfiguration configuration,
-                                 IWebHostEnvironment webHostEnvironment) : IdentityDbContext<ApplicationUser, ApplicationRole, Guid>
+public sealed class AppDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, Guid>
 {
-    /// <summary>
-    /// The application's configuration.
+    /// <summary> 
+    /// An instance of the application configuration.
     /// </summary>
-    private IConfiguration Configuration { get; } = configuration;
+    public IConfiguration Configuration { get; }
     /// <summary>
-    /// The web host environment provides information about the environment it is running in.
+    /// Initializes a new instance of <see cref="AppDbContext"/>
     /// </summary>
-    public IWebHostEnvironment WebHostEnvironment { get; } = webHostEnvironment;
-    /// <inheritdoc/>
+    /// <param name="options"></param>
+    /// <param name="configuration"></param>
+    /// <returns></returns>
+    public AppDbContext(DbContextOptions options,
+                        IConfiguration configuration) : base(options)
+    {
+        Configuration = configuration;
+    }
+    /// <inheritdoc />
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        if (WebHostEnvironment.IsEnvironment("Development"))
+        optionsBuilder.UseSqlServer(Configuration.GetConnectionStringOrThrow("Default"), opt => 
         {
-            optionsBuilder.UseSqlite("Data Source=LocalDatabase.db");
-        }
-        else
-        {
-            optionsBuilder.UseNpgsql(Configuration.GetConnectionString("Default"),
-            opt => opt.EnableRetryOnFailure());
-        }
-
+            opt.EnableRetryOnFailure();
+        });
         base.OnConfiguring(optionsBuilder);
     }
 }

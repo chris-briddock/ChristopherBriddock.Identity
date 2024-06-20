@@ -8,11 +8,13 @@ public class TestFixture<TProgram> : IDisposable where TProgram : class
     public void OneTimeSetUp()
     {
         WebApplicationFactory = new CustomWebApplicationFactory<TProgram>();
+        WebApplicationFactory.StartTestContainer();
     }
 
     [OneTimeTearDown]
     public void OneTimeTearDown()
     {
+        WebApplicationFactory.StopTestContainer();
         Dispose();
     }
 

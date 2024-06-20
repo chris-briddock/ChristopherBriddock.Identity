@@ -47,31 +47,13 @@ public class AccountPurgeBackgroundServiceTests
 
         using var scope = scopeFactory.CreateScope();
         var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-
-        var oldDeletedUser = new ApplicationUser
-        {
-            Id = Guid.NewGuid(),
-            UserName = "OldDeletedUser",
-            Email = "olddeleted@test.com",
-            IsDeleted = true,
-            DeletedDateTime = DateTime.Now.AddYears(-8)
-        };
-
-        var recentDeletedUser = new ApplicationUser
-        {
-            Id = Guid.NewGuid(),
-            UserName = "RecentDeletedUser",
-            Email = "recentdeleted@test.com",
-            IsDeleted = true,
-            DeletedDateTime = DateTime.Now
-        };
-
-        dbContext.Users.Add(oldDeletedUser);
-        dbContext.Users.Add(recentDeletedUser);
-
-        await dbContext.SaveChangesAsync();
+        var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
 
         var service = new AccountPurgeBackgroundServiceExposeProtected(scopeFactory, mockLogger.Object);
+
+        var oldDeletedUser = dbContext.Users.Where(s => s.Email == "olddeleted@test.com").First();
+
+        var recentDeletedUser = dbContext.Users.Where(s => s.Email == "recentlydeleted@test.com").First();
 
         // Act
         await service.ExecuteTaskAsync(CancellationToken.None);

@@ -31,7 +31,7 @@ public class AuthorizeEndpointTests
 
         AuthorizeRequest authorizeRequest = new()
         {
-            EmailAddress = "testing@tester.com",
+            EmailAddress = "authorizeTest@default.com",
             Password = "7XAl@Dg()[=8rV;[wD[:GY$yw:$ltHA\\uaf!\\UQ`",
             RememberMe = true
         };
@@ -103,8 +103,8 @@ public class AuthorizeEndpointTests
         // Arrange
         AuthorizeRequest authorizeRequest = new()
         {
-            EmailAddress = "test@asdf.com",
-            Password = "Ar*P`w8R.WyXb7'UKxh;!-",
+            EmailAddress = "twoFactorTest@default.com",
+            Password = """Ar*P`w8R.WyXb7'UKxh;!-""",
             RememberMe = true
         };
 

@@ -32,7 +32,7 @@ public sealed class Program
         builder.Services.AddResponseCaching();
         builder.Services.AddAzureAppInsights();
         builder.Services.AddDbContext<AppDbContext>(ServiceLifetime.Singleton);
-        builder.Services.AddDatabaseHealthChecks();
+        builder.Services.AddSqlDatabaseHealthChecks(builder.Configuration.GetConnectionStringOrThrow("Default"));
         builder.Services.AddAzureApplicationInsightsHealthChecks();
         builder.Services.AddSeqHealthCheckPublisher();
         builder.Services.AddRedisHealthChecks(builder.Configuration["ConnectionStrings:Redis"]!);
@@ -42,12 +42,6 @@ public sealed class Program
         builder.Services.AddAppRateLimiting();
 
         WebApplication app = builder.Build();
-        if (app.Environment.IsDevelopment())
-        {
-            app.UseSwagger();
-            app.UseSwaggerUI();
-            app.UseCors(CorsConstants.PolicyName);
-        }
         app.UseHsts();
         app.UseResponseCaching();
         app.UseHttpsRedirection();
@@ -58,6 +52,14 @@ public sealed class Program
         app.MapControllers();
         app.UseCustomHealthCheckMapping();
         await app.UseDatabaseMigrationsAsync<AppDbContext>(app.Environment);
+        await app.SeedDataAsync();
+        if (app.Environment.IsDevelopment())
+        {
+            app.UseSwagger();
+            app.UseSwaggerUI();
+            app.UseCors(CorsConstants.PolicyName);
+            await app.SeedTestDataAsync();
+        }
         await app.RunAsync();
     }
 }
