@@ -1,9 +1,9 @@
-using System.Diagnostics;
-using System.Net.Http.Headers;
-using Newtonsoft.Json.Linq;
 using Testcontainers.MsSql;
 using DotNet.Testcontainers.Builders;
 using Microsoft.Extensions.Configuration;
+using System.Diagnostics;
+using Newtonsoft.Json.Linq;
+using System.Net.Http.Headers;
 
 namespace ChristopherBriddock.Service.Identity.Tests.IntegrationTests;
 
@@ -18,7 +18,7 @@ public class CustomWebApplicationFactory<TProgram> :  WebApplicationFactory<TPro
     public void StartTestContainer() 
     {
         _msSqlContainer.StartAsync().Wait();
-        Task.Delay(TimeSpan.FromSeconds(30)).Wait();
+        Task.Delay(TimeSpan.FromSeconds(15)).Wait();
     }
     public void StopTestContainer() 
     {
@@ -49,8 +49,7 @@ public class CustomWebApplicationFactory<TProgram> :  WebApplicationFactory<TPro
                 string desiredDirectory = Path.Combine(
                 currentDirectory, 
                 "..", "..", "..", "..", 
-                "ChristopherBriddock.Service.Identity"
-            );
+                "ChristopherBriddock.Service.Identity");
 
                 // Ensure the path is properly formatted
                 desiredDirectory = Path.GetFullPath(desiredDirectory);
@@ -76,14 +75,14 @@ public class CustomWebApplicationFactory<TProgram> :  WebApplicationFactory<TPro
 
                 JObject jwtJson = JObject.Parse(output);
                 string token = jwtJson["Token"]!.ToString();
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
-            // Optionally, read and handle standard error
-            string error = process.StandardError.ReadToEnd();
-            if (!string.IsNullOrEmpty(error))
-            {
-                throw new Exception(error);
-            }
+                // Optionally, read and handle standard error
+                string error = process.StandardError.ReadToEnd();
+                if (!string.IsNullOrEmpty(error))
+                {
+                    throw new Exception(error);
+                }
         }
         catch (Exception)
         {

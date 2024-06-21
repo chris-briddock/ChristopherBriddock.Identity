@@ -51,9 +51,12 @@ public class AccountPurgeBackgroundServiceTests
 
         var service = new AccountPurgeBackgroundServiceExposeProtected(scopeFactory, mockLogger.Object);
 
-        var oldDeletedUser = dbContext.Users.Where(s => s.Email == "olddeleted@test.com").First();
+        var oldDeletedUser = dbContext.Users
+        .Where(s => s.Email == "deletedUser@default.com")
+        .Where(x => x.DeletedDateTime <= DateTime.UtcNow.AddYears(-8))
+        .FirstOrDefault()!;
 
-        var recentDeletedUser = dbContext.Users.Where(s => s.Email == "recentlydeleted@test.com").First();
+        var recentDeletedUser = dbContext.Users.Where(s => s.Email == "recentlydeleted@default.com").First();
 
         // Act
         await service.ExecuteTaskAsync(CancellationToken.None);
@@ -62,7 +65,7 @@ public class AccountPurgeBackgroundServiceTests
         Assert.Multiple(() =>
         {
             // Assert
-            Assert.That(dbContext.Users.FirstOrDefault(u => u.Id == oldDeletedUser.Id), Is.Null);
+            Assert.That(dbContext.Users.FirstOrDefault(u => u == oldDeletedUser), Is.Null);
             Assert.That(dbContext.Users.Any(u => u.Id == recentDeletedUser.Id), Is.True);
         });
     }

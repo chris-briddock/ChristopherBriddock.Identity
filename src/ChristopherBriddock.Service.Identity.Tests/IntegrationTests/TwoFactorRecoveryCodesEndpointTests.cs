@@ -51,22 +51,18 @@ public class TwoFactorRecoveryCodesEndpointTests
         httpContextAccessorMock.Setup(x => x.HttpContext).Returns(httpContextMock.Object);
 
         // Create an instance of HttpClient with the necessary services configured
-        var client = _fixture.WebApplicationFactory.WithWebHostBuilder(builder =>
+        var client = _fixture.CreateAuthenticatedClient(x => 
         {
-            builder.ConfigureTestServices(services =>
-            {
-                services.Replace(new ServiceDescriptor(typeof(UserManager<ApplicationUser>), userManagerMock.Object));
-                services.Replace(new ServiceDescriptor(typeof(IHttpContextAccessor), httpContextAccessorMock.Object));
-            });
-        }).CreateClient(new WebApplicationFactoryClientOptions());
-
+            x.Replace(new ServiceDescriptor(typeof(UserManager<ApplicationUser>), userManagerMock.Object));
+            x.Replace(new ServiceDescriptor(typeof(IHttpContextAccessor), httpContextAccessorMock.Object));
+        }); 
+                
         // Act
         var sut = await client.GetAsync("/2fa/codes");
         // Assert
         sut.EnsureSuccessStatusCode();
         Assert.That(sut.StatusCode, Is.EqualTo(HttpStatusCode.OK));
     }
-
 
     [Test]
     public async Task TwoFactorRecoveryCodesEndpoint_Returns500InternalServerError_WhenExceptionIsThrown()
@@ -77,12 +73,12 @@ public class TwoFactorRecoveryCodesEndpointTests
         // Create a mock instance of UserManager<ApplicationUser>
         var userManagerMock = new UserManagerMock<ApplicationUser>().Mock();
 
-        userManagerMock.Setup(s => s.FindByEmailAsync(It.IsAny<string>())).ThrowsAsync(new Exception());
+        userManagerMock.Setup(s => s.FindByEmailAsync(It.IsAny<string>())).ReturnsAsync(new ApplicationUser());
 
         // Create a mock instance of ClaimsPrincipal and set up behavior for FindFirst method
         var claimsPrincipalMock = new ClaimsPrincipalMock();
         claimsPrincipalMock.Setup(u => u.FindFirst(ClaimTypes.Email))
-            .Returns(new Claim(ClaimTypes.Email, "test@test.com"));
+            .Throws(new Exception());
 
         // Create a mock instance of HttpContext and set up the User property
         var httpContextMock = new HttpContextMock();
@@ -92,14 +88,11 @@ public class TwoFactorRecoveryCodesEndpointTests
         var httpContextAccessorMock = new IHttpContextAccessorMock();
         httpContextAccessorMock.Setup(x => x.HttpContext).Returns(httpContextMock.Object);
 
-        var sutClient = _fixture.WebApplicationFactory.WithWebHostBuilder(builder =>
+        var sutClient = _fixture.CreateAuthenticatedClient(x => 
         {
-            builder.ConfigureTestServices(services =>
-            {
-                services.Replace(new ServiceDescriptor(typeof(UserManager<ApplicationUser>), userManagerMock.Object));
-                services.Replace(new ServiceDescriptor(typeof(IHttpContextAccessor), httpContextAccessorMock.Object));
-            });
-        }).CreateClient(new WebApplicationFactoryClientOptions());
+            x.Replace(new ServiceDescriptor(typeof(UserManager<ApplicationUser>), userManagerMock.Object));
+            x.Replace(new ServiceDescriptor(typeof(IHttpContextAccessor), httpContextAccessorMock.Object));
+        });
 
         using var sut = await sutClient.GetAsync("/2fa/codes");
         Assert.That(sut.StatusCode, Is.EqualTo(HttpStatusCode.InternalServerError));

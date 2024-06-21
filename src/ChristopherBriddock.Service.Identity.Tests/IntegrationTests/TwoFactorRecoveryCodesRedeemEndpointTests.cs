@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Http;
+
 namespace ChristopherBriddock.Service.Identity.Tests.IntegrationTests;
 
 public class TwoFactorRecoveryCodesRedeemEndpointTests
@@ -82,17 +84,28 @@ public class TwoFactorRecoveryCodesRedeemEndpointTests
     {
         var userManagerMock = new UserManagerMock<ApplicationUser>().Mock();
 
+        var httpContextMock = new HttpContextMock().Mock();
+
+        httpContextMock.Setup(x => x.User.FindFirst(It.IsAny<string>()));
+
         var user = new ApplicationUser();
 
-        userManagerMock.Setup(s => s.FindByEmailAsync(It.IsAny<string>())).ThrowsAsync(new Exception());
+        userManagerMock.Setup(s => s.FindByEmailAsync(It.IsAny<string>())).ReturnsAsync(user);
+        userManagerMock.Setup(s => s.RedeemTwoFactorRecoveryCodeAsync(It.IsAny<ApplicationUser>(), It.IsAny<string>()))
+                       .ReturnsAsync(IdentityResult.Failed());
 
-        userManagerMock.Setup(s => s.RedeemTwoFactorRecoveryCodeAsync(It.IsAny<ApplicationUser>(), It.IsAny<string>())).ReturnsAsync(IdentityResult.Failed());
+        var serviceProviderMock = new Mock<IServiceProvider>();
+        serviceProviderMock.Setup(sp => sp.GetService(typeof(UserManager<ApplicationUser>)))
+                           .Returns(userManagerMock.Object);
+        serviceProviderMock.Setup(sp => sp.GetService(It.IsNotIn(typeof(UserManager<ApplicationUser>), typeof(HttpContext))))
+                           .Throws(new Exception("Service not available"));
 
-         using var sutClient = _fixture.WebApplicationFactory.WithWebHostBuilder(s =>
+        using var sutClient = _fixture.WebApplicationFactory.WithWebHostBuilder(s =>
         {
-            s.ConfigureTestServices(s =>
+            s.ConfigureTestServices(services =>
             {
-                s.Replace(new ServiceDescriptor(typeof(UserManager<ApplicationUser>), userManagerMock.Object));
+                services.AddSingleton(serviceProviderMock.Object);
+                services.Replace(new ServiceDescriptor(typeof(HttpContext), httpContextMock.Object));
             });
         }).CreateClient();
 
@@ -101,7 +114,7 @@ public class TwoFactorRecoveryCodesRedeemEndpointTests
             EmailAddress = "abde@gmail.com",
             Code = "sdkdmdkmksm"
         };
-        
+
         using var sut = await sutClient.PostAsJsonAsync("/2fa/redeem", redeemRequest);
 
         Assert.That(sut.StatusCode, Is.EqualTo(HttpStatusCode.InternalServerError));

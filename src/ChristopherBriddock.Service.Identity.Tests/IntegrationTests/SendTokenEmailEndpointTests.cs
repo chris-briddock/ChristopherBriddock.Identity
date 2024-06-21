@@ -1,4 +1,6 @@
 using ChristopherBriddock.Service.Common.Constants;
+using ChristopherBriddock.Service.Common.Messaging;
+using ChristopherBriddock.Service.Identity.Publishers;
 
 namespace ChristopherBriddock.Service.Identity.Tests.IntegrationTests;
 
@@ -99,13 +101,17 @@ public class SendTokenEmailEndpointTests
     public async Task SendTokenEmailEndpoint_ReturnsStatus500InternalServerError_WhenAnExceptionIsThrown()
     {
         var userManagerMock = new UserManagerMock<ApplicationUser>().Mock();
-        userManagerMock.Setup(s => s.FindByEmailAsync(It.IsAny<string>())).ThrowsAsync(new Exception());
+        userManagerMock.Setup(s => s.FindByEmailAsync(It.IsAny<string>())).ReturnsAsync(new ApplicationUser());
+
+        var emailPublisher = new Mock<IEmailPublisher>();
+        emailPublisher.Setup(x => x.Publish(It.IsAny<EmailMessage>(), It.IsAny<CancellationToken>())).ThrowsAsync(new Exception());
 
          using var client = _fixture.WebApplicationFactory.WithWebHostBuilder(s =>
         {
             s.ConfigureTestServices(s =>
             {
                 s.Replace(new ServiceDescriptor(typeof(UserManager<ApplicationUser>), userManagerMock.Object));
+                s.Replace(new ServiceDescriptor(typeof(IEmailPublisher), emailPublisher.Object));
             });
         }).CreateClient();
 

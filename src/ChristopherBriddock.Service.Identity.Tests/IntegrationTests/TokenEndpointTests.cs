@@ -30,7 +30,7 @@ public class TokenEndpointTests
         _fixture = null!;
     }
 
-    private HttpClient CreateClientWithMocks(IConfiguration configuration, IJsonWebTokenProvider tokenProvider, ClaimsPrincipal user)
+    private HttpClient CreateClientWithMocks(IJsonWebTokenProvider tokenProvider, ClaimsPrincipal user)
     {
         var httpContextAccessorMock = new IHttpContextAccessorMock();
         var httpContextMock = new HttpContextMock();
@@ -43,7 +43,6 @@ public class TokenEndpointTests
             builder.ConfigureTestServices(services =>
             {
                 services.Replace(new ServiceDescriptor(typeof(IHttpContextAccessor), httpContextAccessorMock.Object));
-                services.Replace(new ServiceDescriptor(typeof(IConfiguration), configuration));
                 services.Replace(new ServiceDescriptor(typeof(IJsonWebTokenProvider), tokenProvider));
 
                 // Remove the existing authentication scheme
@@ -62,14 +61,6 @@ public class TokenEndpointTests
     {
         // Arrange
         var tokenProviderMock = new JsonWebTokenProviderMock();
-        var configurationBuilder = new ConfigurationBuilder()
-            .AddInMemoryCollection(new Dictionary<string, string?>
-            {
-                    { "Jwt:Issuer", "https://localhost" },
-                    { "Jwt:Secret", "=W0Jqcxsz8] Lq74z*:&gB^zmhx*HsrB6GYj%K}G" },
-                    { "Jwt:Audience", "audience" },
-                    { "Jwt:Expires", "60" },
-            }).Build();
 
         tokenProviderMock.Setup(x => x.TryCreateTokenAsync(It.IsAny<string>(),
                                                            It.IsAny<string>(),
@@ -82,7 +73,7 @@ public class TokenEndpointTests
         var claimsPrincipalMock = new ClaimsPrincipalMock();
         claimsPrincipalMock.Setup(x => x.Identity!.Name).Returns("test@test.com");
 
-        var client = CreateClientWithMocks(configurationBuilder, tokenProviderMock.Object, claimsPrincipalMock.Object);
+        var client = CreateClientWithMocks(tokenProviderMock.Object, claimsPrincipalMock.Object);
 
         // Act
         var sut = await client.GetAsync("/token");
@@ -96,14 +87,6 @@ public class TokenEndpointTests
     {
         // Arrange
         var tokenProviderMock = new JsonWebTokenProviderMock();
-        var configurationBuilder = new ConfigurationBuilder()
-            .AddInMemoryCollection(new Dictionary<string, string?>
-            {
-                    { "Jwt:Issuer", "https://localhost" },
-                    { "Jwt:Secret", "=W0Jqcxsz8] Lq74z*:&gB^zmhx*HsrB6GYj%K}G" },
-                    { "Jwt:Audience", "audience" },
-                    { "Jwt:Expires", "60" },
-            }).Build();
 
         tokenProviderMock.Setup(p => p.TryCreateTokenAsync(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()))
                 .ReturnsAsync(new JwtResult { Success = true, Token = "mockToken", Error = null });
@@ -117,7 +100,7 @@ public class TokenEndpointTests
         var claimsPrincipalMock = new ClaimsPrincipalMock();
         claimsPrincipalMock.Setup(x => x.Identity!.Name).Returns("test@test.com");
 
-        var client = CreateClientWithMocks(configurationBuilder, tokenProviderMock.Object, claimsPrincipalMock.Object);
+        var client = CreateClientWithMocks(tokenProviderMock.Object, claimsPrincipalMock.Object);
 
         // Act
         var response = await client.GetAsync("/token");

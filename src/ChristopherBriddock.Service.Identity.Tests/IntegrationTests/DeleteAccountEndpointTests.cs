@@ -27,7 +27,6 @@ public class DeleteAccountEndpointTests
     [Test]
     public async Task DeleteAccountEndpoint_Returns204NoContent_WhenAccountIsDeleted()
     {
-
         // Create user manager mock
         var userManagerMock = new UserManagerMock<ApplicationUser>().Mock();
         // Setup user manager mock behaviour
@@ -46,14 +45,11 @@ public class DeleteAccountEndpointTests
         var httpContextAccessorMock = new IHttpContextAccessorMock();
         httpContextAccessorMock.Setup(x => x.HttpContext).Returns(httpContextMock.Object);
 
-        using var sutClient = _fixture.WebApplicationFactory.WithWebHostBuilder(s =>
+        using var sutClient = _fixture.CreateAuthenticatedClient(s =>
         {
-            s.ConfigureTestServices(s =>
-            {
                 s.Replace(new ServiceDescriptor(typeof(UserManager<ApplicationUser>), userManagerMock.Object));
                 s.Replace(new ServiceDescriptor(typeof(IHttpContextAccessor), httpContextAccessorMock.Object));
-            });
-        }).CreateClient();
+        });
 
         using var sut = await sutClient.DeleteAsync("/account/delete");
 
@@ -67,15 +63,9 @@ public class DeleteAccountEndpointTests
 
         userManagerMock.Setup(s => s.DeleteAsync(It.IsAny<ApplicationUser>())).ThrowsAsync(new Exception());
 
-        using var clientWithForcedError = _fixture.WebApplicationFactory.WithWebHostBuilder(s =>
+        using var clientWithForcedError = _fixture.CreateAuthenticatedClient(s =>
         {
-            s.ConfigureTestServices(s =>
-            {
                 s.Replace(new ServiceDescriptor(typeof(UserManager<ApplicationUser>), userManagerMock.Object));
-            });
-        }).CreateClient(new WebApplicationFactoryClientOptions()
-        {
-            AllowAutoRedirect = true
         });
 
         using var sut = await clientWithForcedError.DeleteAsync("/account/delete");
@@ -102,15 +92,9 @@ public class DeleteAccountEndpointTests
 
         userManagerMock.Setup(s => s.FindByEmailAsync(It.IsAny<string>())).ReturnsAsync(value: null);
 
-        using var clientWithForcedError = _fixture.WebApplicationFactory.WithWebHostBuilder(s =>
+        using var clientWithForcedError = _fixture.CreateAuthenticatedClient(s =>
         {
-            s.ConfigureTestServices(s =>
-            {
                 s.Replace(new ServiceDescriptor(typeof(UserManager<ApplicationUser>), userManagerMock.Object));
-            });
-        }).CreateClient(new WebApplicationFactoryClientOptions()
-        {
-            AllowAutoRedirect = true
         });
 
         using var sut = await clientWithForcedError.DeleteAsync("/account/delete");

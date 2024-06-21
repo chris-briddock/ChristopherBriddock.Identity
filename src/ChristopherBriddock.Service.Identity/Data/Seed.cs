@@ -182,8 +182,8 @@ public static class Seed
             using var scope = app.Services.CreateAsyncScope();
             var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
 
-            var oldDeletedUserEmail = "olddeleted@test.com";
-            var recentDeletedUserEmail = "recentlydeleted@test.com";
+            var oldDeletedUserEmail = "olddeleted@default.com";
+            var recentDeletedUserEmail = "recentlydeleted@default.com";
 
             var oldDeletedUser = new ApplicationUser()
             {
