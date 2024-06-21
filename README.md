@@ -64,7 +64,7 @@ Authorization Flows:
 | Secure JWT Bearer Authentication |
 | Azure Application Insights Monitoring |
 | Logging using Serilog (To Console Or To External Logging Server) e.g Seq or ElasticSearch |
-| Resilliant Postgres connections using Entity Framework Core |
+| Resilliant Microsoft SQL Server connections using Entity Framework Core |
 | Encrypted User Passwords |
 | Uses HTTP/3 and fallsback to HTTP/2 or HTTP/1.1 |
 
@@ -95,7 +95,7 @@ To get started with the Identity Service, follow these steps:
 1. Clone the repository: `git clone https://github.com/chris-briddock/ChristopherBriddock.Identity.git`
 2. Open the solution.
 3. Ensure you have added migrations for the Service.Identity project with Entity Framework Core.
-4. Ensure you have an PostgreSQL database and RabbitMQ or Azure Service Bus available at minimum
+4. Ensure you have an SQL Server database and RabbitMQ or Azure Service Bus available at minimum
 5. Optionally you can also use Seq, Azure Application Insights and Redis.
 6. Please configure all placeholder values in appsettings.json in both services.
 7. Build and run the Web API.
