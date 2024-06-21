@@ -15,11 +15,10 @@ public sealed class AppDbContext : IdentityDbContext<ApplicationUser, Applicatio
     /// </summary>
     public IConfiguration Configuration { get; }
     /// <summary>
-    /// Initializes a new instance of <see cref="AppDbContext"/>
+    /// Initializes a new instance of the <see cref="AppDbContext"/> class.
     /// </summary>
-    /// <param name="options"></param>
-    /// <param name="configuration"></param>
-    /// <returns></returns>
+    /// <param name="options">The options to be used by a <see cref="DbContext"/>.</param>
+    /// <param name="configuration">The application configuration settings.</param>
     public AppDbContext(DbContextOptions options,
                         IConfiguration configuration) : base(options)
     {

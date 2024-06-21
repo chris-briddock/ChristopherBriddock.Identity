@@ -216,11 +216,18 @@ public static class Seed
             };
             recentDeletedUser.PasswordHash = userManager.PasswordHasher.HashPassword(recentDeletedUser, "dnjdnjdnwjdnwqjdnqwj");
 
-            await userManager.CreateAsync(oldDeletedUser);
-            await userManager.CreateAsync(recentDeletedUser);
+            ApplicationUser? oldDeletedUserExists = await userManager.FindByEmailAsync(oldDeletedUserEmail);
+            ApplicationUser? recentDeletedUserExists = await userManager.FindByEmailAsync(recentDeletedUserEmail);
+            if (oldDeletedUserExists is null
+                &&recentDeletedUserExists is null) 
+            {
+                await userManager.CreateAsync(oldDeletedUser);
+                await userManager.CreateAsync(recentDeletedUser);
             
-            await userManager.AddToRoleAsync(oldDeletedUser, RoleConstants.User);
-            await userManager.AddToRoleAsync(oldDeletedUser, RoleConstants.User);
+                await userManager.AddToRoleAsync(oldDeletedUser, RoleConstants.User);
+                await userManager.AddToRoleAsync(recentDeletedUser, RoleConstants.User);
+            }
+            
         }
     }
 

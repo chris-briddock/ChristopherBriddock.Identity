@@ -9,10 +9,11 @@ namespace ChristopherBriddock.Service.Identity.Tests.IntegrationTests;
 
 public class CustomWebApplicationFactory<TProgram> :  WebApplicationFactory<TProgram> where TProgram : class
 {
-    public static MsSqlContainer _msSqlContainer = new MsSqlBuilder()
-                                                        .WithImage("mcr.microsoft.com/mssql/server:2022-latest")
-                                                        .WithWaitStrategy(Wait.ForUnixContainer())
-                                                        .Build();
+    public MsSqlContainer _msSqlContainer = new MsSqlBuilder()
+                                                .WithImage("mcr.microsoft.com/mssql/server:2022-latest")
+                                                .WithWaitStrategy(Wait.ForUnixContainer())
+                                                .WithAutoRemove(true)
+                                                .Build();
                                                     
     public void StartTestContainer() 
     {
@@ -22,6 +23,7 @@ public class CustomWebApplicationFactory<TProgram> :  WebApplicationFactory<TPro
     public void StopTestContainer() 
     {
         _msSqlContainer.StopAsync().Wait();
+        _msSqlContainer.DisposeAsync().AsTask().Wait();
     }
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
@@ -42,38 +44,38 @@ public class CustomWebApplicationFactory<TProgram> :  WebApplicationFactory<TPro
     {
         try
         {
-             // Get the current directory and navigate to the desired directory
-            string currentDirectory = Directory.GetCurrentDirectory();
-            string desiredDirectory = Path.Combine(
-            currentDirectory, 
-            "..", "..", "..", "..", 
-            "ChristopherBriddock.Service.Identity"
-        );
+                // Get the current directory and navigate to the desired directory
+                string currentDirectory = Directory.GetCurrentDirectory();
+                string desiredDirectory = Path.Combine(
+                currentDirectory, 
+                "..", "..", "..", "..", 
+                "ChristopherBriddock.Service.Identity"
+            );
 
-            // Ensure the path is properly formatted
-            desiredDirectory = Path.GetFullPath(desiredDirectory);
-            // Create a new process info
-            ProcessStartInfo psi = new()
-            {
-                FileName = "dotnet",
-                Arguments = "user-jwts create --output json --audience http://localhost",
-                RedirectStandardOutput = true,
-                RedirectStandardError = true,
-                UseShellExecute = false,
-                CreateNoWindow = true, 
-                WorkingDirectory = desiredDirectory
-            };
+                // Ensure the path is properly formatted
+                desiredDirectory = Path.GetFullPath(desiredDirectory);
+                // Create a new process info
+                ProcessStartInfo psi = new()
+                {
+                    FileName = "dotnet",
+                    Arguments = "user-jwts create --output json --audience http://localhost",
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true,
+                    UseShellExecute = false,
+                    CreateNoWindow = true, 
+                    WorkingDirectory = desiredDirectory
+                };
 
-            // Create and start the process
-            using Process process = new() { StartInfo = psi };
-            process.Start();
+                // Create and start the process
+                using Process process = new() { StartInfo = psi };
+                process.Start();
 
-            // Read the standard output
-            string output = process.StandardOutput.ReadToEnd();
-            process.WaitForExit();
+                // Read the standard output
+                string output = process.StandardOutput.ReadToEnd();
+                process.WaitForExit();
 
-            JObject jwtJson = JObject.Parse(output);
-            string token = jwtJson["Token"]!.ToString();
+                JObject jwtJson = JObject.Parse(output);
+                string token = jwtJson["Token"]!.ToString();
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
             // Optionally, read and handle standard error

@@ -51,7 +51,7 @@ public sealed class Program
         app.UseAuthorization();
         app.MapControllers();
         app.UseCustomHealthCheckMapping();
-        await app.UseDatabaseMigrationsAsync<AppDbContext>(app.Environment);
+        await app.UseDatabaseMigrationsAsync<AppDbContext>();
         await app.SeedDataAsync();
         if (app.Environment.IsDevelopment())
         {
