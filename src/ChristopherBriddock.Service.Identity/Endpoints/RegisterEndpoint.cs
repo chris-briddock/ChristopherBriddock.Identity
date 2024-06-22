@@ -64,19 +64,9 @@ public sealed class RegisterEndpoint(IServiceProvider serviceProvider,
             await userManager.SetPhoneNumberAsync(user, user.PhoneNumber);
             await userManager.CreateAsync(user);
 
-            ApplicationRole applicationRole = new()
+            if (!await userManager.IsInRoleAsync(user, RoleConstants.User))
             {
-                Name = RoleConstants.UserRole,
-                NormalizedName = RoleConstants.UserRole.ToUpper()
-            };
-
-            if (!await roleManager.RoleExistsAsync(applicationRole.Name))
-            {
-                await roleManager.CreateAsync(applicationRole);
-            }
-            if (!await userManager.IsInRoleAsync(user, RoleConstants.UserRole))
-            {
-                await userManager.AddToRoleAsync(user, RoleConstants.UserRole);
+                await userManager.AddToRoleAsync(user, RoleConstants.User);
             }
             // Send confirmation email.
             return StatusCode(StatusCodes.Status201Created);

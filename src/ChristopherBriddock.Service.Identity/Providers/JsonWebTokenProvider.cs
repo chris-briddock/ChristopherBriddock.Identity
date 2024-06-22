@@ -37,14 +37,13 @@ public class JsonWebTokenProvider : IJsonWebTokenProvider
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(jwtSecret);
 
-            IList<Claim> claims = new List<Claim>()
-            {
+            List<Claim> claims =
+            [
                 new(JwtRegisteredClaimNames.Sub, subject),
                 new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                new(JwtRegisteredClaimNames.Iat, DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString()),
                 new(JwtRegisteredClaimNames.Email, email)
 
-            };
+            ];
             var expiryMinutesToAdd = Convert.ToInt16(expires);
             JwtSecurityToken tokenDescriptor = new(
                 issuer: issuer,

@@ -1,9 +1,11 @@
-﻿using System.Threading.RateLimiting;
+﻿using System.Text;
+using System.Threading.RateLimiting;
+using ChristopherBriddock.AspNetCore.Extensions;
 using ChristopherBriddock.Service.Common.Constants;
 using ChristopherBriddock.Service.Identity.Constants;
 using ChristopherBriddock.Service.Identity.Data;
+using ChristopherBriddock.Service.Identity.Exceptions;
 using ChristopherBriddock.Service.Identity.Models;
-using ChristopherBriddock.Service.Identity.Options;
 using ChristopherBriddock.Service.Identity.Providers;
 using ChristopherBriddock.Service.Identity.Publishers;
 using MassTransit;
@@ -14,6 +16,7 @@ using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Options;
 using Microsoft.FeatureManagement;
+using Microsoft.IdentityModel.Tokens;
 
 namespace ChristopherBriddock.Service.Identity.Extensions;
 
@@ -76,14 +79,43 @@ public static class ServiceCollectionExtensions
     /// <returns>The modified <see cref="IServiceCollection"/> instance.</returns>
     public static IServiceCollection AddBearerAuthentication(this IServiceCollection services)
     {
+        var configuration = services.BuildServiceProvider().GetRequiredService<IConfiguration>();
+
         services.TryAddSingleton<IJsonWebTokenProvider, JsonWebTokenProvider>();
-        services.TryAddSingleton<IConfigureOptions<JwtBearerOptions>, ConfigureJwtBearerOptions>();
         services.AddAuthentication(opt =>
         {
             opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
             opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
         })
-        .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme)
+        .AddJwtBearer(options => 
+        {
+            // Retrieve the JWT secret from the application configuration
+            string issuer = configuration.GetRequiredValueOrThrow("Jwt:Issuer");
+            string audience = configuration.GetRequiredValueOrThrow("Jwt:Audience");
+            string jwtSecret = configuration.GetRequiredValueOrThrow("Jwt:Secret");
+
+            if (string.IsNullOrWhiteSpace(jwtSecret))
+            {
+                throw new JwtSecretNullOrEmptyException();
+            }
+
+            var key = Encoding.ASCII.GetBytes(jwtSecret);
+            // Configure token validation parameters
+            options.TokenValidationParameters = new TokenValidationParameters()
+            {
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new SymmetricSecurityKey(key),
+                ValidateIssuer = true,
+                ValidIssuer = issuer,
+                ValidateAudience = true,
+                ValidAudience = audience,
+                ValidateLifetime = true,
+                ClockSkew = TimeSpan.Zero
+            };
+
+            // Save the token in the authentication context
+            options.SaveToken = true;
+        })
         .AddCookie(IdentityConstants.ApplicationScheme, s =>
         {
             s.LoginPath = "/";
@@ -102,7 +134,7 @@ public static class ServiceCollectionExtensions
         services.AddAuthorizationBuilder()
             .AddPolicy("UserRolePolicy", opt =>
             {
-                opt.RequireRole(RoleConstants.UserRole);
+                opt.RequireRole(RoleConstants.User);
             });
 
         return services;

@@ -14,7 +14,7 @@ public static class RoleConstants
     /// <remarks>
     /// The minimum amount of access.
     /// </remarks>
-    public const string UserRole = "User";
+    public const string User = "User";
 
     /// <summary>
     /// Represents the admin role.
@@ -22,5 +22,5 @@ public static class RoleConstants
     /// <remarks>
     /// The maximum amount of access.
     /// </remarks>
-    public const string AdminRole = "Admin";
+    public const string Admin = "Admin";
 }

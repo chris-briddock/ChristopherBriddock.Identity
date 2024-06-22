@@ -48,7 +48,6 @@ public class AccountPurgeBackgroundService(IServiceScopeFactory serviceScopeFact
             if (usersToBeDeleted.Count > 0)
             {
                 dbContext.RemoveRange(usersToBeDeleted);
-                await Task.Delay(TimeSpan.FromSeconds(120), stoppingToken);
                 await dbContext.SaveChangesAsync(stoppingToken);
             }
         }

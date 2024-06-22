@@ -23,10 +23,14 @@ public class JsonWebTokenProviderTests
         // Act
         var result = await mockProvider.Object.TryCreateTokenAsync(_email, _jwtSecret, _issuer, _audience, _expires, _subject);
 
-        // Assert
-        Assert.That(result.Success, Is.True);
-        Assert.That(result.Token, Is.Not.Null);
-        Assert.That(result.Error, Is.Null);
+        Assert.Multiple(() =>
+        {
+            // Assert
+            Assert.That(result.Success, Is.True);
+            Assert.That(result.Token, Is.Not.Null);
+            Assert.That(result.Error, Is.Null);
+        });
+
     }
 
     [Test]
@@ -41,10 +45,14 @@ public class JsonWebTokenProviderTests
         // Act
         var result = await mockProvider.Object.TryValidateTokenAsync(validToken, _jwtSecret, _issuer, _audience);
 
-        // Assert
-        Assert.That(result.Success, Is.True);
-        Assert.That(result.Error, Is.Null);
-        Assert.That(result.Token, Is.EqualTo(validToken));
+        Assert.Multiple(() =>
+        {
+            // Assert
+            Assert.That(result.Success, Is.True);
+            Assert.That(result.Error, Is.Null);
+            Assert.That(result.Token, Is.EqualTo(validToken));
+        });
+
     }
 
     [Test]
@@ -59,8 +67,12 @@ public class JsonWebTokenProviderTests
         // Act
         var result = await mockProvider.Object.TryValidateTokenAsync(invalidToken, _jwtSecret, _issuer, _audience);
 
-        // Assert
-        Assert.That(result.Success, Is.False);
-        Assert.That(result.Error, Is.Not.Empty);
+        Assert.Multiple(() =>
+        {
+            // Assert
+            Assert.That(result.Success, Is.False);
+            Assert.That(result.Error, Is.Not.Empty);
+        });
+
     }
 }

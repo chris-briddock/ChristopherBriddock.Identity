@@ -41,9 +41,6 @@ public sealed class ConfirmEmailEndpoint(IServiceProvider serviceProvider,
     public override async Task<ActionResult> HandleAsync([FromQuery] ConfirmEmailRequest request,
                                                          CancellationToken cancellationToken = default)
     {
-        string code;
-        IdentityResult result;
-
         try
         {
             var userManager = ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
@@ -51,10 +48,8 @@ public sealed class ConfirmEmailEndpoint(IServiceProvider serviceProvider,
             var user = await userManager.FindByEmailAsync(request.EmailAddress);
 
             // NOTE: This code should have been emailed to the user.
-            var decodedBytes = WebEncoders.Base64UrlDecode(request.Code);
-            code = Encoding.UTF8.GetString(decodedBytes);
 
-            result = await userManager.ConfirmEmailAsync(user!, code);
+            IdentityResult result = await userManager.ConfirmEmailAsync(user!, request.Code);
 
             if (!result.Succeeded)
             {

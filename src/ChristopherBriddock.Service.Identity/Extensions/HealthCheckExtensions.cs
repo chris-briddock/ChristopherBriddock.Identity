@@ -35,21 +35,6 @@ public static class HealthCheckExtensions
 
     }
     /// <summary>
-    /// Adds postgres database health checks.
-    /// </summary>
-    /// <param name="services">The <see cref="IServiceCollection"/> to health checks will be added.</param>
-    /// <returns>The modified <see cref="IServiceCollection"/> instance.</returns>
-    public static IServiceCollection AddDatabaseHealthChecks(this IServiceCollection services) 
-    {
-        var configuration = services.BuildServiceProvider()
-                                    .GetService<IConfiguration>()!;
-
-        services.AddHealthChecks()
-                .AddNpgSql(configuration.GetRequiredValueOrThrow("ConnectionStrings:Default"));
-
-        return services;
-    }
-    /// <summary>
     /// Adds health checks for vital infrastructure such as Databases, Caches and Logging.
     /// </summary>
     /// <param name="services">The <see cref="IServiceCollection"/> to healh checks will be added.</param>

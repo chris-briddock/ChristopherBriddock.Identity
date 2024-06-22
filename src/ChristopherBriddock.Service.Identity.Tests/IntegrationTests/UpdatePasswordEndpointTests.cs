@@ -25,14 +25,11 @@ public class UpdatePasswordEndpointTests
 
     private HttpClient CreateClientWithMocks(UserManager<ApplicationUser> userManagerMock, IHttpContextAccessor httpContextAccessorMock)
     {
-        return _fixture.WebApplicationFactory.WithWebHostBuilder(builder =>
+        return _fixture.CreateAuthenticatedClient(services =>
         {
-            builder.ConfigureTestServices(services =>
-            {
-                services.Replace(new ServiceDescriptor(typeof(UserManager<ApplicationUser>), userManagerMock));
-                services.Replace(new ServiceDescriptor(typeof(IHttpContextAccessor), httpContextAccessorMock));
-            });
-        }).CreateClient(new WebApplicationFactoryClientOptions());
+            services.Replace(new ServiceDescriptor(typeof(UserManager<ApplicationUser>), userManagerMock));
+            services.Replace(new ServiceDescriptor(typeof(IHttpContextAccessor), httpContextAccessorMock));
+        });
     }
 
     private Mock<UserManager<ApplicationUser>> CreateUserManagerMock()

@@ -49,13 +49,10 @@ namespace ChristopherBriddock.Service.Identity.Tests.IntegrationTests
                                                                         It.IsAny<string>(),
                                                                         It.IsAny<string>())).ThrowsAsync(new Exception());
 
-            using var sutClient = _fixture.WebApplicationFactory.WithWebHostBuilder(s =>
+            using var sutClient = _fixture.CreateAuthenticatedClient(s =>
             {
-                s.ConfigureTestServices(s =>
-                {
-                    s.Replace(new ServiceDescriptor(typeof(IJsonWebTokenProvider), jsonWebTokenProviderMock.Object));
-                });
-            }).CreateClient();
+                s.Replace(new ServiceDescriptor(typeof(IJsonWebTokenProvider), jsonWebTokenProviderMock.Object));
+            });
 
             using var sut = await sutClient.PostAsJsonAsync("/refresh", refreshRequest);
 
@@ -77,15 +74,9 @@ namespace ChristopherBriddock.Service.Identity.Tests.IntegrationTests
                                                                         });
 
 
-            using var refreshClient = _fixture.WebApplicationFactory.WithWebHostBuilder(s =>
+            using var refreshClient = _fixture.CreateAuthenticatedClient(s =>
             {
-                s.ConfigureTestServices(s =>
-                {
-                    s.Replace(new ServiceDescriptor(typeof(IJsonWebTokenProvider), jsonWebTokenProviderMock.Object));
-                });
-            }).CreateClient(new WebApplicationFactoryClientOptions()
-            {
-                AllowAutoRedirect = false
+                s.Replace(new ServiceDescriptor(typeof(IJsonWebTokenProvider), jsonWebTokenProviderMock.Object));
             });
 
             using var sut = await refreshClient.PostAsJsonAsync("/refresh", refreshRequest); 

@@ -48,14 +48,11 @@ public class TwoFactorManageEndpointTests
         var httpContextAccessorMock = new IHttpContextAccessorMock();
         httpContextAccessorMock.Setup(x => x.HttpContext).Returns(httpContextMock.Object);
 
-        using var sutClient = _fixture.WebApplicationFactory.WithWebHostBuilder(s =>
+        using var sutClient = _fixture.CreateAuthenticatedClient(x =>
         {
-            s.ConfigureTestServices(s =>
-            {
-                s.Replace(new ServiceDescriptor(typeof(UserManager<ApplicationUser>), userManagerMock.Object));
-                s.Replace(new ServiceDescriptor(typeof(IHttpContextAccessor), httpContextAccessorMock.Object));
-            });
-        }).CreateClient();
+            x.Replace(new ServiceDescriptor(typeof(UserManager<ApplicationUser>), userManagerMock.Object));
+            x.Replace(new ServiceDescriptor(typeof(IHttpContextAccessor), httpContextAccessorMock.Object));
+        });
 
         using var sut = await sutClient.PostAsync("/2fa/manage?IsEnabled=true", null);
 
@@ -85,14 +82,11 @@ public class TwoFactorManageEndpointTests
         var httpContextAccessorMock = new IHttpContextAccessorMock();
         httpContextAccessorMock.Setup(x => x.HttpContext).Returns(httpContextMock.Object);
         
-        using var sutClient = _fixture.WebApplicationFactory.WithWebHostBuilder(s =>
+        using var sutClient = _fixture.CreateAuthenticatedClient(s =>
         {
-            s.ConfigureTestServices(s =>
-            {
                 s.Replace(new ServiceDescriptor(typeof(UserManager<ApplicationUser>), userManagerMock.Object));
                 s.Replace(new ServiceDescriptor(typeof(IHttpContextAccessor), httpContextAccessorMock.Object));
-            });
-        }).CreateClient();
+        });
 
         using var sut = await sutClient.PostAsync("/2fa/manage?IsEnabled=true", null);
 
@@ -122,14 +116,11 @@ public class TwoFactorManageEndpointTests
         var httpContextAccessorMock = new IHttpContextAccessorMock();
         httpContextAccessorMock.Setup(x => x.HttpContext).Returns(httpContextMock.Object);
 
-        using var sutClient = _fixture.WebApplicationFactory.WithWebHostBuilder(s =>
+        using var sutClient = _fixture.CreateAuthenticatedClient(s =>
         {
-            s.ConfigureTestServices(s =>
-            {
                s.Replace(new ServiceDescriptor(typeof(UserManager<ApplicationUser>), userManagerMock.Object));
                s.Replace(new ServiceDescriptor(typeof(IHttpContextAccessor), httpContextAccessorMock.Object));
-            });
-        }).CreateClient();
+        });
 
         using var sut = await sutClient.PostAsync("/2fa/manage?IsEnabled=true", null);
 

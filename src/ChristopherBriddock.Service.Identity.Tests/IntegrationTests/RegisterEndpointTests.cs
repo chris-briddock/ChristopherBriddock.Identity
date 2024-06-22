@@ -25,7 +25,7 @@ public class RegisterEndpointTests
     {
         RegisterRequest registerRequest = new()
         {
-            EmailAddress = "abcdef@test.com",
+            EmailAddress = "abcdefd@test.com",
             Password = "7XAl@Dg()[=8rV;[wD[:GY$yw:$ltHA\\uaf!\\UQ`",
             PhoneNumber = "1234567890"
         };
@@ -45,7 +45,7 @@ public class RegisterEndpointTests
     {
         RegisterRequest registerRequest = new()
         {
-            EmailAddress = "testing@tester.com",
+            EmailAddress = "authorizeTest@default.com",
             Password = "7XAl@Dg()[=8rV;[wD[:GY$yw:$ltHA\\uaf!\\UQ`",
             PhoneNumber = "1234567890"
         };

@@ -37,14 +37,8 @@ public class LogoutEndpointTests
     [Test]
     public async Task LogoutEndpoint_Returns204NoContent_WhenUserLogsOutSuccessfully()
     {
-        var client = _fixture.WebApplicationFactory.WithWebHostBuilder(s =>
+        var client = _fixture.CreateAuthenticatedClient(s =>
         {
-            s.ConfigureTestServices(s =>
-            {
-            });
-        }).CreateClient(new WebApplicationFactoryClientOptions()
-        {
-            AllowAutoRedirect = true
         });
 
         using var sut = await client.PostAsync("/logout", null);
@@ -59,15 +53,9 @@ public class LogoutEndpointTests
 
         signInManagerMock.Setup(s => s.SignOutAsync()).ThrowsAsync(new Exception());
 
-        using var sutClient = _fixture.WebApplicationFactory.WithWebHostBuilder(s =>
+        using var sutClient = _fixture.CreateAuthenticatedClient(s => 
         {
-            s.ConfigureTestServices(s =>
-            {
-                s.Replace(new ServiceDescriptor(typeof(SignInManager<ApplicationUser>), signInManagerMock.Object));
-            });
-        }).CreateClient(new WebApplicationFactoryClientOptions()
-        {
-            AllowAutoRedirect = true
+             s.Replace(new ServiceDescriptor(typeof(SignInManager<ApplicationUser>), signInManagerMock.Object));
         });
 
         using var sut = await sutClient.PostAsync("/logout", null);
