@@ -18,7 +18,7 @@ public class CustomWebApplicationFactory<TProgram> :  WebApplicationFactory<TPro
     public void StartTestContainer() 
     {
         _msSqlContainer.StartAsync().Wait();
-        Task.Delay(TimeSpan.FromSeconds(15)).Wait();
+        Task.Delay(TimeSpan.FromSeconds(60)).Wait();
     }
     public void StopTestContainer() 
     {
