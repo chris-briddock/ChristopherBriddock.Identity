@@ -35,7 +35,7 @@ public class CustomWebApplicationFactory<TProgram> : WebApplicationFactory<TProg
         _redisCacheContainer.StartAsync().Wait();
         _loggingContainer.StartAsync().Wait();
         _messagingContainer.StartAsync().Wait();
-        Task.Delay(TimeSpan.FromSeconds(30)).Wait();
+        Task.Delay(TimeSpan.FromSeconds(60)).Wait();
     }
     public void StopTestContainer()
     {

@@ -2,6 +2,7 @@
 using ChristopherBriddock.Service.Identity.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace ChristopherBriddock.Service.Identity.Data;
 
@@ -31,6 +32,7 @@ public sealed class AppDbContext : IdentityDbContext<ApplicationUser, Applicatio
         {
             opt.EnableRetryOnFailure();
         });
+        
         base.OnConfiguring(optionsBuilder);
     }
 }

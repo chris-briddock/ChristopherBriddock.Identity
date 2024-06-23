@@ -1,4 +1,5 @@
-﻿using ChristopherBriddock.Service.Common.Messaging;
+﻿using System.Diagnostics.CodeAnalysis;
+using ChristopherBriddock.Service.Common.Messaging;
 
 namespace ChristopherBriddock.Service.Identity.Publishers;
 
@@ -12,6 +13,7 @@ namespace ChristopherBriddock.Service.Identity.Publishers;
 public class NullEmailPublisher : IEmailPublisher
 {
     /// <inheritdoc/>
+    [ExcludeFromCodeCoverage]
     public async Task Publish(EmailMessage emailMessage, CancellationToken cancellationToken)
     {
         await Task.CompletedTask;

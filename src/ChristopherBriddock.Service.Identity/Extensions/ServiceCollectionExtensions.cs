@@ -80,7 +80,7 @@ public static class ServiceCollectionExtensions
     {
         var configuration = services.BuildServiceProvider().GetRequiredService<IConfiguration>();
 
-        services.TryAddSingleton<IJsonWebTokenProvider, JsonWebTokenProvider>();
+        services.TryAddScoped<IJsonWebTokenProvider, JsonWebTokenProvider>();
         services.AddAuthentication(opt =>
         {
             opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -152,7 +152,8 @@ public static class ServiceCollectionExtensions
         IFeatureManager featureManager = services
                                         .BuildServiceProvider()
                                         .GetService<IFeatureManager>()!;
-
+        
+        services.AddMemoryCache();
         services.AddDistributedMemoryCache();
 
         if (featureManager.IsEnabledAsync(FeatureFlagConstants.Redis).Result)
