@@ -1,6 +1,4 @@
-﻿using ChristopherBriddock.Service.Identity.Providers;
-
-namespace ChristopherBriddock.Service.Identity.Tests.Mocks;
+﻿namespace ChristopherBriddock.Service.Identity.Tests.Mocks;
 
 public class JsonWebTokenProviderMock : Mock<IJsonWebTokenProvider>, IMockBase<JsonWebTokenProviderMock>
 {

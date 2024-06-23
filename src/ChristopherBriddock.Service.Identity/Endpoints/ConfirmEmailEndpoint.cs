@@ -4,8 +4,6 @@ using ChristopherBriddock.Service.Identity.Models.Requests;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.WebUtilities;
-using System.Text;
 
 namespace ChristopherBriddock.Service.Identity.Endpoints;
 

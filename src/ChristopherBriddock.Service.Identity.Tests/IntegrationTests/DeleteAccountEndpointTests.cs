@@ -1,8 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using System.Net.Http.Headers;
-using System.Security.Claims;
-
-namespace ChristopherBriddock.Service.Identity.Tests.IntegrationTests;
+﻿namespace ChristopherBriddock.Service.Identity.Tests.IntegrationTests;
 
 [TestFixture]
 public class DeleteAccountEndpointTests

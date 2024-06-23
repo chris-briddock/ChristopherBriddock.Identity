@@ -1,7 +1,3 @@
-using ChristopherBriddock.Service.Common.Constants;
-using ChristopherBriddock.Service.Common.Messaging;
-using ChristopherBriddock.Service.Identity.Publishers;
-
 namespace ChristopherBriddock.Service.Identity.Tests.IntegrationTests;
 
 [TestFixture]

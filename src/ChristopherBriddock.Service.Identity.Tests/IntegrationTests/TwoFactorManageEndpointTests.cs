@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using System.Security.Claims;
-
-namespace ChristopherBriddock.Service.Identity.Tests.IntegrationTests;
+﻿namespace ChristopherBriddock.Service.Identity.Tests.IntegrationTests;
 
 public class TwoFactorManageEndpointTests
 {

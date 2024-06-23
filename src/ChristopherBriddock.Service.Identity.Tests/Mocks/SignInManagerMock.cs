@@ -1,9 +1,4 @@
-﻿using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-
-namespace ChristopherBriddock.Service.Identity.Tests.Mocks;
+﻿namespace ChristopherBriddock.Service.Identity.Tests.Mocks;
 
 public class SignInManagerMock<TUser> : IMockBase<Mock<SignInManager<TUser>>> where TUser : IdentityUser<Guid>
 {

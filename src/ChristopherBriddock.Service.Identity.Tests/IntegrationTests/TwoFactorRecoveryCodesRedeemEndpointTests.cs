@@ -1,5 +1,3 @@
-using Microsoft.AspNetCore.Http;
-
 namespace ChristopherBriddock.Service.Identity.Tests.IntegrationTests;
 
 public class TwoFactorRecoveryCodesRedeemEndpointTests
