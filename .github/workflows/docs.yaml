@@ -14,7 +14,7 @@ jobs:
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 6.0.x  # Adjust version as needed
+        dotnet-version: 8.0.x  # Adjust version as needed
 
     - name: Install DocFX
       run: dotnet tool install -g docfx
