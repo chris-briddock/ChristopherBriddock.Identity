@@ -1,9 +1,7 @@
 ﻿using ChristopherBriddock.AspNetCore.Extensions;
-using ChristopherBriddock.Service.Identity.Models;
+using ChristopherBriddock.Service.Identity.Models.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Caching.Memory;
-
 namespace ChristopherBriddock.Service.Identity.Data;
 
 /// <summary>

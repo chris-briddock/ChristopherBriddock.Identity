@@ -1,5 +1,5 @@
 ﻿using ChristopherBriddock.ApiEndpoints;
-using ChristopherBriddock.Service.Identity.Models;
+using ChristopherBriddock.Service.Identity.Models.Entities;
 using ChristopherBriddock.Service.Identity.Models.Requests;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -48,21 +48,32 @@ public class UpdateEmailEndpoint(IServiceProvider serviceProvider,
         try
         {
             var userManager = ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+            
             var httpContextAccessor = ServiceProvider.GetRequiredService<IHttpContextAccessor>();
+            
             var userClaimsPrincipal = httpContextAccessor.HttpContext!.User.FindFirst(ClaimTypes.Email)!;
+            
             var user = await userManager.FindByEmailAsync(userClaimsPrincipal.Value);
 
             user!.EmailConfirmed = false;
+            
+            user!.ModifiedBy = user.Id;
+            
+            user!.ModifiedOnUtc = DateTime.UtcNow;
+            
             await userManager.UpdateAsync(user);
+            
             await userManager.SetUserNameAsync(user, request.EmailAddress);
+            
             var token = await userManager.GenerateChangeEmailTokenAsync(user, request.EmailAddress);
+            
             var result = await userManager.ChangeEmailAsync(user, request.EmailAddress, token);
 
             if (!result.Succeeded)
             {
                 return BadRequest();
             }
-            // At this point send an email to re-confirm the user's email.
+            // At this point send an email to confirm the user's new email.
             return NoContent();
         }
         catch (Exception ex)

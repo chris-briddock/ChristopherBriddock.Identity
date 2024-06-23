@@ -1,5 +1,5 @@
 ﻿using ChristopherBriddock.ApiEndpoints;
-using ChristopherBriddock.Service.Identity.Models;
+using ChristopherBriddock.Service.Identity.Models.Entities;
 using ChristopherBriddock.Service.Identity.Models.Requests;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -42,7 +42,7 @@ public sealed class TwoFactorManageEndpoint(IServiceProvider serviceProvider,
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    public override async Task<ActionResult> HandleAsync([FromQuery] TwoFactorManageRequest request,
+    public override async Task<ActionResult> HandleAsync(TwoFactorManageRequest request,
                                                          CancellationToken cancellationToken = default)
     {
         try
@@ -50,6 +50,7 @@ public sealed class TwoFactorManageEndpoint(IServiceProvider serviceProvider,
             var userManager = ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
 
             IHttpContextAccessor httpContextAccessor = ServiceProvider.GetRequiredService<IHttpContextAccessor>();
+            
             Claim? emailClaim = httpContextAccessor.HttpContext!.User.FindFirst(ClaimTypes.Email)!;
 
             var user = await userManager.FindByEmailAsync(emailClaim.Value);

@@ -36,11 +36,12 @@ public class TestFixture<TProgram> : IDisposable where TProgram : class
             Password = "7XAl@Dg()[=8rV;[wD[:GY$yw:$ltHA\\uaf!\\UQ`",
             RememberMe = true
         };
+        // drops cookie upon successful auth to authenticate against /token endpoint.
+        await client.PostAsJsonAsync("/authorize", authorizeRequest);
+        HttpResponseMessage responseMessage = await client.GetAsync("/token?token_type=resource_owner");
+        responseMessage.EnsureSuccessStatusCode();
 
-        HttpResponseMessage response = await client.PostAsJsonAsync("/authorize", authorizeRequest);
-        response.EnsureSuccessStatusCode();
-
-        string jsonResponse = await response.Content.ReadAsStringAsync();
+        string jsonResponse = await responseMessage.Content.ReadAsStringAsync();
         TokenResponse tokenResponse = JsonSerializer.Deserialize<TokenResponse>(jsonResponse, new JsonSerializerOptions { PropertyNameCaseInsensitive = true })!;
 
         return tokenResponse.AccessToken;
@@ -59,7 +60,7 @@ public class TestFixture<TProgram> : IDisposable where TProgram : class
             AllowAutoRedirect = false    
         });
 
-        client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", AccessToken);
+        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", AccessToken);
         return client;
     }
 }

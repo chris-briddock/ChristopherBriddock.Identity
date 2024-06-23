@@ -1,5 +1,5 @@
 ﻿using ChristopherBriddock.ApiEndpoints;
-using ChristopherBriddock.Service.Identity.Models;
+using ChristopherBriddock.Service.Identity.Models.Entities;
 using ChristopherBriddock.Service.Identity.Models.Requests;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -53,6 +53,10 @@ public class UpdatePasswordEndpoint(IServiceProvider serviceProvider,
             var userClaimsPrincipal = httpContextAccessor.HttpContext!.User.FindFirst(ClaimTypes.Email)!;
 
             var user = await userManager.FindByEmailAsync(userClaimsPrincipal.Value);
+
+            user!.ModifiedBy = user.Id;
+            
+            user!.ModifiedOnUtc = DateTime.UtcNow;
 
             var result = await userManager.ChangePasswordAsync(user!,
                                                                request.CurrentPassword,

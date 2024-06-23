@@ -36,25 +36,34 @@ public class JsonWebTokenProvider : IJsonWebTokenProvider
 
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(jwtSecret);
+            var expiryMinutesToAdd = Convert.ToInt16(expires);
 
             List<Claim> claims =
             [
                 new(JwtRegisteredClaimNames.Sub, subject),
                 new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                new(JwtRegisteredClaimNames.Email, email)
-
+                new(JwtRegisteredClaimNames.Email, email),
+                new(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString())
             ];
-            var expiryMinutesToAdd = Convert.ToInt16(expires);
-            JwtSecurityToken tokenDescriptor = new(
+
+            var signingCredentials = new SigningCredentials
+            (
+                new SymmetricSecurityKey(key),
+                SecurityAlgorithms.HmacSha512Signature
+            );
+
+            var header = new JwtHeader(signingCredentials);
+
+            var payload = new JwtPayload(
                 issuer: issuer,
+                issuedAt: EpochTime.DateTime(EpochTime.GetIntDate(DateTime.UtcNow)),
                 audience: audience,
                 claims: claims,
-                expires: DateTime.UtcNow.AddMinutes(expiryMinutesToAdd),
-                signingCredentials: new SigningCredentials(
-                    new SymmetricSecurityKey(key),
-                    SecurityAlgorithms.HmacSha512Signature
-                )
+                notBefore: DateTime.UtcNow,
+                expires: DateTime.UtcNow.AddMinutes(expiryMinutesToAdd)
             );
+
+            JwtSecurityToken tokenDescriptor = new(header, payload);
             result.Success = true;
             result.Token = tokenHandler.WriteToken(tokenDescriptor);
         }
@@ -64,6 +73,7 @@ public class JsonWebTokenProvider : IJsonWebTokenProvider
             result.Success = false;
             throw;
         }
+
         return await Task.FromResult(result);
     }
 

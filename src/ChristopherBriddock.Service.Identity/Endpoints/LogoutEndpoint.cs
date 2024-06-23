@@ -1,5 +1,5 @@
 ﻿using ChristopherBriddock.ApiEndpoints;
-using ChristopherBriddock.Service.Identity.Models;
+using ChristopherBriddock.Service.Identity.Models.Entities;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;

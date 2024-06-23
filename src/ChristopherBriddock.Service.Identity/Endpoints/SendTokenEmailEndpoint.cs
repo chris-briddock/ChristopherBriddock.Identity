@@ -1,7 +1,7 @@
 ﻿using ChristopherBriddock.ApiEndpoints;
 using ChristopherBriddock.Service.Common.Constants;
 using ChristopherBriddock.Service.Common.Messaging;
-using ChristopherBriddock.Service.Identity.Models;
+using ChristopherBriddock.Service.Identity.Models.Entities;
 using ChristopherBriddock.Service.Identity.Models.Requests;
 using ChristopherBriddock.Service.Identity.Publishers;
 using Microsoft.AspNetCore.Authorization;
@@ -47,15 +47,13 @@ public sealed class SendTokenEmailEndpoint(IServiceProvider serviceProvider,
                                                          CancellationToken cancellationToken = default)
     {
         try
-        {
-            ApplicationUser? user;
-            
+        {            
             EmailMessage message = new();
             var userManager = ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
             
             var emailPublisher = ServiceProvider.GetRequiredService<IEmailPublisher>();
             
-            user = await userManager.FindByEmailAsync(request.EmailAddress);
+            ApplicationUser? user = await userManager.FindByEmailAsync(request.EmailAddress);
             
             if (user is null)
                 return NotFound();
@@ -71,7 +69,6 @@ public sealed class SendTokenEmailEndpoint(IServiceProvider serviceProvider,
                     Type = EmailPublisherConstants.TwoFactorToken
                 };
             }
-
             if (request.TokenType == EmailPublisherConstants.ConfirmEmail) 
             {
                 var code = await userManager.GenerateEmailConfirmationTokenAsync(user);

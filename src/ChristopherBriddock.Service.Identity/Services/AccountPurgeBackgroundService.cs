@@ -41,7 +41,7 @@ public class AccountPurgeBackgroundService(IServiceScopeFactory serviceScopeFact
 
             var usersToBeDeleted = await dbContext.Users
             .Where(s => s.IsDeleted)
-            .Where(u => u.DeletedDateTime.Date < sevenYearsAgo)
+            .Where(u => u.DeletedOnUtc < sevenYearsAgo)
             .ToListAsync(stoppingToken);
 
 

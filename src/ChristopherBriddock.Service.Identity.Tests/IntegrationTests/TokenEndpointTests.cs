@@ -66,7 +66,7 @@ public class TokenEndpointTests
         var client = CreateClientWithMocks(tokenProviderMock.Object, claimsPrincipalMock.Object);
 
         // Act
-        var sut = await client.GetAsync("/token");
+        var sut = await client.GetAsync("/token?token_type=resource_owner");
 
         // Assert
         Assert.That(sut.StatusCode, Is.EqualTo(HttpStatusCode.InternalServerError));
@@ -93,7 +93,7 @@ public class TokenEndpointTests
         var client = CreateClientWithMocks(tokenProviderMock.Object, claimsPrincipalMock.Object);
 
         // Act
-        var response = await client.GetAsync("/token");
+        var response = await client.GetAsync("/token?token_type=resource_owner");
 
         var tokenResponse = await response.Content.ReadFromJsonAsync<TokenResponse>();
 

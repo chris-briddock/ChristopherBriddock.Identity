@@ -1,5 +1,5 @@
 ﻿using ChristopherBriddock.ApiEndpoints;
-using ChristopherBriddock.Service.Identity.Models;
+using ChristopherBriddock.Service.Identity.Models.Entities;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -42,9 +42,13 @@ public class TwoFactorRecoveryCodesEndpoint(IServiceProvider serviceProvider,
         try
         {
             UserManager<ApplicationUser> userManager = ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+            
             IHttpContextAccessor httpContextAccessor = ServiceProvider.GetRequiredService<IHttpContextAccessor>();
+            
             Claim? emailClaim = httpContextAccessor.HttpContext!.User.FindFirst(ClaimTypes.Email)!;
+            
             ApplicationUser? user = await userManager.FindByEmailAsync(emailClaim.Value);
+            
             var codes = await userManager.GenerateNewTwoFactorRecoveryCodesAsync(user!, 10);
             return Ok(codes);
         }
