@@ -1,11 +1,13 @@
-﻿using System;
+﻿using System.Diagnostics.CodeAnalysis;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+
 namespace ChristopherBriddock.Service.Identity.Migrations
 {
     /// <inheritdoc />
+    [ExcludeFromCodeCoverage] 
     public partial class Initial : Migration
     {
         /// <inheritdoc />
