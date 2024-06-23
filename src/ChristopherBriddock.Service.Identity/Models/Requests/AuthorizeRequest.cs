@@ -1,4 +1,6 @@
-﻿namespace ChristopherBriddock.Service.Identity.Models.Requests;
+﻿using Microsoft.AspNetCore.Mvc;
+
+namespace ChristopherBriddock.Service.Identity.Models.Requests;
 
 /// <summary>
 /// Represents a request for authorization.

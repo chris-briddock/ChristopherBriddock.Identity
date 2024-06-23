@@ -17,4 +17,8 @@ public sealed record TokenResponse
     /// Gets or sets the expiration of the token.
     /// </summary>
     public required string Expires { get; set; } = default!;
+    /// <summary>
+    /// Gets or sets the token type.
+    /// </summary>
+    public required string TokenType { get; set; } = default!;
 }

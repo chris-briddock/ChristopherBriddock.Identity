@@ -43,7 +43,7 @@ public class ConfirmEmailEndpointTests
             Code = "CfDJ8OgQt3GRCbpAqpW/lUkYbKcxoL55kAWWuaMIq6/+FPUL4p7KYF6W5u89C2yjXp/NANvDtxLbOggkSvJs24z/cM7PW1iDmiegeS4f9XLHLBQlVzQWKaYZou4rIWKTBxk9O4sFFTC7006koe3sUS0URACV4Iq0Xw3EON2hm+3ji05UgFz+JHLZ7Oou7063fEBmmfDjpbTP9Lk5YobeYEddf6rCkSLC786AYkht+xM0x0g7"
         };
 
-        using var sut = await client.PostAsync($"/confirmemail?EmailAddress=test%40test.com&Code={confirmEmailRequest.Code}", null);
+        using var sut = await client.PostAsync($"/confirmemail?email_address=test%40test.com&code={confirmEmailRequest.Code}", null);
 
         Assert.That(sut.StatusCode, Is.EqualTo(HttpStatusCode.InternalServerError));
     }
@@ -71,7 +71,7 @@ public class ConfirmEmailEndpointTests
             });
         }).CreateClient();
 
-        using var sut = await client.PostAsync($"/confirmemail?EmailAddress=test%40test.com&Code={confirmEmailRequest.Code}", null);
+        using var sut = await client.PostAsync($"/confirmemail?email_address=test%40test.com&code={confirmEmailRequest.Code}", null);
 
         Assert.That(sut.StatusCode, Is.EqualTo(HttpStatusCode.OK));
     }
@@ -90,7 +90,7 @@ public class ConfirmEmailEndpointTests
             // No UserManager setup here to simulate user not found scenario.
         }).CreateClient();
 
-        using var sut = await client.PostAsync($"/confirmemail?EmailAddress={confirmEmailRequest.EmailAddress}&Code={confirmEmailRequest.Code}", null);
+        using var sut = await client.PostAsync($"/confirmemail?email_address={confirmEmailRequest.EmailAddress}&code={confirmEmailRequest.Code}", null);
 
         Assert.That(sut.StatusCode, Is.EqualTo(HttpStatusCode.InternalServerError));
     }

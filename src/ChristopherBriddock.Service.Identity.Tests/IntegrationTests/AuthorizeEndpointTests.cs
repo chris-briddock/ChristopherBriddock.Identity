@@ -40,7 +40,7 @@ public class AuthorizeEndpointTests
         using var response = await client.PostAsJsonAsync("/authorize", authorizeRequest);
 
         // Assert
-        Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.Found));
+        Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
     }
 
     [Test]

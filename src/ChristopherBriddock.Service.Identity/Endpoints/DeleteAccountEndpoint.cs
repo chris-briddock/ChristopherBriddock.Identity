@@ -1,5 +1,5 @@
 ﻿using ChristopherBriddock.ApiEndpoints;
-using ChristopherBriddock.Service.Identity.Models;
+using ChristopherBriddock.Service.Identity.Models.Entities;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -39,11 +39,17 @@ public class DeleteAccountEndpoint(ILogger<DeleteAccountEndpoint> logger,
         try
         {
             var userManager = ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+            
             var httpContextAccessor = ServiceProvider.GetRequiredService<IHttpContextAccessor>();
+            
             var userClaimsPrincipal = httpContextAccessor.HttpContext!.User.FindFirst(ClaimTypes.Email)!;
+            
             var user = await userManager.FindByEmailAsync(userClaimsPrincipal.Value);
+            
             user!.IsDeleted = true;
-            user!.DeletedDateTime = DateTime.UtcNow;
+            user!.DeletedBy = user.Id;
+            user!.DeletedOnUtc = DateTime.UtcNow;
+            
             await userManager.UpdateAsync(user!);
             return NoContent();
         }

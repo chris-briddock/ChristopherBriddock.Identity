@@ -1,6 +1,6 @@
 using ChristopherBriddock.AspNetCore.Extensions;
 using ChristopherBriddock.AspNetCore.HealthChecks;
-using ChristopherBriddock.Service.Common.Constants;
+using ChristopherBriddock.Service.Identity.Constants;
 using ChristopherBriddock.Service.Identity.Data;
 using ChristopherBriddock.Service.Identity.Extensions;
 using ChristopherBriddock.Service.Identity.Services;

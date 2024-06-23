@@ -1,6 +1,6 @@
 ﻿using ChristopherBriddock.ApiEndpoints;
 using ChristopherBriddock.Service.Identity.Constants;
-using ChristopherBriddock.Service.Identity.Models;
+using ChristopherBriddock.Service.Identity.Models.Entities;
 using ChristopherBriddock.Service.Identity.Models.Requests;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -55,9 +55,12 @@ public sealed class RegisterEndpoint(IServiceProvider serviceProvider,
 
             ApplicationUser user = new()
             {
+                Id = Guid.NewGuid(),
                 Email = request.EmailAddress,
                 PhoneNumber = request.PhoneNumber
             };
+            user.CreatedBy = user.Id;
+            user.CreatedOnUtc = DateTime.UtcNow;
             user.PasswordHash = userManager.PasswordHasher.HashPassword(user, $"""{request.Password}""");
             await userManager.SetUserNameAsync(user, user.Email);
             await userManager.SetEmailAsync(user, user.Email);

@@ -6,6 +6,7 @@ using ChristopherBriddock.Service.Identity.Constants;
 using ChristopherBriddock.Service.Identity.Data;
 using ChristopherBriddock.Service.Identity.Exceptions;
 using ChristopherBriddock.Service.Identity.Models;
+using ChristopherBriddock.Service.Identity.Models.Entities;
 using ChristopherBriddock.Service.Identity.Providers;
 using ChristopherBriddock.Service.Identity.Publishers;
 using MassTransit;
@@ -27,23 +28,11 @@ public static class ServiceCollectionExtensions
     /// <summary>
     /// Adds the ASP.NET Identity configuration.
     /// </summary>
-    /// <remarks> 
-    /// This method uses AddIdentityCore due to AddIdentity adding an authentication scheme <see cref="IdentityConstants.ApplicationScheme"/>
-    /// The authentication scheme causes the application to throw an error "System.InvalidOperationException : Scheme already exists: Identity.Application"
-    /// I have manually added the authentication scheme in the extension method <see cref="AddBearerAuthentication"/> due to this incorrectly redirecting users
-    /// to /Account/Login, which causes a 404 error.
-    /// </remarks>
     /// <param name="services">The <see cref="IServiceCollection"/> instance.</param>
     /// <returns>The modified <see cref="IServiceCollection"/> instance.</returns>
     public static IServiceCollection AddIdentity(this IServiceCollection services)
     {
-        services.AddHttpContextAccessor();
-        services.TryAddScoped<IRoleValidator<ApplicationRole>, RoleValidator<ApplicationRole>>();
-        services.TryAddScoped<IdentityErrorDescriber>();
-        services.TryAddScoped<ISecurityStampValidator, SecurityStampValidator<ApplicationUser>>();
-        services.TryAddScoped<ITwoFactorSecurityStampValidator, TwoFactorSecurityStampValidator<ApplicationUser>>();
-
-        services.AddIdentityCore<ApplicationUser>(opt =>
+        services.AddIdentity<ApplicationUser, ApplicationRole>(opt =>
         {
             opt.SignIn.RequireConfirmedPhoneNumber = false;
             opt.SignIn.RequireConfirmedEmail = true;
@@ -114,11 +103,6 @@ public static class ServiceCollectionExtensions
 
             // Save the token in the authentication context
             options.SaveToken = true;
-        })
-        .AddCookie(IdentityConstants.ApplicationScheme, s =>
-        {
-            s.LoginPath = "/";
-            s.LogoutPath = "/";
         });
 
         return services;

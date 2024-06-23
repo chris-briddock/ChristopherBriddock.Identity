@@ -49,7 +49,7 @@ public class AccountPurgeBackgroundServiceTests
 
         var oldDeletedUser = dbContext.Users
         .Where(s => s.Email == "deletedUser@default.com")
-        .Where(x => x.DeletedDateTime <= DateTime.UtcNow.AddYears(-8))
+        .Where(x => x.DeletedOnUtc <= DateTime.UtcNow.AddYears(-8))
         .FirstOrDefault()!;
 
         var recentDeletedUser = dbContext.Users.Where(s => s.Email == "recentlydeleted@default.com").First();

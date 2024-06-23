@@ -119,7 +119,7 @@ public class TwoFactorManageEndpointTests
                s.Replace(new ServiceDescriptor(typeof(IHttpContextAccessor), httpContextAccessorMock.Object));
         });
 
-        using var sut = await sutClient.PostAsync("/2fa/manage?IsEnabled=true", null);
+        using var sut = await sutClient.PostAsync("/2fa/manage?is_enabled=true", null);
 
         Assert.That(sut.StatusCode, Is.EqualTo(HttpStatusCode.InternalServerError));
 

@@ -1,4 +1,4 @@
-global using ChristopherBriddock.Service.Identity.Models;
+global using ChristopherBriddock.Service.Identity.Models.Entities;
 global using ChristopherBriddock.Service.Identity.Models.Requests;
 global using ChristopherBriddock.Service.Identity.Tests.Mocks;
 global using Microsoft.AspNetCore.Hosting;

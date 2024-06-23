@@ -1,5 +1,5 @@
 using ChristopherBriddock.Service.Identity.Constants;
-using ChristopherBriddock.Service.Identity.Models;
+using ChristopherBriddock.Service.Identity.Models.Entities;
 using Microsoft.AspNetCore.Identity;
 
 namespace ChristopherBriddock.Service.Identity;
@@ -93,7 +93,7 @@ public static class Seed
                 LockoutEnabled = false,
                 AccessFailedCount = 0,
                 IsDeleted = true,
-                DeletedDateTime = DateTime.UtcNow,
+                DeletedOnUtc = DateTime.UtcNow,
                 EmailConfirmed = true,
             };
 
@@ -126,7 +126,7 @@ public static class Seed
                 LockoutEnabled = false,
                 AccessFailedCount = 0,
                 IsDeleted = false,
-                DeletedDateTime = default!,
+                DeletedOnUtc = default!,
                 EmailConfirmed = true,
             };
 
@@ -160,7 +160,7 @@ public static class Seed
                 LockoutEnabled = false,
                 AccessFailedCount = 0,
                 IsDeleted = false,
-                DeletedDateTime = default!,
+                DeletedOnUtc = default!,
                 EmailConfirmed = true,
             };
 
@@ -194,7 +194,7 @@ public static class Seed
                 LockoutEnabled = false,
                 AccessFailedCount = 0,
                 IsDeleted = true,
-                DeletedDateTime = DateTime.UtcNow.AddYears(-8),
+                DeletedOnUtc = DateTime.UtcNow.AddYears(-8),
                 EmailConfirmed = true
                 
             };
@@ -210,7 +210,7 @@ public static class Seed
                 LockoutEnabled = false,
                 AccessFailedCount = 0,
                 IsDeleted = true,
-                DeletedDateTime = DateTime.UtcNow,
+                DeletedOnUtc = DateTime.UtcNow,
                 EmailConfirmed = true
                 
             };

@@ -1,4 +1,5 @@
 ﻿using ChristopherBriddock.ApiEndpoints;
+using ChristopherBriddock.Service.Identity.Models.Requests;
 using ChristopherBriddock.Service.Identity.Models.Responses;
 using ChristopherBriddock.Service.Identity.Providers;
 using Microsoft.AspNetCore.Authorization;
@@ -16,7 +17,8 @@ namespace ChristopherBriddock.Service.Identity.Endpoints;
 /// <param name="logger">The application logger.</param>
 public class TokenEndpoint(IServiceProvider serviceProvider,
                            ILogger<TokenEndpoint> logger) : EndpointBaseAsync
-                                                            .WithoutRequest
+                                                            .WithRequest<TokenRequest>
+                                                            .WithoutQuery
                                                             .WithActionResult<TokenResponse>
 {
     /// <summary>
@@ -29,6 +31,7 @@ public class TokenEndpoint(IServiceProvider serviceProvider,
     /// <summary>
     /// Allows a user to generate a Bearer token.
     /// </summary>
+    /// <param name="request">The object which encapsulates the request.</param>
     /// <param name="cancellationToken">The cancellation token to cancel the operation.</param>
     /// <returns>A new <see cref="ActionResult"/></returns>
     [HttpGet("/token")]
@@ -36,12 +39,15 @@ public class TokenEndpoint(IServiceProvider serviceProvider,
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    public override async Task<ActionResult<TokenResponse>> HandleAsync(CancellationToken cancellationToken = default)
+    public override async Task<ActionResult<TokenResponse>> HandleAsync(TokenRequest request,
+                                                                        CancellationToken cancellationToken = default)
     {
         try
         {
             var httpContextAccessor = ServiceProvider.GetRequiredService<IHttpContextAccessor>();
+            
             var configuration = ServiceProvider.GetRequiredService<IConfiguration>();
+            
             var jsonWebTokenProvider = ServiceProvider.GetRequiredService<IJsonWebTokenProvider>();
 
             string email = httpContextAccessor.HttpContext!.User.Identity!.Name ?? string.Empty;
@@ -83,6 +89,7 @@ public class TokenEndpoint(IServiceProvider serviceProvider,
             {
                 AccessToken = result.Token,
                 RefreshToken = refreshToken.Token,
+                TokenType = request.TokenType,
                 Expires = expires
             };
             

@@ -1,5 +1,5 @@
 ﻿using ChristopherBriddock.ApiEndpoints;
-using ChristopherBriddock.Service.Identity.Models;
+using ChristopherBriddock.Service.Identity.Models.Entities;
 using ChristopherBriddock.Service.Identity.Models.Requests;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -61,7 +61,7 @@ public sealed class AuthorizeEndpoint(IServiceProvider serviceProvider,
 
             if (signInResult.RequiresTwoFactor)
             {
-                return Ok();
+                return Ok("Two Factor is required");
                 // Remember to call the /sendemail endpoint for the user.
                 // then once email is confirmed, call the /2fa/authorize endpoint.
             }
@@ -80,7 +80,7 @@ public sealed class AuthorizeEndpoint(IServiceProvider serviceProvider,
 
             await signInManager.CreateUserPrincipalAsync(user!);
 
-            return LocalRedirect($"/token");
+            return Ok();
         }
         catch (Exception ex)
         {

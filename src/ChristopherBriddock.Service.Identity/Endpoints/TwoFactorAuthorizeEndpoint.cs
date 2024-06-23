@@ -1,5 +1,5 @@
 ﻿using ChristopherBriddock.ApiEndpoints;
-using ChristopherBriddock.Service.Identity.Models;
+using ChristopherBriddock.Service.Identity.Models.Entities;
 using ChristopherBriddock.Service.Identity.Models.Requests;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -60,7 +60,7 @@ public sealed class TwoFactorAuthorizeEndpoint(IServiceProvider serviceProvider,
             {
                 return Unauthorized("Two factor token could not be verified.");
             }
-            return LocalRedirect("/token");
+            return Ok();
         }
         catch (Exception ex)
         {
