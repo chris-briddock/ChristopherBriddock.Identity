@@ -1,7 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-
-namespace ChristopherBriddock.Service.Identity.Tests.Mocks;
+﻿namespace ChristopherBriddock.Service.Identity.Tests.Mocks;
 
 public class UserManagerMock<TUser> : IMockBase<Mock<UserManager<TUser>>> where TUser : class
 {

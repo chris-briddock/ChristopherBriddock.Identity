@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-
-namespace ChristopherBriddock.Service.Identity.Extensions;
+﻿namespace ChristopherBriddock.Service.Identity.Extensions;
 
 /// <summary>
 /// Extensions for <see cref="IApplicationBuilder"/>

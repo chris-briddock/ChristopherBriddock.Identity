@@ -1,5 +1,3 @@
-using Microsoft.AspNetCore.Http;
-
 namespace ChristopherBriddock.Service.Identity.Tests.Mocks;
 
 public class IHttpContextAccessorMock : Mock<IHttpContextAccessor>, IMockBase<IHttpContextAccessorMock>

@@ -1,5 +1,3 @@
-using Microsoft.Extensions.DependencyInjection;
-
 namespace ChristopherBriddock.WorkerService.Email.Tests;
 
 [TestFixture]

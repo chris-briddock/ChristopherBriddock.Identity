@@ -1,6 +1,4 @@
-﻿using ChristopherBriddock.Service.Identity.Models.Results;
-using ChristopherBriddock.Service.Identity.Providers;
-using System.Net.Http.Headers;
+﻿using RefreshRequest = ChristopherBriddock.Service.Identity.Models.Requests.RefreshRequest;
 
 namespace ChristopherBriddock.Service.Identity.Tests.IntegrationTests
 {

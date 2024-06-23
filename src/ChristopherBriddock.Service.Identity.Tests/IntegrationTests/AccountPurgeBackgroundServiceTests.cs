@@ -1,7 +1,3 @@
-using ChristopherBriddock.Service.Identity.Data;
-using ChristopherBriddock.Service.Identity.Services;
-using Microsoft.Extensions.Logging;
-
 namespace ChristopherBriddock.Service.Identity.Tests.IntegrationTests;
 
 public class AccountPurgeBackgroundServiceExposeProtected : AccountPurgeBackgroundService

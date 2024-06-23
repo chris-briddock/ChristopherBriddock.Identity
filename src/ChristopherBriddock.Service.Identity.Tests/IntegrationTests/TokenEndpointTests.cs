@@ -1,14 +1,4 @@
-﻿using System.Security.Claims;
-using ChristopherBriddock.Service.Identity.Providers;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Options;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authentication;
-using ChristopherBriddock.Service.Identity.Models.Responses;
-using ChristopherBriddock.Service.Identity.Models.Results;
-
-namespace ChristopherBriddock.Service.Identity.Tests.IntegrationTests;
+﻿namespace ChristopherBriddock.Service.Identity.Tests.IntegrationTests;
 
 [TestFixture]
 public class TokenEndpointTests

@@ -1,6 +1,4 @@
-﻿using ChristopherBriddock.Service.Common.Messaging;
-using ChristopherBriddock.Service.Identity.Publishers;
-using MassTransit;
+﻿using MassTransit;
 using Microsoft.FeatureManagement;
 
 namespace ChristopherBriddock.Service.Identity.Tests.UnitTests;

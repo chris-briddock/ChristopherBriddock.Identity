@@ -1,6 +1,4 @@
-﻿using System.Net.Http.Headers;
-
-namespace ChristopherBriddock.Service.Identity.Tests.IntegrationTests;
+﻿namespace ChristopherBriddock.Service.Identity.Tests.IntegrationTests;
 
 [TestFixture]
 public class LogoutEndpointTests

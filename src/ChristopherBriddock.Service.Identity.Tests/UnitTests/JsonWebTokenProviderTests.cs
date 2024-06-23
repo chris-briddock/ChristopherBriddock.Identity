@@ -1,6 +1,4 @@
-﻿using ChristopherBriddock.Service.Identity.Models.Results;
-
-namespace ChristopherBriddock.Service.Identity.Tests.UnitTests;
+﻿namespace ChristopherBriddock.Service.Identity.Tests.UnitTests;
 
 [TestFixture]
 public class JsonWebTokenProviderTests

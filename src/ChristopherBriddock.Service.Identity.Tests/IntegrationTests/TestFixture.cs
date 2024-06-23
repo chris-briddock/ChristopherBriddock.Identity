@@ -1,6 +1,3 @@
-using System.Text.Json;
-using ChristopherBriddock.Service.Identity.Models.Responses;
-
 namespace ChristopherBriddock.Service.Identity.Tests.IntegrationTests;
 
 public class TestFixture<TProgram> : IDisposable where TProgram : class

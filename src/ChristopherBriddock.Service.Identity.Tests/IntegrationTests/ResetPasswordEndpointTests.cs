@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity.Data;
-
-namespace ChristopherBriddock.Service.Identity.Tests.IntegrationTests;
+﻿namespace ChristopherBriddock.Service.Identity.Tests.IntegrationTests;
 
 [TestFixture]
 public class ResetPasswordEndpointTests
