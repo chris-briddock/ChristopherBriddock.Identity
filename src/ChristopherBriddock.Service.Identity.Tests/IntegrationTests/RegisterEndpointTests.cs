@@ -1,4 +1,6 @@
-﻿namespace ChristopherBriddock.Service.Identity.Tests.IntegrationTests;
+﻿using RegisterRequest = ChristopherBriddock.Service.Identity.Models.Requests.RegisterRequest;
+
+namespace ChristopherBriddock.Service.Identity.Tests.IntegrationTests;
 
 [TestFixture]
 public class RegisterEndpointTests
