@@ -152,7 +152,8 @@ public static class ServiceCollectionExtensions
         IFeatureManager featureManager = services
                                         .BuildServiceProvider()
                                         .GetService<IFeatureManager>()!;
-
+        
+        services.AddMemoryCache();
         services.AddDistributedMemoryCache();
 
         if (featureManager.IsEnabledAsync(FeatureFlagConstants.Redis).Result)
