@@ -31,7 +31,6 @@ public sealed class AppDbContext : IdentityDbContext<ApplicationUser, Applicatio
         optionsBuilder.UseSqlServer(Configuration.GetConnectionStringOrThrow("Default"), opt => 
         {
             opt.EnableRetryOnFailure();
-            opt.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery);
         });
         
         base.OnConfiguring(optionsBuilder);
