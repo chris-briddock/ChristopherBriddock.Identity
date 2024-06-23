@@ -1,0 +1,1305 @@
+{
+  "source_base_path": "/home/runner/work/ChristopherBriddock.Identity/ChristopherBriddock.Identity",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "Resource",
+      "output": {
+        "resource": {
+          "relative_path": "index.json"
+        }
+      }
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "README.md",
+      "output": {
+        ".html": {
+          "relative_path": "README.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Common.Constants.EmailPublisherConstants.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Common.Constants.EmailPublisherConstants.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Common.Constants.FeatureFlagConstants.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Common.Constants.FeatureFlagConstants.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Common.Constants.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Common.Constants.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Common.Messaging.EmailMessage.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Common.Messaging.EmailMessage.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Common.Messaging.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Common.Messaging.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Constants.CorsConstants.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Constants.CorsConstants.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Constants.RoleConstants.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Constants.RoleConstants.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Constants.TokenConstants.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Constants.TokenConstants.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Constants.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Constants.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Data.AppDbContext.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Data.AppDbContext.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Data.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Data.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Endpoints.AuthorizeEndpoint.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Endpoints.AuthorizeEndpoint.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Endpoints.ConfirmEmailEndpoint.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Endpoints.ConfirmEmailEndpoint.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Endpoints.DeleteAccountEndpoint.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Endpoints.DeleteAccountEndpoint.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Endpoints.LogoutEndpoint.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Endpoints.LogoutEndpoint.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Endpoints.RefreshEndpoint.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Endpoints.RefreshEndpoint.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Endpoints.RegisterEndpoint.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Endpoints.RegisterEndpoint.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Endpoints.ResetPasswordEndpoint.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Endpoints.ResetPasswordEndpoint.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Endpoints.SendTokenEmailEndpoint.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Endpoints.SendTokenEmailEndpoint.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Endpoints.TokenEndpoint.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Endpoints.TokenEndpoint.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Endpoints.TwoFactorAuthorizeEndpoint.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Endpoints.TwoFactorAuthorizeEndpoint.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Endpoints.TwoFactorManageEndpoint.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Endpoints.TwoFactorManageEndpoint.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Endpoints.TwoFactorRecoveryCodesEndpoint.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Endpoints.TwoFactorRecoveryCodesEndpoint.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Endpoints.TwoFactorRecoveryCodesRedeemEndpoint.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Endpoints.TwoFactorRecoveryCodesRedeemEndpoint.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Endpoints.UpdateEmailEndpoint.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Endpoints.UpdateEmailEndpoint.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Endpoints.UpdatePasswordEndpoint.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Endpoints.UpdatePasswordEndpoint.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Endpoints.UpdatePhoneNumberEndpoint.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Endpoints.UpdatePhoneNumberEndpoint.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Endpoints.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Endpoints.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Exceptions.CreateJwtException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Exceptions.CreateJwtException.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Exceptions.JwtSecretNullOrEmptyException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Exceptions.JwtSecretNullOrEmptyException.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Exceptions.ValidateJwtException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Exceptions.ValidateJwtException.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Exceptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Exceptions.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Extensions.HealthCheckExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Extensions.HealthCheckExtensions.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Extensions.ServiceCollectionExtensions.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Extensions.WebApplicationExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Extensions.WebApplicationExtensions.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Extensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Extensions.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Migrations.AuditableEntities.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Migrations.AuditableEntities.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Migrations.Initial.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Migrations.Initial.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Migrations.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Migrations.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Models.Entities.ApplicationRole.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Models.Entities.ApplicationRole.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Models.Entities.ApplicationRoleClaim.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Models.Entities.ApplicationRoleClaim.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Models.Entities.ApplicationUser.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Models.Entities.ApplicationUser.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Models.Entities.ApplicationUserClaims.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Models.Entities.ApplicationUserClaims.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Models.Entities.ApplicationUserLogin.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Models.Entities.ApplicationUserLogin.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Models.Entities.ApplicationUserRole.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Models.Entities.ApplicationUserRole.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Models.Entities.ApplicationUserToken.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Models.Entities.ApplicationUserToken.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Models.Entities.IAuditableEntity.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Models.Entities.IAuditableEntity.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Models.Entities.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Models.Entities.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Models.Requests.AuthorizeRequest.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Models.Requests.AuthorizeRequest.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Models.Requests.ConfirmEmailRequest.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Models.Requests.ConfirmEmailRequest.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Models.Requests.RefreshRequest.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Models.Requests.RefreshRequest.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Models.Requests.RegisterRequest.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Models.Requests.RegisterRequest.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Models.Requests.TokenEmailRequest.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Models.Requests.TokenEmailRequest.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Models.Requests.TokenRequest.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Models.Requests.TokenRequest.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Models.Requests.TwoFactorManageRequest.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Models.Requests.TwoFactorManageRequest.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Models.Requests.TwoFactorRecoveryCodesRedeemRequest.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Models.Requests.TwoFactorRecoveryCodesRedeemRequest.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Models.Requests.TwoFactorSignInRequest.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Models.Requests.TwoFactorSignInRequest.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Models.Requests.UpdateEmailRequest.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Models.Requests.UpdateEmailRequest.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Models.Requests.UpdatePasswordRequest.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Models.Requests.UpdatePasswordRequest.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Models.Requests.UpdatePhoneNumberRequest.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Models.Requests.UpdatePhoneNumberRequest.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Models.Requests.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Models.Requests.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Models.Responses.TokenResponse.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Models.Responses.TokenResponse.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Models.Responses.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Models.Responses.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Models.Results.JwtResult.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Models.Results.JwtResult.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Models.Results.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Models.Results.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Program.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Program.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Providers.IJsonWebTokenProvider.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Providers.IJsonWebTokenProvider.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Providers.JsonWebTokenProvider.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Providers.JsonWebTokenProvider.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Providers.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Providers.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Publishers.EmailPublisher.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Publishers.EmailPublisher.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Publishers.IEmailPublisher.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Publishers.IEmailPublisher.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Publishers.NullEmailPublisher.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Publishers.NullEmailPublisher.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Publishers.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Publishers.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Seed.Test.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Seed.Test.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Seed.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Seed.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Services.AccountPurgeBackgroundService.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Services.AccountPurgeBackgroundService.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Services.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Services.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Tests.IntegrationTests.AccountPurgeBackgroundServiceExposeProtected.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Tests.IntegrationTests.AccountPurgeBackgroundServiceExposeProtected.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Tests.IntegrationTests.AccountPurgeBackgroundServiceTests.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Tests.IntegrationTests.AccountPurgeBackgroundServiceTests.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Tests.IntegrationTests.AuthorizeEndpointTests.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Tests.IntegrationTests.AuthorizeEndpointTests.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Tests.IntegrationTests.ConfirmEmailEndpointTests.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Tests.IntegrationTests.ConfirmEmailEndpointTests.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Tests.IntegrationTests.CustomWebApplicationFactory-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Tests.IntegrationTests.CustomWebApplicationFactory-1.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Tests.IntegrationTests.DeleteAccountEndpointTests.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Tests.IntegrationTests.DeleteAccountEndpointTests.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Tests.IntegrationTests.LogoutEndpointTests.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Tests.IntegrationTests.LogoutEndpointTests.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Tests.IntegrationTests.RefreshEndpointTests.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Tests.IntegrationTests.RefreshEndpointTests.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Tests.IntegrationTests.RegisterEndpointTests.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Tests.IntegrationTests.RegisterEndpointTests.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Tests.IntegrationTests.ResetPasswordEndpointTests.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Tests.IntegrationTests.ResetPasswordEndpointTests.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Tests.IntegrationTests.SendTokenEmailEndpointTests.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Tests.IntegrationTests.SendTokenEmailEndpointTests.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Tests.IntegrationTests.TestFixture-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Tests.IntegrationTests.TestFixture-1.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Tests.IntegrationTests.TokenEndpointTests.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Tests.IntegrationTests.TokenEndpointTests.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Tests.IntegrationTests.TwoFactorAuthorizeEndpointTests.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Tests.IntegrationTests.TwoFactorAuthorizeEndpointTests.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Tests.IntegrationTests.TwoFactorManageEndpointTests.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Tests.IntegrationTests.TwoFactorManageEndpointTests.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Tests.IntegrationTests.TwoFactorRecoveryCodesEndpointTests.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Tests.IntegrationTests.TwoFactorRecoveryCodesEndpointTests.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Tests.IntegrationTests.TwoFactorRecoveryCodesRedeemEndpointTests.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Tests.IntegrationTests.TwoFactorRecoveryCodesRedeemEndpointTests.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Tests.IntegrationTests.UpdateEmailEndpointTests.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Tests.IntegrationTests.UpdateEmailEndpointTests.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Tests.IntegrationTests.UpdatePasswordEndpointTests.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Tests.IntegrationTests.UpdatePasswordEndpointTests.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Tests.IntegrationTests.UpdatePhoneNumberEndpointTests.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Tests.IntegrationTests.UpdatePhoneNumberEndpointTests.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Tests.IntegrationTests.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Tests.IntegrationTests.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Tests.Mocks.BusMock.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Tests.Mocks.BusMock.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Tests.Mocks.ClaimsPrincipalMock.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Tests.Mocks.ClaimsPrincipalMock.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Tests.Mocks.EmailPublisherMock.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Tests.Mocks.EmailPublisherMock.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Tests.Mocks.FeatureManagerMock.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Tests.Mocks.FeatureManagerMock.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Tests.Mocks.HttpContextMock.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Tests.Mocks.HttpContextMock.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Tests.Mocks.IHttpContextAccessorMock.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Tests.Mocks.IHttpContextAccessorMock.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Tests.Mocks.IMockBase-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Tests.Mocks.IMockBase-1.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Tests.Mocks.JsonWebTokenProviderMock.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Tests.Mocks.JsonWebTokenProviderMock.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Tests.Mocks.JwtSecurityTokenHandlerMock.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Tests.Mocks.JwtSecurityTokenHandlerMock.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Tests.Mocks.LoggerMock-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Tests.Mocks.LoggerMock-1.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Tests.Mocks.ServiceProviderMock.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Tests.Mocks.ServiceProviderMock.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Tests.Mocks.SignInManagerMock-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Tests.Mocks.SignInManagerMock-1.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Tests.Mocks.UserManagerMock-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Tests.Mocks.UserManagerMock-1.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Tests.Mocks.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Tests.Mocks.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Tests.UnitTests.EmailPublisherTests.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Tests.UnitTests.EmailPublisherTests.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Tests.UnitTests.JsonWebTokenProviderTests.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Tests.UnitTests.JsonWebTokenProviderTests.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.Tests.UnitTests.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.Tests.UnitTests.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.Service.Identity.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.Service.Identity.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.WorkerService.Email.ISmtpClient.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.WorkerService.Email.ISmtpClient.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.WorkerService.Email.SmtpClientWrapper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.WorkerService.Email.SmtpClientWrapper.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.WorkerService.Email.Tests.WorkerTests.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.WorkerService.Email.Tests.WorkerTests.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.WorkerService.Email.Tests.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.WorkerService.Email.Tests.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.WorkerService.Email.Worker.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.WorkerService.Email.Worker.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChristopherBriddock.WorkerService.Email.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChristopherBriddock.WorkerService.Email.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "api/toc.yml",
+      "output": {
+        ".json": {
+          "relative_path": "api/toc.json"
+        },
+        ".html": {
+          "relative_path": "api/toc.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "src/ChristopherBriddock.Service.Identity.UI/Angular/Identity/README.md",
+      "output": {
+        ".html": {
+          "relative_path": "src/ChristopherBriddock.Service.Identity.UI/Angular/Identity/README.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "src/ChristopherBriddock.Service.Identity.UI/React/identity/README.md",
+      "output": {
+        ".html": {
+          "relative_path": "src/ChristopherBriddock.Service.Identity.UI/React/identity/README.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".json": {
+          "relative_path": "toc.json"
+        },
+        ".html": {
+          "relative_path": "toc.html"
+        }
+      },
+      "version": ""
+    }
+  ],
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}

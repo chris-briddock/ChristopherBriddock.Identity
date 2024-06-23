@@ -1,0 +1,280 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>ChristopherBriddock.Service.Identity | ChristopherBriddock.Identity </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="ChristopherBriddock.Service.Identity | ChristopherBriddock.Identity ">
+      
+      
+      <link rel="icon" href="favicon.ico">
+      <link rel="stylesheet" href="public/docfx.min.css">
+      <link rel="stylesheet" href="public/main.css">
+      <meta name="docfx:navrel" content="toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/chris-briddock/ChristopherBriddock.Identity/blob/main/README.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="index.html">
+            <img id="logo" class="svg" src="logo.svg" alt="ChristopherBriddock.Identity">
+            ChristopherBriddock.Identity
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+
+      <div class="content">
+        <div class="actionbar">
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="christopherbriddockserviceidentity">ChristopherBriddock.Service.Identity</h1>
+
+<p>Secure your app with our ASP.NET 8 Identity Service, featuring the OAuth 2.0 Resource Owner Password Credentials and Refresh token grant types for robust and flexible identity management.</p>
+<p><img src="https://img.shields.io/azure-devops/build/chris1997/91f2d938-549b-497e-980d-188da969448a/7" alt="Azure DevOps build">
+<a href="https://sonarcloud.io/summary/new_code?id=chris-briddock_ChristopherBriddock.Identity"><img src="https://sonarcloud.io/api/project_badges/measure?project=chris-briddock_ChristopherBriddock.Identity&amp;metric=alert_status" alt="Quality Gate Status"></a>
+<a href="https://sonarcloud.io/summary/new_code?id=chris-briddock_ChristopherBriddock.Identity"><img src="https://sonarcloud.io/api/project_badges/measure?project=chris-briddock_ChristopherBriddock.Identity&amp;metric=bugs" alt="Bugs"></a>
+<a href="https://sonarcloud.io/summary/new_code?id=chris-briddock_ChristopherBriddock.Identity"><img src="https://sonarcloud.io/api/project_badges/measure?project=chris-briddock_ChristopherBriddock.Identity&amp;metric=sqale_rating" alt="Maintainability Rating"></a>
+<a href="https://sonarcloud.io/summary/new_code?id=chris-briddock_ChristopherBriddock.Identity"><img src="https://sonarcloud.io/api/project_badges/measure?project=chris-briddock_ChristopherBriddock.Identity&amp;metric=ncloc" alt="Lines of Code"></a>
+<img src="https://img.shields.io/azure-devops/coverage/chris1997/ChristopherBriddock.Identity/7" alt="Azure DevOps coverage"></p>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#planned-improvements">Planned Improvments</a></li>
+<li><a href="#user-functionality">User Functionality</a></li>
+<li><a href="#technical-functionality">Technical Functionality</a></li>
+<li><a href="#endpoints">Endpoints</a></li>
+<li><a href="#getting-started">Getting Started</a></li>
+<li><a href="#license">License</a></li>
+</ul>
+<h3 id="introduction">Introduction</h3>
+<p>The Identity Service plays a crucial role in your application's security infrastructure, providing essential features for user authentication, authorization, and identity management. This README provides an overview of the service, libraries used, available endpoints, and instructions on getting started.</p>
+<h3 id="planned-improvements">Planned Improvements</h3>
+<ul>
+<li><strong>Multiple Tenants</strong></li>
+<li><strong>Multiple Client Applications</strong></li>
+<li><strong>FIDO2 Support</strong></li>
+<li><strong>Application based 2FA Codes</strong></li>
+</ul>
+<p>Authorization Flows:</p>
+<ul>
+<li><strong>Authorization Code Flow (with PKCE)</strong></li>
+<li><strong>Client Credentials Flow</strong></li>
+<li><strong>Device Authorization Flow (Device Grant)</strong></li>
+</ul>
+<h3 id="user-functionality">User Functionality</h3>
+<table>
+<thead>
+<tr>
+<th>Features</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Authorize</td>
+</tr>
+<tr>
+<td>Confirm Email</td>
+</tr>
+<tr>
+<td>Delete Account</td>
+</tr>
+<tr>
+<td>Logout</td>
+</tr>
+<tr>
+<td>Refresh Bearer Token</td>
+</tr>
+<tr>
+<td>Register</td>
+</tr>
+<tr>
+<td>Update Password</td>
+</tr>
+<tr>
+<td>Reset Password</td>
+</tr>
+<tr>
+<td>Update Email Address</td>
+</tr>
+<tr>
+<td>Two Step Verification</td>
+</tr>
+<tr>
+<td>Two Factor Recovery Codes</td>
+</tr>
+<tr>
+<td>Account Lockout on 3 retries, for 10 minutes.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="technical-functionality">Technical Functionality</h3>
+<table>
+<thead>
+<tr>
+<th>Features</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RabbitMQ and Azure Service Bus support</td>
+</tr>
+<tr>
+<td>API Health Checks</td>
+</tr>
+<tr>
+<td>Secure JWT Bearer Authentication</td>
+</tr>
+<tr>
+<td>Azure Application Insights Monitoring</td>
+</tr>
+<tr>
+<td>Logging using Serilog (To Console Or To External Logging Server) e.g Seq or ElasticSearch</td>
+</tr>
+<tr>
+<td>Resilliant Microsoft SQL Server connections using Entity Framework Core</td>
+</tr>
+<tr>
+<td>Encrypted User Passwords</td>
+</tr>
+<tr>
+<td>Uses HTTP/3 and fallsback to HTTP/2 or HTTP/1.1</td>
+</tr>
+</tbody>
+</table>
+<h3 id="endpoints">Endpoints</h3>
+<ul>
+<li><strong>/authorize</strong>: Endpoint for user authorization.</li>
+<li><strong>/sendemail</strong>: Endpoint for sending token emails.</li>
+<li><strong>/confirmemail</strong>: Endpoint for confirming user email.</li>
+<li><strong>/forgotpassword</strong>: Endpoint for handling forgotten passwords.</li>
+<li><strong>/logout</strong>: Endpoint for user logout.</li>
+<li><strong>/refresh</strong>: Endpoint for refreshing authentication tokens.</li>
+<li><strong>/register</strong>: Endpoint for user registration.</li>
+<li><strong>/resetpassword</strong>: Endpoint for resetting user passwords.</li>
+<li><strong>/token</strong>: Endpoint for token generation.</li>
+<li><strong>/2fa/authorize</strong>: Endpoint for two-factor authentication authorization.</li>
+<li><strong>/2fa/manage</strong>: Endpoint for managing two-factor authentication settings.</li>
+<li><strong>/2fa/codes</strong>: Endpoint for generating and managing two-factor authentication codes.</li>
+<li><strong>/2fa/redeem</strong>: Endpoint for reedming two-factor recovery codes.</li>
+<li><strong>/account/email</strong>: Endpoint for managing user account email.</li>
+<li><strong>/account/phonenumber</strong>: Endpoint for managing user account phone number.</li>
+<li><strong>/account/password</strong>: Endpoint for managing user account password.</li>
+<li><strong>/account/delete</strong>: Endpoint for deleting their user account.</li>
+</ul>
+<h3 id="getting-started">Getting Started</h3>
+<p>To get started with the Identity Service, follow these steps:</p>
+<ol>
+<li>Clone the repository: <code>git clone https://github.com/chris-briddock/ChristopherBriddock.Identity.git</code></li>
+<li>Open the solution.</li>
+<li>Ensure you have added migrations for the Service.Identity project with Entity Framework Core.</li>
+<li>Ensure you have an SQL Server database and RabbitMQ or Azure Service Bus available at minimum</li>
+<li>Optionally you can also use Seq, Azure Application Insights and Redis.</li>
+<li>Please configure all placeholder values in appsettings.json in both services.</li>
+<li>Build and run the Web API.</li>
+</ol>
+<h3 id="infrastructure-as-code">Infrastructure as Code</h3>
+<p>The project includes infrastructure as code (IaC) configurations for provisioning a Kubernetes cluster in three major cloud platforms - Azure, AWS, and Google Cloud.</p>
+<p>Below are the detailed instructions on how to provision infrastructure on each cloud provider.</p>
+<h4 id="azure">Azure</h4>
+<p>The Azure cloud configuration can be found in the 'azure' directory. This uses Pulumi to define and provision Azure resources. To deploy a Kubernetes cluster in Azure:</p>
+<ol>
+<li>Navigate to the 'azure' directory.</li>
+<li>Install the necessary dependencies, you need to have Pulumi CLI and Node.js installed.</li>
+<li>Run <code>pulumi stack init</code> to create a new Pulumi stacking environment.</li>
+<li>Run <code>pulumi config set azure:location &lt;AzureRegion&gt;</code> to set your desired Azure region.</li>
+<li>Run <code>pulumi up</code> to provision the resources.</li>
+</ol>
+<h4 id="aws">AWS</h4>
+<p>Amazon Web Services (AWS) configuration is located in the 'aws' directory. Follow the steps below:</p>
+<ol>
+<li>Navigate to the 'aws' directory.</li>
+<li>Make sure all the dependencies are installed and AWS credentials are properly set in your environment.</li>
+<li>Run <code>pulumi stack init</code> to create a new Pulumi stacking environment.</li>
+<li>Run <code>pulumi up</code> to start the provisioning of resources.</li>
+</ol>
+<h4 id="google-cloud">Google Cloud</h4>
+<p>The Google Cloud configuration can be found in the 'googlecloud' directory. Follow the steps below:</p>
+<ol>
+<li>Navigate to the 'googlecloud' directory.</li>
+<li>Run <code>npm i</code> to install dependencies.</li>
+<li>Run <code>pulumi stack init</code> to create a new Pulumi stacking environment.</li>
+<li>Run <code>pulumi config set gcp:project &lt;GoogleCloudProjectId&gt;</code> and <code>pulumi config set gcp:region &lt;GoogleCloudRegion&gt;</code> to set your Google Cloud project id and desired Google Cloud region.</li>
+<li>Install the Google Cloud CLI.</li>
+<li>Log in to Google Cloud.</li>
+<li>Run <code>pulumi up</code> to start the provisioning of resources.</li>
+</ol>
+<p>After executing these steps on your desired cloud platform, a Kubernetes cluster will be provisioned and ready-to-use.</p>
+<h3 id="license">License</h3>
+<p>This project is licensed under the <img src="https://img.shields.io/github/license/chris-briddock/ChristopherBriddock.Identity" alt="GitHub License">
+See the <a href="LICENSE">LICENSE</a> file for details.</p>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/chris-briddock/ChristopherBriddock.Identity/blob/main/README.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
