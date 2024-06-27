@@ -8,5 +8,5 @@ public sealed record RefreshRequest
     /// <summary>
     /// The refresh token.
     /// </summary>
-    public required string RefreshToken { get; set; } = default!;
+    public required string RefreshToken { get; init; } = default!;
 }

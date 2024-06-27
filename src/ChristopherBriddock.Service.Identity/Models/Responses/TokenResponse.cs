@@ -21,4 +21,8 @@ public sealed record TokenResponse
     /// Gets or sets the token type.
     /// </summary>
     public required string TokenType { get; set; } = default!;
+    /// <summary>
+    /// Gets or sets the grant type.
+    /// </summary>
+    public required string GrantType { get; set; } = default!;
 }

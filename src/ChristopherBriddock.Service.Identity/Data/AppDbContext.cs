@@ -2,6 +2,7 @@
 using ChristopherBriddock.Service.Identity.Models.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+
 namespace ChristopherBriddock.Service.Identity.Data;
 
 /// <summary>
@@ -33,4 +34,9 @@ public sealed class AppDbContext : IdentityDbContext<ApplicationUser, Applicatio
         
         base.OnConfiguring(optionsBuilder);
     }
+
+    /// <summary>
+    /// Represents a database table with the columns defined in the properties of <see cref="IdentityApplication"/>
+    /// </summary>
+    public DbSet<IdentityApplication> AspNetApplications => Set<IdentityApplication>();
 }

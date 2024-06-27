@@ -1,4 +1,5 @@
 using ChristopherBriddock.Service.Identity.Constants;
+using ChristopherBriddock.Service.Identity.Data;
 using ChristopherBriddock.Service.Identity.Models.Entities;
 using Microsoft.AspNetCore.Identity;
 
@@ -18,11 +19,14 @@ public static class Seed
     {
         using var scope = app.Services.CreateAsyncScope();
         var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<ApplicationRole>>();
+        var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
 
-        string[] roles = [RoleConstants.Admin, RoleConstants.User];
+        if (!dbContext.Roles.Any())
+        {
+            string[] roles = [RoleConstants.Admin, RoleConstants.User];
 
-        // Create roles.
-        foreach (var role in roles)
+            // Create roles.
+            foreach (var role in roles)
         {
             ApplicationRole newRole = new()
             {
@@ -35,30 +39,34 @@ public static class Seed
                 await roleManager.CreateAsync(newRole);
             }
         }
+        }
     }
     /// <summary>
     /// Seeds an admin user into the database if it doesn't already exist.
     /// </summary>
     /// <param name="app">The web application instance.</param>
     /// <returns>A task representing the asynchronous operation.</returns>
-        public static async Task SeedAdminUserAsync(WebApplication app)
+    public static async Task SeedAdminUserAsync(WebApplication app)
+    {
+        using var scope = app.Services.CreateAsyncScope();
+        var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+
+        var adminEmail = "admin@default.com";
+
+        ApplicationUser adminUser = new()
         {
-            using var scope = app.Services.CreateAsyncScope();
-            var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+            UserName = adminEmail,
+            Email = adminEmail,
+            PhoneNumberConfirmed = true,
+            TwoFactorEnabled = false,
+            EmailConfirmed = true,
+            LockoutEnabled = false,
+            AccessFailedCount = 0
+        };
 
-            var adminEmail = "admin@default.com";
-
-            ApplicationUser adminUser = new()
-            {
-                UserName = adminEmail,
-                Email = adminEmail,
-                PhoneNumberConfirmed = true,
-                TwoFactorEnabled = false,
-                EmailConfirmed = true,
-                LockoutEnabled = false,
-                AccessFailedCount = 0
-            };
-
+        bool userExists = await userManager.FindByEmailAsync(adminEmail) != null;
+        if (!userExists)
+        {
             // Hash the password for security.
             adminUser.PasswordHash = userManager.PasswordHasher.HashPassword(adminUser, "fR<pGWqvn4Mu,6w[Z8axP;b5=");
             await userManager.CreateAsync(adminUser);
@@ -67,10 +75,35 @@ public static class Seed
             await userManager.AddToRoleAsync(adminUser, RoleConstants.Admin);
             await userManager.AddToRoleAsync(adminUser, RoleConstants.User);
         }
+    }
+    /// <summary>
+    /// Seeds the initial client application. 
+    /// </summary>
+    /// <param name="app">The web application instance.</param>
+    /// <returns>A task representing the asynchronous operation.</returns>
+    public static async Task SeedApplicationAsync(WebApplication app)
+    {
+        using var scope = app.Services.CreateAsyncScope();
+        var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+        var dbSet = dbContext.Set<IdentityApplication>();
+
+        if (!dbSet.Any())
+        {
+            await dbSet.AddAsync(new IdentityApplication
+            {
+                Name = "Default",
+                RedirectUri = "https://google.com",
+                IsDeleted = false,
+                CreatedBy = Guid.NewGuid()
+            });
+
+            await dbContext.SaveChangesAsync();
+        }
+    }
     /// <summary>
     /// Seeds all test user data.
     /// </summary>
-    public static class Test 
+    public static class Test
     {
         /// <summary>
         /// Seeds an deleted user into the database if it doesn't already exist.
@@ -171,13 +204,13 @@ public static class Seed
             // Add roles
             await userManager.AddToRoleAsync(user, RoleConstants.User);
         }
-         /// <summary>
+        /// <summary>
         /// Seeds two test users into the database if it doesn't already exist for testing
         /// 
         /// </summary>
         /// <param name="app">The web application instance.</param>
         /// <returns>A task representing the asynchronous operation.</returns>
-        public static async Task SeedBackgroundServiceUsers(WebApplication app) 
+        public static async Task SeedBackgroundServiceUsers(WebApplication app)
         {
             using var scope = app.Services.CreateAsyncScope();
             var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
@@ -196,7 +229,7 @@ public static class Seed
                 IsDeleted = true,
                 DeletedOnUtc = DateTime.UtcNow.AddYears(-8),
                 EmailConfirmed = true
-                
+
             };
 
             oldDeletedUser.PasswordHash = userManager.PasswordHasher.HashPassword(oldDeletedUser, "dnjdnjdnwjdnwqjdnqwj");
@@ -212,22 +245,22 @@ public static class Seed
                 IsDeleted = true,
                 DeletedOnUtc = DateTime.UtcNow,
                 EmailConfirmed = true
-                
+
             };
             recentDeletedUser.PasswordHash = userManager.PasswordHasher.HashPassword(recentDeletedUser, "dnjdnjdnwjdnwqjdnqwj");
 
             ApplicationUser? oldDeletedUserExists = await userManager.FindByEmailAsync(oldDeletedUserEmail);
             ApplicationUser? recentDeletedUserExists = await userManager.FindByEmailAsync(recentDeletedUserEmail);
             if (oldDeletedUserExists is null
-                &&recentDeletedUserExists is null) 
+                && recentDeletedUserExists is null)
             {
                 await userManager.CreateAsync(oldDeletedUser);
                 await userManager.CreateAsync(recentDeletedUser);
-            
+
                 await userManager.AddToRoleAsync(oldDeletedUser, RoleConstants.User);
                 await userManager.AddToRoleAsync(recentDeletedUser, RoleConstants.User);
             }
-            
+
         }
     }
 

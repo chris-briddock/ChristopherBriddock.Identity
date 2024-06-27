@@ -15,6 +15,7 @@ namespace ChristopherBriddock.Service.Identity.Endpoints;
 /// </remarks>
 /// <param name="serviceProvider">The application's service provider.</param>
 /// <param name="logger">The application's logger.</param>
+[Route("api/v{version:apiVersion}/")]
 public sealed class LogoutEndpoint(IServiceProvider serviceProvider,
                                     ILogger<LogoutEndpoint> logger) : EndpointBaseAsync
                                                                       .WithoutRequest
@@ -31,7 +32,7 @@ public sealed class LogoutEndpoint(IServiceProvider serviceProvider,
     /// </summary>
     /// <param name="cancellationToken">The cancellation token to cancel the operation.</param>
     /// <returns>A new <see cref="ActionResult"/></returns>
-    [HttpPost("/logout")]
+    [HttpPost("logout")]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]

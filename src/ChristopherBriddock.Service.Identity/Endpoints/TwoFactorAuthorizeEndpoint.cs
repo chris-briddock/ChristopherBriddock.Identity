@@ -10,6 +10,7 @@ namespace ChristopherBriddock.Service.Identity.Endpoints;
 /// <summary>
 /// Exposes an endpoint that allows the user to sign in using two factor authentication.
 /// </summary>
+[Route("api/v{version:apiVersion}/")]
 public sealed class TwoFactorAuthorizeEndpoint(IServiceProvider serviceProvider,
                                                ILogger<TwoFactorAuthorizeEndpoint> logger) : EndpointBaseAsync
                                                                                              .WithRequest<TwoFactorSignInRequest>
@@ -29,7 +30,7 @@ public sealed class TwoFactorAuthorizeEndpoint(IServiceProvider serviceProvider,
     /// <param name="request">The object which encapsulates the request.</param>
     /// <param name="cancellationToken">The cancellation token to cancel the operation.</param>
     /// <returns>A new <see cref="ActionResult"/></returns>
-    [HttpPost("/2fa/authorize")]
+    [HttpPost("2fa/authorize")]
     [Authorize(AuthenticationSchemes = "Identity.Application", Policy = "UserRolePolicy")]
     [ProducesResponseType(StatusCodes.Status302Found)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]

@@ -1,4 +1,7 @@
-﻿namespace ChristopherBriddock.Service.Identity.Tests.UnitTests;
+﻿using ChristopherBriddock.Service.Identity.Exceptions;
+using Microsoft.IdentityModel.Tokens;
+
+namespace ChristopherBriddock.Service.Identity.Tests.UnitTests;
 
 [TestFixture]
 public class JsonWebTokenProviderTests
@@ -15,7 +18,12 @@ public class JsonWebTokenProviderTests
     {
         // Arrange
         var mockProvider = new JsonWebTokenProviderMock();
-        mockProvider.Setup(p => p.TryCreateTokenAsync(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()))
+        mockProvider.Setup(p => p.TryCreateTokenAsync(It.IsAny<string>(),
+                                                      It.IsAny<string>(),
+                                                      It.IsAny<string>(),
+                                                      It.IsAny<string>(),
+                                                      It.IsAny<string>(),
+                                                      It.IsAny<string>()))
                     .ReturnsAsync(new JwtResult { Success = true, Token = "mockToken", Error = null });
 
         // Act
@@ -37,7 +45,10 @@ public class JsonWebTokenProviderTests
         // Arrange
         var mockProvider = new JsonWebTokenProviderMock();
         var validToken = "mockValidToken";
-        mockProvider.Setup(p => p.TryValidateTokenAsync(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()))
+        mockProvider.Setup(p => p.TryValidateTokenAsync(It.IsAny<string>(),
+                                                        It.IsAny<string>(),
+                                                        It.IsAny<string>(),
+                                                        It.IsAny<string>()))
                     .ReturnsAsync(new JwtResult { Success = true, Token = validToken, Error = null });
 
         // Act
@@ -59,7 +70,10 @@ public class JsonWebTokenProviderTests
         // Arrange
         var mockProvider = new JsonWebTokenProviderMock();
         var invalidToken = "invalidToken";
-        mockProvider.Setup(p => p.TryValidateTokenAsync(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>()))
+        mockProvider.Setup(p => p.TryValidateTokenAsync(It.IsAny<string>(),
+                                                        It.IsAny<string>(),
+                                                        It.IsAny<string>(),
+                                                        It.IsAny<string>()))
                     .ReturnsAsync(new JwtResult { Success = false, Token = null!, Error = "Invalid token" });
 
         // Act
@@ -72,5 +86,40 @@ public class JsonWebTokenProviderTests
             Assert.That(result.Error, Is.Not.Empty);
         });
 
+    }
+
+    [Test]
+    public void TryCreateTokenAsync_ShouldThrowCreateJwtException_WhenInvalidParametersAreProvided()
+    {
+        // Arrange
+        var mockProvider = new JsonWebTokenProviderMock();
+        mockProvider.Setup(p => p.TryCreateTokenAsync(It.IsAny<string>(),
+                                                      It.IsAny<string>(),
+                                                      It.IsAny<string>(),
+                                                      It.IsAny<string>(),
+                                                      It.IsAny<string>(),
+                                                      It.IsAny<string>()))
+                    .ThrowsAsync(new CreateJwtException("Failed to create JWT"));
+
+        // Act & Assert
+        Assert.ThrowsAsync<CreateJwtException>(async () =>
+            await mockProvider.Object.TryCreateTokenAsync(_email, _jwtSecret, _issuer, _audience, _expires, _subject));
+    }
+
+    [Test]
+    public void TryValidateTokenAsync_ShouldThrowSecurityTokenException_WhenInvalidTokenIsProvided()
+    {
+        // Arrange
+        var mockProvider = new JsonWebTokenProviderMock();
+        var invalidToken = "invalidToken";
+        mockProvider.Setup(p => p.TryValidateTokenAsync(It.IsAny<string>(), 
+                                                        It.IsAny<string>(), 
+                                                        It.IsAny<string>(),
+                                                        It.IsAny<string>()))
+                    .ThrowsAsync(new SecurityTokenException("Invalid token"));
+
+        // Act & Assert
+        Assert.ThrowsAsync<SecurityTokenException>(async () =>
+            await mockProvider.Object.TryValidateTokenAsync(invalidToken, _jwtSecret, _issuer, _audience));
     }
 }

@@ -51,10 +51,6 @@ public class AccountPurgeBackgroundService(IServiceScopeFactory serviceScopeFact
                 await dbContext.SaveChangesAsync(stoppingToken);
             }
         }
-        catch (DbUpdateConcurrencyException ex) 
-        {
-            Logger.LogWarning("Warning in background service - {methodName}, exception details: {exceptionDetails}", nameof(AccountPurgeBackgroundService), ex);
-        }
         catch (Exception ex)
         {
             Logger.LogError("Error in background service - {methodName}, exception details: {exceptionDetails}", nameof(AccountPurgeBackgroundService), ex);

@@ -8,9 +8,9 @@ public sealed record TwoFactorSignInRequest
     /// <summary>
     /// Gets or sets the email address
     /// </summary>
-    public string EmailAddress { get; set; } = default!;
+    public string EmailAddress { get; init; } = default!;
     /// <summary>
     /// The two factor token
     /// </summary>
-    public string Token { get; set; } = default!;
+    public string Token { get; init; } = default!;
 }

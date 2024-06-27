@@ -17,6 +17,7 @@ namespace ChristopherBriddock.Service.Identity.Endpoints;
 /// </remarks>
 /// <param name="serviceProvider">The application service provider.</param>
 /// <param name="logger">The application logger.</param>
+[Route("api/v{version:apiVersion}/")]
 public class UpdateEmailEndpoint(IServiceProvider serviceProvider,
                                  ILogger<UpdateEmailEndpoint> logger) : EndpointBaseAsync
                                                                         .WithRequest<UpdateEmailRequest>
@@ -38,7 +39,7 @@ public class UpdateEmailEndpoint(IServiceProvider serviceProvider,
     /// <param name="request">The object which encapsulates the request.</param>
     /// <param name="cancellationToken">The cancellation token to cancel the operation.</param>
     /// <returns>A new <see cref="ActionResult"/></returns>
-    [HttpPut("/account/email")]
+    [HttpPut("account/email")]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]

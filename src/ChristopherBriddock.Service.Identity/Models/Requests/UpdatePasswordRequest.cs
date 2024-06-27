@@ -8,9 +8,9 @@ public sealed record UpdatePasswordRequest
     /// <summary>
     /// The user's current password.
     /// </summary>
-    public required string CurrentPassword { get; set; } = default!;
+    public required string CurrentPassword { get; init; } = default!;
     /// <summary>
     /// The user's new password.
     /// </summary>
-    public required string NewPassword { get; set; } = default!;
+    public required string NewPassword { get; init; } = default!;
 }

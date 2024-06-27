@@ -8,5 +8,5 @@ public sealed record UpdateEmailRequest
     /// <summary>
     /// The new email address.
     /// </summary>
-    public string EmailAddress { get; set; } = default!;
+    public string EmailAddress { get; init; } = default!;
 }

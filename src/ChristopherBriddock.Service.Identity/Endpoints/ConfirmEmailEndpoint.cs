@@ -15,6 +15,7 @@ namespace ChristopherBriddock.Service.Identity.Endpoints;
 /// </remarks>
 /// <param name="serviceProvider"> The <see cref="IServiceProvider"/> </param>
 /// <param name="logger">The logger for this endpoint.</param>
+[Route("api/v{version:apiVersion}/")]
 public sealed class ConfirmEmailEndpoint(IServiceProvider serviceProvider,
                                          ILogger<ConfirmEmailEndpoint> logger) : EndpointBaseAsync
                                                                                  .WithRequest<ConfirmEmailRequest>
@@ -25,13 +26,14 @@ public sealed class ConfirmEmailEndpoint(IServiceProvider serviceProvider,
     private IServiceProvider ServiceProvider { get; } = serviceProvider;
     /// <inheritdoc/>
     private ILogger<ConfirmEmailEndpoint> Logger { get; } = logger;
+    
     /// <summary>
     /// Allows a user to confirm their email address.
     /// </summary>
     /// <param name="request">The object which encapsulates the request.</param>
     /// <param name="cancellationToken">The cancellation token to cancel the operation.</param>
     /// <returns>A new <see cref="ActionResult"/></returns>
-    [HttpPost("/confirmemail")]
+    [HttpPost("confirmemail")]
     [AllowAnonymous]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]

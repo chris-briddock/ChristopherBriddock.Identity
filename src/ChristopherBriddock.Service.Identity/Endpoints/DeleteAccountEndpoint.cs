@@ -14,6 +14,7 @@ namespace ChristopherBriddock.Service.Identity.Endpoints;
 /// <remarks>
 /// Initializes a new instance of <see cref="DeleteAccountEndpoint"/>
 /// </remarks>
+[Route("api/v{version:apiVersion}/")]
 public class DeleteAccountEndpoint(ILogger<DeleteAccountEndpoint> logger,
                                    IServiceProvider serviceProvider) : EndpointBaseAsync
                                                                        .WithoutRequest
@@ -29,7 +30,7 @@ public class DeleteAccountEndpoint(ILogger<DeleteAccountEndpoint> logger,
     public ILogger<DeleteAccountEndpoint> Logger { get; } = logger;
 
     /// <inheritdoc/>
-    [HttpDelete("/account/delete")]
+    [HttpDelete("me/delete")]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]

@@ -11,12 +11,12 @@ public sealed record ConfirmEmailRequest
     /// The users email address
     /// </summary>
     [FromQuery(Name = "email_address")]
-    public required string EmailAddress { get; set; } = default!;
+    public required string EmailAddress { get; init; } = default!;
     /// <summary>
     /// The code to confirm the email address
     /// </summary>
     [FromQuery(Name = "code")]
-    public required string Code { get; set; } = default!;
+    public required string Code { get; init; } = default!;
 
 
 }

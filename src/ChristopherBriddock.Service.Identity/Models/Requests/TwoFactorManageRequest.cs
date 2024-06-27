@@ -11,5 +11,5 @@ public sealed record TwoFactorManageRequest
     /// Gets or sets the isEnabled flag.
     /// </summary>
     [FromQuery(Name = "is_enabled")]
-    public bool IsEnabled { get; set; } = default!;
+    public bool IsEnabled { get; init; } = default!;
 }

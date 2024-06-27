@@ -43,7 +43,6 @@ public class JsonWebTokenProvider : IJsonWebTokenProvider
                 new(JwtRegisteredClaimNames.Sub, subject),
                 new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new(JwtRegisteredClaimNames.Email, email),
-                new(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString())
             ];
 
             var signingCredentials = new SigningCredentials

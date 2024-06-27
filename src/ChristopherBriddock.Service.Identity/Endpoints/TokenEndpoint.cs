@@ -15,6 +15,7 @@ namespace ChristopherBriddock.Service.Identity.Endpoints;
 /// </remarks>
 /// <param name="serviceProvider">The application's service provider.</param>
 /// <param name="logger">The application logger.</param>
+[Route("api/v{version:apiVersion}/")]
 public class TokenEndpoint(IServiceProvider serviceProvider,
                            ILogger<TokenEndpoint> logger) : EndpointBaseAsync
                                                             .WithRequest<TokenRequest>
@@ -34,7 +35,7 @@ public class TokenEndpoint(IServiceProvider serviceProvider,
     /// <param name="request">The object which encapsulates the request.</param>
     /// <param name="cancellationToken">The cancellation token to cancel the operation.</param>
     /// <returns>A new <see cref="ActionResult"/></returns>
-    [HttpGet("/token")]
+    [HttpGet("oauth/token")]
     [Authorize(AuthenticationSchemes = "Identity.Application", Policy = "UserRolePolicy")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -50,6 +51,18 @@ public class TokenEndpoint(IServiceProvider serviceProvider,
             
             var jsonWebTokenProvider = ServiceProvider.GetRequiredService<IJsonWebTokenProvider>();
 
+            // If refresh token is requested.
+            if (request.RefreshToken is not null) 
+            {
+                var validationResult = await jsonWebTokenProvider.TryValidateTokenAsync(request.RefreshToken,
+                                                                                        configuration["Jwt:Secret"]!,
+                                                                                        configuration["Jwt:Issuer"]!,
+                                                                                        configuration["Jwt:Audience"]!);
+                if (!validationResult.Success)
+                {
+                    return Unauthorized();
+                }
+            }
             string email = httpContextAccessor.HttpContext!.User.Identity!.Name ?? string.Empty;
             string issuer = configuration["Jwt:Issuer"]!;
             string audience = configuration["Jwt:Audience"]!;
@@ -85,11 +98,13 @@ public class TokenEndpoint(IServiceProvider serviceProvider,
                 }
 
             }
+            
             TokenResponse response = new()
             {
                 AccessToken = result.Token,
                 RefreshToken = refreshToken.Token,
-                TokenType = request.TokenType,
+                TokenType = "Bearer",
+                GrantType = request.GrantType,
                 Expires = expires
             };
             

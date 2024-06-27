@@ -13,6 +13,7 @@ namespace ChristopherBriddock.Service.Identity.Endpoints;
 /// </summary>
 /// <param name="serviceProvider">The application service provider.</param>
 /// <param name="logger">The logger.</param>
+[Route("api/v{version:apiVersion}/")]
 public sealed class ResetPasswordEndpoint(IServiceProvider serviceProvider,
                                           ILogger<ResetPasswordEndpoint> logger) : EndpointBaseAsync
                                                                                   .WithRequest<ResetPasswordRequest>
@@ -34,7 +35,7 @@ public sealed class ResetPasswordEndpoint(IServiceProvider serviceProvider,
     /// <param name="request">The object which encapsulates the request.</param>
     /// <param name="cancellationToken">The cancellation token to cancel the operation.</param>
     /// <returns>A new <see cref="ActionResult"/></returns>
-    [HttpPost("/resetpassword")]
+    [HttpPost("resetpassword")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]

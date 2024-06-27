@@ -17,6 +17,7 @@ namespace ChristopherBriddock.Service.Identity.Endpoints;
 /// </remarks>
 /// <param name="serviceProvider">The application's service provider.</param>
 /// <param name="logger">The application's logger.</param>
+[Route("api/v{version:apiVersion}/")]
 public sealed class TwoFactorManageEndpoint(IServiceProvider serviceProvider,
                                             ILogger<TwoFactorManageEndpoint> logger) : EndpointBaseAsync
                                                                                        .WithRequest<TwoFactorManageRequest>
@@ -36,7 +37,7 @@ public sealed class TwoFactorManageEndpoint(IServiceProvider serviceProvider,
     /// <param name="request">The object which encapsulates the request.</param>
     /// <param name="cancellationToken">The cancellation token to cancel the operation.</param>
     /// <returns>A new <see cref="ActionResult"/></returns>
-    [HttpPost("/2fa/manage")]
+    [HttpPost("2fa/manage")]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]

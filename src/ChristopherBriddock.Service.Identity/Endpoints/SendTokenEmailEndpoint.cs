@@ -18,6 +18,7 @@ namespace ChristopherBriddock.Service.Identity.Endpoints;
 /// </remarks>
 /// <param name="serviceProvider">The application service provider.</param>
 /// <param name="logger">The application's logger.</param>
+[Route("api/v{version:apiVersion}/")]
 public sealed class SendTokenEmailEndpoint(IServiceProvider serviceProvider,
                                                 ILogger<SendTokenEmailEndpoint> logger) : EndpointBaseAsync
                                                                                           .WithRequest<TokenEmailRequest>
@@ -42,7 +43,7 @@ public sealed class SendTokenEmailEndpoint(IServiceProvider serviceProvider,
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    [HttpPost("/sendemail")]
+    [HttpPost("sendemail")]
     public override async Task<ActionResult> HandleAsync([FromBody] TokenEmailRequest request,
                                                          CancellationToken cancellationToken = default)
     {

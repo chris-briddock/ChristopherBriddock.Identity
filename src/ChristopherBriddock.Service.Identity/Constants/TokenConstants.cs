@@ -3,12 +3,8 @@ namespace ChristopherBriddock.Service.Identity.Constants;
 /// <summary>
 /// Constant values for different token types.
 /// </summary>
-public static class TokenConstants 
+public static class TokenGrantTypeConstants 
 {
-    /// <summary>
-    /// Represents the value for resource owner token type.
-    /// </summary>
-    public const string ResourceOwner = "resource_owner";
     /// <summary>
     /// Represents the value for client credentials token type.
     /// </summary>

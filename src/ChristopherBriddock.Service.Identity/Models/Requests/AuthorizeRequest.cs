@@ -13,7 +13,7 @@ public sealed record AuthorizeRequest
     /// <remarks>
     /// This field is required for user identification.
     /// </remarks>
-    public required string EmailAddress { get; set; } = default!;
+    public required string EmailAddress { get; init; } = default!;
 
     /// <summary>
     /// Gets or sets the password associated with the user.
@@ -21,7 +21,7 @@ public sealed record AuthorizeRequest
     /// <remarks>
     /// This field is required for user authentication.
     /// </remarks>
-    public required string Password { get; set; } = default!;
+    public required string Password { get; init; } = default!;
 
     /// <summary>
     /// Gets or sets a value indicating whether the user's session should be remembered.
@@ -29,6 +29,6 @@ public sealed record AuthorizeRequest
     /// <remarks>
     /// Setting this to <c>true</c> will remember the user's session across browser sessions.
     /// </remarks>
-    public required bool RememberMe { get; set; } = default!;
+    public required bool RememberMe { get; init; } = default!;
 }
 

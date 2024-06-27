@@ -15,6 +15,7 @@ namespace ChristopherBriddock.Service.Identity.Endpoints;
 /// </remarks>
 /// <param name="serviceProvider">The application service provider.</param>
 /// <param name="logger">Rhe application's logger.</param>
+[Route("api/v{version:apiVersion}/")]
 public class TwoFactorRecoveryCodesRedeemEndpoint(IServiceProvider serviceProvider,
                                                   ILogger<TwoFactorRecoveryCodesEndpoint> logger) : EndpointBaseAsync
                                                                                                     .WithRequest<TwoFactorRecoveryCodesRedeemRequest>
@@ -34,7 +35,7 @@ public class TwoFactorRecoveryCodesRedeemEndpoint(IServiceProvider serviceProvid
     /// <param name="request">The object which encapsulates the request.</param>
     /// <param name="cancellationToken">The cancellation token to cancel the operation.</param>
     /// <returns>A new <see cref="ActionResult"/></returns>
-    [HttpPost("/2fa/redeem")]
+    [HttpPost("2fa/redeem")]
     [AllowAnonymous]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]

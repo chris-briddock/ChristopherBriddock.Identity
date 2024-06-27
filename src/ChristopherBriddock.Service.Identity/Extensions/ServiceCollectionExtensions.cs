@@ -5,7 +5,6 @@ using ChristopherBriddock.Service.Common.Constants;
 using ChristopherBriddock.Service.Identity.Constants;
 using ChristopherBriddock.Service.Identity.Data;
 using ChristopherBriddock.Service.Identity.Exceptions;
-using ChristopherBriddock.Service.Identity.Models;
 using ChristopherBriddock.Service.Identity.Models.Entities;
 using ChristopherBriddock.Service.Identity.Providers;
 using ChristopherBriddock.Service.Identity.Publishers;
@@ -132,10 +131,10 @@ public static class ServiceCollectionExtensions
     {
         IConfiguration configuration = services
                                       .BuildServiceProvider()
-                                      .GetService<IConfiguration>()!;
+                                      .GetRequiredService<IConfiguration>();
         IFeatureManager featureManager = services
                                         .BuildServiceProvider()
-                                        .GetService<IFeatureManager>()!;
+                                        .GetRequiredService<IFeatureManager>();
         
         services.AddMemoryCache();
         services.AddDistributedMemoryCache();
@@ -173,7 +172,7 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddAzureAppInsights(this IServiceCollection services)
     {
         var featureManager = services.BuildServiceProvider()
-                                     .GetService<IFeatureManager>()!;
+                                     .GetRequiredService<IFeatureManager>();
 
         if (featureManager.IsEnabledAsync(FeatureFlagConstants.AzApplicationInsights).Result)
         {
@@ -215,10 +214,10 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddPublisherMessaging(this IServiceCollection services)
     {
         var configuration = services.BuildServiceProvider()
-                                    .GetService<IConfiguration>()!;
+                                    .GetRequiredService<IConfiguration>();
 
         var featureManager = services.BuildServiceProvider()
-                                     .GetService<IFeatureManager>()!;
+                                     .GetRequiredService<IFeatureManager>();
 
         var rabbitMqEnabled = featureManager.IsEnabledAsync(FeatureFlagConstants.RabbitMq).Result;
 

@@ -21,6 +21,7 @@ public sealed class Program
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddControllers();
         builder.Services.AddSwagger("ChristopherBriddock.Service.Identity.xml");
+        builder.Services.AddVersioning(1, 0);
         builder.Services.AddFeatureManagement();
         builder.Services.AddSerilogWithConfiguration();
         builder.Services.AddBearerAuthentication();

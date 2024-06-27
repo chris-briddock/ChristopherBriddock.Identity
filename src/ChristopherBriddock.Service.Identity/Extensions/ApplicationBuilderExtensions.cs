@@ -15,6 +15,7 @@ public static class WebApplicationExtensions
     {
         await Seed.SeedRolesAsync(app);
         await Seed.SeedAdminUserAsync(app);
+        await Seed.SeedApplicationAsync(app);
     }
     /// <summary>
     /// Seeds all test data asynchronously
