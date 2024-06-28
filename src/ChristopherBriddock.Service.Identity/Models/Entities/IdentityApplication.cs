@@ -48,7 +48,7 @@ public class IdentityApplication<TKey> where TKey : IEquatable<TKey>
     /// <summary>
     /// Gets or sets the client secret used for authentication.
     /// </summary>
-    public virtual string ClientSecret { get; set; } = Ulid.NewUlid().ToString();
+    public virtual string ClientSecret { get; set; } = Ulid.NewUlid().ToBase64();
 
     /// <summary>
     /// Gets or sets the name of the client application.

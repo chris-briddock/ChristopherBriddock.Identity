@@ -1,9 +1,12 @@
 ﻿using ChristopherBriddock.ApiEndpoints;
+using ChristopherBriddock.Service.Identity.Data;
+using ChristopherBriddock.Service.Identity.Models.Entities;
 using ChristopherBriddock.Service.Identity.Models.Requests;
 using ChristopherBriddock.Service.Identity.Models.Responses;
 using ChristopherBriddock.Service.Identity.Providers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace ChristopherBriddock.Service.Identity.Endpoints;
 
@@ -48,8 +51,18 @@ public class TokenEndpoint(IServiceProvider serviceProvider,
             var httpContextAccessor = ServiceProvider.GetRequiredService<IHttpContextAccessor>();
             
             var configuration = ServiceProvider.GetRequiredService<IConfiguration>();
+
+            var dbContext = ServiceProvider.GetRequiredService<AppDbContext>();
             
             var jsonWebTokenProvider = ServiceProvider.GetRequiredService<IJsonWebTokenProvider>();
+
+            var clientSecretQuery = await dbContext
+                         .Set<IdentityApplication>()
+                         .Where(x => x.ClientSecret == request.ClientSecret)
+                         .SingleOrDefaultAsync(cancellationToken: cancellationToken) ?? new IdentityApplication();
+
+            if (clientSecretQuery.ClientSecret != request.ClientSecret)
+                
 
             // If refresh token is requested.
             if (request.RefreshToken is not null) 

@@ -58,7 +58,9 @@ public sealed class RegisterApplicationEndpoint(IServiceProvider serviceProvider
 
             await dbContext.SaveChangesAsync(cancellationToken);
 
-            return NoContent();  
+
+
+            return Ok();
         }
         catch (Exception ex)
         {
