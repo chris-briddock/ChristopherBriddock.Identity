@@ -6,7 +6,7 @@
 public static class EmailPublisherConstants
 {
     /// <summary>
-    /// The value for a forogtten password message.
+    /// The value for a forgotten password message.
     /// </summary>
     public const string ForgotPassword = "ForgotPassword";
     /// <summary>

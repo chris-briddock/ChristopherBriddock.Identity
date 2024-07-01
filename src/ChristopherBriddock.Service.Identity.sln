@@ -3,19 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34408.163
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChristopherBriddock.Service.Identity", "ChristopherBriddock.Service.Identity\ChristopherBriddock.Service.Identity.csproj", "{7E89B665-3CD8-4469-8CD6-59BE8532BF4D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChristopherBriddock.Service.Identity'", "ChristopherBriddock.Service.Identity\ChristopherBriddock.Service.Identity'.csproj", "{7E89B665-3CD8-4469-8CD6-59BE8532BF4D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChristopherBriddock.Service.Identity.Tests", "ChristopherBriddock.Service.Identity.Tests\ChristopherBriddock.Service.Identity.Tests.csproj", "{019FB266-27C6-4BD1-A0E0-D31B0FE8DC93}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChristopherBriddock.Service.Common", "ChristopherBriddock.Service.Common\ChristopherBriddock.Service.Common.csproj", "{55AF770B-80FF-4735-9014-24008C39E27A}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{F12FB90F-85BC-4184-BAE6-90A520AA2072}"
-	ProjectSection(SolutionItems) = preProject
-		Run-Tests.ps1 = Run-Tests.ps1
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Utilities", "Utilities", "{9780B9CD-28B0-4CAD-AA76-ED979CEC693E}"
 	ProjectSection(SolutionItems) = preProject
+		Run-Tests.ps1 = Run-Tests.ps1
 		Set-UserSecrets.ps1 = Set-UserSecrets.ps1
 	EndProjectSection
 EndProject
@@ -33,6 +29,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChristopherBriddock.WorkerS
 EndProject
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "ChristopherBriddock.Service.Identity.PerformanceTests", "ChristopherBriddock.Service.Identity.PerformanceTests\perftests\ChristopherBriddock.Service.Identity.PerformanceTests.esproj", "{ACEE9AA3-3D04-4551-BF7B-3E5511B2BB7B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChristopherBriddock.Service.Identity", "..\ChristopherBriddock.Service.Identity\ChristopherBriddock.Service.Identity.csproj", "{4C32E294-D173-4333-A852-967CEBB22190}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,10 +45,6 @@ Global
 		{019FB266-27C6-4BD1-A0E0-D31B0FE8DC93}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{019FB266-27C6-4BD1-A0E0-D31B0FE8DC93}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{019FB266-27C6-4BD1-A0E0-D31B0FE8DC93}.Release|Any CPU.Build.0 = Release|Any CPU
-		{55AF770B-80FF-4735-9014-24008C39E27A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{55AF770B-80FF-4735-9014-24008C39E27A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{55AF770B-80FF-4735-9014-24008C39E27A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{55AF770B-80FF-4735-9014-24008C39E27A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3E15539C-E6E1-46C5-92F8-C8A6E7B12A77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3E15539C-E6E1-46C5-92F8-C8A6E7B12A77}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3E15539C-E6E1-46C5-92F8-C8A6E7B12A77}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -69,6 +63,10 @@ Global
 		{ACEE9AA3-3D04-4551-BF7B-3E5511B2BB7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ACEE9AA3-3D04-4551-BF7B-3E5511B2BB7B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{ACEE9AA3-3D04-4551-BF7B-3E5511B2BB7B}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{4C32E294-D173-4333-A852-967CEBB22190}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C32E294-D173-4333-A852-967CEBB22190}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C32E294-D173-4333-A852-967CEBB22190}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C32E294-D173-4333-A852-967CEBB22190}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
